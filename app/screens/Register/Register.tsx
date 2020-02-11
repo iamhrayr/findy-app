@@ -5,6 +5,10 @@ const Register: React.FC = () => {
   return (
     <View>
       <Text>Register Screen</Text>
+
+
+
+      
     </View>
   );
 };
