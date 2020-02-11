@@ -50,15 +50,12 @@
       "node"
     ]
   },
-  "lint-staged": {
-    "app/**/*.{js,jsx,ts,tsx}": [
-      "eslint . --fix",
-      "git add"
-    ]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   }
 }
