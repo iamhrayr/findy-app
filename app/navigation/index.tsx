@@ -7,7 +7,14 @@ import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/Register';
 import ForgotPasswordScreen from '../screens/ForgotPassword';
 
-const Stack = createStackNavigator();
+type AuthStackParamList = {
+  'Auth:Intro': undefined;
+  'Auth:Login': undefined;
+  'Auth:Register': undefined;
+  'Auth:ForgotPassword': undefined;
+};
+
+const Stack = createStackNavigator<AuthStackParamList>();
 
 const NavigationRoot = () => {
   return (
