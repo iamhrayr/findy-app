@@ -5,13 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StyleProvider } from 'native-base';
 
 import getTheme from './theme/components';
-import material from './theme/variables/material';
-
+import darkTheme from './theme/variables/dark';
 import NavigationRoot from './navigation';
 
 const App: React.FC = () => {
   return (
-    <StyleProvider style={getTheme(material)}>
+    <StyleProvider style={getTheme(darkTheme)}>
       <NavigationContainer>
         <StatusBar barStyle="dark-content" />
         <NavigationRoot />
