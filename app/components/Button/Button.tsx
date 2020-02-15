@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native';
 import styled, { css } from 'styled-components/native';
+
+import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
 
 enum TextAlignOptions {
   left = 'flex-start',
   center = 'center',
   right = 'flex-end',
 }
-
-type SpacerKey = 't' | 'b' | 'l' | 'r' | 'x' | 'y';
-type SpacerValue = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-type Spacer = { [key in SpacerKey]: SpacerValue };
 
 type WrapperProps = {
   block?: boolean;
@@ -19,7 +17,7 @@ type WrapperProps = {
   iconRight?: React.ReactNode;
   textStyle?: any;
   children: React.ReactNode;
-  spacer: Partial<Spacer>;
+  spacer: Partial<SpacerProps>;
   outline?: boolean;
   shape: 'square' | 'round' | 'circle';
   textAlign: 'left' | 'center' | 'right';
@@ -42,12 +40,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     align-self: ${block ? 'auto' : 'flex-start'};
 
     /* spaces */
-    margin-top: ${spacer.t ? theme.button.spacer[spacer.t] : 0}px;
-    margin-bottom: ${spacer.b ? theme.button.spacer[spacer.b] : 0}px;
-    margin-left: ${spacer.l ? theme.button.spacer[spacer.l] : 0}px;
-    margin-right: ${spacer.r ? theme.button.spacer[spacer.r] : 0}px;
-    margin-vertical: ${spacer.y ? theme.button.spacer[spacer.y] : 0}px;
-    margin-horizontal: ${spacer.x ? theme.button.spacer[spacer.x] : 0}px;
+    ${generateSpaces(spacer, theme)}
   `}
 
   ${({ outline, type, theme }) =>
@@ -76,12 +69,17 @@ const ButtonText = styled(Text)<TextProps>`
     `}
 `;
 
-const Button = ({ children, textStyle, ...rest }: Props) => {
-  // TODO: add merged spacers to avoid removing existing ones
-  // const mergedSpacer: Spacer = {
-  //   ...{ b: 'sm', t: 'sm' },
-  //   ...rest.spacer,
-  // };
+const defaultSpacer = { b: 'sm' };
+
+const Button = ({ children, textStyle, spacer, ...rest }: Props) => {
+  // keep the default ones if the user add non conflicting custom ones
+  const mergedSpacer: Partial<SpacerProps> = useMemo(
+    () => ({
+      ...(defaultSpacer as Partial<SpacerProps>),
+      ...spacer,
+    }),
+    [spacer],
+  );
 
   const content = React.isValidElement(children) ? (
     children
@@ -97,11 +95,7 @@ const Button = ({ children, textStyle, ...rest }: Props) => {
   );
 
   return (
-    <ButtonWrapper
-      activeOpacity={0.8}
-      {...rest}
-      // spacer={mergedSpacer}
-    >
+    <ButtonWrapper activeOpacity={0.8} spacer={mergedSpacer} {...rest}>
       {content}
     </ButtonWrapper>
   );
@@ -114,7 +108,7 @@ Button.defaultProps = {
   textAlign: 'center',
   decoration: 'uppercase',
   outline: false,
-  spacer: { b: 'sm' },
+  spacer: {},
 } as Partial<Props>;
 
 export default Button;
