@@ -1,16 +1,20 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Button from '../../components/Button';
-import Container from '../../components/Container';
+import { Button, Text, Container, Input } from '../../components';
 
 const AuthIntro: React.FC = () => {
   const navigation = useNavigation();
 
   return (
     <Container>
-      <Text>Auth Intro</Text>
+      <Text size="giant" weight="300" spacer={{ b: 'lg' }}>
+        Auth Intro
+      </Text>
+
+      <Input label="Phone number" placeholder="asd" />
+      <Input secureTextEntry label="Password" placeholder="asd" />
+
       <Button onPress={() => navigation.navigate('Auth:Login')} block>
         Test button
       </Button>
