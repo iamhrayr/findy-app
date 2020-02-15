@@ -9,7 +9,7 @@ import getTheme from './theme';
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider theme={getTheme('dark')}>
+    <ThemeProvider theme={getTheme('light')}>
       <NavigationContainer>
         <StatusBar barStyle="dark-content" />
         <NavigationRoot />

@@ -24,7 +24,7 @@ const AuthIntro: React.FC = () => {
         Welcome
       </Text>
 
-      <Text size="lg" spacer={{ b: 'xxl' }}>
+      <Text size="lg" spacer={{ b: 'xl' }}>
         App allows users to get in touch with a car driver quickly and easily by just scanning or
         entering car number.
       </Text>
@@ -43,7 +43,7 @@ const AuthIntro: React.FC = () => {
         </Col>
       </Grid>
 
-      <Text>
+      <Text align="center">
         <Text align="center">By using the app you are agreeing to our </Text>
         <Text align="center" color="primary">
           Terms of Use

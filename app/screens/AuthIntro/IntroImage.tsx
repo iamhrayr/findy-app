@@ -15,8 +15,8 @@ const IntroImage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    marginBottom: 60,
+    marginTop: 35,
+    marginBottom: 50,
     padding: 20,
   },
   shape: {
