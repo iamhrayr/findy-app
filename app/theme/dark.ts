@@ -16,6 +16,7 @@ export default {
   // TODO: may be base styles should be separated?
   container: {
     padding: 15,
+    paddingExtra: 35,
     bgColor: colors.white,
   },
   text: {
@@ -27,7 +28,7 @@ export default {
     round: 7,
     circle: 50,
   },
-  spacer: { xs: 5, sm: 10, md: 15, lg: 20, xl: 25 },
+  spacer: { xs: 5, sm: 10, md: 15, lg: 25, xl: 40, xxl: 50, huge: 70 },
   button: {
     fontWeight: 500,
     fontSizes: { sm: 14, md: 17, lg: 20 },

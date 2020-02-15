@@ -1,67 +1,54 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Col, Grid } from 'react-native-easy-grid';
 
-import { Button, Text, Container, Input } from '../../components';
+import { Button, Text, Container } from '@app/components';
+
+import IntroImage from './IntroImage';
 
 const AuthIntro: React.FC = () => {
   const navigation = useNavigation();
+  const navigateToRegister = useCallback(() => {
+    navigation.navigate('Auth:Register');
+  }, [navigation]);
+
+  const navigateToLogin = useCallback(() => {
+    navigation.navigate('Auth:Login');
+  }, [navigation]);
 
   return (
-    <Container>
-      <Text size="giant" weight="300" spacer={{ b: 'lg' }}>
-        Auth Intro
+    <Container scrollView={false} extraPadded>
+      <IntroImage />
+
+      <Text size="giant" weight="300" spacer={{ b: 'md' }}>
+        Welcome
       </Text>
 
-      <Input label="Phone number" placeholder="asd" />
-      <Input secureTextEntry label="Password" placeholder="asd" />
+      <Text size="lg" spacer={{ b: 'xxl' }}>
+        App allows users to get in touch with a car driver quickly and easily by just scanning or
+        entering car number.
+      </Text>
 
-      <Button onPress={() => navigation.navigate('Auth:Login')} block>
-        Test button
-      </Button>
+      <Grid>
+        <Col size={47}>
+          <Button block outline shape="circle" onPress={navigateToRegister}>
+            Register
+          </Button>
+        </Col>
+        <Col size={6} />
+        <Col size={47}>
+          <Button block shape="circle" onPress={navigateToLogin}>
+            Login
+          </Button>
+        </Col>
+      </Grid>
 
-      <Button block type="success">
-        Success Button
-      </Button>
-      <Button block type="secondary">
-        Secondary Button
-      </Button>
-      <Button block type="danger">
-        Danger Button
-      </Button>
-      <Button block type="link">
-        link Button
-      </Button>
-
-      <Button block outline>
-        Success Button
-      </Button>
-      <Button block outline type="success">
-        Success Button
-      </Button>
-      <Button block outline type="secondary">
-        Secondary Button
-      </Button>
-      <Button block outline type="danger">
-        Danger Button
-      </Button>
-
-      <Button
-        onPress={() => navigation.navigate('Auth:Login')}
-        // shape="circle"
-        outline
-        type="secondary">
-        Test button
-      </Button>
-      <Button
-        onPress={() => navigation.navigate('Auth:Login')}
-        // shape="circle"
-        outline
-        type="secondary">
-        Test button
-      </Button>
-      {/* <Button onPress={() => navigation.navigate('Auth:Register')}>
-        <Text>Register</Text>
-      </Button> */}
+      <Text>
+        <Text align="center">By using the app you are agreeing to our </Text>
+        <Text align="center" color="primary">
+          Terms of Use
+        </Text>
+      </Text>
     </Container>
   );
 };
