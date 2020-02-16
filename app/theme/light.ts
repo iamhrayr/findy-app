@@ -43,5 +43,8 @@ export default {
       color: colors.gray,
       width: 1,
     },
+    error: {
+      fontSize: 14,
+    },
   },
 };

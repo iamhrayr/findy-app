@@ -12,6 +12,7 @@ type Props = TextInputProps & {
   label: React.ReactNode;
   labelProps?: LabelProps;
   spacer?: Partial<SpacerProps>;
+  errorMessage?: string;
 };
 
 // TODO: add sizes for input component
@@ -38,10 +39,19 @@ const StyledInput = styled(TextInput)`
   `}
 `;
 
+const ErrorMessage = styled(Text)`
+  ${({ theme }) => css`
+    margin-top: 5px;
+    color: ${theme.colors.danger};
+    font-size: ${theme.form.error.fontSize}px;
+  `}
+`;
+
 const Input = ({
+  spacer = { b: 'md' },
   label,
   labelProps,
-  spacer = { b: 'md' },
+  errorMessage,
   ...props
 }: Props) => {
   const labelContent =
@@ -51,6 +61,7 @@ const Input = ({
     <Wrapper spacer={spacer}>
       {labelContent}
       <StyledInput {...props} />
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Wrapper>
   );
 };
