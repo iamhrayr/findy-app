@@ -6,12 +6,12 @@ type SpacerValue = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'huge';
 export type SpacerProps = { [key in SpacerKey]?: SpacerValue };
 
 export const generateSpaces = (spacers: Partial<SpacerProps>, theme: DefaultTheme) => css`
-  margin-top: ${spacers.t ? theme.spacer[spacers.t] : 0}px;
-  margin-bottom: ${spacers.b ? theme.spacer[spacers.b] : 0}px;
-  margin-left: ${spacers.l ? theme.spacer[spacers.l] : 0}px;
-  margin-right: ${spacers.r ? theme.spacer[spacers.r] : 0}px;
-  margin-vertical: ${spacers.y ? theme.spacer[spacers.y] : 0}px;
-  margin-horizontal: ${spacers.x ? theme.spacer[spacers.x] : 0}px;
+  ${spacers.t ? `margin-top: ${theme.spacer[spacers.t]}px` : ''};
+  ${spacers.b ? `margin-bottom: ${theme.spacer[spacers.b]}px` : ''};
+  ${spacers.l ? `margin-left: ${theme.spacer[spacers.l]}px` : ''};
+  ${spacers.r ? `margin-right: ${theme.spacer[spacers.r]}px` : ''};
+  ${spacers.x ? `margin-horizontal: ${theme.spacer[spacers.x]}px` : ''};
+  ${spacers.y ? `margin-vertical: ${theme.spacer[spacers.y]}px` : ''};
 `;
 
 const Spacer = Styled(View)<SpacerProps>`
