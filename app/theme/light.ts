@@ -12,8 +12,8 @@ export default {
     link: colors.blue,
     white: colors.white,
   },
-  // TODO: may be base styles should be separated?
-  container: {
+  // TODO: separate base styles?
+  content: {
     padding: 15,
     paddingExtra: 35,
     bgColor: colors.white,

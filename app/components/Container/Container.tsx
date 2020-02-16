@@ -1,30 +1,19 @@
-import React from 'react';
-import { ScrollView, View, ViewProps } from 'react-native';
+import { ScrollView, ScrollViewProps } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-type Props = ViewProps & {
-  noPadding?: boolean;
-  scrollView?: boolean;
-  extraPadded?: boolean;
-  children?: React.ReactNode;
-};
+type Props = ScrollViewProps & {};
 
-const Container = styled(View)<Props>`
-  ${({ noPadding, extraPadded, theme }) => css`
-    padding: ${noPadding ? 0 : theme.container.padding}px;
-    ${extraPadded && `padding: ${theme.container.padding}px`};
-    flex: 1;
-    background: ${theme.container.bgColor};
+const Container = styled(ScrollView)`
+  ${({ theme }) => css`
+    background: ${theme.content.bgColor};
   `}
-  ${({ extraPadded, theme }) =>
-    extraPadded &&
-    css`
-      padding: ${theme.container.paddingExtra}px;
-    `}
 `;
 
-const ContainerOuter = ({ scrollView, ...rest }: Props) => {
-  return scrollView ? <Container as={ScrollView} {...rest} /> : <Container {...rest} />;
+Container.defaultProps = {
+  contentContainerStyle: {
+    justifyContent: 'space-between',
+    flexGrow: 1,
+  },
 };
 
-export default ContainerOuter;
+export default Container;

@@ -19,6 +19,7 @@ type WrapperProps = {
   children: React.ReactNode;
   spacer: Partial<SpacerProps>;
   outline?: boolean;
+  wide?: boolean;
   shape: 'square' | 'round' | 'circle';
   textAlign: 'left' | 'center' | 'right';
   size: 'lg' | 'md' | 'sm';
@@ -31,13 +32,16 @@ type TextProps = Pick<Props, 'size' | 'type' | 'decoration' | 'outline'>;
 type Props = TouchableOpacityProps & WrapperProps;
 
 const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
-  ${({ shape, size, type, textAlign, block, spacer, theme }) => css`
+  ${({ shape, size, type, textAlign, block, spacer, wide, theme }) => css`
     border-radius: ${theme.borderRadius[shape] || 0}px;
     padding-vertical: ${theme.button.paddingY[size] || 0}px;
-    padding-horizontal: ${theme.button.paddingX[size] || 0}px;
+    padding-horizontal: ${!wide
+      ? theme.button.paddingX[size]
+      : theme.button.paddingX[size] * 2.4}px;
     background: ${type !== 'link' ? theme.colors[type] : 'transparent'};
     align-items: ${TextAlignOptions[textAlign] || 'center'};
-    align-self: ${block ? 'auto' : 'flex-start'};
+    width: ${block ? '100%' : 'auto'};
+    flex-shrink: 1;
 
     /* spaces */
     ${generateSpaces(spacer, theme)}
