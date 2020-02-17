@@ -26,7 +26,7 @@ const Login: React.FC = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: validation,
-    // validateOnChange: false,
+    validateOnChange: false,
     onSubmit: values => {
       console.log(JSON.stringify(values, null, 2));
     },
