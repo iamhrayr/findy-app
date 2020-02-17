@@ -24,18 +24,18 @@ export type AuthState = {
   refreshToken: string | null;
 };
 
+export type LoginSuccessPayload = {
+  user: User;
+  accessToken: string;
+  refreshToken: string;
+};
+
 export type LoginAction = {
   type: typeof LOGIN;
   payload: {
     phoneNumber: string;
     password: string;
   };
-};
-
-export type LoginSuccessPayload = {
-  user: User;
-  accessToken: string;
-  refreshToken: string;
 };
 
 export type LoginSuccessAction = {

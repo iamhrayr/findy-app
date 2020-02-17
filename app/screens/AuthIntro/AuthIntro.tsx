@@ -14,6 +14,10 @@ const AuthIntro: React.FC = () => {
     navigation.navigate('Auth:Login');
   }, [navigation]);
 
+  const navigateToTermsOfUse = useCallback(() => {
+    navigation.navigate('Auth:TermsOfUse');
+  }, [navigation]);
+
   return (
     <Container>
       <Content extraPadded>
@@ -48,7 +52,7 @@ const AuthIntro: React.FC = () => {
 
             <Text align="center">
               <Text align="center">By using the app you are agreeing to our </Text>
-              <Text align="center" color="primary">
+              <Text align="center" color="primary" onPress={navigateToTermsOfUse}>
                 Terms of Use
               </Text>
             </Text>
