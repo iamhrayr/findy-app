@@ -1,5 +1,5 @@
-import React from 'react';
-// import { useNavigation } from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
@@ -17,7 +17,11 @@ const initialValues: FormValues = {
 };
 
 const Login: React.FC = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
+
+  const navigateToRegister = useCallback(() => {
+    navigation.navigate('Auth:Register');
+  }, [navigation]);
 
   const formik = useFormik({
     initialValues,
@@ -63,7 +67,7 @@ const Login: React.FC = () => {
 
           <Text align="center">
             <Text align="center">New user? </Text>
-            <Text align="center" color="primary">
+            <Text align="center" color="primary" onPress={navigateToRegister}>
               Login Here
             </Text>
           </Text>

@@ -1,24 +1,29 @@
-import React from 'react';
-// import { useNavigation } from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
-import LoginImage from './LoginImage';
+import RegisterImage from './RegisterImage';
 import validation from './validation';
 
 type FormValues = {
+  fullName: string;
   phoneNumber: string;
-  fullName:string;
   password: string;
 };
 
 const initialValues: FormValues = {
+  fullName: '',
   phoneNumber: '',
   password: '',
 };
 
 const Register: React.FC = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
+
+  const navigateToLogin = useCallback(() => {
+    navigation.navigate('Auth:Login');
+  }, [navigation]);
 
   const formik = useFormik({
     initialValues,
@@ -33,7 +38,7 @@ const Register: React.FC = () => {
     <Container>
       <Content extraPadded>
         <Layout grow={1}>
-          <LoginImage />
+          <RegisterImage />
         </Layout>
 
         <Layout>
@@ -48,14 +53,13 @@ const Register: React.FC = () => {
             value={formik.values.phoneNumber}
             errorMessage={formik.errors.phoneNumber}
           />
-           <Input
-             label="Full Name"
-              placeholder="Grigor Margaryan"
-              onChangeText={val => formik.setFieldValue('fullName', val)}
-              value={formik.values.fullName}
-              errorMessage={formik.errors.fullName}
-            />
-
+          <Input
+            label="Full Name"
+            placeholder="Grigor Margaryan"
+            onChangeText={val => formik.setFieldValue('fullName', val)}
+            value={formik.values.fullName}
+            errorMessage={formik.errors.fullName}
+          />
           <Input
             secureTextEntry
             label="Password"
@@ -64,6 +68,7 @@ const Register: React.FC = () => {
             value={formik.values.password}
             errorMessage={formik.errors.password}
           />
+
           <Layout align="center" spacer={{ y: 'md' }}>
             <Button onPress={formik.handleSubmit} shape="circle" wide>
               Register
@@ -72,7 +77,7 @@ const Register: React.FC = () => {
 
           <Text align="center">
             <Text align="center">New user? </Text>
-            <Text align="center" color="primary">
+            <Text align="center" color="primary" onPress={navigateToLogin}>
               Login Here
             </Text>
           </Text>

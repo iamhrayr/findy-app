@@ -9,7 +9,7 @@ export default Yup.object().shape({
     .min(4, 'Too short password!')
     .max(50, 'Too Long!')
     .required('Please enter password'),
-   fullName: Yup.string()
+  fullName: Yup.string()
     .min(9, 'Too short full name!')
     .max(50, 'Too Long!')
     .required('Please enter full name'),
