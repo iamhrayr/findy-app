@@ -26,7 +26,6 @@ const Login: React.FC = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: validation,
-    validateOnChange: false,
     onSubmit: values => {
       console.log(JSON.stringify(values, null, 2));
     },
@@ -49,7 +48,7 @@ const Login: React.FC = () => {
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
-            errorMessage={formik.errors.phoneNumber}
+            errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
           />
           <Input
             secureTextEntry
@@ -57,7 +56,7 @@ const Login: React.FC = () => {
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            errorMessage={formik.errors.password}
+            errorMessage={formik.touched.password && formik.errors.password}
           />
           <Layout align="center" spacer={{ y: 'md' }}>
             <Button onPress={formik.handleSubmit} shape="circle" wide>

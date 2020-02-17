@@ -12,7 +12,7 @@ type Props = TextInputProps & {
   label: React.ReactNode;
   labelProps?: LabelProps;
   spacer?: Partial<SpacerProps>;
-  errorMessage?: string;
+  errorMessage?: string | false | null;
 };
 
 // TODO: add sizes for input component
