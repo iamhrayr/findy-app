@@ -8,9 +8,9 @@ import {
   LoginSuccessPayload,
 } from './types';
 
-export const login = (phoneNumber: string, password: string) => ({
+export const login = (data: { phoneNumber: string; password: string }) => ({
   type: LOGIN,
-  payload: { phoneNumber, password },
+  payload: data,
 });
 
 export const loginSuccess = (data: LoginSuccessPayload): AuthActionTypes => ({

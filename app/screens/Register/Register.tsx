@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import RegisterImage from './RegisterImage';
 import validation from './validation';
+import { login } from '@app/redux/ducks/auth/actions';
 
 type FormValues = {
   fullName: string;
@@ -20,6 +22,7 @@ const initialValues: FormValues = {
 
 const Register: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const navigateToLogin = useCallback(() => {
     navigation.navigate('Auth:Login');
@@ -29,7 +32,8 @@ const Register: React.FC = () => {
     initialValues,
     validationSchema: validation,
     onSubmit: values => {
-      console.log(JSON.stringify(values, null, 2));
+      console.log('values', values);
+      dispatch(login(values));
     },
   });
 

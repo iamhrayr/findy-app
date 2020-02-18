@@ -1,17 +1,21 @@
 import http from '@app/helpers/http';
 
-export const login = (data: { email: string; password: string }) => {
-  return http({
-    url: '/login',
-    method: 'post',
-    data,
-  });
-};
+class AuthApi {
+  login = (data: { email: string; password: string }) => {
+    return http({
+      url: 'accounts/login/',
+      method: 'post',
+      data,
+    });
+  };
 
-export const register = (email: string, password: string) => {
-  return http({
-    url: '/register',
-    method: 'post',
-    data: { email, password },
-  });
-};
+  register = (data: { email: string; password: string }) => {
+    return http({
+      url: 'accounts/signup',
+      method: 'post',
+      data,
+    });
+  };
+}
+
+export default new AuthApi();

@@ -1,3 +1,5 @@
+/* global GLOBAL */
+
 import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar } from 'react-native';
@@ -9,6 +11,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import NavigationRoot from './navigation';
 import getTheme from './theme';
 import { store, persistor } from './redux/store';
+
+if (process.env.NODE_ENV === 'development') {
+  // @ts-ignore
+  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+}
 
 const App: React.FC = () => {
   return (
