@@ -11,6 +11,9 @@ export default {
     footerBg: '',
     link: colors.blue,
     white: colors.white,
+    gray: colors.gray,
+    lightGray: colors.lightGray,
+    darkGray: colors.darkGray,
   },
   // TODO: separate base styles?
   content: {

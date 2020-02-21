@@ -1,6 +1,7 @@
 import axios from 'axios';
 import camelCaseKeys from 'camelcase-keys';
 import snakeCaseKeys from 'snakecase-keys';
+// import { showMessage } from 'react-native-flash-message';
 
 import configs from '@app/configs';
 
@@ -21,6 +22,7 @@ http.interceptors.request.use(
     return { ...config, data: snakeCasedData };
   },
   error => {
+    // TODO: check if working in all cases like no network, etc...
     if (!error.data) {
       return Promise.reject(error);
     }
@@ -40,12 +42,22 @@ http.interceptors.response.use(
     return { ...response, data: camelCasedData };
   },
   error => {
-    if (!error.data) {
+    if (!error.response) {
+      // showMessage({
+      //   message: error.message || 'Something bad happened',
+      //   type: 'danger',
+      // });
       return Promise.reject(error);
     }
 
-    const camelCasedError = camelCaseKeys(error.data, { deep: true });
-    return Promise.reject({ ...error, data: camelCasedError });
+    const camelCasedError = camelCaseKeys(error.response.data, { deep: true });
+    return Promise.reject({
+      ...error,
+      response: {
+        ...error.response,
+        data: camelCasedError,
+      },
+    });
   },
 );
 

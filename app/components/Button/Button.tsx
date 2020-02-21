@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
-import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native';
-import styled, { css } from 'styled-components/native';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
+import styled, { css, withTheme } from 'styled-components/native';
 
 import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
 
@@ -20,6 +25,7 @@ type WrapperProps = {
   spacer: Partial<SpacerProps>;
   outline?: boolean;
   wide?: boolean;
+  loading?: boolean;
   shape: 'square' | 'round' | 'circle';
   textAlign: 'left' | 'center' | 'right';
   size: 'lg' | 'md' | 'sm';
@@ -32,7 +38,7 @@ type TextProps = Pick<Props, 'size' | 'type' | 'decoration' | 'outline'>;
 type Props = TouchableOpacityProps & WrapperProps;
 
 const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
-  ${({ shape, size, type, textAlign, block, spacer, wide, theme }) => css`
+  ${({ shape, size, type, textAlign, block, spacer, wide, disabled, theme }) => css`
     border-radius: ${theme.borderRadius[shape] || 0}px;
     padding-vertical: ${theme.button.paddingY[size] || 0}px;
     padding-horizontal: ${!wide
@@ -42,6 +48,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     align-items: ${TextAlignOptions[textAlign] || 'center'};
     width: ${block ? '100%' : 'auto'};
     flex-shrink: 1;
+    opacity: ${disabled ? 0.6 : 1};
 
     /* spaces */
     ${generateSpaces(spacer, theme)}
@@ -75,7 +82,7 @@ const ButtonText = styled(Text)<TextProps>`
 
 const defaultSpacer = { b: 'sm' };
 
-const Button = ({ children, textStyle, spacer, ...rest }: Props) => {
+const Button = ({ children, textStyle, spacer, loading, theme, ...rest }: Props) => {
   // keep the default ones if the user add non conflicting custom ones
   const mergedSpacer: Partial<SpacerProps> = useMemo(
     () => ({
@@ -100,7 +107,7 @@ const Button = ({ children, textStyle, spacer, ...rest }: Props) => {
 
   return (
     <ButtonWrapper activeOpacity={0.8} spacer={mergedSpacer} {...rest}>
-      {content}
+      {loading ? <ActivityIndicator color={theme.colors.white} /> : content}
     </ButtonWrapper>
   );
 };
@@ -115,4 +122,4 @@ Button.defaultProps = {
   spacer: {},
 } as Partial<Props>;
 
-export default Button;
+export default withTheme(Button);

@@ -1,7 +1,7 @@
 import http from '@app/helpers/http';
 
 class AuthApi {
-  login = (data: { email: string; password: string }) => {
+  login = (data: { phoneNumber: string; password: string }) => {
     return http({
       url: 'accounts/login/',
       method: 'post',
@@ -11,9 +11,17 @@ class AuthApi {
 
   register = (data: { email: string; password: string }) => {
     return http({
-      url: 'accounts/signup',
+      url: 'accounts/signup/',
       method: 'post',
       data,
+    });
+  };
+
+  confirmPhoneNumber = (code: string) => {
+    return http({
+      url: 'accounts/confirm-phone/',
+      method: 'post',
+      data: { token: code },
     });
   };
 }

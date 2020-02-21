@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import LoginImage from './LoginImage';
 import validation from './validation';
 import { login } from '@app/redux/ducks/auth/actions';
+import { RootState } from '@app/redux/rootReducer';
 
 type FormValues = {
   phoneNumber: string;
@@ -21,6 +22,7 @@ const initialValues: FormValues = {
 const Login: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const auth = useSelector((state: RootState) => state.auth);
 
   const navigateToRegister = useCallback(() => {
     navigation.navigate('Auth:Register');
@@ -30,7 +32,6 @@ const Login: React.FC = () => {
     initialValues,
     validationSchema: validation,
     onSubmit: values => {
-      console.log(JSON.stringify(values, null, 2));
       dispatch(login(values));
     },
   });
@@ -52,7 +53,10 @@ const Login: React.FC = () => {
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
-            errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
+            errorMessage={
+              (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
+              auth.error.login.phoneNumber
+            }
           />
           <Input
             secureTextEntry
@@ -60,10 +64,17 @@ const Login: React.FC = () => {
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            errorMessage={formik.touched.password && formik.errors.password}
+            errorMessage={
+              (formik.touched.password && formik.errors.password) ||
+              auth.error.login.password
+            }
           />
           <Layout align="center" spacer={{ y: 'md' }}>
-            <Button onPress={formik.handleSubmit} shape="circle" wide>
+            <Button
+              wide
+              shape="circle"
+              loading={auth.isAuthenticating}
+              onPress={formik.handleSubmit}>
               Login
             </Button>
           </Layout>
@@ -71,7 +82,7 @@ const Login: React.FC = () => {
           <Text align="center">
             <Text align="center">New user? </Text>
             <Text align="center" color="primary" onPress={navigateToRegister}>
-              Login Here
+              Register Here
             </Text>
           </Text>
         </Layout>

@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import RegisterImage from './RegisterImage';
-import validation from './validation';
-import { login } from '@app/redux/ducks/auth/actions';
+// import validation from './validation';
+import { register } from '@app/redux/ducks/auth/actions';
+import { RootState } from '@app/redux/rootReducer';
 
 type FormValues = {
   fullName: string;
@@ -15,14 +16,15 @@ type FormValues = {
 };
 
 const initialValues: FormValues = {
-  fullName: '',
-  phoneNumber: '',
-  password: '',
+  fullName: 'Hrayr Movsisyan',
+  phoneNumber: '37498999590',
+  password: '123456',
 };
 
 const Register: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const auth = useSelector((state: RootState) => state.auth);
 
   const navigateToLogin = useCallback(() => {
     navigation.navigate('Auth:Login');
@@ -30,10 +32,10 @@ const Register: React.FC = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validation,
+    // validationSchema: validation,
     onSubmit: values => {
       console.log('values', values);
-      dispatch(login(values));
+      dispatch(register(values));
     },
   });
 
@@ -54,11 +56,14 @@ const Register: React.FC = () => {
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
-            errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
+            errorMessage={
+              (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
+              auth.error.register.phoneNumber
+            }
           />
           <Input
             label="Full Name"
-            placeholder="Grigor Margaryan"
+            placeholder="Samuel Jackson"
             onChangeText={val => formik.setFieldValue('fullName', val)}
             value={formik.values.fullName}
             errorMessage={formik.touched.fullName && formik.errors.fullName}
@@ -69,7 +74,10 @@ const Register: React.FC = () => {
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            errorMessage={formik.touched.password && formik.errors.password}
+            errorMessage={
+              (formik.touched.password && formik.errors.password) ||
+              auth.error.register.password
+            }
           />
 
           <Layout align="center" spacer={{ y: 'md' }}>

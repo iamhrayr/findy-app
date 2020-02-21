@@ -14,4 +14,9 @@ declare module 'react-native-render-html' {
   export default value;
 }
 
+declare module 'react-native-countdown-component' {
+  const value: any;
+  export default value;
+}
+
 type FormikOnCange = (value: string) => void;
