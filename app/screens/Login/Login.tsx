@@ -28,6 +28,10 @@ const Login: React.FC = () => {
     navigation.navigate('Auth:Register');
   }, [navigation]);
 
+  const navigateToForgot = useCallback(() => {
+    navigation.navigate('Auth:ForgotPassword');
+  }, [navigation]);
+
   const formik = useFormik({
     initialValues,
     validationSchema: validation,
@@ -53,11 +57,17 @@ const Login: React.FC = () => {
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
+            addonRight={
+              <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
+                Forgot?
+              </Text>
+            }
             errorMessage={
               (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
               auth.error.login.phoneNumber
             }
           />
+
           <Input
             secureTextEntry
             label="Password"
@@ -69,6 +79,7 @@ const Login: React.FC = () => {
               auth.error.login.password
             }
           />
+
           <Layout align="center" spacer={{ y: 'md' }}>
             <Button
               wide

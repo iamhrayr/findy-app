@@ -19,7 +19,7 @@ const NavigationRoot = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {!isAuthenticated && (
-        <Stack.Navigator initialRouteName="Auth:ConfirmPhoneNumber">
+        <Stack.Navigator initialRouteName="Auth:Login">
           <Stack.Screen
             name="Auth:Intro"
             component={AuthIntroScreen}
