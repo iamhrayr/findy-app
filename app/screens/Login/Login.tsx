@@ -57,11 +57,6 @@ const Login: React.FC = () => {
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
-            addonRight={
-              <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
-                Forgot?
-              </Text>
-            }
             errorMessage={
               (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
               auth.error.login.phoneNumber
@@ -74,6 +69,11 @@ const Login: React.FC = () => {
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
+            addonRight={
+              <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
+                Forgot?
+              </Text>
+            }
             errorMessage={
               (formik.touched.password && formik.errors.password) ||
               auth.error.login.password

@@ -18,29 +18,34 @@ const NavigationRoot = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {!isAuthenticated && (
-        <Stack.Navigator initialRouteName="Auth:Login">
-          <Stack.Screen
-            name="Auth:Intro"
-            component={AuthIntroScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Auth:Login" component={LoginScreen} />
-          <Stack.Screen name="Auth:Register" component={RegisterScreen} />
-          <Stack.Screen name="Auth:ForgotPassword" component={ForgotPasswordScreen} />
-          <Stack.Screen name="Auth:TermsOfUse" component={TermsOfUseScreen} />
-          <Stack.Screen
-            name="Auth:ConfirmPhoneNumber"
-            component={ConfirmPhoneNumberScreen}
-          />
-        </Stack.Navigator>
-      )}
+      <Stack.Navigator initialRouteName="Auth:Login">
+        {!isAuthenticated ? (
+          <>
+            <Stack.Screen
+              name="Auth:Intro"
+              component={AuthIntroScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Auth:Login" component={LoginScreen} />
+            <Stack.Screen name="Auth:Register" component={RegisterScreen} />
+            <Stack.Screen name="Auth:ForgotPassword" component={ForgotPasswordScreen} />
+            <Stack.Screen
+              name="Auth:ConfirmPhoneNumber"
+              component={ConfirmPhoneNumberScreen}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Navigator>
+              <Stack.Screen name="Profile" component={TermsOfUseScreen} />
+            </Stack.Navigator>
+          </>
+        )}
+      </Stack.Navigator>
 
-      {isAuthenticated && (
-        <Stack.Navigator>
-          <Stack.Screen name="Profile" component={TermsOfUseScreen} />
-        </Stack.Navigator>
-      )}
+      {/* <Stack.Navigator>
+        <Stack.Screen name="Auth:TermsOfUse" component={TermsOfUseScreen} />
+      </Stack.Navigator> */}
     </SafeAreaView>
   );
 };

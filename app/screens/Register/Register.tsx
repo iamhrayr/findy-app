@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import RegisterImage from './RegisterImage';
@@ -25,6 +26,8 @@ const Register: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const auth = useSelector((state: RootState) => state.auth);
+
+  const [passVisible, setPassVisible] = useState(false);
 
   const navigateToLogin = useCallback(() => {
     navigation.navigate('Auth:Login');
@@ -69,11 +72,14 @@ const Register: React.FC = () => {
             errorMessage={formik.touched.fullName && formik.errors.fullName}
           />
           <Input
-            secureTextEntry
+            secureTextEntry={!passVisible}
             label="Password"
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
+            addonRight={
+              <Icon onPress={() => setPassVisible(!passVisible)} name="eye" size={22} />
+            }
             errorMessage={
               (formik.touched.password && formik.errors.password) ||
               auth.error.register.password
