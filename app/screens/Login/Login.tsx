@@ -76,7 +76,8 @@ const Login: React.FC = () => {
             }
             errorMessage={
               (formik.touched.password && formik.errors.password) ||
-              auth.error.login.password
+              auth.error.login.password ||
+              auth.error.login.nonFieldErrors
             }
           />
 

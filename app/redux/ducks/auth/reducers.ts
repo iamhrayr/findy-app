@@ -21,11 +21,6 @@ const errorReducer = (error: any, action: AuthActionTypes) => {
     case types.LOGIN_FAILURE:
       return {
         ...error,
-        login: {},
-      };
-    case types.LOGIN_FAILURE:
-      return {
-        ...error,
         login: action.payload,
       };
     case types.REGISTER:
@@ -66,7 +61,7 @@ export default (state = initialState, action: AuthActionTypes) => {
         ...state,
         isAuthenticating: false,
         isAuthenticated: true,
-        error: {},
+        error: { ...initialState.error },
         user: action.payload.user,
         token: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,

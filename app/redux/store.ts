@@ -13,7 +13,7 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   // whitelist: ['auth.user', 'auth.isAuthenticated', 'auth.isAuthenticating'],
-  whitelist: [],
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
