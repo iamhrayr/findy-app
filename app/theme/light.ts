@@ -23,7 +23,7 @@ export default {
   },
   text: {
     color: colors.darkGray,
-    fontSizes: { sm: 14, md: 17, lg: 20, h3: 20, h2: 24, h1: 28, giant: 50 },
+    fontSizes: { xs: 11, sm: 14, md: 17, lg: 20, h3: 20, h2: 24, h1: 28, giant: 50 },
   },
   borderRadius: {
     square: 0,

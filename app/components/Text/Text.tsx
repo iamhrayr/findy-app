@@ -9,8 +9,15 @@ import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
 //   right = 'flex-end',
 // }
 
-type Color = 'primary' | 'secondary' | 'danger' | 'success';
-type Size = 'sm' | 'md' | 'lg' | 'h3' | 'h2' | 'h1' | 'giant';
+type Color =
+  | 'primary'
+  | 'secondary'
+  | 'danger'
+  | 'success'
+  | 'gray'
+  | 'lightGray'
+  | 'darkGray';
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'h3' | 'h2' | 'h1' | 'giant';
 type Weight = '100' | '200' | '300' | '400' | '500' | '600' | '700';
 type Props = {
   size?: Size;

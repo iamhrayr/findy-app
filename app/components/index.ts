@@ -5,3 +5,7 @@ export { default as Spacer } from './Spacer';
 export { default as Container } from './Container';
 export { default as Content } from './Content';
 export { default as Layout } from './Layout';
+export { default as Card } from './Card';
+export { default as Avatar } from './Avatar';
+export { default as List } from './List';
+export { default as If } from './If';

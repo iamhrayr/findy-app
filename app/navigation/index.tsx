@@ -3,6 +3,8 @@ import { SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { withTheme, DefaultTheme } from 'styled-components/native';
 
 import { RootState } from '@app/redux/rootReducer';
 // Auth screens
@@ -23,35 +25,109 @@ import EventsScreen from '../screens/Events';
 import SettingsScreen from '../screens/Settings';
 
 const Stack = createStackNavigator();
+const ProfileStack = createStackNavigator();
+const EventsStack = createStackNavigator();
+const NewEventStack = createStackNavigator();
+const MessagesStack = createStackNavigator();
+const SettingsStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const MainTabs = () => {
+const ProfileStackScreen = () => (
+  <ProfileStack.Navigator
+  // screenOptions={{
+  //   // headerTitleAlign: 'left',
+  //   headerTitleStyle: {
+  //     fontWeight: '400',
+  //   },
+  // }}
+  >
+    <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+  </ProfileStack.Navigator>
+);
+
+const EventsStackScreen = () => (
+  <EventsStack.Navigator>
+    <EventsStack.Screen name="Events" component={EventsScreen} />
+  </EventsStack.Navigator>
+);
+
+const NewEventStackScreen = () => (
+  <NewEventStack.Navigator>
+    <NewEventStack.Screen name="Events" component={NewEventScreen} />
+  </NewEventStack.Navigator>
+);
+
+const MessagesStackScreen = () => (
+  <MessagesStack.Navigator>
+    <MessagesStack.Screen name="Messages" component={MessagesScreen} />
+  </MessagesStack.Navigator>
+);
+
+const SettingsStackScreen = () => (
+  <SettingsStack.Navigator>
+    <SettingsStack.Screen name="Messages" component={SettingsScreen} />
+  </SettingsStack.Navigator>
+);
+
+const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        // style: { backgroundColor: 'grey' },
+        activeTintColor: theme.colors.primary,
+        // activeBackgroundColor: 'green',
+        inactiveTintColor: theme.colors.darkGray,
+        // safeAreaInset: { bottom: 'always', top: 'never' },
+      }}>
       <Tab.Screen
         name="Profile:Home"
-        component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        component={ProfileStackScreen}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ /* focused, */ color, size }) => (
+            <Icon name="user" size={size} color={color} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Events:Home"
-        component={EventsScreen}
-        options={{ title: 'Events' }}
+        component={EventsStackScreen}
+        options={{
+          title: 'Events',
+          tabBarIcon: ({ /* focused, */ color, size }) => (
+            <Icon name="bell" size={size} color={color} />
+          ),
+        }}
       />
       <Tab.Screen
         name="NewEvent:Home"
-        component={NewEventScreen}
-        options={{ title: 'Add' }}
+        component={NewEventStackScreen}
+        options={{
+          title: 'Add',
+          tabBarIcon: ({ /* focused, */ color, size }) => (
+            <Icon name="plus" size={size} color={color} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Messages:Home"
-        component={MessagesScreen}
-        options={{ title: 'Messages' }}
+        component={MessagesStackScreen}
+        options={{
+          title: 'Messages',
+          tabBarIcon: ({ /* focused, */ color, size }) => (
+            <Icon name="speech" size={size} color={color} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Settings:Home"
-        component={SettingsScreen}
-        options={{ title: 'Settings' }}
+        component={SettingsStackScreen}
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ /* focused, */ color, size }) => (
+            <Icon name="settings" size={size} color={color} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
@@ -83,7 +159,7 @@ const NavigationRoot = () => {
           <>
             <Stack.Screen
               name="Profile"
-              component={MainTabs}
+              component={withTheme(MainTabs)}
               options={{ headerShown: false }}
             />
           </>
