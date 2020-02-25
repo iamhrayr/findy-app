@@ -5,7 +5,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import styled, { css, withTheme, DefaultTheme } from 'styled-components/native';
+import styled, { css, withTheme /*DefaultTheme*/ } from 'styled-components/native';
 
 import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
 import If from '../If';
@@ -27,16 +27,16 @@ type WrapperProps = {
   outline?: boolean;
   wide?: boolean;
   loading?: boolean;
-  theme?: DefaultTheme;
+  // theme?: DefaultTheme;
   shape: 'square' | 'round' | 'circle';
   textAlign: 'left' | 'center' | 'right';
   size: 'lg' | 'md' | 'sm';
   type: 'primary' | 'secondary' | 'danger' | 'success' | 'link';
-  decoration: 'uppercase' | 'capitalize' | 'lowercase' | 'none';
+  transform?: 'uppercase' | 'capitalize' | 'lowercase' | 'none';
   icon?: React.ReactNode;
 };
 
-type TextProps = Pick<Props, 'size' | 'type' | 'decoration' | 'outline'>;
+type TextProps = Pick<Props, 'size' | 'type' | 'transform' | 'outline'>;
 
 type Props = TouchableOpacityProps & WrapperProps;
 
@@ -72,10 +72,10 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
 `;
 
 const ButtonText = styled(Text)<TextProps>`
-  ${({ type, size, decoration, theme }) => css`
+  ${({ type, size, transform, theme }) => css`
     color: ${type === 'link' ? theme.colors.primary : theme.colors.white};
     font-size: ${theme.button.fontSizes[size]}px;
-    text-transform: ${decoration};
+    text-transform: ${transform};
     font-weight: ${theme.button.fontWeight};
   `}
 
@@ -95,6 +95,8 @@ const Button = ({
   spacer,
   loading,
   icon,
+  // @ts-ignore
+  // FIXME: fix the fucking theme type
   theme,
   ...rest
 }: Props) => {
@@ -122,7 +124,7 @@ const Button = ({
             <ButtonText
               style={textStyle}
               size={rest.size}
-              decoration={rest.decoration}
+              transform={rest.transform}
               type={rest.type}
               outline={rest.outline}>
               {children}
@@ -139,9 +141,11 @@ Button.defaultProps = {
   size: 'md',
   shape: 'round',
   textAlign: 'center',
-  decoration: 'uppercase',
+  transform: 'uppercase',
   outline: false,
   spacer: {},
 } as Partial<Props>;
 
+//@ts-ignore
+// FIXME: find out what the fucking problem with type
 export default withTheme(Button);

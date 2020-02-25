@@ -1,9 +1,14 @@
 import React from 'react';
-// import { FlatList } from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { DefaultTheme, withTheme } from 'styled-components/native';
+// import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { Icon } from 'react-native-eva-icons';
 
 import { Container, Content, Card, Avatar, Layout, Text, List } from '@app/components';
 import CarNumberRow from './CarNumberRow';
+
+type Props = {
+  theme: DefaultTheme;
+};
 
 const dummyCarNumbers = [
   {
@@ -24,7 +29,7 @@ const dummyCarNumbers = [
   },
 ];
 
-const Profile: React.FC<{}> = () => {
+const Profile = ({ theme }: Props) => {
   return (
     <Container>
       <Content>
@@ -35,7 +40,7 @@ const Profile: React.FC<{}> = () => {
               Sipo Sipoakanyan
             </Text>
             <Layout layout="row">
-              <Icon name="phone" size={20} />
+              <Icon name="phone-outline" width={20} height={20} />
               <Text weight="300" spacer={{ l: 'xs' }}>
                 374 95 959595
               </Text>
@@ -44,7 +49,20 @@ const Profile: React.FC<{}> = () => {
         </Layout>
 
         <Card>
-          <Text>My Cars</Text>
+          <Layout layout="row" align="center" justify="between" spacer={{ b: 'md' }}>
+            <Text>My Cars</Text>
+            <Layout layout="row" align="center">
+              <Text color="primary" transform="uppercase" spacer={{ r: 'xs' }}>
+                Add
+              </Text>
+              <Icon
+                name="plus-outline"
+                width={20}
+                height={20}
+                fill={theme.colors.primary}
+              />
+            </Layout>
+          </Layout>
           <List
             virtualized={false}
             bordered
@@ -58,4 +76,4 @@ const Profile: React.FC<{}> = () => {
   );
 };
 
-export default Profile;
+export default withTheme(Profile);

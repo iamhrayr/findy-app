@@ -1,12 +1,11 @@
 import React from 'react';
 
-const If = ({
-  condition,
-  children,
-}: {
+type Props = {
   condition: any;
   children: React.ReactNode;
-}): any => {
+};
+
+const If = ({ condition, children }: Props): any => {
   if (condition) {
     return children;
   }
