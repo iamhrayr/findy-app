@@ -1,10 +1,20 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  ViewProps,
+  TouchableOpacityProps,
+  ImageSourcePropType,
+} from 'react-native';
 import styled from 'styled-components/native';
 
-import NoAvatarImg from '@app/assets/no-avatar.png';
+import noAvatarImg from '@app/assets/no-avatar.png';
 
-type Props = {};
+type Props = {
+  source?: ImageSourcePropType | null;
+  clickable?: boolean;
+} & (TouchableOpacityProps | ViewProps);
 
 const AvatarWrapper = styled(View)``;
 
@@ -14,10 +24,10 @@ const AvatarImage = styled(Image)`
   border-radius: 20px;
 `;
 
-const Avatar = () => {
+const Avatar = ({ source, clickable, ...rest }: Props) => {
   return (
-    <AvatarWrapper>
-      <AvatarImage source={NoAvatarImg} />
+    <AvatarWrapper {...rest} as={clickable ? TouchableOpacity : View}>
+      <AvatarImage source={source || noAvatarImg} />
     </AvatarWrapper>
   );
 };
