@@ -8,8 +8,8 @@ import { Icon } from 'react-native-eva-icons';
 import ProfileStackScreen from './ProfileStack';
 import EventsStackScreen from './EventsStack';
 import NewEventStackScreen from './NewEventStack';
-import MessagesStackScreen from './MessagesStack';
-import SettingsStackScreen from './SettingsStack';
+// import MessagesStackScreen from './MessagesStack';
+// import SettingsStackScreen from './SettingsStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,21 +23,6 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         inactiveTintColor: theme.colors.darkGray,
         // safeAreaInset: { bottom: 'always', top: 'never' },
       }}>
-      <Tab.Screen
-        name="Profile:Home"
-        component={ProfileStackScreen}
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name={focused ? 'person' : 'person-outline'}
-              height={size}
-              width={size}
-              fill={color}
-            />
-          ),
-        }}
-      />
       <Tab.Screen
         name="Events:Home"
         component={EventsStackScreen}
@@ -57,7 +42,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         name="NewEvent:Home"
         component={NewEventStackScreen}
         options={{
-          title: 'Add',
+          title: 'New Event',
           tabBarIcon: ({ focused, color, size }) => (
             <Icon
               name={focused ? 'plus-circle' : 'plus-circle-outline'}
@@ -69,6 +54,21 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         }}
       />
       <Tab.Screen
+        name="Profile:Home"
+        component={ProfileStackScreen}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Icon
+              name={focused ? 'person' : 'person-outline'}
+              height={size}
+              width={size}
+              fill={color}
+            />
+          ),
+        }}
+      />
+      {/* <Tab.Screen
         name="Messages:Home"
         component={MessagesStackScreen}
         options={{
@@ -82,8 +82,8 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
             />
           ),
         }}
-      />
-      <Tab.Screen
+      /> */}
+      {/* <Tab.Screen
         name="Settings:Home"
         component={SettingsStackScreen}
         options={{
@@ -97,7 +97,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
+// import { useNavigation } from '@react-navigation/native';
 
 import { Container, Content, Input, Layout, Button } from '@app/components';
 import validation from './validation';
+import CarListSelectModal from './CarListSelectModal';
 
 type FormValues = {
   carNumber: string;
@@ -23,6 +25,10 @@ const ProfileAddEditCar: React.FC = () => {
     onSubmit: () => {},
   });
 
+  // const navigation = useNavigation();
+
+  const [brandsModalVisible, setBrandsModalVisible] = useState(false);
+
   return (
     <Container>
       <Content>
@@ -33,6 +39,7 @@ const ProfileAddEditCar: React.FC = () => {
           value={formik.values.carNumber}
           errorMessage={formik.touched.carNumber && formik.errors.carNumber}
         />
+        <Button onPress={() => setBrandsModalVisible(true)}>Car Number ></Button>
 
         <Input
           label="Car Model"
@@ -56,6 +63,8 @@ const ProfileAddEditCar: React.FC = () => {
           </Button>
         </Layout>
       </Content>
+
+      <CarListSelectModal isVisible={brandsModalVisible} />
     </Container>
   );
 };

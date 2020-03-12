@@ -7,27 +7,38 @@ import {
   TouchableOpacityProps,
   ImageSourcePropType,
 } from 'react-native';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 import noAvatarImg from '@app/assets/no-avatar.png';
 
 type Props = {
   source?: ImageSourcePropType | null;
   clickable?: boolean;
+  size?: number | string;
+  circle?: boolean;
 } & (TouchableOpacityProps | ViewProps);
 
-const AvatarWrapper = styled(View)``;
+const DEFAULT_SIZE = 100;
 
-const AvatarImage = styled(Image)`
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
+const AvatarWrapper = styled(View)<Props>`
+  ${({ size = DEFAULT_SIZE }) => css`
+    width: ${size}px;
+    height: ${size}px;
+  `}
 `;
 
-const Avatar = ({ source, clickable, ...rest }: Props) => {
+const AvatarImage = styled(Image)<Props>`
+  ${({ size = DEFAULT_SIZE, circle }) => css`
+    width: ${size}px;
+    height: ${size}px;
+    border-radius: ${circle ? size : size / 5}px;
+  `}
+`;
+
+const Avatar = ({ source, clickable, circle, ...rest }: Props) => {
   return (
     <AvatarWrapper {...rest} as={clickable ? TouchableOpacity : View}>
-      <AvatarImage source={source || noAvatarImg} />
+      <AvatarImage source={source || noAvatarImg} size={rest.size} circle={circle} />
     </AvatarWrapper>
   );
 };

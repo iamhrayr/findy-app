@@ -44,7 +44,7 @@ const ConfirmPhoneNumber: React.FC = () => {
           <UserIdentityIcon width={100} height={200} />
         </Layout>
 
-        <Text align="center" size="h1" spacer={{ b: 'sm' }}>
+        <Text align="center" size="h2" spacer={{ b: 'sm' }}>
           Phone verification
         </Text>
 

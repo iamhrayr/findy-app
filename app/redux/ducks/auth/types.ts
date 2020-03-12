@@ -11,6 +11,9 @@ export const CONFIRM_PHONE_NUMBER = '@app/auth/CONFIRM_PHONE_NUMBER';
 export const CONFIRM_PHONE_NUMBER_SUCCESS = '@app/auth/CONFIRM_PHONE_NUMBER_SUCCESS';
 export const CONFIRM_PHONE_NUMBER_FAILURE = '@app/auth/CONFIRM_PHONE_NUMBER_FAILURE';
 
+export const REFRESH_TOKEN = '@app/auth/REFRESH_TOKEN';
+export const REFRESH_TOKEN_SUCCESS = '@app/auth/REFRESH_TOKEN_SUCCESS';
+
 export const LOGOUT = '@app/auth/LOGOUT';
 
 export type User = {
@@ -99,6 +102,16 @@ export type LogoutAction = {
   type: typeof LOGOUT;
 };
 
+export type RefreshTokenAction = {
+  type: typeof REFRESH_TOKEN;
+  payload: string;
+};
+
+export type RefreshTokenSuccessAction = {
+  type: typeof REFRESH_TOKEN_SUCCESS;
+  payload: string;
+};
+
 export type AuthActionTypes =
   | LoginAction
   | LoginSuccessAction
@@ -109,4 +122,6 @@ export type AuthActionTypes =
   | RegisterFailureAction
   | ConfirmPhoneNumberAction
   | ConfirmPhoneNumberSuccessAction
-  | ConfirmPhoneNumberFailureAction;
+  | ConfirmPhoneNumberFailureAction
+  | RefreshTokenAction
+  | RefreshTokenSuccessAction;

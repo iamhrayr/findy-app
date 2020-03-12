@@ -38,7 +38,7 @@ const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
   return (
     <Layout layout="row">
       <Layout grow={1}>
-        <Text size="h2" spacer={{ b: 'xs' }}>
+        <Text size="h3" spacer={{ b: 'xs' }}>
           {data.number}
         </Text>
         <Text size="xs" color="darkGray">

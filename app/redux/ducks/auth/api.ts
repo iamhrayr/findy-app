@@ -1,4 +1,4 @@
-import http from '@app/helpers/http';
+import { http } from '@app/helpers/http';
 
 class AuthApi {
   login = (data: { phoneNumber: string; password: string }) => {
@@ -22,6 +22,14 @@ class AuthApi {
       url: 'accounts/confirm-phone/',
       method: 'post',
       data: { token: code },
+    });
+  };
+
+  refreshToken = (refresh: string) => {
+    return http({
+      url: 'accounts/refresh-token/',
+      method: 'post',
+      data: { refresh },
     });
   };
 }

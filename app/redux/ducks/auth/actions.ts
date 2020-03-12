@@ -4,12 +4,15 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT,
   REGISTER,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
   CONFIRM_PHONE_NUMBER,
   CONFIRM_PHONE_NUMBER_SUCCESS,
   CONFIRM_PHONE_NUMBER_FAILURE,
+  REFRESH_TOKEN,
+  REFRESH_TOKEN_SUCCESS,
   AuthActionTypes,
   LoginSuccessPayload,
   RegisterSuccessPayload,
@@ -63,4 +66,18 @@ export const confirmPhoneNumberSuccess = (): AuthActionTypes => ({
 export const confirmPhoneNumberFailure = (error: any): AuthActionTypes => ({
   type: CONFIRM_PHONE_NUMBER_FAILURE,
   payload: error,
+});
+
+export const logout = (): AuthActionTypes => ({
+  type: LOGOUT,
+});
+
+export const refreshToken = (refres: string): AuthActionTypes => ({
+  type: REFRESH_TOKEN,
+  payload: refres,
+});
+
+export const refreshTokenSuccess = (token: string): AuthActionTypes => ({
+  type: REFRESH_TOKEN_SUCCESS,
+  payload: token,
 });

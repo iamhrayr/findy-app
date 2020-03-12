@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import NavigationRoot from './navigation';
 import getTheme from './theme';
@@ -24,11 +25,13 @@ const App: React.FC = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={getTheme('light')}>
-          <NavigationContainer>
-            <StatusBar barStyle="dark-content" />
-            <NavigationRoot />
-            <FlashMessage position="top" />
-          </NavigationContainer>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <StatusBar barStyle="dark-content" />
+              <NavigationRoot />
+              <FlashMessage position="top" />
+            </NavigationContainer>
+          </SafeAreaProvider>
         </ThemeProvider>
       </PersistGate>
     </Provider>

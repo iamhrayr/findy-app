@@ -8,11 +8,15 @@ type Props = {
   bordered?: boolean;
   lastItemBordered?: boolean;
   virtualized?: boolean;
-  keyExtractor?: (row: any) => string | number;
+  keyExtractor?: (row: any) => string;
   renderItem: (row: any, index?: number) => React.ReactNode;
 };
 
-const ListItem = styled(View)<{ bordered?: boolean }>`
+const ListItem = styled(View)<{
+  bordered?: boolean;
+  noPaddingTop?: boolean;
+  noPaddingBottom?: boolean;
+}>`
   padding-vertical: 20px;
   ${({ bordered, theme }) =>
     bordered &&
@@ -20,6 +24,16 @@ const ListItem = styled(View)<{ bordered?: boolean }>`
       border-bottom-width: 1px;
       border-bottom-color: ${theme.colors.lightGray};
     `}
+  ${({ noPaddingTop }) =>
+    noPaddingTop &&
+    css`
+      padding-top: 0;
+    `}
+    ${({ noPaddingBottom }) =>
+      noPaddingBottom &&
+      css`
+        padding-bottom: 0;
+      `}
 `;
 
 const List: React.FC<Props> = ({
@@ -34,8 +48,11 @@ const List: React.FC<Props> = ({
     return (
       <FlatList
         data={data}
+        keyExtractor={keyExtractor ? item => keyExtractor(item) : undefined}
         renderItem={({ item, index }) => (
           <ListItem
+            noPaddingTop={index === 0}
+            noPaddingBottom={index === data.length - 1}
             bordered={bordered && (index === data.length - 1 ? lastItemBordered : true)}>
             {renderItem(item)}
           </ListItem>

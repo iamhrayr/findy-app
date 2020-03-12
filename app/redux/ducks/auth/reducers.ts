@@ -63,8 +63,13 @@ export default (state = initialState, action: AuthActionTypes) => {
         isAuthenticated: true,
         error: { ...initialState.error },
         user: action.payload.user,
-        token: action.payload.accessToken,
+        accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
+      };
+    case types.REFRESH_TOKEN_SUCCESS:
+      return {
+        ...state,
+        accessToken: action.payload,
       };
     case types.REGISTER_FAILURE:
     case types.LOGIN_FAILURE:

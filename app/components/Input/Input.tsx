@@ -9,7 +9,7 @@ type LabelProps = {};
 type WrapperProps = { spacer: Partial<LabelProps> };
 
 type Props = TextInputProps & {
-  label: React.ReactNode;
+  label?: React.ReactNode;
   labelProps?: LabelProps;
   spacer?: Partial<SpacerProps>;
   errorMessage?: string | false | null;

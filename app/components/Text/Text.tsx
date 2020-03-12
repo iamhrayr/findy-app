@@ -36,7 +36,7 @@ const Text = styled(RNText)<Props>`
     color: ${color && theme.colors[color] ? theme.colors[color] : theme.text.color};
     font-size: ${theme.text.fontSizes[size || 'md']}px;
     font-weight: ${weight || 400};
-    text-align: ${align || 'left'};
+    text-align: ${align || 'auto'};
     text-transform: ${transform || 'none'};
     /* spaces */
     ${generateSpaces(spacer || {}, theme)};

@@ -1,19 +1,13 @@
-import { ScrollView, ScrollViewProps } from 'react-native';
+import { View, ViewProps } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-type Props = ScrollViewProps & {};
+type Props = ViewProps & {};
 
-const Container = styled(ScrollView)`
+const Container = styled(View)`
   ${({ theme }) => css`
     background: ${theme.content.bgColor};
+    flex: 1;
   `}
 `;
-
-Container.defaultProps = {
-  contentContainerStyle: {
-    justifyContent: 'space-between',
-    flexGrow: 1,
-  },
-};
 
 export default Container;

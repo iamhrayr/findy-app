@@ -63,7 +63,7 @@ const Profile = ({ theme }: Props) => {
         <Layout layout="row" spacer={{ x: 'md', b: 'xxl', t: 'lg' }}>
           <Avatar />
           <Layout layout="col" justify="center" spacer={{ l: 'lg' }}>
-            <Text size="h2" weight="600" spacer={{ b: 'sm' }}>
+            <Text size="h3" weight="600" spacer={{ b: 'sm' }}>
               Sipo Sipoakanyan
             </Text>
             <Layout layout="row">
@@ -99,6 +99,7 @@ const Profile = ({ theme }: Props) => {
                 width={20}
                 height={20}
                 fill={theme.colors.primary}
+                onPress={navigateToAddEditCar}
               />
             </Layout>
           </Layout>
