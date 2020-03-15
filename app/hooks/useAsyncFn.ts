@@ -1,27 +1,38 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { AxiosError } from 'axios';
 
-const useAsyncFn = fn => {
+type State = {
+  loading: boolean;
+  error: AxiosError | null;
+  res: any | null;
+};
+type Fn = (...args: any[]) => Promise<any>;
+type Return = [State, Fn];
+
+const useAsyncFn = (fn: Fn, initialLoading?: boolean): Return => {
   const [state, setState] = useState({
-    isLoading: false,
-    err: null,
+    loading: !!initialLoading,
+    error: null,
     res: null,
   });
 
-  const mutate = (...args) => {
-    setState({ isLoading: true, err: null, res: null });
+  const mutate = useCallback(
+    async (...args: any[]) => {
+      setState({ loading: true, error: null, res: null });
 
-    return fn(...args)
-      .then(({ data }) => {
-        setState({ ...state, isLoading: false, res: data });
+      try {
+        const { data } = await fn(...args);
+        setState({ ...state, loading: false, res: data });
         return data;
-      })
-      .catch(err => {
-        setState({ ...state, isLoading: false, err });
-        return err;
-      });
-  };
+      } catch (error) {
+        setState({ ...state, loading: false, error });
+        return error;
+      }
+    },
+    [], // eslint-disable-line
+  );
 
-  return { ...state, mutate };
+  return [{ ...state }, mutate];
 };
 
 export default useAsyncFn;

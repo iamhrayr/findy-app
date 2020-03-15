@@ -2,17 +2,15 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
+import { CarWithWrapper } from '@app/models/Car';
 import { Text, Layout, Button } from '@app/components';
 
 type Props = {
-  data: {
-    pk: string;
-    number: string;
-    added: string;
-    onDelete: () => void;
-    onEdit: () => void;
+  data: CarWithWrapper & {
+    onDelete?: () => void;
+    onEdit?: () => void;
   };
-  navigateToEdit: (id: string) => void;
+  navigateToEdit: (data: CarWithWrapper) => void;
 };
 
 const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
@@ -39,10 +37,10 @@ const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
     <Layout layout="row">
       <Layout grow={1}>
         <Text size="h3" spacer={{ b: 'xs' }}>
-          {data.number}
+          {data.car.carNumber}
         </Text>
         <Text size="xs" color="darkGray">
-          Added: {data.added}
+          Added: {'data.car.added'}
         </Text>
       </Layout>
       <Layout layout="row">
@@ -58,7 +56,7 @@ const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
           shape="circle"
           spacer={{ l: 'sm' }}
           icon={<Icon name="edit" size={18} color="white" />}
-          onPress={() => navigateToEdit(data.pk)}
+          onPress={() => navigateToEdit(data)}
         />
       </Layout>
     </Layout>

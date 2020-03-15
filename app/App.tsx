@@ -17,7 +17,7 @@ import { store, persistor } from './redux/store';
 if (process.env.NODE_ENV === 'development') {
   // @ts-ignore
   GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
-  import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
+  // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
 }
 
 const App: React.FC = () => {

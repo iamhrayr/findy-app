@@ -26,7 +26,7 @@ const Wrapper = styled(View)<WrapperProps>`
   `}
 `;
 
-const Label = styled(Text)<LabelProps>`
+export const Label = styled(Text)<LabelProps>`
   ${({ theme }) => css`
     opacity: ${theme.form.label.opacity};
     color: ${theme.form.label.color};
@@ -67,6 +67,19 @@ const Input = ({
   const labelContent =
     typeof label === 'string' ? <Label {...labelProps}>{label}</Label> : label;
 
+  // let addonLeftCopy, addonRightCopy;
+
+  // if (addonLeft) {
+  //   addonLeftCopy = cloneElement(addonLeft, {
+  //     color: theme.colors.gray,
+  //   });
+  // }
+  // if (addonRight) {
+  //   addonRightCopy = cloneElement(addonRight, {
+  //     color: theme.colors.gray,
+  //   });
+  // }
+
   return (
     <Wrapper spacer={spacer}>
       {labelContent}
@@ -79,5 +92,7 @@ const Input = ({
     </Wrapper>
   );
 };
+
+Input.Label = Label;
 
 export default Input;

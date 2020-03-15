@@ -1,35 +1,29 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useCallback, useMemo } from 'react';
+import { FlatList, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 
-import { RootState } from '@app/redux/rootReducer';
-import { fetchBrandsAndModels } from '@app/redux/ducks/brandsModels/actions';
-
-import { Container, Text, Button, Layout, Input, List, If } from '@app/components';
+import { Container, Text, Layout, Input, If, Spacer } from '@app/components';
 
 type Props = {
   isVisible: boolean;
+  data: any[];
+  loading: boolean;
+  close: () => void;
+  onSelect: (item: any) => void;
 };
 
-const CarListSelectModal = ({ isVisible }: Props) => {
+const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props) => {
   const [searchText, setSearchText] = useState('');
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchBrandsAndModels());
-  }, [dispatch]);
-
-  const brandsModels = useSelector((state: RootState) => state.brandsModels);
-  const filteredModels = useMemo(() => {
-    return brandsModels.data.brands.filter(brand => brand.name.includes(searchText));
-  }, [searchText, brandsModels.data.brands]);
+  const filteredData = useMemo(() => {
+    return data.filter(item => item.name.includes(searchText));
+  }, [data, searchText]);
 
   const handleSearchInputChange = useCallback(val => {
     setSearchText(val);
   }, []);
 
-  if (brandsModels.loading) {
+  if (loading) {
     <Text>Loading...</Text>;
   }
 
@@ -41,29 +35,33 @@ const CarListSelectModal = ({ isVisible }: Props) => {
             <Input
               placeholder="Type to search..."
               onChangeText={handleSearchInputChange}
+              value={searchText}
+              autoCorrect={false}
+              addonRight={
+                <Text color="primary" onPress={close}>
+                  Close
+                </Text>
+              }
             />
           </Layout>
 
           <Layout spacer={{ x: 'lg' }} size={1}>
-            <If condition={filteredModels.length === 0}>
+            <If condition={filteredData.length === 0}>
               <Text>No result</Text>
             </If>
 
-            <If condition={filteredModels.length > 0}>
-              <List
-                virtualized
-                bordered={false}
-                data={filteredModels}
+            <If condition={filteredData.length > 0}>
+              <FlatList
+                data={filteredData}
                 keyExtractor={item => String(item.pk)}
-                renderItem={item => <Text>{item.name}</Text>}
+                ItemSeparatorComponent={() => <Spacer b="lg" />}
+                renderItem={({ item }) => (
+                  <TouchableOpacity onPress={() => onSelect(item)}>
+                    <Text>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
               />
             </If>
-          </Layout>
-
-          <Layout spacer={{ x: 'lg' }} noShrink>
-            <Button shape="circle" spacer={{ t: 'xl' }}>
-              Submit
-            </Button>
           </Layout>
         </SafeAreaView>
       </Container>

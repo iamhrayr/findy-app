@@ -1,6 +1,8 @@
 import { http } from '@app/helpers/http';
 
-class AuthApi {
+class Api {
+  /********/
+  /* AUTH */
   login = (data: { phoneNumber: string; password: string }) => {
     return http({
       url: 'accounts/login/',
@@ -32,6 +34,32 @@ class AuthApi {
       data: { refresh },
     });
   };
+
+  /*************************/
+  /* car brands and models */
+  fetchBrandsAndModels = () => {
+    return http({
+      url: 'accounts/add-car-info/',
+      method: 'get',
+    });
+  };
+
+  /***********/
+  /* profile */
+  fetchMyCars = () => {
+    return http({
+      url: 'accounts/user-cars',
+      method: 'get',
+    });
+  };
+
+  addCar = (data: { carNumber: string; carModel: number; color: string }) => {
+    return http({
+      url: 'accounts/add-car/',
+      method: 'post',
+      data,
+    });
+  };
 }
 
-export default new AuthApi();
+export default new Api();

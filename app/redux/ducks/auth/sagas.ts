@@ -2,6 +2,8 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import httpInstance from '@app/helpers/http';
+import api from '@app/api';
+
 import * as types from './types';
 import { AuthActionTypes } from './types';
 import {
@@ -14,7 +16,6 @@ import {
   refreshTokenSuccess,
   logout,
 } from './actions';
-import api from './api';
 
 // worker Sagas
 function* loginHandler(action: AuthActionTypes) {

@@ -1,9 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
+import api from '@app/api';
 
 import * as types from './types';
 import { fetchBrandsAndModelsSuccess, fetchBrandsAndModelsFailure } from './actions';
-import api from './api';
 
 // worker Sagas
 function* fetchBrandsAndModelsHandler() {

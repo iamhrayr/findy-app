@@ -10,3 +10,5 @@ export { default as Avatar } from './Avatar';
 export { default as List } from './List';
 export { default as If } from './If';
 export { default as Line } from './Line';
+export { default as NoData } from './NoData';
+export { default as Loading } from './Loading';
