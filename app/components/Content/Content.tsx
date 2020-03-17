@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components/native';
 type Props = ScrollViewProps & {
   noPadding?: boolean;
   extraPadded?: boolean;
+  full?: boolean;
   children?: React.ReactNode;
 };
 
@@ -22,4 +23,10 @@ const Content = styled(ScrollView)<Props>`
     `}
 `;
 
-export default Content;
+export default ({ children, full, ...props }: Props) => (
+  <Content contentContainerStyle={full ? { flex: 1 } : {}} {...props}>
+    {children}
+  </Content>
+);
+
+// export default Content;

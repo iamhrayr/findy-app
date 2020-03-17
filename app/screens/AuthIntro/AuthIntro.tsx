@@ -20,7 +20,7 @@ const AuthIntro: React.FC = () => {
 
   return (
     <Container>
-      <Content extraPadded>
+      <Content extraPadded full>
         <Layout size={1}>
           <Layout grow={1}>
             <IntroImage />

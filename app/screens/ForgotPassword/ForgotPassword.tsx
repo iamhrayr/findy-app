@@ -22,7 +22,7 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <Container>
-      <Content extraPadded>
+      <Content extraPadded full>
         <Layout grow={1}>
           <ForgotImage />
         </Layout>
