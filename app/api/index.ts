@@ -60,6 +60,17 @@ class Api {
       data,
     });
   };
+
+  editCar = (
+    data: { carNumber?: string; carModel?: number; color?: string },
+    carId?: Id,
+  ) => {
+    return http({
+      url: `accounts/edit-car/${carId}/`,
+      method: 'patch',
+      data,
+    });
+  };
 }
 
 export default new Api();
