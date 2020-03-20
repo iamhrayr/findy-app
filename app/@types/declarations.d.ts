@@ -36,3 +36,24 @@ declare var Otherwise: any;
 type FormikOnCange = (value: string) => void;
 
 type Id = string | number;
+
+type KeyMap<T> = {
+  [key: string]: T;
+};
+
+// Redux types
+// interface BaseAction<T = any> {
+//   type: string;
+//   payload?: T;
+// }
+interface BaseAction<ActionType = string> {
+  type: ActionType;
+}
+interface Action<Payload, ActionType = string> extends BaseAction<ActionType> {
+  payload: Payload;
+  error?: boolean;
+}
+interface ActionMeta<Payload, Meta, ActionType = string>
+  extends Action<Payload, ActionType> {
+  meta: Meta;
+}

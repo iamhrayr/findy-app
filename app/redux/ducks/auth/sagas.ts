@@ -48,10 +48,31 @@ function* confirmPhoneNumberHandler(action: AuthActionTypes) {
   }
 }
 
+// function* refreshTokenHandler(action: AuthActionTypes) {
+//   try {
+//     const res: AxiosResponse = yield call(api.refreshToken, (action as any).payload);
+//     console.log('action.meta', action.meta);
+//     yield put({
+//       type: 'REFRESH_TOKEN_SUCCESS',
+//       payload: res.data.access,
+//       meta: action.meta,
+//     });
+//     yield put(refreshTokenSuccess(res.data.access));
+//     httpInstance.setAuthHeader(res.data.access);
+//   } catch (error) {
+//     // yield put({
+//     //   type: 'REFRESH_TOKEN_FAILURE',
+//     //   payload: error,
+//     //   error: true,
+//     //   meta: action.meta,
+//     // });
+//   }
+// }
+
 function* refreshTokenHandler(action: AuthActionTypes) {
   try {
     const res: AxiosResponse = yield call(api.refreshToken, (action as any).payload);
-    yield put(refreshTokenSuccess(res.data.access));
+    yield put(refreshTokenSuccess(res.data.access, action.meta));
     httpInstance.setAuthHeader(res.data.access);
   } catch (error) {
     yield put(logout());

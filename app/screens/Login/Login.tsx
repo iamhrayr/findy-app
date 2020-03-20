@@ -15,8 +15,8 @@ type FormValues = {
 };
 
 const initialValues: FormValues = {
-  phoneNumber: '',
-  password: '',
+  phoneNumber: '37498999590',
+  password: '123456',
 };
 
 const Login: React.FC = () => {
@@ -42,7 +42,7 @@ const Login: React.FC = () => {
 
   return (
     <Container>
-      <Content extraPadded full>
+      <Content extraPadded>
         <Layout grow={1}>
           <LoginImage />
         </Layout>

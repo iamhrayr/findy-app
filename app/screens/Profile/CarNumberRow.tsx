@@ -2,15 +2,16 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import { CarWithWrapper } from '@app/models/Car';
+import { Car } from '@app/models/Car';
 import { Text, Layout, Button } from '@app/components';
 
 type Props = {
-  data: CarWithWrapper & {
-    onDelete?: () => void;
-    onEdit?: () => void;
-  };
-  navigateToEdit: (data: CarWithWrapper) => void;
+  data: Car;
+  // data: Car & {
+  //   onDelete?: () => void;
+  //   onEdit?: () => void;
+  // };
+  navigateToEdit: (data: Car) => void;
 };
 
 const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
@@ -37,10 +38,10 @@ const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
     <Layout layout="row">
       <Layout grow={1}>
         <Text size="h3" spacer={{ b: 'xs' }}>
-          {data.car.carNumber}
+          {data.carNumber}
         </Text>
         <Text size="xs" color="darkGray">
-          Added: {'data.car.added'}
+          Added: {'data.added'}
         </Text>
       </Layout>
       <Layout layout="row">

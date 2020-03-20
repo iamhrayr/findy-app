@@ -72,12 +72,16 @@ export const logout = (): AuthActionTypes => ({
   type: LOGOUT,
 });
 
+// const meta = { thunk: true };
+
 export const refreshToken = (refres: string): AuthActionTypes => ({
   type: REFRESH_TOKEN,
   payload: refres,
+  meta: { thunk: true },
 });
 
-export const refreshTokenSuccess = (token: string): AuthActionTypes => ({
+export const refreshTokenSuccess = (token: string, meta): AuthActionTypes => ({
   type: REFRESH_TOKEN_SUCCESS,
   payload: token,
+  meta,
 });

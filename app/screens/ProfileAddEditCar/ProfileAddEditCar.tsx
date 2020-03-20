@@ -14,6 +14,7 @@ import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
 import { RootState } from '@app/redux/rootReducer';
 import { fetchBrandsAndModels } from '@app/redux/ducks/brandsModels/actions';
+import { editCar, addCar } from '@app/redux/ducks/profile/actions';
 import CarIcon from '@app/assets/car.svg';
 // import validation from './validation';
 import CarMakeInput from './CarMakeInput';
@@ -46,9 +47,9 @@ const ProfileAddEditCar: React.FC = () => {
 
   const brandsModels = useSelector((state: RootState) => state.brandsModels);
 
-  const [{ error }, addCar] = useAsyncFn(api.addCar);
-  const [{}, editCar] = useAsyncFn(api.editCar);
-  const addOrEdit = params.pk ? editCar : addCar;
+  const [{ error }, AddCarMutation] = useAsyncFn(api.addCar);
+  const [{}, editCarMutation] = useAsyncFn(api.editCar);
+  const addOrEdit = params?.pk ? editCarMutation : AddCarMutation;
 
   useEffect(() => {
     error &&
@@ -59,7 +60,7 @@ const ProfileAddEditCar: React.FC = () => {
   }, [error]);
 
   const formik = useFormik({
-    initialValues: params.pk ? params : initialValues,
+    initialValues: params?.pk ? params : initialValues,
     // validationSchema: validation,
     onSubmit: values => {
       const valuesToSend = {
@@ -68,7 +69,13 @@ const ProfileAddEditCar: React.FC = () => {
         color: values.color,
       };
 
-      addOrEdit(valuesToSend, params.pk).then(() => navigation.goBack());
+      addOrEdit(valuesToSend, params?.pk).then((car: Car) => {
+        params?.pk
+          ? dispatch(editCar({ car, id: params.pk }))
+          : dispatch(addCar({ car }));
+
+        navigation.goBack();
+      });
     },
   });
 

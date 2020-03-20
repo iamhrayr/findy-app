@@ -4,12 +4,20 @@ import styled, { css } from 'styled-components/native';
 type Props = {
   radius?: number;
   noShadow?: boolean;
+  size?: number;
 };
 
 const CardWrapper = styled(View)<Props>`
   /* TODO: transfer all the data into theme configs */
   padding: 20px;
   background-color: #fff;
+
+  ${({ size }) =>
+    size &&
+    css`
+      flex: ${size};
+    `}
+
   ${({ noShadow }) =>
     !noShadow &&
     css`

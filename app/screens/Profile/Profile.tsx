@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import { FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { useAsyncFn } from '@app/hooks';
+import { useDispatch, useSelector } from 'react-redux';
 import { DefaultTheme, withTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 
-import { CarWithWrapper } from '@app/models/Car';
+import { Car } from '@app/models/Car';
+import { profileSelectors } from '@app/redux/ducks/profile';
 import { useNavigation } from '@react-navigation/native';
-import api from '@app/api';
 import {
   Container,
   Card,
@@ -18,6 +18,7 @@ import {
   NoData,
   If,
 } from '@app/components';
+import { fetchMyCars as fetchMyCarsRedux } from '@app/redux/ducks/profile/actions';
 import CarNumberRow from './CarNumberRow';
 
 type Props = {
@@ -27,15 +28,19 @@ type Props = {
 const Profile = ({ theme }: Props) => {
   const navigation = useNavigation();
 
-  const [{ loading, res }, fetchMyCars] = useAsyncFn(api.fetchMyCars);
+  const dispatch = useDispatch();
+
+  const myCars = useSelector(profileSelectors.getMyCars);
+  const myCarsLoading = useSelector(profileSelectors.getIsMyCarsLoading);
+  const myCarsLoaded = useSelector(profileSelectors.getIsMyCarsLoaded);
 
   useEffect(() => {
-    fetchMyCars();
-  }, [fetchMyCars]);
+    dispatch(fetchMyCarsRedux());
+  }, [dispatch]);
 
   const navigateToAddEditCar = useCallback(
-    (data?: CarWithWrapper) => {
-      navigation.navigate('Profile:AddEditCar', (data && data.car) || {});
+    (data?: Car) => {
+      navigation.navigate('Profile:AddEditCar', data);
     },
     [navigation],
   );
@@ -70,7 +75,7 @@ const Profile = ({ theme }: Props) => {
       </Layout>
 
       <Layout size={1} spacer={{ x: 'md', y: 'md' }}>
-        <Card>
+        <Card size={1}>
           <Layout layout="row" justify="between" spacer={{ b: 'md' }}>
             <Text spacer={{ b: 'sm' }}>My Cars</Text>
             <TouchableOpacity onPress={() => navigateToAddEditCar()}>
@@ -88,19 +93,20 @@ const Profile = ({ theme }: Props) => {
             </TouchableOpacity>
           </Layout>
 
-          <If condition={loading}>
+          <If condition={myCarsLoading}>
             <ActivityIndicator />
           </If>
 
-          <If condition={res}>
+          <If condition={myCarsLoaded}>
             <FlatList
-              data={res}
+              // style={{ shrink: 1 }}
+              data={myCars}
               ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
               ListEmptyComponent={() => <NoData message="You do not have any car yet" />}
-              renderItem={({ item }: { item: CarWithWrapper }) => (
+              renderItem={({ item }: { item: Car }) => (
                 <CarNumberRow data={item} navigateToEdit={navigateToAddEditCar} />
               )}
-              keyExtractor={item => String(item.car.pk)}
+              keyExtractor={item => String(item.pk)}
             />
           </If>
         </Card>
