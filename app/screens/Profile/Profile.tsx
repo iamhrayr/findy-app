@@ -6,7 +6,10 @@ import { Icon } from 'react-native-eva-icons';
 
 import { Car } from '@app/models/Car';
 import { profileSelectors } from '@app/redux/ducks/profile';
+import { removeCar } from '@app/redux/ducks/profile/actions';
 import { useNavigation } from '@react-navigation/native';
+import { useAsyncFn } from '@app/hooks';
+import api from '@app/api';
 import {
   Container,
   Card,
@@ -34,6 +37,8 @@ const Profile = ({ theme }: Props) => {
   const myCarsLoading = useSelector(profileSelectors.getIsMyCarsLoading);
   const myCarsLoaded = useSelector(profileSelectors.getIsMyCarsLoaded);
 
+  const [{}, removeCarMutation] = useAsyncFn(api.removeCar);
+
   useEffect(() => {
     dispatch(fetchMyCarsRedux());
   }, [dispatch]);
@@ -48,6 +53,15 @@ const Profile = ({ theme }: Props) => {
   const navigateToEditProfile = useCallback(() => {
     navigation.navigate('Profile:Edit');
   }, [navigation]);
+
+  const removeCarHandler = useCallback(
+    id => {
+      removeCarMutation(id).then(() => {
+        dispatch(removeCar({ id }));
+      });
+    },
+    [dispatch, removeCarMutation],
+  );
 
   return (
     <Container>
@@ -104,7 +118,11 @@ const Profile = ({ theme }: Props) => {
               ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
               ListEmptyComponent={() => <NoData message="You do not have any car yet" />}
               renderItem={({ item }: { item: Car }) => (
-                <CarNumberRow data={item} navigateToEdit={navigateToAddEditCar} />
+                <CarNumberRow
+                  data={item}
+                  navigateToEdit={navigateToAddEditCar}
+                  onRemove={removeCarHandler}
+                />
               )}
               keyExtractor={item => String(item.pk)}
             />

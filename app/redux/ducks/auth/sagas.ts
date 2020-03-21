@@ -5,7 +5,7 @@ import httpInstance from '@app/helpers/http';
 import api from '@app/api';
 
 import * as types from './types';
-import { AuthActionTypes } from './types';
+// import { AuthActionTypes } from './types';
 import {
   loginSuccess,
   loginFailure,
@@ -18,10 +18,9 @@ import {
 } from './actions';
 
 // worker Sagas
-function* loginHandler(action: AuthActionTypes) {
+function* loginHandler(action: Action) {
   try {
-    // FIXME: fix (action as any) issue
-    const res: AxiosResponse = yield call(api.login, (action as any).payload);
+    const res: AxiosResponse = yield call(api.login, action.payload);
     yield put(loginSuccess(res.data));
     httpInstance.setAuthHeader(res.data.accessToken);
   } catch (error) {
@@ -30,49 +29,28 @@ function* loginHandler(action: AuthActionTypes) {
   }
 }
 
-function* registerHandler(action: AuthActionTypes) {
+function* registerHandler(action: Action) {
   try {
-    const res: AxiosResponse = yield call(api.register, (action as any).payload);
+    const res: AxiosResponse = yield call(api.register, action.payload);
     yield put(registerSuccess(res.data));
   } catch (error) {
     yield put(registerFailure(error.response.data));
   }
 }
 
-function* confirmPhoneNumberHandler(action: AuthActionTypes) {
+function* confirmPhoneNumberHandler(action: Action) {
   try {
-    yield call(api.confirmPhoneNumber, (action as any).payload);
+    yield call(api.confirmPhoneNumber, action.payload);
     yield put(confirmPhoneNumberSuccess());
   } catch (error) {
     yield put(confirmPhoneNumberFailure(error.response.data));
   }
 }
 
-// function* refreshTokenHandler(action: AuthActionTypes) {
-//   try {
-//     const res: AxiosResponse = yield call(api.refreshToken, (action as any).payload);
-//     console.log('action.meta', action.meta);
-//     yield put({
-//       type: 'REFRESH_TOKEN_SUCCESS',
-//       payload: res.data.access,
-//       meta: action.meta,
-//     });
-//     yield put(refreshTokenSuccess(res.data.access));
-//     httpInstance.setAuthHeader(res.data.access);
-//   } catch (error) {
-//     // yield put({
-//     //   type: 'REFRESH_TOKEN_FAILURE',
-//     //   payload: error,
-//     //   error: true,
-//     //   meta: action.meta,
-//     // });
-//   }
-// }
-
-function* refreshTokenHandler(action: AuthActionTypes) {
+function* refreshTokenHandler(action: Action) {
   try {
-    const res: AxiosResponse = yield call(api.refreshToken, (action as any).payload);
-    yield put(refreshTokenSuccess(res.data.access, action.meta));
+    const res: AxiosResponse = yield call(api.refreshToken, action.payload);
+    yield put(refreshTokenSuccess(res.data.access));
     httpInstance.setAuthHeader(res.data.access);
   } catch (error) {
     yield put(logout());

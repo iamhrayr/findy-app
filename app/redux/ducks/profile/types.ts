@@ -14,47 +14,39 @@ export type ProfileState = {
   myCars: MyCarsState;
 };
 
-// export interface FetchMyCarsAction {
-//   type: typeof fetchMyCars.TRIGGER;
-// }
+export interface FetchMyCarsAction extends Action {
+  type: typeof fetchMyCars.TRIGGER;
+}
 
-export interface FetchMyCarsSuccessAction {
+export interface FetchMyCarsSuccessAction extends Action {
   type: typeof fetchMyCars.SUCCESS;
   payload: { data: KeyMap<Car>; ids: Id[] };
 }
 
-export interface FetchMyCarsFailureAction {
+export interface FetchMyCarsFailureAction extends Action {
   type: typeof fetchMyCars.FAILURE;
   payload: any;
 }
 
-export interface AddCarAction {
+export interface AddCarAction extends Action {
   type: typeof ADD_CAR;
   payload: { car: Car };
 }
 
-export interface EditCarAction {
+export interface EditCarAction extends Action {
   type: typeof EDIT_CAR;
   payload: { id: Id; car: Car };
 }
 
-export interface RemoveCarAction {
+export interface RemoveCarAction extends Action {
   type: typeof REMOVE_CAR;
   payload: { id: Id };
 }
 
 export type MyCarsActionTypes =
-  // | FetchMyCarsAction
+  | FetchMyCarsAction
   | FetchMyCarsSuccessAction
   | FetchMyCarsFailureAction
   | AddCarAction
   | EditCarAction
   | RemoveCarAction;
-
-export type ProfilePayload =
-  | {
-      data: KeyMap<Car>;
-      ids: Id[];
-    }
-  | { id: Id; car: Car }
-  | { car: Car };

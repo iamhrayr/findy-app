@@ -46,14 +46,13 @@ type KeyMap<T> = {
 //   type: string;
 //   payload?: T;
 // }
-interface BaseAction<ActionType = string> {
-  type: ActionType;
+interface BaseAction {
+  type: string;
 }
-interface Action<Payload, ActionType = string> extends BaseAction<ActionType> {
+interface Action<Payload = any> extends BaseAction {
   payload: Payload;
   error?: boolean;
 }
-interface ActionMeta<Payload, Meta, ActionType = string>
-  extends Action<Payload, ActionType> {
+interface ActionMeta<Payload, Meta> extends Action<Payload> {
   meta: Meta;
 }

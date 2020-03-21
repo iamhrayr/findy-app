@@ -105,13 +105,11 @@ export type LogoutAction = {
 export type RefreshTokenAction = {
   type: typeof REFRESH_TOKEN;
   payload: string;
-  meta: any;
 };
 
 export type RefreshTokenSuccessAction = {
   type: typeof REFRESH_TOKEN_SUCCESS;
   payload: string;
-  meta: any;
 };
 
 export type AuthActionTypes =

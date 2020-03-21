@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
+
 import createListReducer from '../../common/createListReducer';
 
 import { fetchMyCars, ADD_CAR, EDIT_CAR, REMOVE_CAR } from './actions';
-import { MyCarsState, MyCarsActionTypes } from './types';
+import { MyCarsState } from './types';
 
-const myCarsFetchSlice = createListReducer({
+const myCarsFetchReducer = createListReducer({
   loadingAction: fetchMyCars.TRIGGER,
   failureAction: fetchMyCars.FAILURE,
   successAction: fetchMyCars.SUCCESS,
@@ -18,11 +19,11 @@ const initialState = {
   error: '',
 };
 
-const myCarsReducer = (state: MyCarsState = initialState, action: MyCarsActionTypes) => {
+const myCarsReducer = (state: MyCarsState = initialState, action: Action) => {
   switch (action.type) {
     case ADD_CAR: {
-      const { car } = action.payload;
-      const newData = { ...state.data, [car.pk]: car };
+      const { car, sam } = action.payload;
+      const newData = { ...state.data, [car.pk]: car, sam };
       const newIds = [...state.ids, car.pk];
       return {
         ...state,
@@ -32,7 +33,6 @@ const myCarsReducer = (state: MyCarsState = initialState, action: MyCarsActionTy
     }
     case EDIT_CAR: {
       const { car, id } = action.payload;
-      console.log({ car });
       const newData = {
         ...state.data,
         [id]: car,
@@ -54,7 +54,7 @@ const myCarsReducer = (state: MyCarsState = initialState, action: MyCarsActionTy
       };
     }
     default:
-      return myCarsFetchSlice(state, action);
+      return myCarsFetchReducer(state, action);
   }
 };
 

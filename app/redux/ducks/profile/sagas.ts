@@ -11,10 +11,7 @@ import { fetchMyCars } from './actions';
 function* fetchMyCarsHandler() {
   try {
     const res: AxiosResponse = yield call(api.fetchMyCars);
-    // TODO: fix after extra `car` in fucking api is fixed
-    const data = res.data.map((item: any) => item.car);
-    const { map, ids } = array2IdMap(data);
-    // console.log('aaction', action);
+    const { map, ids } = array2IdMap(res.data);
     yield put(fetchMyCars.success({ data: map, ids }));
   } catch (error) {
     yield put(fetchMyCars.failure(error.response.data));

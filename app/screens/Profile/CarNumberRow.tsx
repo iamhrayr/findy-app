@@ -11,13 +11,14 @@ type Props = {
   //   onDelete?: () => void;
   //   onEdit?: () => void;
   // };
+  onRemove: (id: Id) => void;
   navigateToEdit: (data: Car) => void;
 };
 
-const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
-  const deleteCar = useCallback(() => {
-    // delete
-  }, []);
+const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
+  const removeCar = useCallback(() => {
+    onRemove(data.pk);
+  }, [data.pk, onRemove]);
 
   const handleDeletePress = useCallback(() => {
     Alert.alert(
@@ -28,11 +29,11 @@ const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
           text: 'Cancel',
           style: 'cancel',
         },
-        { text: 'Yes', onPress: deleteCar },
+        { text: 'Yes', onPress: removeCar },
       ],
       { cancelable: false },
     );
-  }, [deleteCar]);
+  }, [removeCar]);
 
   return (
     <Layout layout="row">

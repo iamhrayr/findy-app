@@ -71,6 +71,13 @@ class Api {
       data,
     });
   };
+
+  removeCar = (carId?: Id) => {
+    return http({
+      url: `/accounts/delete-car/${carId}`,
+      method: 'delete',
+    });
+  };
 }
 
 export default new Api();
