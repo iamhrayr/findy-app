@@ -72,10 +72,19 @@ class Api {
     });
   };
 
-  removeCar = (carId?: Id) => {
+  removeCar = (carId: Id) => {
     return http({
-      url: `/accounts/delete-car/${carId}`,
+      url: `accounts/delete-car/${carId}`,
       method: 'delete',
+    });
+  };
+
+  changeAvatar = (data: FormData) => {
+    return http({
+      url: 'accounts/change-avatar/',
+      method: 'post',
+      data,
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
   };
 }

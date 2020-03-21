@@ -22,6 +22,7 @@
     "camelcase-keys": "^6.1.2",
     "formik": "^2.1.4",
     "jwt-decode": "^2.2.0",
+    "libphonenumber-js": "^1.7.48",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-color-palette": "^2.2.0",

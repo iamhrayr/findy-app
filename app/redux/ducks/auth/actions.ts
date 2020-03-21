@@ -1,5 +1,5 @@
-// import { Action, ActionCreator, Dispatch } from 'redux';
-// import * as types from './types';
+// TODO: change into routines
+
 import {
   LOGIN,
   LOGIN_SUCCESS,

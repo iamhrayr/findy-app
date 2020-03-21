@@ -1,59 +1,44 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
-import ImagePicker, { Image } from 'react-native-image-crop-picker';
+import { useSelector } from 'react-redux';
 
-import { Container, Content, Input, Layout, Avatar, Button } from '@app/components';
+import { authSelectors } from '@app/redux/ducks/auth';
+import { Container, Content, Input, Layout, Button } from '@app/components';
 import validation from './validation';
 
-type FormValues = {
-  avatar: null | Image;
-  fullName: string;
-  phoneNumber: string;
-};
+// import { Avatar, Layout, Text, Button } from '@app/components';
 
-const initialValues: FormValues = {
-  avatar: null,
-  fullName: '',
-  phoneNumber: '',
-};
+// type FormValues = {
+//   avatar: null | Image;
+//   fullName: string;
+//   email: string;
+// };
+
+// const initialValues: FormValues = {
+//   avatar: null,
+//   fullName: '',
+//   email: '',
+// };
 
 const EditProfile: React.FC = () => {
+  const user = useSelector(authSelectors.getUser);
+  const fullName = (user?.firstName || '') + ' ' + (user?.lastName || '');
+
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      fullName,
+      email: user?.email,
+      phoneNumber: user?.phoneNumber,
+    },
     validationSchema: validation,
     onSubmit: () => {},
   });
-
-  const handleAvatarPress = useCallback(() => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      mediaType: 'photo',
-      cropping: true,
-      includeBase64: true,
-    }).then(image => {
-      // console.log(image);
-      formik.setFieldValue('avatar', image);
-    });
-  }, [formik]);
 
   const { values, setFieldValue, touched, errors, handleSubmit } = formik;
 
   return (
     <Container>
       <Content>
-        <Layout align="center" spacer={{ b: 'lg' }}>
-          <Avatar
-            clickable
-            onPress={handleAvatarPress}
-            source={
-              values.avatar && {
-                uri: `data:${values.avatar.mime};base64,${values.avatar.data}`,
-              }
-            }
-          />
-        </Layout>
-
         <Input
           label="Full Name"
           placeholder=""
@@ -63,6 +48,15 @@ const EditProfile: React.FC = () => {
         />
 
         <Input
+          label="Email"
+          placeholder=""
+          onChangeText={val => setFieldValue('email', val)}
+          value={values.email}
+          errorMessage={touched.email && errors.email}
+        />
+
+        <Input
+          editable={false}
           label="Phone Number"
           placeholder=""
           onChangeText={val => setFieldValue('phoneNumber', val)}

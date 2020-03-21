@@ -14,7 +14,6 @@ type Props = {
 const Splash = ({ setAppInitialised }: Props) => {
   const auth = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-  // console.log(auth);
 
   useMount(() => {
     if (!auth.isAuthenticated) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
-import { TextInputMask, TextInputMaskProps } from 'react-native-masked-text';
 
 import Text from '../Text';
 import styled, { css } from 'styled-components/native';
@@ -96,9 +95,5 @@ const Input = ({
 };
 
 Input.Label = Label;
-
-Input.Masked = (props: TextInputMaskProps) => (
-  <TextInputMask {...props} customTextInput={Input} />
-);
 
 export default Input;

@@ -1,3 +1,5 @@
+import { User } from '@app/models/User';
+
 // redux action types
 export const LOGIN = '@app/auth/LOGIN';
 export const LOGIN_SUCCESS = '@app/auth/LOGIN_SUCCESS';
@@ -15,15 +17,6 @@ export const REFRESH_TOKEN = '@app/auth/REFRESH_TOKEN';
 export const REFRESH_TOKEN_SUCCESS = '@app/auth/REFRESH_TOKEN_SUCCESS';
 
 export const LOGOUT = '@app/auth/LOGOUT';
-
-export type User = {
-  pk: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  avatar: string;
-  country: string;
-};
 
 export type AuthState = {
   isAuthenticated: boolean;
