@@ -1,4 +1,4 @@
-package com.whomcaristhis;
+package com.findy.app;
 
 import android.app.Application;
 import android.content.Context;
