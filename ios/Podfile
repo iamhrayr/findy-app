@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'WhomCarIsThis' do
-  # Pods for WhomCarIsThis
+target 'findy' do
+  # Pods for findy
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,7 +34,7 @@ target 'WhomCarIsThis' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'WhomCarIsThisTests' do
+  target 'findyTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +42,10 @@ target 'WhomCarIsThis' do
   use_native_modules!
 end
 
-target 'WhomCarIsThis-tvOS' do
-  # Pods for WhomCarIsThis-tvOS
+target 'findy-tvOS' do
+  # Pods for findy-tvOS
 
-  target 'WhomCarIsThis-tvOSTests' do
+  target 'findy-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
