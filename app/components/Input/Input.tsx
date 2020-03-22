@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
+
 import Text from '../Text';
 import styled, { css } from 'styled-components/native';
 
@@ -8,7 +9,7 @@ import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
 type LabelProps = {};
 type WrapperProps = { spacer: Partial<LabelProps> };
 
-type Props = TextInputProps & {
+export type Props = TextInputProps & {
   label?: React.ReactNode;
   labelProps?: LabelProps;
   spacer?: Partial<SpacerProps>;

@@ -12,7 +12,7 @@ import styled, { css } from 'styled-components/native';
 import noAvatarImg from '@app/assets/no-avatar.png';
 
 type Props = {
-  source?: ImageSourcePropType | null;
+  source?: ImageSourcePropType;
   clickable?: boolean;
   size?: number | string;
   circle?: boolean;
@@ -31,7 +31,7 @@ const AvatarImage = styled(Image)<Props>`
   ${({ size = DEFAULT_SIZE, circle }) => css`
     width: ${size}px;
     height: ${size}px;
-    border-radius: ${circle ? size : size / 5}px;
+    border-radius: ${circle ? size : Number(size) / 5}px;
   `}
 `;
 

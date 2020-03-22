@@ -1,5 +1,5 @@
-// import { Action, ActionCreator, Dispatch } from 'redux';
-// import * as types from './types';
+// TODO: change into routines
+
 import {
   LOGIN,
   LOGIN_SUCCESS,
@@ -13,10 +13,14 @@ import {
   CONFIRM_PHONE_NUMBER_FAILURE,
   REFRESH_TOKEN,
   REFRESH_TOKEN_SUCCESS,
+  UPDATE_USER,
+  UPDATE_USER_SUCCESS,
+  // UPDATE_USER_FAILURE,
   AuthActionTypes,
   LoginSuccessPayload,
   RegisterSuccessPayload,
 } from './types';
+import { User } from '@app/models/User';
 
 export const login = (data: {
   phoneNumber: string;
@@ -80,4 +84,14 @@ export const refreshToken = (refres: string): AuthActionTypes => ({
 export const refreshTokenSuccess = (token: string): AuthActionTypes => ({
   type: REFRESH_TOKEN_SUCCESS,
   payload: token,
+});
+
+export const updateUser = (payload: Partial<User>): AuthActionTypes => ({
+  type: UPDATE_USER,
+  payload,
+});
+
+export const updateUserSuccess = (payload: Partial<User>): AuthActionTypes => ({
+  type: UPDATE_USER_SUCCESS,
+  payload,
 });

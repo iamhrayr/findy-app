@@ -10,7 +10,7 @@ type Props = {
   formik: any;
   models: Model[];
   loading: boolean;
-  selectedBrandId: Id;
+  selectedBrandId?: Id;
 };
 
 const CarModalInput = ({ formik, models = [], loading, selectedBrandId }: Props) => {

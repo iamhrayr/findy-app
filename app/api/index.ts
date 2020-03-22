@@ -60,6 +60,59 @@ class Api {
       data,
     });
   };
+
+  editCar = (
+    data: { carNumber?: string; carModel?: number; color?: string },
+    carId?: Id,
+  ) => {
+    return http({
+      url: `accounts/edit-car/${carId}/`,
+      method: 'patch',
+      data,
+    });
+  };
+
+  removeCar = (carId: Id) => {
+    return http({
+      url: `accounts/delete-car/${carId}`,
+      method: 'delete',
+    });
+  };
+
+  changeAvatar = (data: FormData) => {
+    return http({
+      url: 'accounts/change-avatar/',
+      method: 'post',
+      data,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  };
+
+  fetchProfileSettings = () => {
+    return http({
+      url: 'accounts/change-notification/',
+      method: 'get',
+    });
+  };
+
+  changeProfileSettings = (data: {
+    notificationMethod?: string;
+    showPhoneNumber?: boolean;
+  }) => {
+    return http({
+      url: 'accounts/change-notification/',
+      method: 'put',
+      data,
+    });
+  };
+
+  editUser = (data: { firstName: string; lastName: string; email: string }) => {
+    return http({
+      url: '/accounts/edit-user/',
+      method: 'patch',
+      data,
+    });
+  };
 }
 
 export default new Api();

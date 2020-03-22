@@ -66,6 +66,14 @@ export default (state = initialState, action: AuthActionTypes) => {
         accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
       };
+    case types.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      };
     case types.REFRESH_TOKEN_SUCCESS:
       return {
         ...state,

@@ -22,8 +22,10 @@ const CarMakeInput = ({ formik, brands, loading }: Props) => {
   const handleBrandSelect = useCallback(
     (brand: Brand) => {
       setModalVisible(false);
-      formik.setFieldValue('make', brand.name);
+      formik.setFieldValue('makeName', brand.name);
       formik.setFieldValue('makePk', brand.pk);
+      formik.setFieldValue('model', '');
+      formik.setFieldValue('modelPk', '');
     },
     [formik],
   );
@@ -35,9 +37,9 @@ const CarMakeInput = ({ formik, brands, loading }: Props) => {
           pointerEvents="none"
           label="Car Make"
           placeholder="Tap to select car make"
-          value={formik.values.make}
+          value={formik.values.makeName}
           addonRight={<Icon name="ios-arrow-forward" size={24} />}
-          errorMessage={formik.touched.make && formik.errors.make}
+          errorMessage={formik.touched.makeName && formik.errors.makeName}
           editable={false}
         />
       </TouchableOpacity>

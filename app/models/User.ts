@@ -1,12 +1,20 @@
 export type User = {
-  user: {
-    pk: Id;
-    email: string;
-    firstName: string;
-    lastName: string;
-    avatar?: string | null;
-    country: string;
-  };
+  pk: Id;
+  email: string;
+  phoneNumber: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string | null;
+  country?: string;
+};
+
+export type Auth = {
+  user: User;
   refreshToken: string;
   accessToken: string;
+};
+
+export type Settings = {
+  notificationMethod: 'sms' | 'app' | 'both';
+  showPhoneNumber: boolean;
 };

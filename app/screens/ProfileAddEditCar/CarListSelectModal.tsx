@@ -16,7 +16,9 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
   const [searchText, setSearchText] = useState('');
 
   const filteredData = useMemo(() => {
-    return data.filter(item => item.name.includes(searchText));
+    return data.filter(item =>
+      item.name.toLowerCase().includes(searchText.toLowerCase()),
+    );
   }, [data, searchText]);
 
   const handleSearchInputChange = useCallback(val => {

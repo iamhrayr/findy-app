@@ -49,6 +49,28 @@ const items = [
     lastMessage:
       'There were an accident with your car near Mashtots street. Please come as soon as possible. Thanks.',
   },
+  {
+    pk: 5,
+    participant: {
+      name: 'Juakin Rodrigo',
+      avatar: avatarImage,
+    },
+    carNumber: '77 SZ 877',
+    date: '27 June 2019',
+    lastMessage:
+      'There were an accident with your car near Mashtots street. Please come as soon as possible. Thanks.',
+  },
+  {
+    pk: 6,
+    participant: {
+      name: 'Juakin Rodrigo',
+      avatar: avatarImage,
+    },
+    carNumber: '77 SZ 877',
+    date: '27 June 2019',
+    lastMessage:
+      'There were an accident with your car near Mashtots street. Please come as soon as possible. Thanks.',
+  },
 ];
 
 const Events = () => {

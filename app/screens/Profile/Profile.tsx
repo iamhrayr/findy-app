@@ -1,24 +1,19 @@
 import React, { useCallback, useEffect } from 'react';
 import { FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { useAsyncFn } from '@app/hooks';
+import { useDispatch, useSelector } from 'react-redux';
 import { DefaultTheme, withTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 
-import { CarWithWrapper } from '@app/models/Car';
+import { Car } from '@app/models/Car';
+import { profileSelectors } from '@app/redux/ducks/profile';
+import { removeCar } from '@app/redux/ducks/profile/actions';
 import { useNavigation } from '@react-navigation/native';
+import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
-import {
-  Container,
-  Card,
-  Avatar,
-  Layout,
-  Text,
-  Line,
-  Button,
-  NoData,
-  If,
-} from '@app/components';
+import { Container, Card, Layout, Text, Line, NoData, If } from '@app/components';
+import { fetchMyCars as fetchMyCarsRedux } from '@app/redux/ducks/profile/actions';
 import CarNumberRow from './CarNumberRow';
+import UserDetails from './UserDetails';
 
 type Props = {
   theme: DefaultTheme;
@@ -27,50 +22,40 @@ type Props = {
 const Profile = ({ theme }: Props) => {
   const navigation = useNavigation();
 
-  const [{ loading, res }, fetchMyCars] = useAsyncFn(api.fetchMyCars);
+  const dispatch = useDispatch();
+
+  const myCars = useSelector(profileSelectors.getMyCars);
+  const myCarsLoading = useSelector(profileSelectors.getIsMyCarsLoading);
+  const myCarsLoaded = useSelector(profileSelectors.getIsMyCarsLoaded);
+
+  const [{}, removeCarMutation] = useAsyncFn(api.removeCar);
 
   useEffect(() => {
-    fetchMyCars();
-  }, [fetchMyCars]);
+    dispatch(fetchMyCarsRedux());
+  }, [dispatch]);
 
   const navigateToAddEditCar = useCallback(
-    (data?: CarWithWrapper) => {
-      navigation.navigate('Profile:AddEditCar', (data && data.car) || {});
+    (data?: Car) => {
+      navigation.navigate('Profile:AddEditCar', data);
     },
     [navigation],
   );
 
-  const navigateToEditProfile = useCallback(() => {
-    navigation.navigate('Profile:Edit');
-  }, [navigation]);
+  const removeCarHandler = useCallback(
+    id => {
+      removeCarMutation(id).then(() => {
+        dispatch(removeCar({ id }));
+      });
+    },
+    [dispatch, removeCarMutation],
+  );
 
   return (
     <Container>
-      <Layout layout="row" spacer={{ x: 'md', b: 'xxl', t: 'lg' }}>
-        <Avatar />
-        <Layout layout="col" justify="center" spacer={{ l: 'lg' }}>
-          <Text size="h3" weight="600" spacer={{ b: 'sm' }}>
-            Sipo Sipoakanyan
-          </Text>
-          <Layout layout="row">
-            <Icon name="phone-outline" width={20} height={20} />
-            <Text weight="300" spacer={{ l: 'xs' }}>
-              374 95 959595
-            </Text>
-          </Layout>
-          <Button
-            outline
-            spacer={{ t: 'sm' }}
-            type="primary"
-            size="sm"
-            onPress={navigateToEditProfile}>
-            Edit Profile
-          </Button>
-        </Layout>
-      </Layout>
+      <UserDetails />
 
       <Layout size={1} spacer={{ x: 'md', y: 'md' }}>
-        <Card>
+        <Card size={1}>
           <Layout layout="row" justify="between" spacer={{ b: 'md' }}>
             <Text spacer={{ b: 'sm' }}>My Cars</Text>
             <TouchableOpacity onPress={() => navigateToAddEditCar()}>
@@ -88,19 +73,24 @@ const Profile = ({ theme }: Props) => {
             </TouchableOpacity>
           </Layout>
 
-          <If condition={loading}>
+          <If condition={myCarsLoading}>
             <ActivityIndicator />
           </If>
 
-          <If condition={res}>
+          <If condition={myCarsLoaded}>
             <FlatList
-              data={res}
+              // style={{ shrink: 1 }}
+              data={myCars}
               ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
               ListEmptyComponent={() => <NoData message="You do not have any car yet" />}
-              renderItem={({ item }: { item: CarWithWrapper }) => (
-                <CarNumberRow data={item} navigateToEdit={navigateToAddEditCar} />
+              renderItem={({ item }: { item: Car }) => (
+                <CarNumberRow
+                  data={item}
+                  navigateToEdit={navigateToAddEditCar}
+                  onRemove={removeCarHandler}
+                />
               )}
-              keyExtractor={item => String(item.car.pk)}
+              keyExtractor={item => String(item.pk)}
             />
           </If>
         </Card>

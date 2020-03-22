@@ -37,7 +37,6 @@ const Register: React.FC = () => {
     initialValues,
     // validationSchema: validation,
     onSubmit: values => {
-      console.log('values', values);
       dispatch(register(values));
     },
   });

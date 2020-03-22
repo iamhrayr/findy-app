@@ -2,21 +2,23 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-import { CarWithWrapper } from '@app/models/Car';
+import { Car } from '@app/models/Car';
 import { Text, Layout, Button } from '@app/components';
 
 type Props = {
-  data: CarWithWrapper & {
-    onDelete?: () => void;
-    onEdit?: () => void;
-  };
-  navigateToEdit: (data: CarWithWrapper) => void;
+  data: Car;
+  // data: Car & {
+  //   onDelete?: () => void;
+  //   onEdit?: () => void;
+  // };
+  onRemove: (id: Id) => void;
+  navigateToEdit: (data: Car) => void;
 };
 
-const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
-  const deleteCar = useCallback(() => {
-    // delete
-  }, []);
+const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
+  const removeCar = useCallback(() => {
+    onRemove(data.pk);
+  }, [data.pk, onRemove]);
 
   const handleDeletePress = useCallback(() => {
     Alert.alert(
@@ -27,20 +29,20 @@ const CarNumberRow: React.FC<Props> = ({ data, navigateToEdit }) => {
           text: 'Cancel',
           style: 'cancel',
         },
-        { text: 'Yes', onPress: deleteCar },
+        { text: 'Yes', onPress: removeCar },
       ],
       { cancelable: false },
     );
-  }, [deleteCar]);
+  }, [removeCar]);
 
   return (
     <Layout layout="row">
       <Layout grow={1}>
         <Text size="h3" spacer={{ b: 'xs' }}>
-          {data.car.carNumber}
+          {data.carNumber}
         </Text>
         <Text size="xs" color="darkGray">
-          Added: {'data.car.added'}
+          Added: {'data.added'}
         </Text>
       </Layout>
       <Layout layout="row">
