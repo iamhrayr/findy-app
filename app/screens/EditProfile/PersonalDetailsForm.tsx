@@ -43,7 +43,7 @@ const PersonalDetailsForm: React.FC = () => {
       </Text>
 
       <Input
-        label="Full Name"
+        label="First Name"
         placeholder=""
         onChangeText={val => setFieldValue('firstName', val)}
         value={values.firstName}
@@ -51,7 +51,7 @@ const PersonalDetailsForm: React.FC = () => {
       />
 
       <Input
-        label="Full Name"
+        label="Last Name"
         placeholder=""
         onChangeText={val => setFieldValue('lastName', val)}
         value={values.lastName}
