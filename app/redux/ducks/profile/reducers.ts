@@ -2,8 +2,15 @@ import { combineReducers } from 'redux';
 
 import createListReducer from '../../common/createListReducer';
 
-import { fetchMyCars, ADD_CAR, EDIT_CAR, REMOVE_CAR } from './actions';
-import { MyCarsState } from './types';
+import {
+  fetchMyCars,
+  fetchProfileSettings,
+  updateProfileSettings,
+  ADD_CAR,
+  EDIT_CAR,
+  REMOVE_CAR,
+} from './actions';
+import { MyCarsState, SettingsState } from './types';
 
 const myCarsFetchReducer = createListReducer({
   loadingAction: fetchMyCars.TRIGGER,
@@ -58,6 +65,40 @@ const myCarsReducer = (state: MyCarsState = initialState, action: Action) => {
   }
 };
 
+const settingsReducer = (
+  state: SettingsState = {
+    loading: false,
+    loaded: false,
+    data: {
+      notificationMethod: null,
+      showPhoneNumber: null,
+    },
+  },
+  action: Action,
+) => {
+  switch (action.type) {
+    case fetchProfileSettings.TRIGGER:
+      return {
+        ...state,
+        loading: true,
+      };
+    case fetchProfileSettings.SUCCESS:
+      return {
+        loading: false,
+        loaded: true,
+        data: action.payload,
+      };
+    case updateProfileSettings.SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   myCars: myCarsReducer,
+  settings: settingsReducer,
 });

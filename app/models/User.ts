@@ -13,3 +13,8 @@ export type Auth = {
   refreshToken: string;
   accessToken: string;
 };
+
+export type Settings = {
+  notificationMethod: 'sms' | 'app' | 'both';
+  showPhoneNumber: boolean;
+};

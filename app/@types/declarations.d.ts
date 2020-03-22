@@ -41,6 +41,8 @@ type KeyMap<T> = {
   [key: string]: T;
 };
 
+type NullableProps<T> = { [P in keyof T]: T[P] | null };
+
 // Redux types
 // interface BaseAction<T = any> {
 //   type: string;

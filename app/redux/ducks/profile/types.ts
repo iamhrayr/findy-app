@@ -1,4 +1,5 @@
 import { Car } from '@app/models/Car';
+import { Settings } from '@app/models/User';
 
 import { fetchMyCars, ADD_CAR, EDIT_CAR, REMOVE_CAR } from './actions';
 
@@ -10,8 +11,15 @@ export type MyCarsState = {
   error?: any;
 };
 
+export type SettingsState = {
+  loading: boolean;
+  loaded: boolean;
+  data: NullableProps<Settings>;
+};
+
 export type ProfileState = {
   myCars: MyCarsState;
+  settings: SettingsState;
 };
 
 export interface FetchMyCarsAction extends Action {

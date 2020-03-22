@@ -87,6 +87,32 @@ class Api {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   };
+
+  fetchProfileSettings = () => {
+    return http({
+      url: 'accounts/change-notification/',
+      method: 'get',
+    });
+  };
+
+  changeProfileSettings = (data: {
+    notificationMethod?: string;
+    showPhoneNumber?: boolean;
+  }) => {
+    return http({
+      url: 'accounts/change-notification/',
+      method: 'put',
+      data,
+    });
+  };
+
+  editUser = (data: { firstName: string; lastName: string; email: string }) => {
+    return http({
+      url: '/accounts/edit-user/',
+      method: 'patch',
+      data,
+    });
+  };
 }
 
 export default new Api();

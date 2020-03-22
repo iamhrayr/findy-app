@@ -20,6 +20,8 @@ if (process.env.NODE_ENV === 'development') {
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
 }
 
+// console.disableYellowBox = true;
+
 const App: React.FC = () => {
   return (
     <Provider store={store}>
@@ -29,7 +31,10 @@ const App: React.FC = () => {
             <NavigationContainer>
               <StatusBar barStyle="dark-content" />
               <NavigationRoot />
-              <FlashMessage position="top" />
+              <FlashMessage
+                position="top"
+                // floating={true}
+              />
             </NavigationContainer>
           </SafeAreaProvider>
         </ThemeProvider>

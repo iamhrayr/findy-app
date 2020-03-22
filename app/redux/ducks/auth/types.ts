@@ -13,6 +13,10 @@ export const CONFIRM_PHONE_NUMBER = '@app/auth/CONFIRM_PHONE_NUMBER';
 export const CONFIRM_PHONE_NUMBER_SUCCESS = '@app/auth/CONFIRM_PHONE_NUMBER_SUCCESS';
 export const CONFIRM_PHONE_NUMBER_FAILURE = '@app/auth/CONFIRM_PHONE_NUMBER_FAILURE';
 
+export const UPDATE_USER = '@app/auth/UPDATE_USER';
+export const UPDATE_USER_SUCCESS = '@app/auth/UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = '@app/auth/UPDATE_USER_FAILURE';
+
 export const REFRESH_TOKEN = '@app/auth/REFRESH_TOKEN';
 export const REFRESH_TOKEN_SUCCESS = '@app/auth/REFRESH_TOKEN_SUCCESS';
 
@@ -57,6 +61,16 @@ export type LoginSuccessAction = {
 export type LoginFailureAction = {
   type: typeof LOGIN_FAILURE;
   payload: any;
+};
+
+export type UpdateUserAction = {
+  type: typeof UPDATE_USER;
+  payload: Partial<User>;
+};
+
+export type UpdateUserSuccessAction = {
+  type: typeof UPDATE_USER_SUCCESS;
+  payload: Partial<User>;
 };
 
 export type RegisterAction = {
@@ -109,6 +123,8 @@ export type AuthActionTypes =
   | LoginAction
   | LoginSuccessAction
   | LoginFailureAction
+  | UpdateUserAction
+  | UpdateUserSuccessAction
   | LogoutAction
   | RegisterAction
   | RegisterSuccessAction

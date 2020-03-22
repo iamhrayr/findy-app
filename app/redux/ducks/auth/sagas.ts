@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
+import { showMessage } from 'react-native-flash-message';
 
 import httpInstance from '@app/helpers/http';
 import api from '@app/api';
@@ -14,6 +15,7 @@ import {
   confirmPhoneNumberSuccess,
   confirmPhoneNumberFailure,
   refreshTokenSuccess,
+  updateUserSuccess,
   logout,
 } from './actions';
 
@@ -57,6 +59,23 @@ function* refreshTokenHandler(action: Action) {
   }
 }
 
+function* updateUserHandler(action: Action) {
+  try {
+    const res: AxiosResponse = yield call(api.editUser, action.payload);
+    yield put(updateUserSuccess(res.data));
+    showMessage({
+      type: 'success',
+      message: 'Updated successfully',
+    });
+  } catch (error) {
+    // console.log(error);
+    showMessage({
+      type: 'danger',
+      message: 'Something went wrong',
+    });
+  }
+}
+
 function* logoutHandler() {
   httpInstance.removeAuthHeader();
 }
@@ -68,6 +87,7 @@ function* watcherSaga() {
   yield takeLatest(types.CONFIRM_PHONE_NUMBER, confirmPhoneNumberHandler);
   yield takeLatest(types.REFRESH_TOKEN, refreshTokenHandler);
   yield takeLatest(types.LOGOUT, logoutHandler);
+  yield takeLatest(types.UPDATE_USER, updateUserHandler);
 }
 
 export default watcherSaga;
