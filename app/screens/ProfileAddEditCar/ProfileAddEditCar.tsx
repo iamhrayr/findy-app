@@ -6,6 +6,7 @@ import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import ColorPalette from 'react-native-color-palette';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { showMessage } from 'react-native-flash-message';
+import useMount from 'react-use/lib/useMount';
 
 import CAR_COLORS from '@app/constants/carColors';
 import { Container, Content, Input, MaskedInput, Layout, Button } from '@app/components';
@@ -37,31 +38,32 @@ type RoutePropType = RouteProp<{ 'Profile:AddEditCar': Car }, 'Profile:AddEditCa
 
 const ProfileAddEditCar: React.FC = () => {
   const { params } = useRoute<RoutePropType>();
-
   const navigation = useNavigation();
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchBrandsAndModels());
-  }, [dispatch]);
-
   const brandsModels = useSelector((state: RootState) => state.brandsModels);
+  const operation = params?.pk ? api.editCar : api.addCar;
 
-  const [{ error }, AddCarMutation] = useAsyncFn(api.addCar);
-  const [{}, editCarMutation] = useAsyncFn(api.editCar);
-  const addOrEdit = params?.pk ? editCarMutation : AddCarMutation;
+  const [{ loading, error, res }, mutation] = useAsyncFn(operation);
+
+  useMount(() => dispatch(fetchBrandsAndModels()));
 
   useEffect(() => {
-    error &&
+    if (res) {
+      params?.pk
+        ? dispatch(editCar({ car: res, id: params.pk }))
+        : dispatch(addCar({ car: res }));
+
       showMessage({
-        message: error?.response?.data,
-        type: 'danger',
+        type: 'success',
+        message: params?.pk ? 'Successfully updated' : 'Successfully added',
       });
-  }, [error]);
+
+      navigation.goBack();
+    }
+  }, [dispatch, navigation, params, res]);
 
   const formik = useFormik({
     initialValues: params?.pk ? params : initialValues,
-    // validationSchema: validation,
     onSubmit: values => {
       const valuesToSend = {
         carNumber: values.carNumber,
@@ -69,13 +71,7 @@ const ProfileAddEditCar: React.FC = () => {
         color: values.color,
       };
 
-      addOrEdit(valuesToSend, params?.pk).then((car: Car) => {
-        params?.pk
-          ? dispatch(editCar({ car, id: params.pk }))
-          : dispatch(addCar({ car }));
-
-        navigation.goBack();
-      });
+      mutation(valuesToSend, params?.pk);
     },
   });
 
@@ -89,10 +85,10 @@ const ProfileAddEditCar: React.FC = () => {
           onChangeText={(val: string) => formik.setFieldValue('carNumber', val)}
           value={formik.values.carNumber}
           autoCapitalize="characters"
-          // errorMessage={formik.touched.carNumber && formik.errors.carNumber}
+          errorMessage={
+            (formik.touched.carNumber && formik.errors.carNumber) || error?.carNumber
+          }
         />
-
-        {/* <TextInputMask type="custom" /> */}
 
         <CarMakeInput
           formik={formik}
@@ -127,7 +123,7 @@ const ProfileAddEditCar: React.FC = () => {
         </Layout>
 
         <Layout align="center" spacer={{ t: 'xl', y: 'md' }}>
-          <Button wide shape="circle" onPress={formik.handleSubmit}>
+          <Button wide shape="circle" onPress={formik.handleSubmit} loading={loading}>
             Save
           </Button>
         </Layout>

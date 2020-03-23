@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
-import { AxiosError } from 'axios';
+// import { AxiosError } from 'axios';
 
 type State = {
   loading: boolean;
-  error: AxiosError | null;
+  error: any | null;
   res: any | null;
 };
 type Fn = (...args: any[]) => Promise<any>;
@@ -25,8 +25,9 @@ const useAsyncFn = (fn: Fn, initialLoading?: boolean): Return => {
         setState({ ...state, loading: false, res: data });
         return data;
       } catch (error) {
-        setState({ ...state, loading: false, error });
-        return error;
+        // TODO: error may be thrown before the response received. handle it proparly
+        setState({ ...state, loading: false, error: error.response.data });
+        return error.response.data;
       }
     },
     [], // eslint-disable-line
