@@ -3,11 +3,12 @@ import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { login } from '@app/redux/ducks/auth/actions';
+import { getLoginStatus } from '@app/redux/ducks/auth/selectors';
+// import { RootState } from '@app/redux/rootReducer';
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import LoginImage from './LoginImage';
 import validation from './validation';
-import { login } from '@app/redux/ducks/auth/actions';
-import { RootState } from '@app/redux/rootReducer';
 
 type FormValues = {
   phoneNumber: string;
@@ -22,7 +23,7 @@ const initialValues: FormValues = {
 const Login: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const auth = useSelector((state: RootState) => state.auth);
+  const loginStatus = useSelector(getLoginStatus);
 
   const navigateToRegister = useCallback(() => {
     navigation.navigate('Auth:Register');
@@ -59,7 +60,7 @@ const Login: React.FC = () => {
             value={formik.values.phoneNumber}
             errorMessage={
               (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
-              auth.error.login.phoneNumber
+              loginStatus.error?.phoneNumber
             }
           />
 
@@ -76,8 +77,8 @@ const Login: React.FC = () => {
             }
             errorMessage={
               (formik.touched.password && formik.errors.password) ||
-              auth.error.login.password ||
-              auth.error.login.nonFieldErrors
+              loginStatus.error?.password ||
+              loginStatus.error?.nonFieldErrors
             }
           />
 
@@ -85,7 +86,7 @@ const Login: React.FC = () => {
             <Button
               wide
               shape="circle"
-              loading={auth.isAuthenticating}
+              loading={loginStatus.loading}
               onPress={formik.handleSubmit}>
               Login
             </Button>

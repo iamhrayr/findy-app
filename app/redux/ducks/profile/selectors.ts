@@ -4,7 +4,7 @@ import { RootState } from '@app/redux/rootReducer';
 import { arrayFromIdMap } from '@app/helpers/array';
 
 import { getEntireStatus } from '../status/selectors';
-import { FETCH_MY_CARS } from './actions';
+import { FETCH_MY_CARS } from './types';
 
 export const getProfileCars = (state: RootState) => state.profile.myCars;
 export const getProfileSettings = (state: RootState) => state.profile.settings;

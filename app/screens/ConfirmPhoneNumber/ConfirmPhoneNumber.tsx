@@ -8,7 +8,8 @@ import { showMessage } from 'react-native-flash-message';
 import { Button, Text, Container, Layout, Content } from '@app/components';
 import UserIdentityIcon from '@app/assets/user-identity.svg';
 import { confirmPhoneNumber } from '@app/redux/ducks/auth/actions';
-import { RootState } from '@app/redux/rootReducer';
+import { getConfirmPhoneNumberStatus } from '@app/redux/ducks/auth/selectors';
+// import { RootState } from '@app/redux/rootReducer';
 import VerificationCodeField from './VerificationCodeField';
 
 const CELL_COUNT = 4;
@@ -16,7 +17,8 @@ const CELL_COUNT = 4;
 const ConfirmPhoneNumber: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const auth = useSelector((state: RootState) => state.auth);
+  // const auth = useSelector((state: RootState) => state.auth);
+  const confirmPhoneNumberStatus = useSelector(getConfirmPhoneNumberStatus);
   const [value, setValue] = useState('');
 
   const handleSubmit = useCallback(() => {
@@ -24,7 +26,7 @@ const ConfirmPhoneNumber: React.FC = () => {
   }, [dispatch, value]);
 
   useEffect(() => {
-    if (auth.codeConfirmed) {
+    if (confirmPhoneNumberStatus.loaded) {
       showMessage({
         message: 'You have successfully registered! please Log In',
         type: 'success',
@@ -35,7 +37,7 @@ const ConfirmPhoneNumber: React.FC = () => {
         routes: [{ name: 'Auth:Login' }],
       });
     }
-  }, [auth.codeConfirmed, navigation]);
+  }, [confirmPhoneNumberStatus.loaded, navigation]);
 
   return (
     <Container>
@@ -71,13 +73,14 @@ const ConfirmPhoneNumber: React.FC = () => {
           size="lg"
           spacer={{ t: 'xxl' }}
           onPress={handleSubmit}
+          loading={confirmPhoneNumberStatus.loading}
           disabled={value.length !== CELL_COUNT}>
           Confirm
         </Button>
 
-        {auth.error.confirmPhone.token && (
+        {confirmPhoneNumberStatus.error?.token && (
           <Text align="center" color="danger" spacer={{ t: 'sm' }}>
-            {auth.error.confirmPhone.token}
+            {confirmPhoneNumberStatus.error?.token}
           </Text>
         )}
       </Content>
