@@ -1,8 +1,6 @@
 import { Car } from '@app/models/Car';
 import { Settings } from '@app/models/User';
 
-import { fetchMyCars, ADD_CAR, EDIT_CAR, REMOVE_CAR } from './actions';
-
 export type MyCarsState = {
   loading: boolean;
   loaded: boolean;
@@ -22,39 +20,9 @@ export type ProfileState = {
   settings: SettingsState;
 };
 
-export interface FetchMyCarsAction extends Action {
-  type: typeof fetchMyCars.TRIGGER;
-}
-
-export interface FetchMyCarsSuccessAction extends Action {
-  type: typeof fetchMyCars.SUCCESS;
-  payload: { data: KeyMap<Car>; ids: Id[] };
-}
-
-export interface FetchMyCarsFailureAction extends Action {
-  type: typeof fetchMyCars.FAILURE;
-  payload: any;
-}
-
-export interface AddCarAction extends Action {
-  type: typeof ADD_CAR;
-  payload: { car: Car };
-}
-
-export interface EditCarAction extends Action {
-  type: typeof EDIT_CAR;
-  payload: { id: Id; car: Car };
-}
-
-export interface RemoveCarAction extends Action {
-  type: typeof REMOVE_CAR;
-  payload: { id: Id };
-}
-
-export type MyCarsActionTypes =
-  | FetchMyCarsAction
-  | FetchMyCarsSuccessAction
-  | FetchMyCarsFailureAction
-  | AddCarAction
-  | EditCarAction
-  | RemoveCarAction;
+export const REMOVE_CAR = '@app/profile/REMOVE_CAR';
+export const EDIT_CAR = '@app/profile/EDIT_CAR';
+export const ADD_CAR = '@app/profile/ADD_CAR';
+export const FETCH_MY_CARS = '@app/profile/FETCH_MY_CARS';
+export const UPDATE_SETTINGS_UPDATED = '@app/profile/UPDATE_SETTINGS_UPDATED';
+export const FETCH_PROFILE_SETTINGS = '@app/profile/FETCH_PROFILE_SETTINGS';

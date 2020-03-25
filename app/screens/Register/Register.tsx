@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
-import RegisterImage from './RegisterImage';
 // import validation from './validation';
 import { register } from '@app/redux/ducks/auth/actions';
-import { RootState } from '@app/redux/rootReducer';
+import { getRegisterStatus } from '@app/redux/ducks/auth/selectors';
+// import { RootState } from '@app/redux/rootReducer';
+import RegisterImage from './RegisterImage';
 
 type FormValues = {
   fullName: string;
@@ -25,7 +26,8 @@ const initialValues: FormValues = {
 const Register: React.FC = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const auth = useSelector((state: RootState) => state.auth);
+  const registerStatus = useSelector(getRegisterStatus);
+  // const auth = useSelector((state: RootState) => state.auth);
 
   const [passVisible, setPassVisible] = useState(false);
 
@@ -60,7 +62,7 @@ const Register: React.FC = () => {
             value={formik.values.phoneNumber}
             errorMessage={
               (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
-              auth.error.register.phoneNumber
+              registerStatus.error?.phoneNumber
             }
           />
           <Input
@@ -81,12 +83,16 @@ const Register: React.FC = () => {
             }
             errorMessage={
               (formik.touched.password && formik.errors.password) ||
-              auth.error.register.password
+              registerStatus.error?.password
             }
           />
 
           <Layout align="center" spacer={{ y: 'md' }}>
-            <Button onPress={formik.handleSubmit} shape="circle" wide>
+            <Button
+              onPress={formik.handleSubmit}
+              shape="circle"
+              loading={registerStatus.loading}
+              wide>
               Register
             </Button>
           </Layout>

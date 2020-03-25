@@ -6,16 +6,12 @@ import httpInstance from '@app/helpers/http';
 import api from '@app/api';
 
 import * as types from './types';
-// import { AuthActionTypes } from './types';
 import {
-  loginSuccess,
-  loginFailure,
-  registerSuccess,
-  registerFailure,
-  confirmPhoneNumberSuccess,
-  confirmPhoneNumberFailure,
-  refreshTokenSuccess,
-  updateUserSuccess,
+  login,
+  register,
+  confirmPhoneNumber,
+  refreshToken,
+  updateUser,
   logout,
 } from './actions';
 
@@ -23,36 +19,36 @@ import {
 function* loginHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.login, action.payload);
-    yield put(loginSuccess(res.data));
+    yield put(login.success(res.data));
     httpInstance.setAuthHeader(res.data.accessToken);
   } catch (error) {
     // FIXME: response could be undefined if it's network error for example
-    yield put(loginFailure(error.response.data));
+    yield put(login.failure(error.response.data));
   }
 }
 
 function* registerHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.register, action.payload);
-    yield put(registerSuccess(res.data));
+    yield put(register.success(res.data));
   } catch (error) {
-    yield put(registerFailure(error.response.data));
+    yield put(register.failure(error.response.data));
   }
 }
 
 function* confirmPhoneNumberHandler(action: Action) {
   try {
     yield call(api.confirmPhoneNumber, action.payload);
-    yield put(confirmPhoneNumberSuccess());
+    yield put(confirmPhoneNumber.success());
   } catch (error) {
-    yield put(confirmPhoneNumberFailure(error.response.data));
+    yield put(confirmPhoneNumber.failure(error.response.data));
   }
 }
 
 function* refreshTokenHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.refreshToken, action.payload);
-    yield put(refreshTokenSuccess(res.data.access));
+    yield put(refreshToken.success(res.data.access));
     httpInstance.setAuthHeader(res.data.access);
   } catch (error) {
     yield put(logout());
@@ -62,7 +58,7 @@ function* refreshTokenHandler(action: Action) {
 function* updateUserHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.editUser, action.payload);
-    yield put(updateUserSuccess(res.data));
+    yield put(updateUser.success(res.data));
     showMessage({
       type: 'success',
       message: 'Updated successfully',
@@ -82,12 +78,12 @@ function* logoutHandler() {
 
 // watchers
 function* watcherSaga() {
-  yield takeLatest(types.LOGIN, loginHandler);
-  yield takeLatest(types.REGISTER, registerHandler);
-  yield takeLatest(types.CONFIRM_PHONE_NUMBER, confirmPhoneNumberHandler);
-  yield takeLatest(types.REFRESH_TOKEN, refreshTokenHandler);
+  yield takeLatest(login.TRIGGER, loginHandler);
+  yield takeLatest(register.TRIGGER, registerHandler);
+  yield takeLatest(confirmPhoneNumber.TRIGGER, confirmPhoneNumberHandler);
+  yield takeLatest(refreshToken.TRIGGER, refreshTokenHandler);
+  yield takeLatest(updateUser.TRIGGER, updateUserHandler);
   yield takeLatest(types.LOGOUT, logoutHandler);
-  yield takeLatest(types.UPDATE_USER, updateUserHandler);
 }
 
 export default watcherSaga;

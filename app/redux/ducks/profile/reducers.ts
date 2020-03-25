@@ -2,15 +2,8 @@ import { combineReducers } from 'redux';
 
 import createListReducer from '../../common/createListReducer';
 
-import {
-  fetchMyCars,
-  fetchProfileSettings,
-  updateProfileSettings,
-  ADD_CAR,
-  EDIT_CAR,
-  REMOVE_CAR,
-} from './actions';
-import { MyCarsState, SettingsState } from './types';
+import { fetchMyCars, fetchProfileSettings, updateProfileSettings } from './actions';
+import { ADD_CAR, EDIT_CAR, REMOVE_CAR, MyCarsState, SettingsState } from './types';
 
 const myCarsFetchReducer = createListReducer({
   loadingAction: fetchMyCars.TRIGGER,

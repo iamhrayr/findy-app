@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 
 import { RootState } from '@app/redux/rootReducer';
 import { logout, refreshToken } from '@app/redux/ducks/auth/actions';
+import { getRefreshTokenStatus } from '@app/redux/ducks/auth/selectors';
 
 type Props = {
   setAppInitialised: (status: boolean) => void;
@@ -13,7 +14,14 @@ type Props = {
 
 const Splash = ({ setAppInitialised }: Props) => {
   const auth = useSelector((state: RootState) => state.auth);
+  const refreshTokenStatus = useSelector(getRefreshTokenStatus);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (auth.isAuthenticated && refreshTokenStatus.loaded) {
+      setAppInitialised(true);
+    }
+  }, [auth.isAuthenticated, refreshTokenStatus.loaded, setAppInitialised]);
 
   useMount(() => {
     if (!auth.isAuthenticated) {
@@ -27,7 +35,6 @@ const Splash = ({ setAppInitialised }: Props) => {
         setAppInitialised(true);
       } else {
         dispatch(refreshToken(auth.refreshToken));
-        setAppInitialised(true);
       }
     } else {
       dispatch(logout());
@@ -36,8 +43,14 @@ const Splash = ({ setAppInitialised }: Props) => {
   });
 
   return (
-    <View style={{ backgroundColor: 'red' }}>
-      <Text>Splash</Text>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Splash Screen</Text>
     </View>
   );
 };
