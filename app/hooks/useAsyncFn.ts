@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 // import { AxiosError } from 'axios';
 
+// TODO: somehow this fucking hook is not working when chrome debugger is active but working if `React native debugger` is active
+
 type State = {
   loading: boolean;
   error: any | null;

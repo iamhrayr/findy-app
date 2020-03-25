@@ -28,6 +28,17 @@ declare module 'react-native-color-palette' {
   export default value;
 }
 
+declare module 'redux-api-status' {
+  const value: any;
+  export const createStatusSelectors: any;
+  export default value;
+}
+declare module 'redux-api-status/actions' {
+  export const begin: any;
+  export const success: any;
+  export const failure: any;
+}
+
 declare function If(condition: any): any;
 declare var Choose: any;
 declare function When(condition: any): any;

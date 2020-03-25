@@ -25,8 +25,7 @@ const Profile = ({ theme }: Props) => {
   const dispatch = useDispatch();
 
   const myCars = useSelector(profileSelectors.getMyCars);
-  const myCarsLoading = useSelector(profileSelectors.getIsMyCarsLoading);
-  const myCarsLoaded = useSelector(profileSelectors.getIsMyCarsLoaded);
+  const { loading, loaded } = useSelector(profileSelectors.getMyCarsStatus);
 
   const [{}, removeCarMutation] = useAsyncFn(api.removeCar);
 
@@ -73,11 +72,11 @@ const Profile = ({ theme }: Props) => {
             </TouchableOpacity>
           </Layout>
 
-          <If condition={myCarsLoading}>
+          <If condition={loading}>
             <ActivityIndicator />
           </If>
 
-          <If condition={myCarsLoaded}>
+          <If condition={loaded}>
             <FlatList
               // style={{ shrink: 1 }}
               data={myCars}

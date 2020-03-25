@@ -113,6 +113,21 @@ class Api {
       data,
     });
   };
+
+  // messaging
+  fetchThreads = () => {
+    return http({
+      url: '/messaging/inbox/',
+      method: 'get',
+    });
+  };
+
+  fetchThreadMessages = (id: Id) => {
+    return http({
+      url: `/messaging/inbox/${id}`,
+      method: 'get',
+    });
+  };
 }
 
 export default new Api();
