@@ -114,7 +114,8 @@ class Api {
     });
   };
 
-  // messaging
+  /*************/
+  /* Events */
   fetchThreads = () => {
     return http({
       url: '/messaging/inbox/',
@@ -126,6 +127,21 @@ class Api {
     return http({
       url: `/messaging/inbox/${id}`,
       method: 'get',
+    });
+  };
+
+  checkCarExistance = (carNumber: string) => {
+    return http({
+      url: `/accounts/check_car/${carNumber}`,
+      method: 'get',
+    });
+  };
+
+  sendMessage = (data: { carId: Id; message: string }) => {
+    return http({
+      url: '/api/v1/messaging/send-message',
+      method: 'post',
+      data,
     });
   };
 }

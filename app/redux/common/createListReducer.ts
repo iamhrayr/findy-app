@@ -18,6 +18,8 @@ const createListReducer = ({
   failureAction,
   appendAction,
 }: Actions) => {
+  // TODO: most probably we don't need loading/loaded/error
+  // states anymore because we have dedecated reducer for handling it
   const initialState: State = {
     loading: false,
     loaded: false,
