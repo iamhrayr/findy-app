@@ -7,6 +7,7 @@ type Props = ScrollViewProps & {
   extraPadded?: boolean;
   full?: boolean;
   children?: React.ReactNode;
+  as?: React.ComponentType;
 };
 
 const Content = styled(ScrollView)<Props>`

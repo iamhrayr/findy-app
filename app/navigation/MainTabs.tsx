@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
   return (
     <Tab.Navigator
-      // initialRouteName="Profile:Home"
+      initialRouteName="NewEvent:Home"
       tabBarOptions={{
         // style: { backgroundColor: 'grey' },
         activeTintColor: theme.colors.primary,
