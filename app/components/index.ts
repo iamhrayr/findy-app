@@ -12,3 +12,4 @@ export { default as If } from './If';
 export { default as Line } from './Line';
 export { default as NoData } from './NoData';
 export { default as Loading } from './Loading';
+export { default as ColorTag } from './ColorTag';

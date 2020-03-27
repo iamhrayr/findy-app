@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DefaultTheme, withTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
@@ -14,6 +14,7 @@ import { Container, Card, Layout, Text, Line, NoData, If } from '@app/components
 import { fetchMyCars as fetchMyCarsRedux } from '@app/redux/ducks/profile/actions';
 import CarNumberRow from './CarNumberRow';
 import UserDetails from './UserDetails';
+import CarNumberPlaceholder from './CarNumberPlaceholder';
 
 type Props = {
   theme: DefaultTheme;
@@ -73,12 +74,11 @@ const Profile = ({ theme }: Props) => {
           </Layout>
 
           <If condition={loading}>
-            <ActivityIndicator />
+            <CarNumberPlaceholder />
           </If>
 
           <If condition={loaded}>
             <FlatList
-              // style={{ shrink: 1 }}
               data={myCars}
               ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
               ListEmptyComponent={() => <NoData message="You do not have any car yet" />}

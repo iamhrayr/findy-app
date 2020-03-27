@@ -40,7 +40,7 @@ const NewEvent = () => {
     initialValues: {
       carNumber: '',
       message:
-        "Hello. I'm so sorry. I enter into your car. It's complatly broken. please come and help to solve the problem. thanks.",
+        "Hello. I'm so sorry. I crashed your car. It's complatly broken. Please come and help to solve the problem. thanks.",
     },
     onSubmit: values => {
       console.log(values);
@@ -71,14 +71,15 @@ const NewEvent = () => {
       <Content>
         <Card>
           <Spacer b="sm" />
+
           <Layout align="center">
             <LicensePlateIcon width={100} height={100} />
             <Text align="center" size="h1" weight="700">
-              SCAN
+              SEND A REQUEST
             </Text>
             <Spacer b="xs" />
             <Text align="center" size="xs">
-              AUTOMATICALLY BY CAMERA
+              TYPE CAR NUMBER AND CHECK EXISTANCE
             </Text>
           </Layout>
           <Spacer b="lg" />
@@ -126,6 +127,8 @@ const NewEvent = () => {
 
         <ConfirmationModal
           isVisible={isVisible}
+          onClose={() => setIsVisible(false)}
+          carId={res?.pk}
           make={res?.makeName}
           model={res?.modelName}
           color={res?.color}

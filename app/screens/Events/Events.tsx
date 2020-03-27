@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
-// import { Car } from '@app/models/Car';
-import { Container, Content, Line, NoData, Loading, If } from '@app/components';
+import {
+  Container,
+  Content,
+  Line,
+  NoData,
+  If,
+  // Text,
+  // Layout
+} from '@app/components';
 import { eventsSelectors, eventsActions } from '@app/redux/ducks/events';
-// import avatarImage from '@app/assets/no-avatar.png';
 import EventItem from './EventsItem';
+import EventsPlaceholder from './EventsPlaceholder';
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -23,28 +31,27 @@ const Events = () => {
     <Container>
       <Content as={View}>
         <If condition={loading}>
-          <Loading />
+          <EventsPlaceholder />
         </If>
 
         <If condition={loaded}>
-          <FlatList
-            // style={{ shrink: 1 }}
+          <SwipeListView
+            useFlatList
+            disableRightSwipe
+            closeOnRowPress
             data={events}
-            // data={items}
             ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
             ListEmptyComponent={() => <NoData message="There is not anything to show" />}
             renderItem={({ item }) => <EventItem {...item} />}
             keyExtractor={item => String(item.pk)}
+            // renderHiddenItem={(data, rowMap) => (
+            //   <Layout layout="row" style={{ backgroundColor: 'red' }} reverse>
+            //     <Text>Hi</Text>
+            //   </Layout>
+            // )}
+            leftOpenValue={75}
+            rightOpenValue={-75}
           />
-
-          {/* <List
-            virtualized
-            bordered
-            // data={items}
-            data={events}
-            keyExtractor={item => String(item.pk)}
-            renderItem={item => <EventItem {...item} />}
-          /> */}
         </If>
       </Content>
     </Container>

@@ -139,7 +139,7 @@ class Api {
 
   sendMessage = (data: { carId: Id; message: string }) => {
     return http({
-      url: '/api/v1/messaging/send-message',
+      url: '/messaging/send-message/',
       method: 'post',
       data,
     });

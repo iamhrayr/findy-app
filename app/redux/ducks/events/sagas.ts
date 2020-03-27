@@ -10,9 +10,7 @@ import { fetchEvents } from './actions';
 function* fetchEventsHandler() {
   try {
     const res: AxiosResponse = yield call(api.fetchThreads);
-    // TODO: fix once extra thread fixed in api
-    const aa = res.data.map((item: any) => item.thread);
-    const { map, ids } = array2IdMap(aa);
+    const { map, ids } = array2IdMap(res.data);
     yield put(fetchEvents.success({ data: map, ids }));
   } catch (error) {
     yield put(fetchEvents.failure(error.response.data));

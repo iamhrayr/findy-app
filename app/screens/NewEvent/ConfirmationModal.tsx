@@ -4,24 +4,36 @@ import Modal from 'react-native-modal';
 
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
-import { Container, Content, Text, Spacer, Button, Layout } from '@app/components';
+import {
+  Container,
+  Content,
+  Text,
+  Spacer,
+  Button,
+  Layout,
+  ColorTag,
+} from '@app/components';
 
 type Props = {
   isVisible: boolean;
+  carId: Id;
   make: string;
   model: string;
   color: string;
   plateNumber: string;
   message: string;
+  onClose: () => void;
 };
 
 const ConfirmationModal = ({
   isVisible,
+  carId,
   make,
   model,
   color,
   plateNumber,
   message,
+  onClose,
 }: Props) => {
   const [
     {
@@ -33,10 +45,10 @@ const ConfirmationModal = ({
 
   const handleSendRequest = useCallback(() => {
     sendMessage({
-      carId: 'coming_soon',
+      carId,
       message,
     });
-  }, [message, sendMessage]);
+  }, [carId, message, sendMessage]);
 
   return (
     <Modal isVisible={isVisible} style={styles.modal}>
@@ -58,10 +70,10 @@ const ConfirmationModal = ({
 
               <Spacer t="lg" />
 
-              <Text size="xs" transform="uppercase" weight="600">
+              <Text size="xs" transform="uppercase" weight="600" spacer={{ b: 'xs' }}>
                 Color
               </Text>
-              <Text size="lg">{color}</Text>
+              <ColorTag color={color} />
 
               <Spacer t="lg" />
 
@@ -84,6 +96,9 @@ const ConfirmationModal = ({
                 loading={loading}
                 disabled={loading}>
                 Send Request
+              </Button>
+              <Button type="link" onPress={onClose}>
+                Close
               </Button>
             </Layout>
           </Content>

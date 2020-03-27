@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -24,26 +24,33 @@ const EventsItem = ({
   carNumber,
   sentAt,
   message,
+  pk,
 }: Props) => {
   const navigation = useNavigation();
   const navigateToRegister = useCallback(() => {
-    navigation.navigate('Events:Event');
-  }, [navigation]);
+    navigation.navigate('Events:Event', { id: pk });
+  }, [navigation, pk]);
 
   return (
-    <TouchableOpacity onPress={navigateToRegister}>
-      <Layout layout="row">
-        {/* <Avatar source={participant.avatar} size={60} /> */}
-        <Layout spacer={{ l: 'md', b: 'lg' }} size={1}>
-          {/* <Text spacer={{ b: 'sm' }}>{participant.name}</Text> */}
-          <Text size="sm">{carNumber}</Text>
+    <TouchableWithoutFeedback onPress={navigateToRegister}>
+      <View style={styles.container}>
+        <Layout layout="row">
+          <Layout spacer={{ b: 'md' }} size={1}>
+            <Text size="sm">{carNumber}</Text>
+          </Layout>
+          <Text size="sm">{sentAt}</Text>
         </Layout>
-        <Text size="sm">{sentAt}</Text>
-      </Layout>
 
-      <Text numberOfLines={2}>{message}</Text>
-    </TouchableOpacity>
+        <Text numberOfLines={2}>{message}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+  },
+});
 
 export default EventsItem;

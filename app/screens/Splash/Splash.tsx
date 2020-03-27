@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
+import messaging from '@react-native-firebase/messaging';
 
 import { RootState } from '@app/redux/rootReducer';
 import { logout, refreshToken } from '@app/redux/ducks/auth/actions';
@@ -10,6 +11,25 @@ import { getRefreshTokenStatus } from '@app/redux/ducks/auth/selectors';
 
 type Props = {
   setAppInitialised: (status: boolean) => void;
+};
+
+const requestPermission = async () => {
+  const granted = messaging().requestPermission();
+
+  if (granted) {
+    console.log('User granted messaging permissions!');
+  } else {
+    console.log('User declined messaging permissions :(');
+  }
+};
+
+const registerAppWithFCM = async () => {
+  await requestPermission();
+  await messaging().registerForRemoteNotifications();
+  const fcmToken = await messaging().getToken();
+
+  console.log({ fcmToken });
+  // send token to api
 };
 
 const Splash = ({ setAppInitialised }: Props) => {
@@ -35,6 +55,7 @@ const Splash = ({ setAppInitialised }: Props) => {
         setAppInitialised(true);
       } else {
         dispatch(refreshToken(auth.refreshToken));
+        registerAppWithFCM();
       }
     } else {
       dispatch(logout());
@@ -46,11 +67,11 @@ const Splash = ({ setAppInitialised }: Props) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>Splash Screen</Text>
+      <Text>Loading...</Text>
     </View>
   );
 };
