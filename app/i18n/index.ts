@@ -1,14 +1,14 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// translations
+// locales
 import en from './en';
-// import am from './am';
+import am from './am';
 
 i18n.use(initReactI18next).init({
   resources: {
     en,
-    // am,
+    am,
   },
   fallbackLng: 'en',
   debug: true,

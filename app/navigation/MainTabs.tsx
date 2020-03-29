@@ -1,15 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DefaultTheme } from 'styled-components/native';
-// import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { Icon } from 'react-native-eva-icons';
 
 // tabs
 import ProfileStackScreen from './ProfileStack';
 import EventsStackScreen from './EventsStack';
 import NewEventStackScreen from './NewEventStack';
-// import MessagesStackScreen from './MessagesStack';
-// import SettingsStackScreen from './SettingsStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -70,36 +67,6 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Messages:Home"
-        component={MessagesStackScreen}
-        options={{
-          title: 'Messages',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name={focused ? 'message-square' : 'message-square-outline'}
-              height={size}
-              width={size}
-              fill={color}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="Settings:Home"
-        component={SettingsStackScreen}
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name={focused ? 'settings' : 'settings-outline'}
-              height={size}
-              width={size}
-              fill={color}
-            />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 };
