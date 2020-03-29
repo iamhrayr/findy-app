@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import ForgotImage from './ForgotImage';
@@ -14,6 +15,8 @@ const initialValues: FormValues = {
 };
 
 const ForgotPassword: React.FC = () => {
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues,
     validationSchema: validation,
@@ -29,11 +32,11 @@ const ForgotPassword: React.FC = () => {
 
         <Layout>
           <Text size="giant" spacer={{ b: 'xl' }}>
-            Forgot Password
+            {t('auth:forgot_password.title')}
           </Text>
 
           <Input
-            label="Phone Number"
+            label={t('phone_numner')}
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
@@ -42,7 +45,7 @@ const ForgotPassword: React.FC = () => {
 
           <Layout align="center" spacer={{ y: 'md' }}>
             <Button wide shape="circle" onPress={formik.handleSubmit}>
-              Submit
+              {t('submit')}
             </Button>
           </Layout>
         </Layout>

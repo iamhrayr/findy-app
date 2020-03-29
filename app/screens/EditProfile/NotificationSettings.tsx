@@ -3,6 +3,7 @@ import { Switch, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-native-picker-select';
 import { Icon } from 'react-native-eva-icons';
+import { useTranslation } from 'react-i18next';
 
 // import api from '@app/api';
 import { Card, Layout, Text, Spacer } from '@app/components';
@@ -23,6 +24,7 @@ const NotificationSettings = () => {
   // const [{ loading: fetchSettingsLoading }, fetchSettings] = useAsyncFn(
   //   api.fetchProfileSettings,
   // );
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const settings = useSelector(getProfileSettings);
@@ -54,17 +56,17 @@ const NotificationSettings = () => {
   );
 
   if (settings.loading) {
-    <Text>Loading...</Text>;
+    <Text>{t('loading')}</Text>;
   }
 
   return (
     <Card>
       <Text size="lg" align="center" spacer={{ b: 'lg' }}>
-        Notification Settings
+        {t('profile:settings.notification_title')}
       </Text>
 
       <Layout layout="row" align="center" justify="between">
-        <Text>Show phone number</Text>
+        <Text>{t('profile:settings.phone_number_label')}</Text>
         <Switch
           onValueChange={handlePhoneNumberChange}
           value={settings.data.showPhoneNumber}
@@ -74,7 +76,7 @@ const NotificationSettings = () => {
       <Spacer b="lg" />
 
       <Layout layout="row" align="center" justify="between">
-        <Text>Notification method</Text>
+        <Text>{t('profile:settings.notification_method_label')}</Text>
         <Select
           style={styles}
           onValueChange={handleNotificationChange}

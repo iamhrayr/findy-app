@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 // import validation from './validation';
@@ -24,6 +25,8 @@ const initialValues: FormValues = {
 };
 
 const Register: React.FC = () => {
+  const { t } = useTranslation();
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const registerStatus = useSelector(getRegisterStatus);
@@ -52,11 +55,11 @@ const Register: React.FC = () => {
 
         <Layout>
           <Text size="giant" spacer={{ b: 'xl' }}>
-            Register
+            {t('register')}
           </Text>
 
           <Input
-            label="Phone Number"
+            label={t('phone_number')}
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
@@ -66,7 +69,7 @@ const Register: React.FC = () => {
             }
           />
           <Input
-            label="Full Name"
+            label={t('full_name')}
             placeholder="Samuel Jackson"
             onChangeText={val => formik.setFieldValue('fullName', val)}
             value={formik.values.fullName}
@@ -74,7 +77,7 @@ const Register: React.FC = () => {
           />
           <Input
             secureTextEntry={!passVisible}
-            label="Password"
+            label={t('password')}
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
@@ -93,14 +96,14 @@ const Register: React.FC = () => {
               shape="circle"
               loading={registerStatus.loading}
               wide>
-              Register
+              {t('register')}
             </Button>
           </Layout>
 
           <Text align="center">
-            <Text align="center">New user? </Text>
+            <Text align="center">{t('auth:register.already_registered')} </Text>
             <Text align="center" color="primary" onPress={navigateToLogin}>
-              Login Here
+              {t('auth:register.login_text')}
             </Text>
           </Text>
         </Layout>

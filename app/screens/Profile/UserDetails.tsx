@@ -4,6 +4,7 @@ import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
 import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 import api from '@app/api';
 import { authSelectors, authActions } from '@app/redux/ducks/auth';
@@ -13,6 +14,7 @@ import { Avatar, Layout, Text, Button } from '@app/components';
 const UserDetails = () => {
   const navigation = useNavigation();
   const user = useSelector(authSelectors.getUser);
+  const { t } = useTranslation();
   // const isAuth = useSelector(state => state.auth.isAuthenticated);
 
   const dispatch = useDispatch();
@@ -29,8 +31,8 @@ const UserDetails = () => {
     if (user && user.firstName && user.lastName) {
       return `${user.firstName} ${user.lastName}`;
     }
-    return 'No Name';
-  }, [user]);
+    return t('profile:no_name');
+  }, [t, user]);
 
   const phoneNumber = parsePhoneNumberFromString(
     user!.phoneNumber,
@@ -58,6 +60,7 @@ const UserDetails = () => {
         uri: photo.path,
       });
 
+      // TODO: fix change avatar issue if it's not because of e emulator
       changeAvatarMutation(formdata)
         .then(res => console.log('### asdasdasdasd', res))
         .catch(e => console.log('error', e));
@@ -87,10 +90,10 @@ const UserDetails = () => {
         </Layout>
         <Layout layout="row" align="center" spacer={{ t: 'sm' }}>
           <Button outline type="primary" size="sm" onPress={navigateToEditProfile}>
-            Edit Profile
+            {t('profile:edit_profile')}
           </Button>
           <Button type="link" size="sm" onPress={logoutHandler}>
-            Logout
+            {t('logout')}
           </Button>
         </Layout>
       </Layout>

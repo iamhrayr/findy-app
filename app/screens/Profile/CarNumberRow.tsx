@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useTranslation } from 'react-i18next';
 
 import { Car } from '@app/models/Car';
 import { Text, Layout, Button } from '@app/components';
@@ -16,24 +17,26 @@ type Props = {
 };
 
 const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
+  const { t } = useTranslation();
+
   const removeCar = useCallback(() => {
     onRemove(data.pk);
   }, [data.pk, onRemove]);
 
   const handleDeletePress = useCallback(() => {
     Alert.alert(
-      'Are you sure?',
-      'This operation could not be undone',
+      t('are_you_sure'),
+      t('non_undone_operataion_warning'),
       [
         {
-          text: 'Cancel',
+          text: t('cancel'),
           style: 'cancel',
         },
-        { text: 'Yes', onPress: removeCar },
+        { text: t('yes'), onPress: removeCar },
       ],
       { cancelable: false },
     );
-  }, [removeCar]);
+  }, [removeCar, t]);
 
   return (
     <Layout layout="row">
@@ -42,7 +45,7 @@ const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
           {data.carNumber}
         </Text>
         <Text size="xs" color="darkGray">
-          Added: {'data.added'}
+          {t('added')}: {'data.added'}
         </Text>
       </Layout>
       <Layout layout="row">

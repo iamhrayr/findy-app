@@ -3,6 +3,7 @@ import { FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DefaultTheme, withTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
+import { useTranslation } from 'react-i18next';
 
 import { Car } from '@app/models/Car';
 import { profileSelectors } from '@app/redux/ducks/profile';
@@ -21,6 +22,8 @@ type Props = {
 };
 
 const Profile = ({ theme }: Props) => {
+  const { t } = useTranslation();
+
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -57,11 +60,11 @@ const Profile = ({ theme }: Props) => {
       <Layout size={1} spacer={{ x: 'md', y: 'md' }}>
         <Card size={1}>
           <Layout layout="row" justify="between" spacer={{ b: 'md' }}>
-            <Text spacer={{ b: 'sm' }}>My Cars</Text>
+            <Text spacer={{ b: 'sm' }}>{t('profile:my_cars')}</Text>
             <TouchableOpacity onPress={() => navigateToAddEditCar()}>
               <Layout layout="row" align="center">
                 <Text color="primary" transform="uppercase" spacer={{ r: 'xs' }}>
-                  Add
+                  {t('add')}
                 </Text>
                 <Icon
                   name="plus-outline"

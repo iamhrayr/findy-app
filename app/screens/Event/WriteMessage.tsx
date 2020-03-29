@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, TextInput } from 'react-native';
 import styled, { css, withTheme, DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled(View)`
   ${({ theme }) => css`
@@ -33,6 +34,7 @@ type Props = {
 };
 
 const WriteMessage = ({ theme, onSendMessage }: Props) => {
+  const { t } = useTranslation();
   const [message, setMessage] = useState('');
 
   const handleSendMessage = useCallback(() => {
@@ -43,7 +45,7 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
   return (
     <Wrapper>
       <MessageInput
-        placeholder="Type your message..."
+        placeholder={t('events:message.type_msg')}
         onSubmitEditing={handleSendMessage}
         onChangeText={val => setMessage(val)}
         value={message}

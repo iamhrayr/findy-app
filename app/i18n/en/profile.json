@@ -1,0 +1,13 @@
+{
+  "settings.notification_title": "Notification Settings",
+  "settings.phone_number_label": "Show phone number",
+  "settings.notification_method_label": "Notification method",
+  "settings.personal_details_title": "Personal Details",
+  "my_cars": "My Cars",
+  "no_name": "No Name",
+  "edit_profile": "Edit Profile",
+  "car_make_placeholder": "Edit Profile",
+  "car_make_label": "Car Make",
+  "car_model_label": "Car Model",
+  "car_model_placeholder": "Tap to select car model"
+}

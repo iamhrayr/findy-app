@@ -2,13 +2,14 @@ import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { login } from '@app/redux/ducks/auth/actions';
 import { getLoginStatus } from '@app/redux/ducks/auth/selectors';
 // import { RootState } from '@app/redux/rootReducer';
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import LoginImage from './LoginImage';
-import validation from './validation';
+// import validation from './validation';
 
 type FormValues = {
   phoneNumber: string;
@@ -21,6 +22,8 @@ const initialValues: FormValues = {
 };
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const loginStatus = useSelector(getLoginStatus);
@@ -35,7 +38,7 @@ const Login: React.FC = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validation,
+    // validationSchema: validation,
     onSubmit: values => {
       dispatch(login(values));
     },
@@ -50,11 +53,11 @@ const Login: React.FC = () => {
 
         <Layout>
           <Text size="giant" spacer={{ b: 'xl' }}>
-            Login
+            {t('login')}
           </Text>
 
           <Input
-            label="Phone Number"
+            label={t('phone_number')}
             placeholder="+374 98999590"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
@@ -66,13 +69,13 @@ const Login: React.FC = () => {
 
           <Input
             secureTextEntry
-            label="Password"
+            label={t('password')}
             placeholder="*******"
             onChangeText={val => formik.setFieldValue('password', val)}
             value={formik.values.password}
             addonRight={
               <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
-                Forgot?
+                {t('auth:login.forgot_password_text')}
               </Text>
             }
             errorMessage={
@@ -88,14 +91,14 @@ const Login: React.FC = () => {
               shape="circle"
               loading={loginStatus.loading}
               onPress={formik.handleSubmit}>
-              Login
+              {t('login')}
             </Button>
           </Layout>
 
           <Text align="center">
-            <Text align="center">New user? </Text>
+            <Text align="center">{t('auth:login.new_user')} </Text>
             <Text align="center" color="primary" onPress={navigateToRegister}>
-              Register Here
+              {t('auth:login.register_text')}
             </Text>
           </Text>
         </Layout>

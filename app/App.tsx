@@ -10,6 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import './i18n';
 import NavigationRoot from './navigation';
 import getTheme from './theme';
 import { store, persistor } from './redux/store';
