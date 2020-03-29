@@ -46,12 +46,12 @@ const Login: React.FC = () => {
 
   return (
     <Container>
-      <Content extraPadded>
+      <Content noPadding>
         <Layout grow={1}>
           <LoginImage />
         </Layout>
 
-        <Layout>
+        <Layout spacer={{ x: 'lg', b: 'lg' }}>
           <Text size="giant" spacer={{ b: 'xl' }}>
             {t('login')}
           </Text>

@@ -25,12 +25,12 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <Container>
-      <Content extraPadded full>
+      <Content noPadding>
         <Layout grow={1}>
           <ForgotImage />
         </Layout>
 
-        <Layout>
+        <Layout spacer={{ x: 'lg', b: 'lg' }}>
           <Text size="giant" spacer={{ b: 'xl' }}>
             {t('auth:forgot_password.title')}
           </Text>

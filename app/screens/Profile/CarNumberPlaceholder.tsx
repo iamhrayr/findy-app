@@ -33,8 +33,6 @@ const CarNumberPlaceholders = () => {
       <CarNumberPlaceholder />
       <Line spacer={{ y: 'lg' }} />
       <CarNumberPlaceholder />
-      <Line spacer={{ y: 'lg' }} />
-      <CarNumberPlaceholder />
     </Layout>
   );
 };

@@ -77,21 +77,23 @@ const NewEvent = () => {
   return (
     <Container>
       <Content>
-        <Card>
-          <Spacer b="sm" />
+        <Layout spacer={{ x: 'lg', y: 'lg' }}>
+          <Card>
+            <Spacer b="sm" />
 
-          <Layout align="center">
-            <LicensePlateIcon width={100} height={100} />
-            <Text align="center" size="h1" weight="700">
-              {t('events:new_event.title')}
-            </Text>
-            <Spacer b="xs" />
-            <Text align="center" size="xs">
-              {t('events:new_event.subtitle')}
-            </Text>
-          </Layout>
-          <Spacer b="lg" />
-        </Card>
+            <Layout align="center">
+              <LicensePlateIcon width={100} height={100} />
+              <Text align="center" size="h1" weight="700">
+                {t('events:new_event.title')}
+              </Text>
+              <Spacer b="xs" />
+              <Text align="center" size="xs">
+                {t('events:new_event.subtitle')}
+              </Text>
+            </Layout>
+            <Spacer b="lg" />
+          </Card>
+        </Layout>
 
         <MaskedInput
           options={{ mask: '99 AA 999' }}

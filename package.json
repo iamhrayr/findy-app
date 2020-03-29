@@ -20,7 +20,7 @@
     "@react-navigation/native": "^5.0.2",
     "@react-navigation/stack": "^5.0.2",
     "@types/redux-actions": "^2.6.1",
-    "axios": "^0.19.2",
+    "axios": "^0.18.0",
     "camelcase-keys": "^6.1.2",
     "formik": "^2.1.4",
     "i18next": "^19.3.4",

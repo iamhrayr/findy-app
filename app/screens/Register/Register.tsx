@@ -48,12 +48,12 @@ const Register: React.FC = () => {
 
   return (
     <Container>
-      <Content extraPadded full>
+      <Content noPadding>
         <Layout grow={1}>
           <RegisterImage />
         </Layout>
 
-        <Layout>
+        <Layout spacer={{ x: 'lg', b: 'lg' }}>
           <Text size="giant" spacer={{ b: 'xl' }}>
             {t('register')}
           </Text>
