@@ -1,4 +1,4 @@
-package com.findy.app;
+package org.findy.app;
 
 import android.app.Application;
 import android.content.Context;

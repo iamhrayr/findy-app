@@ -703,7 +703,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.findy.app;
+				PRODUCT_BUNDLE_IDENTIFIER = org.findy.app;
 				PRODUCT_NAME = findy;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -722,7 +722,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.findy.app;
+				PRODUCT_BUNDLE_IDENTIFIER = org.findy.app;
 				PRODUCT_NAME = findy;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

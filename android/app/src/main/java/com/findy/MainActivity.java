@@ -1,4 +1,4 @@
-package com.findy.app;
+package org.findy.app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
