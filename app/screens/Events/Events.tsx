@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
@@ -10,8 +10,7 @@ import {
   Line,
   NoData,
   If,
-  // Text,
-  // Layout
+  // Text, Layout
 } from '@app/components';
 import { eventsSelectors, eventsActions } from '@app/redux/ducks/events';
 import EventItem from './EventsItem';
@@ -21,11 +20,12 @@ const Events = () => {
   const dispatch = useDispatch();
   const events = useSelector(eventsSelectors.getEvents);
   const { loading, loaded } = useSelector(eventsSelectors.getEventsStatus);
-  console.log({ loading, loaded });
 
-  useMount(() => {
+  const fetchData = useCallback(() => {
     dispatch(eventsActions.fetchEvents());
-  });
+  }, [dispatch]);
+
+  useMount(fetchData);
 
   return (
     <Container>
@@ -44,6 +44,8 @@ const Events = () => {
             ListEmptyComponent={() => <NoData message="There is not anything to show" />}
             renderItem={({ item }) => <EventItem {...item} />}
             keyExtractor={item => String(item.pk)}
+            onRefresh={fetchData}
+            refreshing={loading}
             // renderHiddenItem={(data, rowMap) => (
             //   <Layout layout="row" style={{ backgroundColor: 'red' }} reverse>
             //     <Text>Hi</Text>

@@ -17,6 +17,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
   return (
     <Tab.Navigator
       initialRouteName="NewEvent:Home"
+      // initialRouteName="Events:Home"
       tabBarOptions={{
         // style: { backgroundColor: 'grey' },
         activeTintColor: theme.colors.primary,

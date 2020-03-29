@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components/native';
 
 type Props = ScrollViewProps & {
   noPadding?: boolean;
+  noPaddingX?: boolean;
+  noPaddingY?: boolean;
   extraPadded?: boolean;
   full?: boolean;
   children?: React.ReactNode;
@@ -21,6 +23,18 @@ const Content = styled(ScrollView)<Props>`
     extraPadded &&
     css`
       padding: ${theme.content.paddingExtra}px;
+    `};
+  ${({ noPaddingX }) =>
+    noPaddingX &&
+    css`
+      padding-left: 0px;
+      padding-right: 0px;
+    `};
+  ${({ noPaddingY }) =>
+    noPaddingY &&
+    css`
+      padding-top: 0px;
+      padding-bottom: 0px;
     `}
 `;
 

@@ -1,18 +1,23 @@
 import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
 import api from '@app/api';
-import { authSelectors } from '@app/redux/ducks/auth';
+import { authSelectors, authActions } from '@app/redux/ducks/auth';
 import { useAsyncFn } from '@app/hooks';
 import { Avatar, Layout, Text, Button } from '@app/components';
 
 const UserDetails = () => {
   const navigation = useNavigation();
   const user = useSelector(authSelectors.getUser);
+  // const isAuth = useSelector(state => state.auth.isAuthenticated);
+
+  const dispatch = useDispatch();
+
+  // console.log('before isAUth????', { isAuth });
 
   const [{}, changeAvatarMutation] = useAsyncFn(api.changeAvatar);
 
@@ -59,6 +64,14 @@ const UserDetails = () => {
     });
   }, [changeAvatarMutation]);
 
+  const logoutHandler = useCallback(() => {
+    CommonActions.reset({
+      index: 1,
+      routes: [{ name: 'Auth:Intro' }],
+    });
+    dispatch(authActions.logout());
+  }, [dispatch]);
+
   return (
     <Layout layout="row" spacer={{ x: 'md', b: 'xxl', t: 'lg' }}>
       <Avatar clickable onPress={handleAvatarPress} source={{ uri: user!.avatar! }} />
@@ -72,14 +85,14 @@ const UserDetails = () => {
             {phoneNumber}
           </Text>
         </Layout>
-        <Button
-          outline
-          spacer={{ t: 'sm' }}
-          type="primary"
-          size="sm"
-          onPress={navigateToEditProfile}>
-          Edit Profile
-        </Button>
+        <Layout layout="row" align="center" spacer={{ t: 'sm' }}>
+          <Button outline type="primary" size="sm" onPress={navigateToEditProfile}>
+            Edit Profile
+          </Button>
+          <Button type="link" size="sm" onPress={logoutHandler}>
+            Logout
+          </Button>
+        </Layout>
       </Layout>
     </Layout>
   );

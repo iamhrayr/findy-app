@@ -7,6 +7,7 @@ import configs from '@app/configs';
 
 class Http {
   client: AxiosInstance;
+
   constructor() {
     this.client = axios.create({
       baseURL: configs.api.url,
@@ -65,9 +66,9 @@ class Http {
     this.client.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
 
-  removeAuthHeader() {
+  removeAuthHeader = () => {
     delete this.client.defaults.headers.common.Authorization;
-  }
+  };
 }
 
 const httpInstance = new Http();

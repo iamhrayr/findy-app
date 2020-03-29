@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
 }
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const App: React.FC = () => {
   return (

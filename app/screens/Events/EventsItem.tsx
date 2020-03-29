@@ -24,12 +24,12 @@ const EventsItem = ({
   carNumber,
   sentAt,
   message,
-  pk,
+  eventPk,
 }: Props) => {
   const navigation = useNavigation();
   const navigateToRegister = useCallback(() => {
-    navigation.navigate('Events:Event', { id: pk });
-  }, [navigation, pk]);
+    navigation.navigate('Events:Event', { id: eventPk });
+  }, [navigation, eventPk]);
 
   return (
     <TouchableWithoutFeedback onPress={navigateToRegister}>

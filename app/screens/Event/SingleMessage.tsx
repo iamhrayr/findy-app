@@ -2,11 +2,14 @@ import React from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
+import moment from '@app/helpers/moment';
+
 import { Avatar, Text, Layout, Spacer } from '@app/components';
 
 type Props = {
   text: string;
   isTypeReceived?: boolean;
+  date: string;
 };
 
 const BORDER_RADIUS = '15px';
@@ -30,7 +33,7 @@ const MessageText = styled(Text)<Partial<Props>>`
   `}
 `;
 
-const Message = ({ text, isTypeReceived }: Props) => {
+const SingleMessage = ({ text, isTypeReceived, date }: Props) => {
   return (
     <Layout layout="row" spacer={{ b: 'sm' }} reverse={!isTypeReceived}>
       {isTypeReceived && <Avatar size="50" circle />}
@@ -40,10 +43,10 @@ const Message = ({ text, isTypeReceived }: Props) => {
       </MessageTextWrapper>
       <Spacer r="sm" />
       <Text size="sm" spacer={{ t: 'sm' }}>
-        7:54 AM
+        {moment(date).fromNow()}
       </Text>
     </Layout>
   );
 };
 
-export default Message;
+export default SingleMessage;

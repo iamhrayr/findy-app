@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { showMessage } from 'react-native-flash-message';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import httpInstance from '@app/helpers/http';
 import api from '@app/api';
@@ -73,6 +74,7 @@ function* updateUserHandler(action: Action) {
 }
 
 function* logoutHandler() {
+  yield call(AsyncStorage.clear);
   httpInstance.removeAuthHeader();
 }
 
