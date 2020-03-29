@@ -84,7 +84,10 @@ class Api {
       url: 'accounts/change-avatar/',
       method: 'post',
       data,
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data; charset=utf-8;',
+      },
     });
   };
 

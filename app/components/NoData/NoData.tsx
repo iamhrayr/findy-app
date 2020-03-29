@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-import { Text } from '@app/components';
+import Text from '../Text';
 
 type Props = {
   message: React.ReactNode;

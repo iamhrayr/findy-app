@@ -12,6 +12,7 @@ i18n.use(initReactI18next).init({
   },
   fallbackLng: 'en',
   debug: true,
+  lng: 'en',
   keySeparator: false, // we use content as keys
   ns: 'common',
   defaultNS: 'common',

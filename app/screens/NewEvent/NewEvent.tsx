@@ -97,7 +97,6 @@ const NewEvent = () => {
 
         <MaskedInput
           options={{ mask: '99 AA 999' }}
-          // label="Car Number"
           label={t('car_number')}
           placeholder="11 AA 111"
           spacer={{ t: 'lg' }}

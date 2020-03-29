@@ -53,12 +53,15 @@ const UserDetails = () => {
 
       const formdata = new FormData();
       formdata.append('avatar', {
-        title: 'avatar',
-        name: photo.filename,
+        uri: photo.path,
+        // name: photo.filename,
+        name: 'avatar.jpeg',
         type: photo.mime,
         // type: 'multipart/form-data',
-        uri: photo.path,
+        title: 'avatar',
       });
+      // formdata.append('blah', 'lorem ipsum');
+      // console.log(ddd, photo);
 
       // TODO: fix change avatar issue if it's not because of e emulator
       changeAvatarMutation(formdata)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
 
 import Text from '../Text';
@@ -56,37 +56,27 @@ const ErrorMessage = styled(Text)`
   `}
 `;
 
-const Input = ({
-  spacer = { b: 'md' },
-  label,
-  labelProps,
-  addonRight,
-  addonLeft,
-  errorMessage,
-  ...props
-}: Props) => {
+const Input = (
+  {
+    spacer = { b: 'md' },
+    label,
+    labelProps,
+    addonRight,
+    addonLeft,
+    errorMessage,
+    ...props
+  }: Props,
+  ref: any,
+) => {
   const labelContent =
     typeof label === 'string' ? <Label {...labelProps}>{label}</Label> : label;
-
-  // let addonLeftCopy, addonRightCopy;
-
-  // if (addonLeft) {
-  //   addonLeftCopy = cloneElement(addonLeft, {
-  //     color: theme.colors.gray,
-  //   });
-  // }
-  // if (addonRight) {
-  //   addonRightCopy = cloneElement(addonRight, {
-  //     color: theme.colors.gray,
-  //   });
-  // }
 
   return (
     <Wrapper spacer={spacer}>
       {labelContent}
       <InputContainer>
         {addonLeft}
-        <StyledInput {...props} />
+        <StyledInput {...props} ref={ref} />
         {addonRight}
       </InputContainer>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
@@ -96,4 +86,4 @@ const Input = ({
 
 Input.Label = Label;
 
-export default Input;
+export default forwardRef(Input);

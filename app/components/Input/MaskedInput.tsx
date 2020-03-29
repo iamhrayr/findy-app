@@ -3,14 +3,26 @@ import { TextInputMask, TextInputMaskProps } from 'react-native-masked-text';
 
 import Input, { Props } from './Input';
 
-const MaskedInput = (props: TextInputMaskProps & Props) => (
-  <TextInputMask {...props} customTextInput={Input} />
+const MaskedInput = ({
+  type,
+  options,
+  checkText,
+  onChangeText,
+  refInput,
+  includeRawValueInChangeText,
+  ...props
+}: TextInputMaskProps & Props) => (
+  <TextInputMask
+    type={type}
+    options={options}
+    checkText={checkText}
+    onChangeText={onChangeText}
+    refInput={refInput}
+    includeRawValueInChangeText={includeRawValueInChangeText}
+    customTextInput={Input}
+    customTextInputProps={props}
+  />
 );
-
-// const MaskedInput = React.forwardRef((props: TextInputMaskProps & Props, ref) => {
-//   const innerRef = React.useRef(ref);
-//   return <TextInputMask ref={innerRef} {...props} customTextInput={Input} />;
-// });
 
 MaskedInput.defaultProps = {
   type: 'custom',
