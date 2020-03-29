@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>169838319868-7uev9b8t9aphpv56r6pt2tikgb4hg9fr.apps.googleusercontent.com</string>
+	<string>169838319868-er2gvevivqlho2ffr1t6908lbn75djbq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.169838319868-7uev9b8t9aphpv56r6pt2tikgb4hg9fr</string>
+	<string>com.googleusercontent.apps.169838319868-er2gvevivqlho2ffr1t6908lbn75djbq</string>
 	<key>API_KEY</key>
 	<string>AIzaSyB6cpZQzDaxy9KMsAS0sFh7deQcWKeRtco</string>
 	<key>GCM_SENDER_ID</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:169838319868:ios:48bf409d4a06bbaf9f5f79</string>
+	<string>1:169838319868:ios:414370b15ef3512c9f5f79</string>
 	<key>DATABASE_URL</key>
 	<string>https://findy-mobile.firebaseio.com</string>
 </dict>

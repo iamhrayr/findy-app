@@ -16,7 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* findyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* findyTests.m */; };
-		4613BCE72427E26500A025F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4613BCE62427E26400A025F6 /* GoogleService-Info.plist */; };
+		46C7C79624311A5E009C5454 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C7C79524311A5E009C5454 /* GoogleService-Info.plist */; };
 		81F2EB48CF6304F4FB2B88BD /* libPods-findy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A464B405F74471B9BD935C1B /* libPods-findy.a */; };
 		BF54552306D09ECBC21B6AEC /* libPods-findyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BE9E97C61176419FBCBB8D /* libPods-findyTests.a */; };
 		C65F5BA4F81546E2D7890CAC /* libPods-findy-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1042DC32BA26625C02B34B /* libPods-findy-tvOS.a */; };
@@ -57,7 +57,7 @@
 		2D02E4901E0B4A5D006451C7 /* findy-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "findy-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		363964F2425C7625BF5B10AE /* Pods-findy-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findy-tvOS.release.xcconfig"; path = "Target Support Files/Pods-findy-tvOS/Pods-findy-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		3817DCACE58E9C807166DEB2 /* Pods-findy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findy.release.xcconfig"; path = "Target Support Files/Pods-findy/Pods-findy.release.xcconfig"; sourceTree = "<group>"; };
-		4613BCE62427E26400A025F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		46C7C79524311A5E009C5454 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47EEFC3B185F624DF9B1BA8C /* Pods-findy-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findy-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-findy-tvOSTests/Pods-findy-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5B47CA5947EE967D227815E4 /* Pods-findy-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findy-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-findy-tvOSTests/Pods-findy-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E50BD9FBAF7FA21CECD7DBE /* Pods-findyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findyTests.release.xcconfig"; path = "Target Support Files/Pods-findyTests/Pods-findyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				4613BCE62427E26400A025F6 /* GoogleService-Info.plist */,
+				46C7C79524311A5E009C5454 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* findy */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* findyTests */,
@@ -343,7 +343,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				4613BCE72427E26500A025F6 /* GoogleService-Info.plist in Resources */,
+				46C7C79624311A5E009C5454 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

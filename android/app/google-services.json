@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:169838319868:android:29a05a22b2b3b8009f5f79",
+        "mobilesdk_app_id": "1:169838319868:android:9b2405868b29f5619f5f79",
         "android_client_info": {
           "package_name": "org.findy.app"
         }
@@ -32,7 +32,7 @@
               "client_type": 3
             },
             {
-              "client_id": "169838319868-7uev9b8t9aphpv56r6pt2tikgb4hg9fr.apps.googleusercontent.com",
+              "client_id": "169838319868-er2gvevivqlho2ffr1t6908lbn75djbq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "org.findy.app"
