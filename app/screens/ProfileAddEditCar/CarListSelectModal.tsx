@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { FlatList, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import { useTranslation } from 'react-i18next';
 
-import { Container, Text, Layout, Input, If, Spacer } from '@app/components';
+import { Container, Text, Layout, Input, If, Spacer, Loading } from '@app/components';
 
 type Props = {
   isVisible: boolean;
@@ -13,6 +14,8 @@ type Props = {
 };
 
 const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props) => {
+  const { t } = useTranslation();
+
   const [searchText, setSearchText] = useState('');
 
   const filteredData = useMemo(() => {
@@ -26,7 +29,7 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
   }, []);
 
   if (loading) {
-    <Text>Loading...</Text>;
+    <Loading />;
   }
 
   return (
@@ -41,7 +44,7 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
               autoCorrect={false}
               addonRight={
                 <Text color="primary" onPress={close}>
-                  Close
+                  {t('close')}
                 </Text>
               }
             />
@@ -49,7 +52,7 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
 
           <Layout spacer={{ x: 'lg' }} size={1}>
             <If condition={filteredData.length === 0}>
-              <Text>No result</Text>
+              <Text>{t('no_result')}</Text>
             </If>
 
             <If condition={filteredData.length > 0}>

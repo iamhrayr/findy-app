@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
 import { showMessage } from 'react-native-flash-message';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Layout, Content } from '@app/components';
 import UserIdentityIcon from '@app/assets/user-identity.svg';
@@ -15,6 +16,8 @@ import VerificationCodeField from './VerificationCodeField';
 const CELL_COUNT = 4;
 
 const ConfirmPhoneNumber: React.FC = () => {
+  const { t } = useTranslation();
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   // const auth = useSelector((state: RootState) => state.auth);
@@ -28,7 +31,7 @@ const ConfirmPhoneNumber: React.FC = () => {
   useEffect(() => {
     if (confirmPhoneNumberStatus.loaded) {
       showMessage({
-        message: 'You have successfully registered! please Log In',
+        message: t('auth:verification.success_message'),
         type: 'success',
       });
 
@@ -37,7 +40,7 @@ const ConfirmPhoneNumber: React.FC = () => {
         routes: [{ name: 'Auth:Login' }],
       });
     }
-  }, [confirmPhoneNumberStatus.loaded, navigation]);
+  }, [confirmPhoneNumberStatus.loaded, navigation, t]);
 
   return (
     <Container>
@@ -47,18 +50,17 @@ const ConfirmPhoneNumber: React.FC = () => {
         </Layout>
 
         <Text align="center" size="h2" spacer={{ b: 'sm' }}>
-          Phone verification
+          {t('auth:verification.title')}
         </Text>
 
-        <Text align="center">
-          Please enter the confirmation code you received via sms
-        </Text>
+        <Text align="center">{t('auth:verification.confirmation_code_text')}</Text>
 
         <CountDown
           size={30}
           until={2 * 60}
           // @ts-ignore
-          onFinish={() => alert('Finished')}
+          // TODO: show message and redirect to register page if time is over
+          onFinish={() => Alert.alert('Finished')}
           digitStyle={styles.digitStyle}
           separatorStyle={styles.separatorStyle}
           timeToShow={['M', 'S']}
@@ -75,7 +77,7 @@ const ConfirmPhoneNumber: React.FC = () => {
           onPress={handleSubmit}
           loading={confirmPhoneNumberStatus.loading}
           disabled={value.length !== CELL_COUNT}>
-          Confirm
+          {t('confirm')}
         </Button>
 
         {confirmPhoneNumberStatus.error?.token && (

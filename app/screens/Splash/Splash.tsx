@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
@@ -8,6 +8,7 @@ import messaging from '@react-native-firebase/messaging';
 import { RootState } from '@app/redux/rootReducer';
 import { logout, refreshToken } from '@app/redux/ducks/auth/actions';
 import { getRefreshTokenStatus } from '@app/redux/ducks/auth/selectors';
+import { Loading } from '@app/components';
 
 type Props = {
   setAppInitialised: (status: boolean) => void;
@@ -71,7 +72,7 @@ const Splash = ({ setAppInitialised }: Props) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>Loading...</Text>
+      <Loading />
     </View>
   );
 };

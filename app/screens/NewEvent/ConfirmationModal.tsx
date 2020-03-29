@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import { useTranslation } from 'react-i18next';
 
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
@@ -35,6 +36,8 @@ const ConfirmationModal = ({
   message,
   onClose,
 }: Props) => {
+  const { t } = useTranslation();
+
   const [
     {
       loading,
@@ -57,35 +60,35 @@ const ConfirmationModal = ({
           <Content extraPadded scrollEnabled={false}>
             <Layout size={1} justify="center">
               <Text size="xs" transform="uppercase" weight="600">
-                Make
+                {t('make')}
               </Text>
               <Text size="lg">{make}</Text>
 
               <Spacer t="lg" />
 
               <Text size="xs" transform="uppercase" weight="600">
-                Model
+                {t('model')}
               </Text>
               <Text size="lg">{model}</Text>
 
               <Spacer t="lg" />
 
               <Text size="xs" transform="uppercase" weight="600" spacer={{ b: 'xs' }}>
-                Color
+                {t('color')}
               </Text>
               <ColorTag color={color} />
 
               <Spacer t="lg" />
 
               <Text size="xs" transform="uppercase" weight="600">
-                Plate number
+                {t('plate_number')}
               </Text>
               <Text size="lg">{plateNumber}</Text>
 
               <Spacer t="lg" />
 
               <Text size="xs" transform="uppercase" weight="600">
-                Message
+                {t('message')}
               </Text>
               <Text size="lg">{message}</Text>
 
@@ -95,10 +98,11 @@ const ConfirmationModal = ({
                 onPress={handleSendRequest}
                 loading={loading}
                 disabled={loading}>
-                Send Request
+                {t('send_request')}
               </Button>
+              {/* TODO: redirect to Events after sending request */}
               <Button type="link" onPress={onClose}>
-                Close
+                {t('close')}
               </Button>
             </Layout>
           </Content>

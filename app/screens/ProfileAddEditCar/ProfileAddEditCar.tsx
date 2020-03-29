@@ -7,6 +7,7 @@ import ColorPalette from 'react-native-color-palette';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { showMessage } from 'react-native-flash-message';
 import useMount from 'react-use/lib/useMount';
+import { useTranslation } from 'react-i18next';
 
 import CAR_COLORS from '@app/constants/carColors';
 import { Container, Content, Input, MaskedInput, Layout, Button } from '@app/components';
@@ -37,6 +38,7 @@ const initialValues: Partial<InputValues> = {
 type RoutePropType = RouteProp<{ 'Profile:AddEditCar': Car }, 'Profile:AddEditCar'>;
 
 const ProfileAddEditCar: React.FC = () => {
+  const { t } = useTranslation();
   const { params } = useRoute<RoutePropType>();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -55,12 +57,12 @@ const ProfileAddEditCar: React.FC = () => {
 
       showMessage({
         type: 'success',
-        message: params?.pk ? 'Successfully updated' : 'Successfully added',
+        message: params?.pk ? t('successfully_updated') : t('successfully_added'),
       });
 
       navigation.goBack();
     }
-  }, [dispatch, navigation, params, res]);
+  }, [dispatch, navigation, params, res, t]);
 
   const formik = useFormik({
     initialValues: params?.pk ? params : initialValues,
@@ -80,7 +82,7 @@ const ProfileAddEditCar: React.FC = () => {
       <Content>
         <MaskedInput
           options={{ mask: '99 AA 999' }}
-          label="Car Number"
+          label={t('car_number')}
           placeholder="11 AA 111"
           onChangeText={(val: string) => formik.setFieldValue('carNumber', val)}
           value={formik.values.carNumber}
@@ -106,7 +108,7 @@ const ProfileAddEditCar: React.FC = () => {
 
         <Layout layout="row" align="center">
           <Layout spacer={{ r: 'md' }} size={0.7}>
-            <Input.Label>Color</Input.Label>
+            <Input.Label>{t('color')}</Input.Label>
             <ColorPalette
               onChange={(color: string) => formik.setFieldValue('color', color)}
               value={formik.values.color}
@@ -124,7 +126,7 @@ const ProfileAddEditCar: React.FC = () => {
 
         <Layout align="center" spacer={{ t: 'xl', y: 'md' }}>
           <Button wide shape="circle" onPress={formik.handleSubmit} loading={loading}>
-            Save
+            {t('save')}
           </Button>
         </Layout>
       </Content>

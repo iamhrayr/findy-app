@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import {
   Container,
@@ -31,6 +32,8 @@ const TextArea = styled(Input)`
 `;
 
 const NewEvent = () => {
+  const { t } = useTranslation();
+
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isNextDisabled, setIsNextDisabled] = useState<boolean>(true);
 
@@ -39,8 +42,7 @@ const NewEvent = () => {
   const formik = useFormik<FormValues>({
     initialValues: {
       carNumber: '',
-      message:
-        "Hello. I'm so sorry. I crashed your car. It's complatly broken. Please come and help to solve the problem. thanks.",
+      message: '',
     },
     onSubmit: values => {
       console.log(values);
@@ -50,14 +52,20 @@ const NewEvent = () => {
   useEffect(() => {
     if (res) {
       if (res.valid) {
-        Alert.alert('You are lucky', 'The car is registered in the sustem');
+        Alert.alert(
+          t('events:new_event.check_car_success_title'),
+          t('events:new_event.check_car_success_description'),
+        );
         setIsNextDisabled(false);
       } else {
-        Alert.alert('We are sorry', 'The car is not registered in our system');
+        Alert.alert(
+          t('events:new_event.check_car_error_title'),
+          t('events:new_event.check_car_error_description'),
+        );
         setIsNextDisabled(true);
       }
     }
-  }, [res]);
+  }, [res, t]);
 
   const handleCarNumberChange = useCallback(
     (val: string) => {
@@ -75,11 +83,11 @@ const NewEvent = () => {
           <Layout align="center">
             <LicensePlateIcon width={100} height={100} />
             <Text align="center" size="h1" weight="700">
-              SEND A REQUEST
+              {t('events:new_event.title')}
             </Text>
             <Spacer b="xs" />
             <Text align="center" size="xs">
-              TYPE CAR NUMBER AND CHECK EXISTANCE
+              {t('events:new_event.subtitle')}
             </Text>
           </Layout>
           <Spacer b="lg" />
@@ -87,7 +95,8 @@ const NewEvent = () => {
 
         <MaskedInput
           options={{ mask: '99 AA 999' }}
-          label="Car Number"
+          // label="Car Number"
+          label={t('car_number')}
           placeholder="11 AA 111"
           spacer={{ t: 'lg' }}
           onChangeText={handleCarNumberChange}
@@ -101,7 +110,7 @@ const NewEvent = () => {
               onPress={() => checkCarExistance(formik.values.carNumber)}
               disabled={formik.values.carNumber.length === 0 || loading}
               loading={loading}>
-              Check
+              {t('check')}
             </Button>
           }
         />
@@ -110,10 +119,10 @@ const NewEvent = () => {
           multiline
           textAlignVertical="top"
           numberOfLines={4}
-          label="Message"
+          label={t('message')}
           value={formik.values.message}
           onChangeText={val => formik.setFieldValue('message', val)}
-          placeholder="Type message to another driver..."
+          placeholder={t('events:new_event.message_to_driver_placeholder')}
           spacer={{ t: 'lg' }}
         />
 
@@ -122,7 +131,7 @@ const NewEvent = () => {
           spacer={{ t: 'xl' }}
           shape="circle"
           onPress={() => setIsVisible(true)}>
-          Next
+          {t('next')}
         </Button>
 
         <ConfirmationModal

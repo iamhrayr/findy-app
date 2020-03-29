@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 import { Input } from '@app/components';
 import { Model } from '@app/models/CarBrandModel';
@@ -14,6 +15,8 @@ type Props = {
 };
 
 const CarModalInput = ({ formik, models = [], loading, selectedBrandId }: Props) => {
+  const { t } = useTranslation();
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = useCallback(() => {
@@ -36,8 +39,8 @@ const CarModalInput = ({ formik, models = [], loading, selectedBrandId }: Props)
       <TouchableOpacity onPress={() => setModalVisible(true)}>
         <Input
           pointerEvents="none"
-          label="Car Model"
-          placeholder="Tap to select car model"
+          label={t('profile:car_model_label')}
+          placeholder={t('profile:car_model_placeholder')}
           value={formik.values.model}
           addonRight={<Icon name="ios-arrow-forward" size={24} />}
           errorMessage={formik.touched.model && formik.errors.model}

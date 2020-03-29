@@ -9,11 +9,8 @@ import {
 } from '@app/components';
 
 type Props = {
-  pk: string | number;
-  // participant: {
-  //   name: string;
-  //   avatar: React.ReactNode;
-  // };
+  pk: Id;
+  eventPk: Id;
   carNumber: string;
   sentAt: string;
   message: string;

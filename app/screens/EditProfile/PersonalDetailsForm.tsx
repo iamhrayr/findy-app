@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 // import { useAsyncFn } from '@app/hooks';
 // import api from '@app/api';
@@ -16,6 +17,7 @@ type FormValues = {
 
 const PersonalDetailsForm: React.FC = () => {
   // const [{}, editUser] = useAsyncFn(api.editUser);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -39,11 +41,11 @@ const PersonalDetailsForm: React.FC = () => {
   return (
     <Card>
       <Text size="lg" align="center" spacer={{ b: 'lg' }}>
-        Personal Details
+        {t('profile:settings.personal_details_title')}
       </Text>
 
       <Input
-        label="First Name"
+        label={t('first_name')}
         placeholder=""
         onChangeText={val => setFieldValue('firstName', val)}
         value={values.firstName}
@@ -51,7 +53,7 @@ const PersonalDetailsForm: React.FC = () => {
       />
 
       <Input
-        label="Last Name"
+        label={t('last_name')}
         placeholder=""
         onChangeText={val => setFieldValue('lastName', val)}
         value={values.lastName}
@@ -59,7 +61,7 @@ const PersonalDetailsForm: React.FC = () => {
       />
 
       <Input
-        label="Email"
+        label={t('email')}
         placeholder=""
         onChangeText={val => setFieldValue('email', val)}
         value={values.email}
@@ -68,14 +70,14 @@ const PersonalDetailsForm: React.FC = () => {
 
       <Input
         editable={false}
-        label="Phone Number"
+        label={t('phone_number')}
         placeholder=""
         value={user!.phoneNumber}
       />
 
       <Layout align="center" spacer={{ y: 'md' }}>
         <Button wide shape="circle" onPress={handleSubmit}>
-          Save
+          {t('save')}
         </Button>
       </Layout>
     </Card>
