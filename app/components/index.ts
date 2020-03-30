@@ -1,6 +1,7 @@
 export { default as Button } from './Button';
 export { default as Text } from './Text';
 export { default as Input, MaskedInput } from './Input';
+export { default as Label } from './Label';
 export { default as Spacer } from './Spacer';
 export { default as Container } from './Container';
 export { default as Content } from './Content';

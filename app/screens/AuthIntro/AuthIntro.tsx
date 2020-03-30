@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -65,4 +65,4 @@ const AuthIntro: React.FC = () => {
   );
 };
 
-export default AuthIntro;
+export default memo(AuthIntro);

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
@@ -60,4 +60,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default memo(Events);

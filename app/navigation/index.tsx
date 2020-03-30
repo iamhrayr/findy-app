@@ -27,8 +27,7 @@ const NavigationRoot = () => {
   }
 
   return (
-    // <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }}>
-    <Stack.Navigator initialRouteName="Auth:Intro">
+    <Stack.Navigator>
       {!isAuthenticated ? (
         <>
           <Stack.Screen
@@ -55,7 +54,6 @@ const NavigationRoot = () => {
         </>
       )}
     </Stack.Navigator>
-    //  </SafeAreaView>
   );
 };
 

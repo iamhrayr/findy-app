@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { View } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
@@ -77,4 +77,4 @@ const Splash = ({ setAppInitialised }: Props) => {
   );
 };
 
-export default Splash;
+export default memo(Splash);

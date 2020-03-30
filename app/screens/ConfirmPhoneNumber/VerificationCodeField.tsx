@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/native';
 import {
   CodeField,
@@ -54,4 +54,4 @@ const VerificationCodeField = ({ value, cellCount, setValue }: Props) => {
   );
 };
 
-export default VerificationCodeField;
+export default memo(VerificationCodeField);

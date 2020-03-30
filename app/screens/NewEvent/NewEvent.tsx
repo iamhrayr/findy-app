@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { useFormik } from 'formik';
@@ -150,4 +150,4 @@ const NewEvent = () => {
   );
 };
 
-export default NewEvent;
+export default memo(NewEvent);

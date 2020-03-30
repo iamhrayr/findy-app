@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import Shape from '@app/assets/shape-1.svg';
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IntroImage;
+export default memo(IntroImage);

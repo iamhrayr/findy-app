@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
@@ -54,4 +54,4 @@ const ForgotPassword: React.FC = () => {
   );
 };
 
-export default ForgotPassword;
+export default memo(ForgotPassword);

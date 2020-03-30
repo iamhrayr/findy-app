@@ -1,7 +1,7 @@
 /* global GLOBAL */
 
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
@@ -45,4 +45,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default memo(App);

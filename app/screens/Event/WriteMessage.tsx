@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { View, TextInput } from 'react-native';
 import styled, { css, withTheme, DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
@@ -62,4 +62,4 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
   );
 };
 
-export default withTheme(WriteMessage);
+export default memo(withTheme(WriteMessage));

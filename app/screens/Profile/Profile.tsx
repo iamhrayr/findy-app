@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, memo } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DefaultTheme, withTheme } from 'styled-components/native';
@@ -101,4 +101,4 @@ const Profile = ({ theme }: Props) => {
   );
 };
 
-export default withTheme(Profile);
+export default memo(withTheme(Profile));

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -10,7 +10,7 @@ import useMount from 'react-use/lib/useMount';
 import { useTranslation } from 'react-i18next';
 
 import CAR_COLORS from '@app/constants/carColors';
-import { Container, Content, Input, MaskedInput, Layout, Button } from '@app/components';
+import { Container, Content, Label, MaskedInput, Layout, Button } from '@app/components';
 import { Car } from '@app/models/Car';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
@@ -108,7 +108,7 @@ const ProfileAddEditCar: React.FC = () => {
 
         <Layout layout="row" align="center">
           <Layout spacer={{ r: 'md' }} size={0.7}>
-            <Input.Label>{t('color')}</Input.Label>
+            <Label>{t('color')}</Label>
             <ColorPalette
               onChange={(color: string) => formik.setFieldValue('color', color)}
               value={formik.values.color}
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileAddEditCar;
+export default memo(ProfileAddEditCar);

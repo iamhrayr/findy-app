@@ -1,5 +1,5 @@
 /* global WebSocket */
-import React, { useRef, useCallback, useReducer, useMemo } from 'react';
+import React, { useRef, useCallback, useReducer, useMemo, memo } from 'react';
 import { FlatList, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
@@ -107,4 +107,4 @@ const Event = () => {
   );
 };
 
-export default Event;
+export default memo(Event);

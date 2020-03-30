@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
-import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { withTheme, DefaultTheme } from 'styled-components/native';
 
@@ -21,6 +21,7 @@ const UserDetails = ({ theme }: Props) => {
   const user = useSelector(authSelectors.getUser);
   const { t } = useTranslation();
   // const isAuth = useSelector(state => state.auth.isAuthenticated);
+  console.log({ user });
 
   const dispatch = useDispatch();
 
@@ -69,10 +70,6 @@ const UserDetails = ({ theme }: Props) => {
   }, [changeAvatarMutation]);
 
   const logoutHandler = useCallback(() => {
-    CommonActions.reset({
-      index: 1,
-      routes: [{ name: 'Auth:Intro' }],
-    });
     dispatch(authActions.logout());
   }, [dispatch]);
 
@@ -115,4 +112,4 @@ const UserDetails = ({ theme }: Props) => {
   );
 };
 
-export default withTheme(UserDetails);
+export default memo(withTheme(UserDetails));

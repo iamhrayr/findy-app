@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -49,4 +49,4 @@ const SingleMessage = ({ text, isTypeReceived, date }: Props) => {
   );
 };
 
-export default SingleMessage;
+export default memo(SingleMessage);
