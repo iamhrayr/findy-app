@@ -15,6 +15,7 @@ import NavigationRoot from './navigation';
 import getTheme from './theme';
 import { store, persistor } from './redux/store';
 
+// This will fail any FormData request if enabled!!!
 if (process.env.NODE_ENV === 'development') {
   // @ts-ignore
   GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;

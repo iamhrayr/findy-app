@@ -5,13 +5,18 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { withTheme, DefaultTheme } from 'styled-components/native';
 
 import api from '@app/api';
 import { authSelectors, authActions } from '@app/redux/ducks/auth';
 import { useAsyncFn } from '@app/hooks';
 import { Avatar, Layout, Text, Button } from '@app/components';
 
-const UserDetails = () => {
+type Props = {
+  theme: DefaultTheme;
+};
+
+const UserDetails = ({ theme }: Props) => {
   const navigation = useNavigation();
   const user = useSelector(authSelectors.getUser);
   const { t } = useTranslation();
@@ -54,19 +59,12 @@ const UserDetails = () => {
       const formdata = new FormData();
       formdata.append('avatar', {
         uri: photo.path,
-        // name: photo.filename,
         name: 'avatar.jpeg',
         type: photo.mime,
-        // type: 'multipart/form-data',
         title: 'avatar',
       });
-      // formdata.append('blah', 'lorem ipsum');
-      // console.log(ddd, photo);
 
-      // TODO: fix change avatar issue if it's not because of e emulator
-      changeAvatarMutation(formdata)
-        .then(res => console.log('### asdasdasdasd', res))
-        .catch(e => console.log('error', e));
+      changeAvatarMutation(formdata);
     });
   }, [changeAvatarMutation]);
 
@@ -78,15 +76,28 @@ const UserDetails = () => {
     dispatch(authActions.logout());
   }, [dispatch]);
 
+  const s =
+    user?.avatar && user.avatar.replace('http://127.0.0.1', 'http://134.122.22.145');
+
   return (
     <Layout layout="row" spacer={{ x: 'md', b: 'xxl', t: 'lg' }}>
-      <Avatar clickable onPress={handleAvatarPress} source={{ uri: user!.avatar! }} />
+      <Avatar
+        clickable
+        onPress={handleAvatarPress}
+        // source={{ uri: user!.avatar! }}
+        source={{ uri: s }}
+      />
       <Layout layout="col" justify="center" spacer={{ l: 'lg' }}>
         <Text size="h3" weight="600" spacer={{ b: 'sm' }}>
           {renderFullName()}
         </Text>
         <Layout layout="row">
-          <Icon name="phone-outline" width={20} height={20} />
+          <Icon
+            name="phone-outline"
+            width={20}
+            height={20}
+            fill={theme.colors.darkGray}
+          />
           <Text weight="300" spacer={{ l: 'xs' }}>
             {phoneNumber}
           </Text>
@@ -104,4 +115,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default withTheme(UserDetails);

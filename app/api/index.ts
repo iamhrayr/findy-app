@@ -85,7 +85,6 @@ class Api {
       method: 'post',
       data,
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'multipart/form-data; charset=utf-8;',
       },
     });

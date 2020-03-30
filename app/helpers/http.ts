@@ -22,14 +22,18 @@ class Http {
           return config;
         }
 
-        // TODO: be sure if there is not any other case besides multipart/form-data
+        // TODO: check if there is no any other case besides multipart/form-data
         // It should convert to `snakeCaseKeys` only our properties
-        if (config.headers['Content-Type'] === 'multipart/form-data') {
+        if (
+          config.headers['Content-Type'] &&
+          config.headers['Content-Type'].includes('multipart/form-data')
+        ) {
           return config;
         }
 
         const snakeCasedData = snakeCaseKeys(config.data, { deep: true });
-        return { ...config, data: snakeCasedData };
+        config.data = snakeCasedData;
+        return config;
       },
       error => {
         // TODO: check if working in all cases like no network, etc...
