@@ -76,6 +76,10 @@ class Http {
     this.client.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
 
+  setLanguageHeader(language: string) {
+    this.client.defaults.headers.common['Accept-Language'] = language;
+  }
+
   removeAuthHeader = () => {
     delete this.client.defaults.headers.common.Authorization;
   };

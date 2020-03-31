@@ -18,6 +18,11 @@ declare module 'react-native-render-html' {
   export default value;
 }
 
+declare module 'i18next-react-native-language-detector' {
+  const value: any;
+  export default value;
+}
+
 declare module 'react-native-countdown-component' {
   const value: any;
   export default value;

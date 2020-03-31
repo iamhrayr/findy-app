@@ -10,6 +10,7 @@ const MaskedInput = ({
   onChangeText,
   refInput,
   includeRawValueInChangeText,
+  value,
   ...props
 }: TextInputMaskProps & Props) => (
   <TextInputMask
@@ -18,6 +19,7 @@ const MaskedInput = ({
     checkText={checkText}
     onChangeText={onChangeText}
     refInput={refInput}
+    value={value}
     includeRawValueInChangeText={includeRawValueInChangeText}
     customTextInput={Input}
     customTextInputProps={props}

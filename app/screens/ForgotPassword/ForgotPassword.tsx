@@ -1,5 +1,4 @@
 import React from 'react';
-import { KeyboardAvoidingView } from 'react-native';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
@@ -25,38 +24,33 @@ const ForgotPassword: React.FC = () => {
   });
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior="padding"
-      keyboardVerticalOffset={100}>
-      <Container>
-        <Content noPadding>
-          <Layout grow={1}>
-            <ForgotImage />
+    <Container>
+      <Content noPadding>
+        <Layout grow={1}>
+          <ForgotImage />
+        </Layout>
+
+        <Layout spacer={{ x: 'lg', b: 'lg' }}>
+          <Text size="giant" spacer={{ b: 'xl' }}>
+            {t('auth:forgot_password.title')}
+          </Text>
+
+          <Input
+            label={t('phone_number')}
+            placeholder="+374 98999590"
+            onChangeText={val => formik.setFieldValue('phoneNumber', val)}
+            value={formik.values.phoneNumber}
+            errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
+          />
+
+          <Layout align="center" spacer={{ y: 'md' }}>
+            <Button wide shape="circle" onPress={formik.handleSubmit}>
+              {t('submit')}
+            </Button>
           </Layout>
-
-          <Layout spacer={{ x: 'lg', b: 'lg' }}>
-            <Text size="giant" spacer={{ b: 'xl' }}>
-              {t('auth:forgot_password.title')}
-            </Text>
-
-            <Input
-              label={t('phone_numner')}
-              placeholder="+374 98999590"
-              onChangeText={val => formik.setFieldValue('phoneNumber', val)}
-              value={formik.values.phoneNumber}
-              errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
-            />
-
-            <Layout align="center" spacer={{ y: 'md' }}>
-              <Button wide shape="circle" onPress={formik.handleSubmit}>
-                {t('submit')}
-              </Button>
-            </Layout>
-          </Layout>
-        </Content>
-      </Container>
-    </KeyboardAvoidingView>
+        </Layout>
+      </Content>
+    </Container>
   );
 };
 

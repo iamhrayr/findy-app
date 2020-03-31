@@ -8,6 +8,7 @@ import { FETCH_MY_CARS } from './types';
 
 export const getProfileCars = (state: RootState) => state.profile.myCars;
 export const getProfileSettings = (state: RootState) => state.profile.settings;
+export const getProfilePreferences = (state: RootState) => state.profile.preferences;
 
 export const getMyCars = createSelector([getProfileCars], profileCars =>
   arrayFromIdMap(profileCars.data, profileCars.ids),

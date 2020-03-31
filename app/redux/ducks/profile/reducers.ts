@@ -3,7 +3,15 @@ import { combineReducers } from 'redux';
 import createListReducer from '../../common/createListReducer';
 
 import { fetchMyCars, fetchProfileSettings, updateProfileSettings } from './actions';
-import { ADD_CAR, EDIT_CAR, REMOVE_CAR, MyCarsState, SettingsState } from './types';
+import {
+  ADD_CAR,
+  EDIT_CAR,
+  REMOVE_CAR,
+  CHANGE_PREFERENCES,
+  MyCarsState,
+  SettingsState,
+  PreferencesState,
+} from './types';
 
 const myCarsFetchReducer = createListReducer({
   loadingAction: fetchMyCars.TRIGGER,
@@ -91,7 +99,26 @@ const settingsReducer = (
   }
 };
 
+const preferencesReducer = (
+  state: PreferencesState = {
+    theme: 'light',
+    language: 'en',
+  },
+  action: Action,
+) => {
+  switch (action.type) {
+    case CHANGE_PREFERENCES:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   myCars: myCarsReducer,
   settings: settingsReducer,
+  preferences: preferencesReducer,
 });

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/native';
 
 type Props = ViewProps & {};
 
-const Container = styled(View)`
+const Container = styled(View)<Props>`
   ${({ theme }) => css`
     background: ${theme.content.bgColor};
     flex: 1;
