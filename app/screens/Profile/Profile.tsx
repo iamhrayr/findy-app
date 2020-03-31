@@ -90,7 +90,7 @@ const Profile = ({ theme }: Props) => {
             <FlatList
               data={myCars}
               ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
-              ListEmptyComponent={() => <NoData message="You do not have any car yet" />}
+              ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
               renderItem={({ item }: { item: Car }) => (
                 <CarNumberRow
                   data={item}
