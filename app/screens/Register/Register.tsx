@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import { KeyboardAvoidingView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,73 +47,68 @@ const Register: React.FC = () => {
   });
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior="padding"
-      keyboardVerticalOffset={100}>
-      <Container>
-        <Content noPadding>
-          <Layout grow={1}>
-            <RegisterImage />
-          </Layout>
+    <Container>
+      <Content noPadding>
+        <Layout grow={1}>
+          <RegisterImage />
+        </Layout>
 
-          <Layout spacer={{ x: 'lg', b: 'lg' }}>
-            <Text size="giant" spacer={{ b: 'xl' }}>
+        <Layout spacer={{ x: 'lg', b: 'lg' }}>
+          <Text size="giant" spacer={{ b: 'xl' }}>
+            {t('register')}
+          </Text>
+
+          <Input
+            label={t('phone_number')}
+            placeholder="+374 98999590"
+            onChangeText={val => formik.setFieldValue('phoneNumber', val)}
+            value={formik.values.phoneNumber}
+            errorMessage={
+              (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
+              registerStatus.error?.phoneNumber
+            }
+          />
+          <Input
+            label={t('full_name')}
+            placeholder="Samuel Jackson"
+            onChangeText={val => formik.setFieldValue('fullName', val)}
+            value={formik.values.fullName}
+            errorMessage={formik.touched.fullName && formik.errors.fullName}
+          />
+          <Input
+            secureTextEntry={!passVisible}
+            label={t('password')}
+            placeholder="*******"
+            onChangeText={val => formik.setFieldValue('password', val)}
+            value={formik.values.password}
+            addonRight={
+              <Icon onPress={() => setPassVisible(!passVisible)} name="eye" size={22} />
+            }
+            errorMessage={
+              (formik.touched.password && formik.errors.password) ||
+              registerStatus.error?.password
+            }
+          />
+
+          <Layout align="center" spacer={{ y: 'md' }}>
+            <Button
+              onPress={formik.handleSubmit}
+              shape="circle"
+              loading={registerStatus.loading}
+              wide>
               {t('register')}
-            </Text>
-
-            <Input
-              label={t('phone_number')}
-              placeholder="+374 98999590"
-              onChangeText={val => formik.setFieldValue('phoneNumber', val)}
-              value={formik.values.phoneNumber}
-              errorMessage={
-                (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
-                registerStatus.error?.phoneNumber
-              }
-            />
-            <Input
-              label={t('full_name')}
-              placeholder="Samuel Jackson"
-              onChangeText={val => formik.setFieldValue('fullName', val)}
-              value={formik.values.fullName}
-              errorMessage={formik.touched.fullName && formik.errors.fullName}
-            />
-            <Input
-              secureTextEntry={!passVisible}
-              label={t('password')}
-              placeholder="*******"
-              onChangeText={val => formik.setFieldValue('password', val)}
-              value={formik.values.password}
-              addonRight={
-                <Icon onPress={() => setPassVisible(!passVisible)} name="eye" size={22} />
-              }
-              errorMessage={
-                (formik.touched.password && formik.errors.password) ||
-                registerStatus.error?.password
-              }
-            />
-
-            <Layout align="center" spacer={{ y: 'md' }}>
-              <Button
-                onPress={formik.handleSubmit}
-                shape="circle"
-                loading={registerStatus.loading}
-                wide>
-                {t('register')}
-              </Button>
-            </Layout>
-
-            <Text align="center">
-              <Text align="center">{t('auth:register.already_registered')} </Text>
-              <Text align="center" color="primary" onPress={navigateToLogin}>
-                {t('auth:register.login_text')}
-              </Text>
-            </Text>
+            </Button>
           </Layout>
-        </Content>
-      </Container>
-    </KeyboardAvoidingView>
+
+          <Text align="center">
+            <Text align="center">{t('auth:register.already_registered')} </Text>
+            <Text align="center" color="primary" onPress={navigateToLogin}>
+              {t('auth:register.login_text')}
+            </Text>
+          </Text>
+        </Layout>
+      </Content>
+    </Container>
   );
 };
 

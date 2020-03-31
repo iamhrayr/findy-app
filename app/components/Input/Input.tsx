@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
 
 import Text from '../Text';
+import Label from '../Label';
 import styled, { css } from 'styled-components/native';
 
 import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
@@ -24,13 +25,6 @@ const Wrapper = styled(View)<WrapperProps>`
   ${({ spacer, theme }) => css`
     /* spaces */
     ${generateSpaces(spacer, theme)}
-  `}
-`;
-
-export const Label = styled(Text)<LabelProps>`
-  ${({ theme }) => css`
-    opacity: ${theme.form.label.opacity};
-    color: ${theme.form.label.color};
   `}
 `;
 
@@ -83,7 +77,5 @@ const Input = (
     </Wrapper>
   );
 };
-
-Input.Label = Label;
 
 export default forwardRef(Input);

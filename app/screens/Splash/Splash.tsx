@@ -6,8 +6,10 @@ import jwtDecode from 'jwt-decode';
 import messaging from '@react-native-firebase/messaging';
 
 import { RootState } from '@app/redux/rootReducer';
+import httpInstance from '@app/helpers/http';
 import { logout, refreshToken } from '@app/redux/ducks/auth/actions';
 import { getRefreshTokenStatus } from '@app/redux/ducks/auth/selectors';
+import { getProfilePreferences } from '@app/redux/ducks/profile/selectors';
 import { Loading } from '@app/components';
 
 type Props = {
@@ -36,6 +38,7 @@ const registerAppWithFCM = async () => {
 const Splash = ({ setAppInitialised }: Props) => {
   const auth = useSelector((state: RootState) => state.auth);
   const refreshTokenStatus = useSelector(getRefreshTokenStatus);
+  const profilePreferences = useSelector(getProfilePreferences);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,6 +48,7 @@ const Splash = ({ setAppInitialised }: Props) => {
   }, [auth.isAuthenticated, refreshTokenStatus.loaded, setAppInitialised]);
 
   useMount(() => {
+    httpInstance.setLanguageHeader(profilePreferences.language);
     if (!auth.isAuthenticated) {
       return setAppInitialised(true);
     }

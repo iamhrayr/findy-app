@@ -1,8 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import AsyncStorage from '@react-native-community/async-storage';
 import { middleware as thunkMiddleware } from 'redux-saga-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore } from 'redux-persist';
 
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
@@ -10,29 +9,20 @@ import rootSaga from './rootSaga';
 
 // AsyncStorage.clear();
 
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-  // whitelist: ['auth.user', 'auth.isAuthenticated', 'auth.isAuthenticating'],
-  whitelist: ['auth'],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const sagaMiddleware = createSagaMiddleware();
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  persistedReducer,
+  rootReducer,
   composeEnhancers(
     applyMiddleware(thunkMiddleware, sagaMiddleware),
     //Reactotron.createEnhancer()
   ),
 );
 
-const persistor = persistStore(store as any);
+const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
 

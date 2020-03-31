@@ -1,13 +1,14 @@
 {
-  "settings.notification_title": "Notification Settings",
-  "settings.phone_number_label": "Show phone number",
-  "settings.notification_method_label": "Notification method",
-  "settings.personal_details_title": "Personal Details",
-  "my_cars": "My Cars",
-  "no_name": "No Name",
-  "edit_profile": "Edit Profile",
-  "car_make_placeholder": "Edit Profile",
-  "car_make_label": "Car Make",
-  "car_model_label": "Car Model",
-  "car_model_placeholder": "Tap to select car model"
+  "settings.notification_title": "Տեղեկացման պարամետրերը",
+  "settings.phone_number_label": "Showույց տալ հեռախոսահամարը",
+  "settings.notification_method_label": "Ծանուցման եղանակը",
+  "settings.personal_details_title": "Անձնական տվյալներ",
+  "settings.app_language": "Հավելվածի լեզուն",
+  "my_cars": "Իմ ավտոմեքենաները",
+  "no_name": "Անանուն",
+  "edit_profile": "Խմբագրել պրոֆիլը",
+  "car_make_placeholder": "Խմբագրել պրոֆիլը",
+  "car_make_label": "Ավտոմեքենաների պատրաստում",
+  "car_model_label": "Ավտոմեքենայի մոդել",
+  "car_model_placeholder": "Հպեք մեքենայի մոդելը ընտրելու համար"
 }

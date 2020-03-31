@@ -11,13 +11,22 @@ import { Card, Layout, Text, Spacer } from '@app/components';
 import {
   fetchProfileSettings,
   updateProfileSettings,
+  changePreferences,
 } from '@app/redux/ducks/profile/actions';
-import { getProfileSettings } from '@app/redux/ducks/profile/selectors';
+import {
+  getProfileSettings,
+  getProfilePreferences,
+} from '@app/redux/ducks/profile/selectors';
 
 const SELECT_VALUES = [
   { label: 'SMS', value: 'sms' },
   { label: 'Push notification', value: 'app' },
   { label: 'Both', value: 'both' },
+];
+
+const LANGUAGES = [
+  { label: 'English', value: 'en' },
+  { label: 'Armenian', value: 'am' },
 ];
 
 const NotificationSettings = () => {
@@ -28,6 +37,7 @@ const NotificationSettings = () => {
 
   const dispatch = useDispatch();
   const settings = useSelector(getProfileSettings);
+  const preferences = useSelector(getProfilePreferences);
 
   useEffect(() => {
     dispatch(fetchProfileSettings());
@@ -55,6 +65,17 @@ const NotificationSettings = () => {
     [dispatch],
   );
 
+  const handleLanguageChange = useCallback(
+    language => {
+      dispatch(
+        changePreferences({
+          language,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
   if (settings.loading) {
     <Text>{t('loading')}</Text>;
   }
@@ -64,6 +85,19 @@ const NotificationSettings = () => {
       <Text size="lg" align="center" spacer={{ b: 'lg' }}>
         {t('profile:settings.notification_title')}
       </Text>
+
+      <Layout layout="row" align="center" justify="between">
+        <Text>{t('profile:settings.app_language')}</Text>
+        <Select
+          style={styles}
+          onValueChange={handleLanguageChange}
+          Icon={() => <Icon name="arrow-ios-downward-outline" width={20} height={20} />}
+          value={preferences.language}
+          items={LANGUAGES}
+        />
+      </Layout>
+
+      <Spacer b="lg" />
 
       <Layout layout="row" align="center" justify="between">
         <Text>{t('profile:settings.phone_number_label')}</Text>

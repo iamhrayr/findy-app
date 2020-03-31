@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 
 import { Car } from '@app/models/Car';
 import { profileSelectors } from '@app/redux/ducks/profile';
-import { authSelectors } from '@app/redux/ducks/auth';
+import { authSelectors, authActions } from '@app/redux/ducks/auth';
 import { removeCar } from '@app/redux/ducks/profile/actions';
 import { useNavigation } from '@react-navigation/native';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
-import { Container, Card, Layout, Text, Line, NoData, If } from '@app/components';
+import { Container, Card, Layout, Text, Button, Line, NoData, If } from '@app/components';
 import { fetchMyCars as fetchMyCarsRedux } from '@app/redux/ducks/profile/actions';
 import CarNumberRow from './CarNumberRow';
 import UserDetails from './UserDetails';
@@ -55,11 +55,15 @@ const Profile = ({ theme }: Props) => {
     [dispatch, removeCarMutation],
   );
 
+  const logoutHandler = useCallback(() => {
+    dispatch(authActions.logout());
+  }, [dispatch]);
+
   return (
     <Container>
       <UserDetails isAuthenticated={isAuthenticated} />
 
-      <Layout size={1} spacer={{ x: 'md', y: 'md' }}>
+      <Layout size={1} spacer={{ x: 'md', b: 'md' }}>
         <Card size={1}>
           <Layout layout="row" justify="between" spacer={{ b: 'md' }}>
             <Text spacer={{ b: 'sm' }}>{t('profile:my_cars')}</Text>
@@ -99,6 +103,10 @@ const Profile = ({ theme }: Props) => {
           </If>
         </Card>
       </Layout>
+
+      <Button type="link" size="sm" onPress={logoutHandler}>
+        {t('logout')}
+      </Button>
     </Container>
   );
 };
