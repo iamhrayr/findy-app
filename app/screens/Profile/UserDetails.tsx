@@ -115,4 +115,18 @@ const UserDetails = ({ theme }: Props) => {
   );
 };
 
-export default withTheme(UserDetails);
+const UserDetailsWithTheme = withTheme(UserDetails);
+
+// all this messy shit was because of some unexpected rerender after logout.
+// When logout action dispatched it changes isAuthenticated flag,
+// Navigator whould handle it and show the Auth screen,
+// but somehow before showing Auth screen this component rerenders
+// and the fucking error appears. I'm almost sure it's react-navigation bug.
+const UserDetailsWrapper = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+  if (!isAuthenticated) {
+    return null;
+  }
+  return <UserDetailsWithTheme />;
+};
+
+export default UserDetailsWrapper;

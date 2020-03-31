@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Car } from '@app/models/Car';
 import { profileSelectors } from '@app/redux/ducks/profile';
+import { authSelectors } from '@app/redux/ducks/auth';
 import { removeCar } from '@app/redux/ducks/profile/actions';
 import { useNavigation } from '@react-navigation/native';
 import { useAsyncFn } from '@app/hooks';
@@ -28,6 +29,7 @@ const Profile = ({ theme }: Props) => {
 
   const dispatch = useDispatch();
 
+  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
   const myCars = useSelector(profileSelectors.getMyCars);
   const { loading, loaded } = useSelector(profileSelectors.getMyCarsStatus);
 
@@ -55,7 +57,7 @@ const Profile = ({ theme }: Props) => {
 
   return (
     <Container>
-      <UserDetails />
+      <UserDetails isAuthenticated={isAuthenticated} />
 
       <Layout size={1} spacer={{ x: 'md', y: 'md' }}>
         <Card size={1}>
