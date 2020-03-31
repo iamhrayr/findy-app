@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { KeyboardAvoidingView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,65 +46,70 @@ const Login: React.FC = () => {
   });
 
   return (
-    <Container>
-      <Content noPadding>
-        <Layout grow={1}>
-          <LoginImage />
-        </Layout>
-
-        <Layout spacer={{ x: 'lg', b: 'lg' }}>
-          <Text size="giant" spacer={{ b: 'xl' }}>
-            {t('login')}
-          </Text>
-
-          <Input
-            label={t('phone_number')}
-            placeholder="+374 98999590"
-            onChangeText={val => formik.setFieldValue('phoneNumber', val)}
-            value={formik.values.phoneNumber}
-            errorMessage={
-              (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
-              loginStatus.error?.phoneNumber
-            }
-          />
-
-          <Input
-            secureTextEntry
-            label={t('password')}
-            placeholder="*******"
-            onChangeText={val => formik.setFieldValue('password', val)}
-            value={formik.values.password}
-            addonRight={
-              <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
-                {t('auth:login.forgot_password_text')}
-              </Text>
-            }
-            errorMessage={
-              (formik.touched.password && formik.errors.password) ||
-              loginStatus.error?.password ||
-              loginStatus.error?.nonFieldErrors
-            }
-          />
-
-          <Layout align="center" spacer={{ y: 'md' }}>
-            <Button
-              wide
-              shape="circle"
-              loading={loginStatus.loading}
-              onPress={formik.handleSubmit}>
-              {t('login')}
-            </Button>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior="padding"
+      keyboardVerticalOffset={100}>
+      <Container>
+        <Content noPadding>
+          <Layout grow={1}>
+            <LoginImage />
           </Layout>
 
-          <Text align="center">
-            <Text align="center">{t('auth:login.new_user')} </Text>
-            <Text align="center" color="primary" onPress={navigateToRegister}>
-              {t('auth:login.register_text')}
+          <Layout spacer={{ x: 'lg', b: 'lg' }}>
+            <Text size="giant" spacer={{ b: 'xl' }}>
+              {t('login')}
             </Text>
-          </Text>
-        </Layout>
-      </Content>
-    </Container>
+
+            <Input
+              label={t('phone_number')}
+              placeholder="+374 98999590"
+              onChangeText={val => formik.setFieldValue('phoneNumber', val)}
+              value={formik.values.phoneNumber}
+              errorMessage={
+                (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
+                loginStatus.error?.phoneNumber
+              }
+            />
+
+            <Input
+              secureTextEntry
+              label={t('password')}
+              placeholder="*******"
+              onChangeText={val => formik.setFieldValue('password', val)}
+              value={formik.values.password}
+              addonRight={
+                <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
+                  {t('auth:login.forgot_password_text')}
+                </Text>
+              }
+              errorMessage={
+                (formik.touched.password && formik.errors.password) ||
+                loginStatus.error?.password ||
+                loginStatus.error?.nonFieldErrors
+              }
+            />
+
+            <Layout align="center" spacer={{ y: 'md' }}>
+              <Button
+                wide
+                shape="circle"
+                loading={loginStatus.loading}
+                onPress={formik.handleSubmit}>
+                {t('login')}
+              </Button>
+            </Layout>
+
+            <Text align="center">
+              <Text align="center">{t('auth:login.new_user')} </Text>
+              <Text align="center" color="primary" onPress={navigateToRegister}>
+                {t('auth:login.register_text')}
+              </Text>
+            </Text>
+          </Layout>
+        </Content>
+      </Container>
+    </KeyboardAvoidingView>
   );
 };
 
