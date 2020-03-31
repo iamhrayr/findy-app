@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 
+import i18n from '@app/i18n';
+
 // tabs
 import ProfileStackScreen from './ProfileStack';
 import EventsStackScreen from './EventsStack';
@@ -26,7 +28,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         name="Events:Home"
         component={EventsStackScreen}
         options={{
-          title: 'Events',
+          title: i18n.t('events'),
           tabBarIcon: ({ focused, color, size }) => (
             <Icon
               name={focused ? 'bell' : 'bell-outline'}
@@ -41,7 +43,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         name="NewEvent:Home"
         component={NewEventStackScreen}
         options={{
-          title: 'New Event',
+          title: i18n.t('new_event'),
           tabBarIcon: ({ focused, color, size }) => (
             <Icon
               name={focused ? 'plus-circle' : 'plus-circle-outline'}
@@ -56,7 +58,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         name="Profile:Home"
         component={ProfileStackScreen}
         options={{
-          title: 'Profile',
+          title: i18n.t('profile'),
           tabBarIcon: ({ focused, color, size }) => (
             <Icon
               name={focused ? 'person' : 'person-outline'}

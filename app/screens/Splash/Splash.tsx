@@ -7,6 +7,7 @@ import messaging from '@react-native-firebase/messaging';
 
 import { RootState } from '@app/redux/rootReducer';
 import httpInstance from '@app/helpers/http';
+import i18n from '@app/i18n';
 import { logout, refreshToken } from '@app/redux/ducks/auth/actions';
 import { getRefreshTokenStatus } from '@app/redux/ducks/auth/selectors';
 import { getProfilePreferences } from '@app/redux/ducks/profile/selectors';
@@ -49,6 +50,8 @@ const Splash = ({ setAppInitialised }: Props) => {
 
   useMount(() => {
     httpInstance.setLanguageHeader(profilePreferences.language);
+    i18n.changeLanguage(profilePreferences.language);
+
     if (!auth.isAuthenticated) {
       return setAppInitialised(true);
     }

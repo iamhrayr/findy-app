@@ -32,5 +32,9 @@
   "send_request": "Հարցում ուղարկել",
   "no_result": "Արդյունք չկա",
   "successfully_updated": "Հաջողությամբ թարմացվեց",
-  "successfully_added": "Հաջողությամբ ավելացվեց"
+  "successfully_added": "Հաջողությամբ ավելացվեց",
+  "events": "Էվենթս",
+  "new_event": "Նոր Էվենթ",
+  "profile": "Անձնական էջ",
+  "no_data_text": "Տվյալներ առկա չեն"
 }

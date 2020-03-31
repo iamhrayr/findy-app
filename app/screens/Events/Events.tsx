@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { useTranslation } from 'react-i18next';
 
 import {
   Container,
@@ -20,6 +21,7 @@ const Events = () => {
   const dispatch = useDispatch();
   const events = useSelector(eventsSelectors.getEvents);
   const { loading, loaded } = useSelector(eventsSelectors.getEventsStatus);
+  const { t } = useTranslation();
 
   const fetchData = useCallback(() => {
     dispatch(eventsActions.fetchEvents());
@@ -41,7 +43,7 @@ const Events = () => {
             closeOnRowPress
             data={events}
             ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
-            ListEmptyComponent={() => <NoData message="There is not anything to show" />}
+            ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
             renderItem={({ item }) => <EventItem {...item} />}
             keyExtractor={item => String(item.pk)}
             onRefresh={fetchData}
