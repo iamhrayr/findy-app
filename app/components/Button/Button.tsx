@@ -50,7 +50,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     background: ${type !== 'link' ? theme.colors[type] : 'transparent'};
     align-items: ${TextAlignOptions[textAlign] || 'center'};
     width: ${block ? '100%' : 'auto'};
-    flex-shrink: 1;
+    /* flex-shrink: 1; */
     opacity: ${disabled ? 0.6 : 1};
 
     /* spaces */
