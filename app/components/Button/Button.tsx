@@ -51,6 +51,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     align-items: ${TextAlignOptions[textAlign] || 'center'};
     width: ${block ? '100%' : 'auto'};
     /* flex-shrink: 1; */
+    flex-shrink: 0;
     opacity: ${disabled ? 0.6 : 1};
 
     /* spaces */

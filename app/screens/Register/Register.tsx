@@ -10,7 +10,7 @@ import { Button, Text, Container, Layout, Input, Content } from '@app/components
 import { register } from '@app/redux/ducks/auth/actions';
 import { getRegisterStatus } from '@app/redux/ducks/auth/selectors';
 // import { RootState } from '@app/redux/rootReducer';
-import RegisterImage from './RegisterImage';
+import RegisterImage from '../Login/LoginImage';
 
 type FormValues = {
   fullName: string;

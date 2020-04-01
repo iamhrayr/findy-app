@@ -1,21 +1,20 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 import Shape from '@app/assets/shape-1.svg';
-import Cars from '@app/assets/two-cars.svg';
+import twoCarsImage from '@app/assets/two-cars.png';
 
 const LoginImage = () => {
   return (
     <View style={styles.container}>
       <Shape style={styles.shape} />
-      <Cars style={styles.cars} />
+      <Image source={twoCarsImage} style={styles.cars} resizeMode={'contain'} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 50,
     padding: 20,
   },
   shape: {
@@ -26,8 +25,9 @@ const styles = StyleSheet.create({
     top: -100,
   },
   cars: {
-    height: '100%',
-    marginLeft: -210,
+    width: '100%',
+    height: 200,
+    marginLeft: -180,
     marginTop: -40,
   },
 });
