@@ -57,7 +57,6 @@ class Http {
       },
       error => {
         if (!error.response) {
-          // return error;
           return Promise.reject(error);
         }
 

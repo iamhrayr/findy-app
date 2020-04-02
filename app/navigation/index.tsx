@@ -37,6 +37,7 @@ const NavigationRoot = () => {
             component={AuthIntroScreen}
             options={{
               headerShown: false,
+              title: i18n.t('auth:intro_title'),
             }}
           />
           <Stack.Screen

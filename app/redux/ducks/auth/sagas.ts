@@ -20,13 +20,10 @@ import {
 function* loginHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.login, action.payload);
-    console.log(1111, res);
     yield put(login.success(res.data));
-    console.log(2222);
     httpInstance.setAuthHeader(res.data.accessToken);
-    console.log(3333);
   } catch (error) {
-    console.log(4444, error);
+    console.log(Object.assign({}, error));
     // FIXME: response could be undefined if it's network error for example
     yield put(login.failure(error.response.data));
   }
