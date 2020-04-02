@@ -40,5 +40,7 @@
   "you_are_offline": "You are offline",
   "connect_to_network_message": "Please connect to the network to continue using the app!",
   "oops_something_wrong": "Oops, something went wrong. We are sorry!",
-  "reload": "Reload"
+  "reload": "Reload",
+  "forgot_password": "Forgot Password",
+  "terms_of_use": "Terms of use"
 }
