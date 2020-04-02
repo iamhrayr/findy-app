@@ -36,5 +36,9 @@
   "events": "Events",
   "new_event": "New Event",
   "profile": "Profile",
-  "no_data_text": "There is not anything to show"
+  "no_data_text": "There is not anything to show",
+  "you_are_offline": "You are offline",
+  "connect_to_network_message": "Please connect to the network to continue using the app!",
+  "oops_something_wrong": "Oops, something went wrong. We are sorry!",
+  "reload": "Reload"
 }

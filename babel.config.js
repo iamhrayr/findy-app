@@ -11,6 +11,11 @@ module.exports = {
       },
     ],
   ],
+  env: {
+    production: {
+      plugins: ['transform-remove-console'],
+    },
+  },
 };
 // module.exports = {
 //   presets: ['@typescript-eslint/parser'],

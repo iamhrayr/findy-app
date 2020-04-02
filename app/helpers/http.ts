@@ -10,7 +10,7 @@ class Http {
 
   constructor() {
     this.client = axios.create({
-      baseURL: configs.api.url,
+      baseURL: configs.api.url + 'oo',
     });
     this.addInterceptors();
   }
@@ -57,17 +57,18 @@ class Http {
       },
       error => {
         if (!error.response) {
+          // return error;
           return Promise.reject(error);
         }
 
-        const camelCasedError = camelCaseKeys(error.response.data, { deep: true });
-        return Promise.reject({
-          ...error,
-          response: {
-            ...error.response,
-            data: camelCasedError,
-          },
-        });
+        try {
+          const camelCasedError = camelCaseKeys(error.response.data, { deep: true });
+          error.response.data = camelCasedError;
+        } catch (e) {
+          return Promise.reject(error);
+        }
+
+        return Promise.reject(error);
       },
     );
   }

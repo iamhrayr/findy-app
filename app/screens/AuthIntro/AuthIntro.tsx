@@ -23,7 +23,7 @@ const AuthIntro: React.FC = () => {
 
   return (
     <Container>
-      <Content noPaddingX>
+      <Content noPaddingX full>
         <Layout size={1} spacer={{ x: 'lg' }}>
           <Layout grow={1}>
             <IntroImage />
