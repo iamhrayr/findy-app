@@ -13,7 +13,7 @@ const ProfileStack = createStackNavigator();
 const ProfileStackScreen = () => (
   <ProfileStack.Navigator>
     <ProfileStack.Screen
-      name="Profile"
+      name="Profile:Home"
       component={ProfileScreen}
       options={{
         title: i18n.t('profile'),

@@ -12,17 +12,17 @@ const EventsStack = createStackNavigator();
 const EventsStackScreen = () => (
   <EventsStack.Navigator initialRouteName="Events">
     <EventsStack.Screen
-      name="Events"
+      name="Events:Home"
       component={EventsScreen}
       options={{
-        title: i18n.t('profile:add_edit_car'),
+        title: i18n.t('events'),
       }}
     />
     <EventsStack.Screen
       name="Events:Event"
       component={EventScreen}
       options={{
-        title: i18n.t('profile:add_edit_car'),
+        title: i18n.t('event'),
       }}
     />
   </EventsStack.Navigator>

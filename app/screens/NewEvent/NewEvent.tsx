@@ -3,6 +3,7 @@ import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -33,6 +34,7 @@ const TextArea = styled(Input)`
 
 const NewEvent = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isNextDisabled, setIsNextDisabled] = useState<boolean>(true);
@@ -74,6 +76,11 @@ const NewEvent = () => {
     },
     [formik],
   );
+  const handleRequestSuccess = useCallback(() => {
+    setIsVisible(false);
+    navigation.navigate('Events:Home');
+  }, [navigation]);
+
   return (
     <Container>
       <Content>
@@ -144,6 +151,7 @@ const NewEvent = () => {
           color={res?.color}
           plateNumber={res?.carNumber}
           message={formik.values.message}
+          onSuccess={handleRequestSuccess}
         />
       </Content>
     </Container>

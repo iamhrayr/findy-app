@@ -24,6 +24,7 @@ type Props = {
   plateNumber: string;
   message: string;
   onClose: () => void;
+  onSuccess: () => void;
 };
 
 const ConfirmationModal = ({
@@ -35,23 +36,20 @@ const ConfirmationModal = ({
   plateNumber,
   message,
   onClose,
+  onSuccess,
 }: Props) => {
   const { t } = useTranslation();
 
-  const [
-    {
-      loading,
-      // res, error
-    },
-    sendMessage,
-  ] = useAsyncFn(api.sendMessage);
+  const [{ loading }, sendMessage] = useAsyncFn(api.sendMessage);
 
   const handleSendRequest = useCallback(() => {
     sendMessage({
       carId,
       message,
+    }).then(() => {
+      onSuccess();
     });
-  }, [carId, message, sendMessage]);
+  }, [carId, message, onSuccess, sendMessage]);
 
   return (
     <Modal isVisible={isVisible} style={styles.modal}>
@@ -100,7 +98,6 @@ const ConfirmationModal = ({
                 disabled={loading}>
                 {t('send_request')}
               </Button>
-              {/* TODO: redirect to Events after sending request */}
               <Button type="link" onPress={onClose}>
                 {t('close')}
               </Button>

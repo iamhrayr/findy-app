@@ -11,10 +11,10 @@ const NewEventStack = createStackNavigator();
 const NewEventStackScreen = () => (
   <NewEventStack.Navigator>
     <NewEventStack.Screen
-      name="Events"
+      name="NewEvents:Home"
       component={NewEventScreen}
       options={{
-        title: i18n.t('events'),
+        title: i18n.t('new_event'),
       }}
     />
   </NewEventStack.Navigator>

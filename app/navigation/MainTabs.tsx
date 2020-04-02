@@ -25,7 +25,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         // safeAreaInset: { bottom: 'always', top: 'never' },
       }}>
       <Tab.Screen
-        name="Events:Home"
+        name="Events:Tab"
         component={EventsStackScreen}
         options={{
           title: i18n.t('events'),
@@ -40,7 +40,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         }}
       />
       <Tab.Screen
-        name="NewEvent:Home"
+        name="NewEvent:Tab"
         component={NewEventStackScreen}
         options={{
           title: i18n.t('new_event'),
@@ -55,7 +55,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
         }}
       />
       <Tab.Screen
-        name="Profile:Home"
+        name="Profile:Tab"
         component={ProfileStackScreen}
         options={{
           title: i18n.t('profile'),
