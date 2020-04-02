@@ -5,7 +5,7 @@ class Api {
   /* AUTH */
   login = (data: { phoneNumber: string; password: string }) => {
     return http({
-      url: 'accounts/loginasd/',
+      url: 'accounts/login/',
       method: 'post',
       data,
     });

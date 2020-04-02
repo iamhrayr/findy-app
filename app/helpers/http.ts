@@ -10,7 +10,7 @@ class Http {
 
   constructor() {
     this.client = axios.create({
-      baseURL: configs.api.url + 'oo',
+      baseURL: configs.api.url,
     });
     this.addInterceptors();
   }
