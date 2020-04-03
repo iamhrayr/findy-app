@@ -21,9 +21,8 @@ function* loginHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.login, action.payload);
     yield put(login.success(res.data));
-    httpInstance.setAuthHeader(res.data.accessToken);
+    yield call([httpInstance, 'setAuthHeader'], res.data.accessToken);
   } catch (error) {
-    console.log(Object.assign({}, error));
     // FIXME: response could be undefined if it's network error for example
     yield put(login.failure(error.response.data));
   }
@@ -51,7 +50,7 @@ function* refreshTokenHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.refreshToken, action.payload);
     yield put(refreshToken.success(res.data.access));
-    httpInstance.setAuthHeader(res.data.access);
+    yield call([httpInstance, 'setAuthHeader'], res.data.access);
   } catch (error) {
     yield put(logout());
   }
@@ -76,7 +75,7 @@ function* updateUserHandler(action: Action) {
 
 function* logoutHandler() {
   yield call(AsyncStorage.clear);
-  httpInstance.removeAuthHeader();
+  yield call([httpInstance, 'removeAuthHeader']);
 }
 
 // watchers

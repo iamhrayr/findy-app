@@ -48,7 +48,7 @@ class Api {
   /* profile */
   fetchMyCars = () => {
     return http({
-      url: 'accounts/user-cars',
+      url: '/accounts/user-cars/',
       method: 'get',
     });
   };
