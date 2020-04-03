@@ -63,17 +63,9 @@ const UserDetails = ({ theme }: Props) => {
     });
   }, [changeAvatarMutation]);
 
-  const s =
-    user?.avatar && user.avatar.replace('http://127.0.0.1', 'http://134.122.22.145');
-
   return (
     <Layout layout="row" spacer={{ x: 'md', b: 'lg', t: 'lg' }}>
-      <Avatar
-        clickable
-        onPress={handleAvatarPress}
-        // source={{ uri: user!.avatar! }}
-        source={{ uri: s }}
-      />
+      <Avatar clickable onPress={handleAvatarPress} source={{ uri: user!.avatar! }} />
       <Layout layout="col" justify="center" spacer={{ l: 'lg' }}>
         <Text size="h3" weight="600" spacer={{ b: 'sm' }}>
           {renderFullName()}
@@ -89,7 +81,7 @@ const UserDetails = ({ theme }: Props) => {
             {phoneNumber}
           </Text>
         </Layout>
-        <Layout layout="col" align="center" spacer={{ t: 'sm' }}>
+        <Layout layout="col" spacer={{ t: 'sm' }}>
           <Button outline type="primary" size="sm" onPress={navigateToEditProfile}>
             {t('profile:edit_profile')}
           </Button>

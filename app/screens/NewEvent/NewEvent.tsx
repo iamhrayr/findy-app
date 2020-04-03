@@ -84,13 +84,13 @@ const NewEvent = () => {
   return (
     <Container>
       <Content>
-        <Layout spacer={{ x: 'lg', y: 'lg' }}>
+        <Layout spacer={{ x: 'md', y: 'lg' }}>
           <Card>
             <Spacer b="sm" />
 
             <Layout align="center">
               <LicensePlateIcon width={100} height={100} />
-              <Text align="center" size="h1" weight="700">
+              <Text align="center" size="h3" weight="700">
                 {t('events:new_event.title')}
               </Text>
               <Spacer b="xs" />

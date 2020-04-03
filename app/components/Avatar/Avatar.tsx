@@ -8,6 +8,7 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import styled, { css } from 'styled-components/native';
+import { s } from 'react-native-size-matters';
 
 import noAvatarImg from '@app/assets/no-avatar.png';
 
@@ -18,7 +19,7 @@ type Props = {
   circle?: boolean;
 } & (TouchableOpacityProps | ViewProps);
 
-const DEFAULT_SIZE = 100;
+const DEFAULT_SIZE = s(100);
 
 const AvatarWrapper = styled(View)<Props>`
   ${({ size = DEFAULT_SIZE }) => css`
