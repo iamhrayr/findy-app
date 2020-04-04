@@ -49,10 +49,7 @@ const App: React.FC = () => {
                 <NavigationContainer>
                   <StatusBar barStyle="dark-content" />
                   <NavigationRoot />
-                  <FlashMessage
-                    position="top"
-                    // floating={true}
-                  />
+                  <FlashMessage position="top" />
                 </NavigationContainer>
               </SafeAreaProvider>
             </ErrorBoundary>

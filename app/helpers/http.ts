@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import camelCaseKeys from 'camelcase-keys';
 import snakeCaseKeys from 'snakecase-keys';
-// import { showMessage } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 
 import configs from '@app/configs';
 
@@ -57,6 +57,13 @@ class Http {
       },
       error => {
         if (!error.response) {
+          error.response = {
+            data: 'Network Error',
+          };
+          showMessage({
+            type: 'danger',
+            message: 'There is a network Error',
+          });
           return Promise.reject(error);
         }
 
