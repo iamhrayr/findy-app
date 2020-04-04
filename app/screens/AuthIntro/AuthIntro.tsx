@@ -50,7 +50,7 @@ const AuthIntro: React.FC = () => {
               </Layout>
             </Layout>
 
-            <Text align="center" spacer={{ b: 'lg' }}>
+            <Text align="center" spacer={{ b: 'xs' }}>
               <Trans i18nKey="auth:intro.terms_of_use">
                 By using the app you are agreeing to our
                 <Text align="center" color="primary" onPress={navigateToTermsOfUse}>
