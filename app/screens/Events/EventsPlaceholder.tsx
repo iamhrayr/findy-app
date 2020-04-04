@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Placeholder, PlaceholderLine, ShineOverlay } from 'rn-placeholder';
 
 import { Line, Layout } from '@app/components';
@@ -26,4 +26,4 @@ const EventsPlaceholders = () => {
   );
 };
 
-export default EventsPlaceholders;
+export default memo(EventsPlaceholders);

@@ -1,5 +1,5 @@
 /* global WebSocket */
-import React, { useRef, useCallback, useReducer, useMemo } from 'react';
+import React, { useRef, useCallback, useReducer, useMemo, memo } from 'react';
 import { FlatList, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
@@ -92,7 +92,7 @@ const Event = () => {
             ListFooterComponent={<Spacer t="md" />}
             renderItem={({ item }: { item: Message }) => (
               <SingleMessage
-                isTypeReceived={item.sender !== auth.user.pk}
+                isTypeReceived={item.sender !== auth.user?.pk}
                 text={item.message}
                 date={item.sentAt}
               />
@@ -107,4 +107,4 @@ const Event = () => {
   );
 };
 
-export default Event;
+export default memo(Event);

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTranslation } from 'react-i18next';
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ConfirmationModal;
+export default memo(ConfirmationModal);

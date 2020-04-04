@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useTranslation } from 'react-i18next';
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NetworkStatusChecker;
+export default memo(NetworkStatusChecker);

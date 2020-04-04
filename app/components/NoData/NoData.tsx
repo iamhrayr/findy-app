@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -26,4 +26,4 @@ const NoData = ({ message }: Props) => {
   );
 };
 
-export default NoData;
+export default memo(NoData);

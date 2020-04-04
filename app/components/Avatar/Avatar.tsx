@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   View,
   Image,
@@ -44,4 +44,4 @@ const Avatar = ({ source, clickable, circle, ...rest }: Props) => {
   );
 };
 
-export default Avatar;
+export default memo(Avatar);

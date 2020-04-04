@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { SafeAreaView, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { withTheme } from 'styled-components/native';
 
 import i18n from '@app/i18n';
@@ -29,8 +29,12 @@ const NavigationRoot = () => {
   }
 
   return (
-    <Stack.Navigator initialRouteName="Auth:Intro">
-      {!isAuthenticated ? (
+    <Stack.Navigator
+      initialRouteName="Auth:Intro"
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
+      {isAuthenticated ? (
         <>
           <Stack.Screen
             name="Auth:Intro"
@@ -81,7 +85,9 @@ const NavigationRoot = () => {
           <Stack.Screen
             name="Profile"
             component={withTheme(MainTabs)}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+            }}
           />
         </>
       )}

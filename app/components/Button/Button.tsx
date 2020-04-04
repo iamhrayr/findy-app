@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import {
   TouchableOpacity,
   TouchableOpacityProps,
@@ -149,4 +149,4 @@ Button.defaultProps = {
 
 //@ts-ignore
 // FIXME: find out what the fucking problem with type
-export default withTheme(Button);
+export default memo(withTheme(Button));

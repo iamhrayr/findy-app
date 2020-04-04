@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import { FlatList, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTranslation } from 'react-i18next';
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CarListSelectModal;
+export default memo(CarListSelectModal);

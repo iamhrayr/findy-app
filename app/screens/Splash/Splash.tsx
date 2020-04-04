@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import React, { useEffect, memo } from 'react';
+import { View, StyleSheet } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
@@ -51,6 +51,7 @@ const Splash = ({ setAppInitialised }: Props) => {
   useMount(() => {
     httpInstance.setLanguageHeader(profilePreferences.language);
     i18n.changeLanguage(profilePreferences.language);
+    registerAppWithFCM();
 
     if (!auth.isAuthenticated) {
       return setAppInitialised(true);
@@ -72,16 +73,19 @@ const Splash = ({ setAppInitialised }: Props) => {
   });
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       <Loading />
     </View>
   );
 };
 
-export default Splash;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default memo(Splash);

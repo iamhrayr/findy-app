@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   Placeholder,
   PlaceholderLine,
@@ -56,4 +56,4 @@ const MessagePlaceholders = () => {
   );
 };
 
-export default MessagePlaceholders;
+export default memo(MessagePlaceholders);

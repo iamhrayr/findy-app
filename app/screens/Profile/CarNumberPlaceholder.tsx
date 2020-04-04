@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/native';
 import {
   Placeholder,
@@ -37,4 +37,4 @@ const CarNumberPlaceholders = () => {
   );
 };
 
-export default CarNumberPlaceholders;
+export default memo(CarNumberPlaceholders);

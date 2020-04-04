@@ -1,4 +1,4 @@
-/* global GLOBAL */
+// /* global GLOBAL */
 
 import 'react-native-gesture-handler';
 import React from 'react';
@@ -26,11 +26,11 @@ Sentry.init({
 });
 
 // This will fail any FormData request if enabled!!!
-if (process.env.NODE_ENV === 'development') {
-  // @ts-ignore
-  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
-  // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
-}
+// if (process.env.NODE_ENV === 'development') {
+//   // @ts-ignore
+//   GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+//   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
+// }
 
 console.disableYellowBox = true;
 

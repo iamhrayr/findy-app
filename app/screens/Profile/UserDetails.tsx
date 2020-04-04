@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
@@ -91,7 +91,7 @@ const UserDetails = ({ theme }: Props) => {
   );
 };
 
-const UserDetailsWithTheme = withTheme(UserDetails);
+const UserDetailsWithTheme = memo(withTheme(UserDetails));
 
 // all this messy shit was because of some unexpected rerender after logout.
 // When logout action dispatched it changes isAuthenticated flag,
@@ -105,4 +105,4 @@ const UserDetailsWrapper = ({ isAuthenticated }: { isAuthenticated: boolean }) =
   return <UserDetailsWithTheme />;
 };
 
-export default UserDetailsWrapper;
+export default memo(UserDetailsWrapper);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -30,4 +31,4 @@ const CardWrapper = styled(View)<Props>`
   border-radius: ${({ radius }) => radius || 10}px;
 `;
 
-export default CardWrapper;
+export default memo(CardWrapper);

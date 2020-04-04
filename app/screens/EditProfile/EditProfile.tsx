@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Container, Content, Spacer } from '@app/components';
 import { useHideTabBar } from '@app/hooks';
@@ -20,4 +20,4 @@ const EditProfile: React.FC = () => {
   );
 };
 
-export default EditProfile;
+export default memo(EditProfile);

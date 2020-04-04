@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Text as RNText } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -43,4 +44,4 @@ const Text = styled(RNText)<Props>`
   `}
 `;
 
-export default Text;
+export default memo(Text);

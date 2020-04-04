@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -10,15 +10,15 @@ const AuthIntro: React.FC = () => {
   const { t } = useTranslation();
 
   const navigateToRegister = useCallback(() => {
-    navigation.navigate('Auth:Register');
+    requestAnimationFrame(() => navigation.navigate('Auth:Register'));
   }, [navigation]);
 
   const navigateToLogin = useCallback(() => {
-    navigation.navigate('Auth:Login');
+    requestAnimationFrame(() => navigation.navigate('Auth:Login'));
   }, [navigation]);
 
   const navigateToTermsOfUse = useCallback(() => {
-    navigation.navigate('Auth:TermsOfUse');
+    requestAnimationFrame(() => navigation.navigate('Auth:TermsOfUse'));
   }, [navigation]);
 
   return (
@@ -65,4 +65,4 @@ const AuthIntro: React.FC = () => {
   );
 };
 
-export default AuthIntro;
+export default memo(AuthIntro);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled, { css } from 'styled-components/native';
 import Text from '../Text';
 
@@ -8,4 +9,4 @@ const Label = styled(Text)`
   `}
 `;
 
-export default Label;
+export default memo(Label);

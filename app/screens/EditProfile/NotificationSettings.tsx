@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, memo } from 'react';
 import { Switch, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-native-picker-select';
@@ -129,4 +129,4 @@ const styles = StyleSheet.create({
   iconContainer: { bottom: -1 },
 });
 
-export default NotificationSettings;
+export default memo(NotificationSettings);

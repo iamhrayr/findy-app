@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -107,4 +107,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

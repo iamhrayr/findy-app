@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   ScrollView,
   ScrollViewProps,
@@ -43,12 +43,9 @@ const Content = styled(ScrollView)<Props>`
     `}
 `;
 
-export default ({
-  children,
-  full,
-  // disableKeyboardAvoiding,
-  ...props
-}: Props) => (
+export default memo((
+  { children, full, ...props }: Props, // disableKeyboardAvoiding,
+) => (
   // <KeyboardAvoidingView
   //   enabled={!disableKeyboardAvoiding}
   //   style={{ flex: 1 }}
@@ -58,6 +55,6 @@ export default ({
     {children}
   </Content>
   // </KeyboardAvoidingView>
-);
+));
 
 // export default Content;
