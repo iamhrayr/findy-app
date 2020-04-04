@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
@@ -72,16 +72,19 @@ const Splash = ({ setAppInitialised }: Props) => {
   });
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       <Loading />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Splash;
