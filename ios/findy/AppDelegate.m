@@ -11,6 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <Firebase.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -31,6 +32,7 @@
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
+  [RNSplashScreen show];
   return YES;
 }
 

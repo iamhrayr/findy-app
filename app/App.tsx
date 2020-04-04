@@ -2,6 +2,7 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
+import useMount from 'react-use/lib/useMount';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
@@ -10,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Sentry from '@sentry/react-native';
+import SplashScreen from 'react-native-splash-screen';
 
 import './i18n';
 import NavigationRoot from './navigation';
@@ -33,6 +35,10 @@ if (process.env.NODE_ENV === 'development') {
 console.disableYellowBox = true;
 
 const App: React.FC = () => {
+  useMount(() => {
+    SplashScreen.hide();
+  });
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
