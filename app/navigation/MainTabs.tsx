@@ -15,14 +15,11 @@ const Tab = createBottomTabNavigator();
 const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
   return (
     <Tab.Navigator
-      initialRouteName="NewEvent:Home"
-      // initialRouteName="Events:Home"
+      initialRouteName="NewEvent:Tab"
       tabBarOptions={{
-        // style: { backgroundColor: 'grey' },
+        keyboardHidesTabBar: true,
         activeTintColor: theme.colors.primary,
-        // activeBackgroundColor: 'green',
         inactiveTintColor: theme.colors.darkGray,
-        // safeAreaInset: { bottom: 'always', top: 'never' },
       }}>
       <Tab.Screen
         name="Events:Tab"

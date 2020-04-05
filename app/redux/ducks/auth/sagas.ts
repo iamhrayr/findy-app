@@ -13,6 +13,7 @@ import {
   confirmPhoneNumber,
   refreshToken,
   updateUser,
+  changeAvatar,
   logout,
 } from './actions';
 
@@ -73,6 +74,18 @@ function* updateUserHandler(action: Action) {
   }
 }
 
+function* changeAvatarHandler(action: Action) {
+  try {
+    const res: AxiosResponse = yield call(api.changeAvatar, action.payload);
+    yield put(changeAvatar.success(res.data.avatar));
+  } catch (error) {
+    showMessage({
+      type: 'danger',
+      message: 'Something went wrong',
+    });
+  }
+}
+
 function* logoutHandler() {
   yield call(AsyncStorage.clear);
   yield call([httpInstance, 'removeAuthHeader']);
@@ -85,6 +98,7 @@ function* watcherSaga() {
   yield takeLatest(confirmPhoneNumber.TRIGGER, confirmPhoneNumberHandler);
   yield takeLatest(refreshToken.TRIGGER, refreshTokenHandler);
   yield takeLatest(updateUser.TRIGGER, updateUserHandler);
+  yield takeLatest(changeAvatar.TRIGGER, changeAvatarHandler);
   yield takeLatest(types.LOGOUT, logoutHandler);
 }
 

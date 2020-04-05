@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
@@ -7,9 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { withTheme, DefaultTheme } from 'styled-components/native';
 
-import api from '@app/api';
-import { authSelectors } from '@app/redux/ducks/auth';
-import { useAsyncFn } from '@app/hooks';
+import { authSelectors, authActions } from '@app/redux/ducks/auth';
 import { Avatar, Layout, Text, Button } from '@app/components';
 
 type Props = {
@@ -19,9 +17,8 @@ type Props = {
 const UserDetails = ({ theme }: Props) => {
   const navigation = useNavigation();
   const user = useSelector(authSelectors.getUser);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  const [{}, changeAvatarMutation] = useAsyncFn(api.changeAvatar);
 
   const navigateToEditProfile = useCallback(() => {
     navigation.navigate('Profile:Edit');
@@ -59,9 +56,9 @@ const UserDetails = ({ theme }: Props) => {
         title: 'avatar',
       });
 
-      changeAvatarMutation(formdata);
+      dispatch(authActions.changeAvatar.trigger(formdata));
     });
-  }, [changeAvatarMutation]);
+  }, [dispatch]);
 
   return (
     <Layout layout="row" spacer={{ x: 'md', b: 'lg', t: 'lg' }}>

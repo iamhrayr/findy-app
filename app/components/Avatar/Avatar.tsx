@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ViewProps,
   TouchableOpacityProps,
-  ImageSourcePropType,
+  ImageURISource,
 } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { s } from 'react-native-size-matters';
@@ -13,7 +13,7 @@ import { s } from 'react-native-size-matters';
 import noAvatarImg from '@app/assets/no-avatar.png';
 
 type Props = {
-  source?: ImageSourcePropType;
+  source?: ImageURISource;
   clickable?: boolean;
   size?: number | string;
   circle?: boolean;
@@ -37,9 +37,11 @@ const AvatarImage = styled(Image)<Props>`
 `;
 
 const Avatar = ({ source, clickable, circle, ...rest }: Props) => {
+  const avatarSource = source && source.uri ? source : noAvatarImg;
+
   return (
     <AvatarWrapper {...rest} as={clickable ? TouchableOpacity : View}>
-      <AvatarImage source={source || noAvatarImg} size={rest.size} circle={circle} />
+      <AvatarImage source={avatarSource} size={rest.size} circle={circle} />
     </AvatarWrapper>
   );
 };

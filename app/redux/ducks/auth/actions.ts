@@ -8,6 +8,7 @@ import {
   CONFIRM_PHONE_NUMBER,
   REFRESH_TOKEN,
   UPDATE_USER,
+  CHANGE_AVATAR,
 } from './types';
 
 // action creators
@@ -19,3 +20,4 @@ export const register = createRoutine(REGISTER);
 export const confirmPhoneNumber = createRoutine(CONFIRM_PHONE_NUMBER);
 export const refreshToken = createRoutine(REFRESH_TOKEN);
 export const updateUser = createRoutine(UPDATE_USER);
+export const changeAvatar = createRoutine(CHANGE_AVATAR);

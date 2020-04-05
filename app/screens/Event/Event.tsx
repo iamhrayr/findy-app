@@ -10,7 +10,10 @@ import { Message } from '@app/models/Message';
 import { RootState } from '@app/redux/rootReducer';
 import { Container, Content, If, Spacer } from '@app/components';
 import api from '@app/api';
-import { useAsyncFn, useHideTabBar } from '@app/hooks';
+import {
+  useAsyncFn,
+  // useHideTabBar
+} from '@app/hooks';
 import configs from '@app/configs';
 import SingleMessage from './SingleMessage';
 import MessagePlaceholder from './MessagePlaceholder';
@@ -44,7 +47,7 @@ const Event = () => {
 
   const [socketMessages, dispatchMessage] = useReducer(reducer, initialState);
 
-  useHideTabBar();
+  // useHideTabBar();
 
   useMount(() => {
     fetchMessages(params.id);

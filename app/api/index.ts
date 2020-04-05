@@ -35,6 +35,14 @@ class Api {
     });
   };
 
+  connectForPushNotifications = (deviceId: string) => {
+    return http({
+      url: 'accounts/connect-device/',
+      method: 'patch',
+      data: { deviceId },
+    });
+  };
+
   /*************************/
   /* car brands and models */
   fetchBrandsAndModels = () => {

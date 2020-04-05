@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import i18n from '@app/i18n';
 
@@ -9,7 +9,10 @@ import NewEventScreen from '../screens/NewEvent';
 const NewEventStack = createStackNavigator();
 
 const NewEventStackScreen = () => (
-  <NewEventStack.Navigator>
+  <NewEventStack.Navigator
+    screenOptions={{
+      cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+    }}>
     <NewEventStack.Screen
       name="NewEvents:Home"
       component={NewEventScreen}

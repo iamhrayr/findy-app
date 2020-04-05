@@ -26,7 +26,7 @@ Sentry.init({
 });
 
 // This will fail any FormData request if enabled!!!
-if (process.env.NODE_ENV === 'development') {
+if (__DEV__) {
   // @ts-ignore
   GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));

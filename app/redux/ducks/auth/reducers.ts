@@ -1,7 +1,14 @@
 import { AuthState } from './types';
 import * as types from './types';
 
-import { login, register, confirmPhoneNumber, updateUser, refreshToken } from './actions';
+import {
+  login,
+  register,
+  confirmPhoneNumber,
+  updateUser,
+  refreshToken,
+  changeAvatar,
+} from './actions';
 
 const initialState: AuthState = {
   isAuthenticated: false,
@@ -26,6 +33,15 @@ export default (state = initialState, action: Action) => {
         user: {
           ...state.user,
           ...action.payload,
+        },
+      };
+    case changeAvatar.SUCCESS:
+      console.log('action.payload', action.payload);
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          avatar: action.payload,
         },
       };
     case refreshToken.SUCCESS:
