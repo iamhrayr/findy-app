@@ -1,9 +1,9 @@
 /* global GLOBAL */
 
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { StatusBar, Alert } from 'react-native';
 import useMount from 'react-use/lib/useMount';
-import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
@@ -12,6 +12,7 @@ import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Sentry from '@sentry/react-native';
 import SplashScreen from 'react-native-splash-screen';
+import messaging from '@react-native-firebase/messaging';
 
 import './i18n';
 import NavigationRoot from './navigation';
@@ -38,6 +39,14 @@ const App: React.FC = () => {
   useMount(() => {
     SplashScreen.hide();
   });
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <Provider store={store}>

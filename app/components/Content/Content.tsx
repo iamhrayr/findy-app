@@ -42,7 +42,7 @@ export default ({ children, full, as: AsComponent, ...props }: Props) => {
   const Component = AsComponent ? AsComponent : ScrollView;
 
   return (
-    <Component contentContainerStyle={full ? { flex: 1 } : {}}>
+    <Component contentContainerStyle={full ? { flex: 1 } : {}} style={{ flex: 1 }}>
       <Content {...props}>{children}</Content>
     </Component>
   );
