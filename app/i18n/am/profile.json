@@ -1,0 +1,15 @@
+{
+  "settings.notification_title": "Տեղեկացման պարամետրերը",
+  "settings.phone_number_label": "Showույց տալ հեռախոսահամարը",
+  "settings.notification_method_label": "Ծանուցման եղանակը",
+  "settings.personal_details_title": "Անձնական տվյալներ",
+  "settings.app_language": "Հավելվածի լեզուն",
+  "my_cars": "Իմ ավտոմեքենաները",
+  "no_name": "Անանուն",
+  "edit_profile": "Խմբագրել պրոֆիլը",
+  "car_make_placeholder": "Խմբագրել պրոֆիլը",
+  "car_make_label": "Ավտոմեքենաների պատրաստում",
+  "car_model_label": "Ավտոմեքենայի մոդել",
+  "car_model_placeholder": "Հպեք մեքենայի մոդելը ընտրելու համար",
+  "add_edit_car": "Ավելացնել/խմբագրել մեքենա"
+}

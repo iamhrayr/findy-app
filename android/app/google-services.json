@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "169838319868",
+    "firebase_url": "https://findy-mobile.firebaseio.com",
+    "project_id": "findy-mobile",
+    "storage_bucket": "findy-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169838319868:android:9b2405868b29f5619f5f79",
+        "android_client_info": {
+          "package_name": "org.findy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169838319868-bonndduimte3kk3n7m504auf342cparl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKItG-M1M_8t7VxSOOBl96uCDc4qRXSnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169838319868-bonndduimte3kk3n7m504auf342cparl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "169838319868-er2gvevivqlho2ffr1t6908lbn75djbq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.findy.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

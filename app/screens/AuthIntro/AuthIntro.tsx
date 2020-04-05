@@ -1,63 +1,66 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Trans, useTranslation } from 'react-i18next';
 
-import Button from '../../components/Button';
-import Container from '../../components/Container';
+import { Button, Text, Container, Content, Layout } from '@app/components';
+import IntroImage from './IntroImage';
 
 const AuthIntro: React.FC = () => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  const navigateToRegister = useCallback(() => {
+    requestAnimationFrame(() => navigation.navigate('Auth:Register'));
+  }, [navigation]);
+
+  const navigateToLogin = useCallback(() => {
+    requestAnimationFrame(() => navigation.navigate('Auth:Login'));
+  }, [navigation]);
+
+  const navigateToTermsOfUse = useCallback(() => {
+    requestAnimationFrame(() => navigation.navigate('Auth:TermsOfUse'));
+  }, [navigation]);
 
   return (
     <Container>
-      <Text>Auth Intro</Text>
-      <Button onPress={() => navigation.navigate('Auth:Login')} block>
-        Test button
-      </Button>
+      <Content noPaddingX full>
+        <Layout size={1} spacer={{ x: 'lg' }}>
+          <Layout grow={1}>
+            <IntroImage />
+          </Layout>
 
-      <Button block type="success">
-        Success Button
-      </Button>
-      <Button block type="secondary">
-        Secondary Button
-      </Button>
-      <Button block type="danger">
-        Danger Button
-      </Button>
-      <Button block type="link">
-        link Button
-      </Button>
+          <Layout grow={0}>
+            <Text size="giant" weight="300" spacer={{ b: 'md' }}>
+              {t('welcome')}
+            </Text>
 
-      <Button block outline>
-        Success Button
-      </Button>
-      <Button block outline type="success">
-        Success Button
-      </Button>
-      <Button block outline type="secondary">
-        Secondary Button
-      </Button>
-      <Button block outline type="danger">
-        Danger Button
-      </Button>
+            <Text size="lg">{t('auth:intro.text')}</Text>
 
-      <Button
-        onPress={() => navigation.navigate('Auth:Login')}
-        // shape="circle"
-        outline
-        type="secondary">
-        Test button
-      </Button>
-      <Button
-        onPress={() => navigation.navigate('Auth:Login')}
-        // shape="circle"
-        outline
-        type="secondary">
-        Test button
-      </Button>
-      {/* <Button onPress={() => navigation.navigate('Auth:Register')}>
-        <Text>Register</Text>
-      </Button> */}
+            <Layout layout="row" justify="between" spacer={{ y: 'lg' }}>
+              <Layout size={47}>
+                <Button block outline shape="circle" onPress={navigateToRegister}>
+                  {t('register')}
+                </Button>
+              </Layout>
+              <Layout size={6} />
+              <Layout size={47}>
+                <Button block shape="circle" onPress={navigateToLogin}>
+                  {t('login')}
+                </Button>
+              </Layout>
+            </Layout>
+
+            <Text align="center" spacer={{ b: 'xs' }}>
+              <Trans i18nKey="auth:intro.terms_of_use">
+                By using the app you are agreeing to our
+                <Text align="center" color="primary" onPress={navigateToTermsOfUse}>
+                  Terms of Usea
+                </Text>
+              </Trans>
+            </Text>
+          </Layout>
+        </Layout>
+      </Content>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import dark from './dark';
 import light from './light';
 
-export type Theme = typeof dark;
+export type Theme = typeof light;
 export type ThemeName = 'dark' | 'light';
 export type Themes = { [key in ThemeName]: Theme };
 
@@ -11,5 +11,5 @@ export const themes: Themes = {
 };
 
 export default (name: ThemeName): Theme => {
-  return themes[name] || dark;
+  return themes[name] || light;
 };

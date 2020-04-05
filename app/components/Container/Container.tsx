@@ -1,14 +1,13 @@
-import { ScrollView } from 'react-native';
-import styled from 'styled-components/native';
+import { View, ViewProps } from 'react-native';
+import styled, { css } from 'styled-components/native';
 
-type Props = {
-  noPadding?: boolean;
-};
+type Props = ViewProps & {};
 
-const Container = styled(ScrollView)<Props>`
-  padding: ${({ noPadding, theme }) =>
-    noPadding ? 0 : theme.container.padding}px;
-  flex: 1;
+const Container = styled(View)<Props>`
+  ${({ theme }) => css`
+    background: ${theme.content.bgColor};
+    flex: 1;
+  `}
 `;
 
 export default Container;

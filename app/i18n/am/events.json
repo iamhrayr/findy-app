@@ -1,0 +1,10 @@
+{
+  "message.type_msg": "Մուտքագրեք ձեր հաղորդագրությունը ...",
+  "new_event.title": "ՈՒՂԱՐԿԵՔ",
+  "new_event.subtitle": "ՏԵՍԱԿԸ Ավտոմեքենաների համարը և չեկի գոյությունը",
+  "new_event.check_car_success_title": "Դու հաջողակ ես",
+  "new_event.check_car_success_description": "Մեքենան հաշվառված է sustem- ում",
+  "new_event.check_car_error_title": "Մենք ցավում ենք",
+  "new_event.check_car_error_description": "Մեքենան գրանցված չէ մեր համակարգում",
+  "new_event.message_to_driver_placeholder": "Մուտքագրեք հաղորդագրություն այլ վարորդին ..."
+}
