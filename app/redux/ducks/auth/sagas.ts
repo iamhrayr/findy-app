@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import httpInstance from '@app/helpers/http';
 import api from '@app/api';
+import i18n from '@app/i18n';
 
 import * as types from './types';
 import {
@@ -24,7 +25,6 @@ function* loginHandler(action: Action) {
     yield put(login.success(res.data));
     yield call([httpInstance, 'setAuthHeader'], res.data.accessToken);
   } catch (error) {
-    // FIXME: response could be undefined if it's network error for example
     yield put(login.failure(error.response.data));
   }
 }
@@ -63,13 +63,12 @@ function* updateUserHandler(action: Action) {
     yield put(updateUser.success(res.data));
     showMessage({
       type: 'success',
-      message: 'Updated successfully',
+      message: i18n.t('successfully_updated'),
     });
   } catch (error) {
-    // console.log(error);
     showMessage({
       type: 'danger',
-      message: 'Something went wrong',
+      message: i18n.t('something_went_wrong'),
     });
   }
 }
@@ -81,7 +80,7 @@ function* changeAvatarHandler(action: Action) {
   } catch (error) {
     showMessage({
       type: 'danger',
-      message: 'Something went wrong',
+      message: i18n.t('something_went_wrong'),
     });
   }
 }

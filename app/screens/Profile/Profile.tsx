@@ -5,7 +5,7 @@ import { DefaultTheme, withTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
 
-import { Car } from '@app/models/Car';
+import { Car } from '@app/types/Car';
 import { profileSelectors } from '@app/redux/ducks/profile';
 import { authSelectors, authActions } from '@app/redux/ducks/auth';
 import { removeCar } from '@app/redux/ducks/profile/actions';

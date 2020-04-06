@@ -17,8 +17,8 @@ type FormValues = {
 };
 
 const initialValues: FormValues = {
-  phoneNumber: '37498999590',
-  password: '123456',
+  phoneNumber: '',
+  password: '',
 };
 
 const Login: React.FC = () => {
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
 
   return (
     <Container>
-      <Content noPadding>
+      <Content noPadding full>
         <Layout grow={1}>
           <LoginImage />
         </Layout>
@@ -58,7 +58,7 @@ const Login: React.FC = () => {
 
           <Input
             label={t('phone_number')}
-            placeholder="+374 98999590"
+            placeholder="+374 XXXXXXXX"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={

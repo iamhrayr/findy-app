@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { useNetInfo } from '@react-native-community/netinfo';
+import NetInfo from '@react-native-community/netinfo';
 import { useTranslation } from 'react-i18next';
 
 import { Container, Content, Text, Layout } from '@app/components';
@@ -11,10 +11,18 @@ type Props = {
 };
 
 const NetworkStatusChecker = ({ children }: Props) => {
-  const netInfo = useNetInfo();
+  const [isConnected, setIsConnected] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const { t } = useTranslation();
 
-  if (!netInfo.isConnected) {
+  if (!isConnected) {
     return (
       <Container>
         <Content full extraPadded>

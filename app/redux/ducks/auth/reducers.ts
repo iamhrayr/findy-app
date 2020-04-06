@@ -36,7 +36,6 @@ export default (state = initialState, action: Action) => {
         },
       };
     case changeAvatar.SUCCESS:
-      console.log('action.payload', action.payload);
       return {
         ...state,
         user: {

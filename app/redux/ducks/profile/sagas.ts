@@ -26,7 +26,7 @@ function* fetchProfileSettingsHandler() {
     const res: AxiosResponse = yield call(api.fetchProfileSettings);
     yield put(fetchProfileSettings.success(res.data));
   } catch (error) {
-    // TODO: shoe error toats
+    // TODO: show error toats
   }
 }
 
@@ -35,7 +35,7 @@ function* updateProfileSettingsHandler(action: Action) {
     const res: AxiosResponse = yield call(api.changeProfileSettings, action.payload);
     yield put(updateProfileSettings.success(res.data));
   } catch (error) {
-    // TODO: shoe error toats
+    // TODO: show error toats
   }
 }
 

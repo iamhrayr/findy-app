@@ -6,7 +6,7 @@ import useMount from 'react-use/lib/useMount';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import camelCaseKeys from 'camelcase-keys';
 
-import { Message } from '@app/models/Message';
+import { Message } from '@app/types/Message';
 import { RootState } from '@app/redux/rootReducer';
 import { Container, Content, If, Spacer } from '@app/components';
 import api from '@app/api';

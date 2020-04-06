@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import jwtDecode from 'jwt-decode';
 import messaging from '@react-native-firebase/messaging';
 import { showMessage } from 'react-native-flash-message';
@@ -21,6 +22,7 @@ type Props = {
 };
 
 const Splash = ({ setAppInitialised }: Props) => {
+  const { t } = useTranslation();
   const auth = useSelector((state: RootState) => state.auth);
   const refreshTokenStatus = useSelector(getRefreshTokenStatus);
   const profilePreferences = useSelector(getProfilePreferences);
@@ -33,11 +35,11 @@ const Splash = ({ setAppInitialised }: Props) => {
     error &&
       showMessage({
         type: 'danger',
-        message: 'Error with sending device Id',
-        description: 'You will not receive any push notification',
+        message: t('auth:error_sending_deviceid_title'),
+        description: t('auth:error_sending_deviceid_description'),
         duration: 5000,
       });
-  }, [error]);
+  }, [error, t]);
 
   const registerAppWithFCM = useCallback(() => {
     const fn = async () => {

@@ -42,5 +42,9 @@
   "oops_something_wrong": "Oops, something went wrong. We are sorry!",
   "reload": "Reload",
   "forgot_password": "Forgot Password",
-  "terms_of_use": "Terms of use"
+  "terms_of_use": "Terms of use",
+  "network_error": "Network Error",
+  "there_is_network_error": "There is a Network Error",
+  "bad_error_restart_app": "Something bad happend. Restart the app",
+  "something_went_wrong": "Something went wrong"
 }

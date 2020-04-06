@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
 
-import { Car } from '@app/models/Car';
+import { Car } from '@app/types/Car';
 import { Text, Layout, Button } from '@app/components';
 
 type Props = {

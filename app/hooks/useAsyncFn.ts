@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-// import { AxiosError } from 'axios';
 
 // TODO: somehow this fucking hook is not working when chrome debugger is active but working if `React native debugger` is active
 
@@ -27,12 +26,11 @@ const useAsyncFn = (fn: Fn, initialLoading?: boolean): Return => {
         setState({ ...state, loading: false, res: data });
         return data;
       } catch (error) {
-        // TODO: error may be thrown before the response received. handle it proparly
         setState({ ...state, loading: false, error: error.response.data });
         return error.response.data;
       }
     },
-    [], // eslint-disable-line
+    [], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return [{ ...state }, mutate];

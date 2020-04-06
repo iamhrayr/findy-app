@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, ScrollView, ScrollViewProps } from 'react-native';
+import {
+  View,
+  ScrollView,
+  ScrollViewProps,
+  KeyboardAvoidingView,
+  StyleSheet,
+} from 'react-native';
 import styled, { css } from 'styled-components/native';
 
 type Props = ScrollViewProps & {
@@ -42,10 +48,29 @@ export default ({ children, full, as: AsComponent, ...props }: Props) => {
   const Component = AsComponent ? AsComponent : ScrollView;
 
   return (
-    <Component contentContainerStyle={full ? { flex: 1 } : {}} style={{ flex: 1 }}>
-      <Content {...props}>{children}</Content>
-    </Component>
+    <KeyboardAvoidingView
+      style={styles.keyboardAvoidingView}
+      behavior="padding"
+      enabled
+      keyboardVerticalOffset={100}>
+      <Component
+        contentContainerStyle={full ? styles.container : {}}
+        style={styles.container}>
+        <Content {...props}>{children}</Content>
+      </Component>
+    </KeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  keyboardAvoidingView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  container: {
+    flexGrow: 1,
+  },
+});
 
 // export default Content;

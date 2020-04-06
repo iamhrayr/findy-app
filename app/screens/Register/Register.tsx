@@ -19,9 +19,9 @@ type FormValues = {
 };
 
 const initialValues: FormValues = {
-  fullName: 'Hrayr Movsisyan',
-  phoneNumber: '37498999590',
-  password: '123456',
+  fullName: '',
+  phoneNumber: '',
+  password: '',
 };
 
 const Register: React.FC = () => {
@@ -48,7 +48,7 @@ const Register: React.FC = () => {
 
   return (
     <Container>
-      <Content noPadding>
+      <Content noPadding full>
         <Layout grow={1}>
           <RegisterImage />
         </Layout>
@@ -60,7 +60,7 @@ const Register: React.FC = () => {
 
           <Input
             label={t('phone_number')}
-            placeholder="+374 98999590"
+            placeholder="+374 XXXXXXXX"
             onChangeText={val => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={
