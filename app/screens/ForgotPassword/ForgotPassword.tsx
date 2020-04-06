@@ -25,7 +25,7 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <Container>
-      <Content noPadding>
+      <Content noPadding full>
         <Layout grow={1}>
           <ForgotImage />
         </Layout>

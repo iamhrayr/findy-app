@@ -1,5 +1,5 @@
-import { Car } from '@app/models/Car';
-import { Settings } from '@app/models/User';
+import { Car } from '@app/types/Car';
+import { Settings } from '@app/types/User';
 
 export type MyCarsState = {
   loading: boolean;

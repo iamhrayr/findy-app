@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
 
 import { Input } from '@app/components';
-import { Model } from '@app/models/CarBrandModel';
+import { Model } from '@app/types/CarBrandModel';
 import CarListSelectModal from './CarListSelectModal';
 
 type Props = {

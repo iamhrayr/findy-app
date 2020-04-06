@@ -4,6 +4,8 @@ import { middleware as thunkMiddleware } from 'redux-saga-thunk';
 import { persistStore } from 'redux-persist';
 import { showMessage } from 'react-native-flash-message';
 
+import i18n from '@app/i18n';
+
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
@@ -14,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware({
   onError: (error: Error, { sagaStack: string }) => {
     showMessage({
       type: 'danger',
-      message: 'Something bad happend. Restart the app',
+      message: i18n.t('bad_error_restart_app'),
     });
     // TODO: log the error
   },

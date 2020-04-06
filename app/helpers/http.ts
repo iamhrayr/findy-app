@@ -4,6 +4,7 @@ import snakeCaseKeys from 'snakecase-keys';
 import { showMessage } from 'react-native-flash-message';
 
 import configs from '@app/configs';
+import i18n from '@app/i18n';
 
 class Http {
   client: AxiosInstance;
@@ -23,7 +24,7 @@ class Http {
         }
 
         // TODO: check if there is no any other case besides multipart/form-data
-        // It should convert to `snakeCaseKeys` only our properties
+        // It should only convert our properties to `snakeCaseKeys`
         if (
           config.headers['Content-Type'] &&
           config.headers['Content-Type'].includes('multipart/form-data')
@@ -36,7 +37,6 @@ class Http {
         return config;
       },
       error => {
-        // TODO: check if working in all cases like no network, etc...
         if (!error.data) {
           return Promise.reject(error);
         }
@@ -58,11 +58,11 @@ class Http {
       error => {
         if (!error.response) {
           error.response = {
-            data: 'Network Error',
+            data: i18n.t('network_error'),
           };
           showMessage({
             type: 'danger',
-            message: 'There is a network Error',
+            message: i18n.t('there_is_network_error'),
           });
           return Promise.reject(error);
         }
