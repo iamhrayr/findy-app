@@ -56,6 +56,7 @@ class Http {
         return { ...response, data: camelCasedData };
       },
       error => {
+        // No response means there is a network error
         if (!error.response) {
           error.response = {
             data: i18n.t('network_error'),
@@ -63,6 +64,15 @@ class Http {
           showMessage({
             type: 'danger',
             message: i18n.t('there_is_network_error'),
+          });
+          return Promise.reject(error);
+        }
+
+        // show global error message if server crashed
+        if (error.status === 500) {
+          showMessage({
+            type: 'danger',
+            message: i18n.t('something_went_wrong'),
           });
           return Promise.reject(error);
         }
