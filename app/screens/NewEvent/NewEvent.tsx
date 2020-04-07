@@ -84,7 +84,7 @@ const NewEvent = () => {
   return (
     <Container>
       <Content>
-        <Layout spacer={{ x: 'md', y: 'lg' }}>
+        <Layout spacer={{ x: 'sm', y: 'lg' }}>
           <Card>
             <Spacer b="sm" />
 

@@ -1,6 +1,6 @@
 {
   "settings.notification_title": "Տեղեկացման պարամետրերը",
-  "settings.phone_number_label": "Showույց տալ հեռախոսահամարը",
+  "settings.phone_number_label": "Ցույց տալ հեռախոսահամարը",
   "settings.notification_method_label": "Ծանուցման եղանակը",
   "settings.personal_details_title": "Անձնական տվյալներ",
   "settings.app_language": "Հավելվածի լեզուն",
@@ -11,5 +11,6 @@
   "car_make_label": "Ավտոմեքենաների պատրաստում",
   "car_model_label": "Ավտոմեքենայի մոդել",
   "car_model_placeholder": "Հպեք մեքենայի մոդելը ընտրելու համար",
-  "add_edit_car": "Ավելացնել/խմբագրել մեքենա"
+  "add_edit_car": "Ավելացնել/խմբագրել մեքենա",
+  "not_editable": "Փոփոխման ենթակա չէ"
 }

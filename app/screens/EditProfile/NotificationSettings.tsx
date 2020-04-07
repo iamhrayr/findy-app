@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-native-picker-select';
 import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
+import { withTheme, DefaultTheme } from 'styled-components/native';
 
 // import api from '@app/api';
 import { Card, Layout, Text, Spacer } from '@app/components';
@@ -29,7 +30,11 @@ const LANGUAGES = [
   { label: 'Armenian', value: 'am' },
 ];
 
-const NotificationSettings = () => {
+type Props = {
+  theme: DefaultTheme;
+};
+
+const NotificationSettings = ({ theme }: Props) => {
   // const [{ loading: fetchSettingsLoading }, fetchSettings] = useAsyncFn(
   //   api.fetchProfileSettings,
   // );
@@ -80,6 +85,8 @@ const NotificationSettings = () => {
     <Text>{t('loading')}</Text>;
   }
 
+  console.log('settings.data.showPhoneNumber', settings.data.showPhoneNumber);
+
   return (
     <Card>
       <Text size="lg" align="center" spacer={{ b: 'lg' }}>
@@ -90,8 +97,16 @@ const NotificationSettings = () => {
         <Text>{t('profile:settings.app_language')}</Text>
         <Select
           style={styles}
+          useNativeAndroidPickerStyle={false}
           onValueChange={handleLanguageChange}
-          Icon={() => <Icon name="arrow-ios-downward-outline" width={20} height={20} />}
+          Icon={() => (
+            <Icon
+              name="arrow-ios-downward-outline"
+              width={20}
+              height={20}
+              fill={theme.colors.gray}
+            />
+          )}
           value={preferences.language}
           items={LANGUAGES}
         />
@@ -113,8 +128,16 @@ const NotificationSettings = () => {
         <Text>{t('profile:settings.notification_method_label')}</Text>
         <Select
           style={styles}
+          useNativeAndroidPickerStyle={false}
           onValueChange={handleNotificationChange}
-          Icon={() => <Icon name="arrow-ios-downward-outline" width={20} height={20} />}
+          Icon={() => (
+            <Icon
+              name="arrow-ios-downward-outline"
+              width={20}
+              height={20}
+              fill={theme.colors.gray}
+            />
+          )}
           value={settings.data.notificationMethod}
           items={SELECT_VALUES}
         />
@@ -126,7 +149,7 @@ const NotificationSettings = () => {
 const styles = StyleSheet.create({
   inputIOS: { paddingRight: 20 },
   inputAndroid: { paddingRight: 20 },
-  iconContainer: { bottom: -1 },
+  iconContainer: { bottom: 14 },
 });
 
-export default NotificationSettings;
+export default withTheme(NotificationSettings);
