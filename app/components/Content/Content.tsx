@@ -5,6 +5,7 @@ import {
   ScrollViewProps,
   KeyboardAvoidingView,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -49,10 +50,10 @@ export default ({ children, full, as: AsComponent, ...props }: Props) => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.keyboardAvoidingView}
-      behavior="padding"
       enabled
-      keyboardVerticalOffset={100}>
+      style={styles.keyboardAvoidingView}
+      behavior={Platform.select({ ios: 'padding', android: undefined })}
+      keyboardVerticalOffset={Platform.select({ ios: 0, android: 100 })}>
       <Component
         contentContainerStyle={full ? styles.container : {}}
         style={styles.container}>
@@ -72,5 +73,3 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
-
-// export default Content;

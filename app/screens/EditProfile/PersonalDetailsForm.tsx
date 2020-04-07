@@ -26,9 +26,9 @@ const PersonalDetailsForm: React.FC = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      email: user!.email,
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      email: user?.email || '',
     },
     // validationSchema: validation,
     onSubmit: values => {
@@ -73,6 +73,11 @@ const PersonalDetailsForm: React.FC = () => {
         label={t('phone_number')}
         placeholder=""
         value={user!.phoneNumber}
+        addonRight={
+          <Text align="right" size="sm" color="gray">
+            {t('profile:not_editable')}
+          </Text>
+        }
       />
 
       <Layout align="center" spacer={{ y: 'md' }}>

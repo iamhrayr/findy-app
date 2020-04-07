@@ -11,5 +11,6 @@
   "car_make_label": "Car Make",
   "car_model_label": "Car Model",
   "car_model_placeholder": "Tap to select car model",
-  "add_edit_car": "Add/Edit Car"
+  "add_edit_car": "Add/Edit Car",
+  "not_editable": "Not Editable"
 }
