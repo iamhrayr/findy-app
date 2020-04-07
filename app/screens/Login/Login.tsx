@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,11 +44,9 @@ const Login: React.FC = () => {
     },
   });
 
-  const ref = useRef(null);
-
   return (
     <Container>
-      <Content noPadding full ref={ref}>
+      <Content noPadding full>
         <Layout grow={1}>
           <LoginImage />
         </Layout>
