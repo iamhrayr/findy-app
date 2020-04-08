@@ -30,6 +30,6 @@ export const REMOVE_CAR = '@app/profile/REMOVE_CAR';
 export const EDIT_CAR = '@app/profile/EDIT_CAR';
 export const ADD_CAR = '@app/profile/ADD_CAR';
 export const FETCH_MY_CARS = '@app/profile/FETCH_MY_CARS';
-export const UPDATE_SETTINGS_UPDATED = '@app/profile/UPDATE_SETTINGS_UPDATED';
+export const EDIT_PROFILE_SETTINGS = '@app/profile/EDIT_PROFILE_SETTINGS';
 export const FETCH_PROFILE_SETTINGS = '@app/profile/FETCH_PROFILE_SETTINGS';
 export const CHANGE_PREFERENCES = '@app/profile/CHANGE_PREFERENCES';

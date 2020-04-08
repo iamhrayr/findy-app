@@ -7,7 +7,7 @@ import { array2IdMap } from '@app/helpers/array';
 import i18n from '@app/i18n';
 
 import { CHANGE_PREFERENCES } from './types';
-import { fetchMyCars, fetchProfileSettings, updateProfileSettings } from './actions';
+import { fetchMyCars, fetchProfileSettings, editProfileSettings } from './actions';
 
 // worker Sagas
 // function* fetchMyCarsHandler(action: ReturnType<typeof fetchMyCars.trigger>) {
@@ -30,10 +30,10 @@ function* fetchProfileSettingsHandler() {
   }
 }
 
-function* updateProfileSettingsHandler(action: Action) {
+function* editProfileSettingsHandler(action: Action) {
   try {
     const res: AxiosResponse = yield call(api.changeProfileSettings, action.payload);
-    yield put(updateProfileSettings.success(res.data));
+    yield put(editProfileSettings.success(res.data));
   } catch (error) {
     // TODO: show error toats
   }
@@ -50,7 +50,7 @@ function* changePreferencesHandler(action: Action) {
 function* watcherSaga() {
   yield takeLatest(fetchMyCars.TRIGGER, fetchMyCarsHandler);
   yield takeLatest(fetchProfileSettings.TRIGGER, fetchProfileSettingsHandler);
-  yield takeLatest(updateProfileSettings.TRIGGER, updateProfileSettingsHandler);
+  yield takeLatest(editProfileSettings.TRIGGER, editProfileSettingsHandler);
   yield takeLatest(CHANGE_PREFERENCES, changePreferencesHandler);
 }
 

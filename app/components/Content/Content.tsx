@@ -56,6 +56,7 @@ export default ({ children, full, as: AsComponent, ...props }: Props) => {
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 100 })}>
       <Component
         contentContainerStyle={full ? styles.container : {}}
+        keyboardShouldPersistTaps="handled"
         style={styles.container}>
         <Content {...props}>{children}</Content>
       </Component>

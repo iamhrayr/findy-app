@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import createListReducer from '../../common/createListReducer';
 
-import { fetchMyCars, fetchProfileSettings, updateProfileSettings } from './actions';
+import { fetchMyCars, fetchProfileSettings, editProfileSettings } from './actions';
 import {
   ADD_CAR,
   EDIT_CAR,
@@ -89,7 +89,7 @@ const settingsReducer = (
         loaded: true,
         data: action.payload,
       };
-    case updateProfileSettings.SUCCESS:
+    case editProfileSettings.SUCCESS:
       return {
         ...state,
         data: action.payload,

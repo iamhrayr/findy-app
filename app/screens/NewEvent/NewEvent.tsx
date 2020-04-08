@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { useFormik } from 'formik';
@@ -51,9 +51,21 @@ const NewEvent = () => {
     },
   });
 
-  useEffect(() => {
-    if (res) {
-      if (res.valid) {
+  const handleCarNumberChange = useCallback(
+    (val: string) => {
+      formik.setFieldValue('carNumber', val);
+      setIsNextDisabled(true);
+    },
+    [formik],
+  );
+  const handleRequestSuccess = useCallback(() => {
+    setIsVisible(false);
+    navigation.navigate('Events:Home');
+  }, [navigation]);
+
+  const handleCheckButtonPress = useCallback(() => {
+    checkCarExistance(formik.values.carNumber).then(({ valid }) => {
+      if (valid) {
         Alert.alert(
           t('events:new_event.check_car_success_title'),
           t('events:new_event.check_car_success_description'),
@@ -66,20 +78,8 @@ const NewEvent = () => {
         );
         setIsNextDisabled(true);
       }
-    }
-  }, [res, t]);
-
-  const handleCarNumberChange = useCallback(
-    (val: string) => {
-      formik.setFieldValue('carNumber', val);
-      setIsNextDisabled(true);
-    },
-    [formik],
-  );
-  const handleRequestSuccess = useCallback(() => {
-    setIsVisible(false);
-    navigation.navigate('Events:Home');
-  }, [navigation]);
+    });
+  }, [checkCarExistance, formik.values.carNumber, t]);
 
   return (
     <Container>
@@ -115,7 +115,7 @@ const NewEvent = () => {
               type="success"
               shape="circle"
               size="sm"
-              onPress={() => checkCarExistance(formik.values.carNumber)}
+              onPress={handleCheckButtonPress}
               disabled={formik.values.carNumber.length === 0 || loading}
               loading={loading}>
               {t('check')}

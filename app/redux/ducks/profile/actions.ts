@@ -6,7 +6,7 @@ import {
   EDIT_CAR,
   ADD_CAR,
   FETCH_MY_CARS,
-  UPDATE_SETTINGS_UPDATED,
+  EDIT_PROFILE_SETTINGS,
   FETCH_PROFILE_SETTINGS,
   CHANGE_PREFERENCES,
 } from './types';
@@ -20,4 +20,4 @@ export const changePreferences = createAction(CHANGE_PREFERENCES);
 // routines
 export const fetchMyCars = createRoutine(FETCH_MY_CARS);
 export const fetchProfileSettings = createRoutine(FETCH_PROFILE_SETTINGS);
-export const updateProfileSettings = createRoutine(UPDATE_SETTINGS_UPDATED);
+export const editProfileSettings = createRoutine(EDIT_PROFILE_SETTINGS);
