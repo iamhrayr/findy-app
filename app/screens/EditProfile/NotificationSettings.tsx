@@ -1,17 +1,22 @@
-import React, { useCallback, useEffect } from 'react';
-import { Switch, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { Switch, StyleSheet, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
 import Select from 'react-native-picker-select';
 import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
 import { withTheme, DefaultTheme } from 'styled-components/native';
 
-// import api from '@app/api';
-import { Card, Layout, Text, Spacer } from '@app/components';
-// import { useAsyncFn } from '@app/hooks';
+type FormValues = {
+  language: string;
+  showPhoneNumber: boolean;
+  notificationMethod: string;
+};
+
+import { Card, Layout, Text, Spacer, Button } from '@app/components';
 import {
   fetchProfileSettings,
-  updateProfileSettings,
+  editProfileSettings,
   changePreferences,
 } from '@app/redux/ducks/profile/actions';
 import {
@@ -19,10 +24,10 @@ import {
   getProfilePreferences,
 } from '@app/redux/ducks/profile/selectors';
 
-const SELECT_VALUES = [
+const SETTINGS_VALUES = [
   { label: 'SMS', value: 'sms' },
   { label: 'Push notification', value: 'app' },
-  { label: 'Both', value: 'both' },
+  { label: 'Both', value: 'bh' },
 ];
 
 const LANGUAGES = [
@@ -35,57 +40,34 @@ type Props = {
 };
 
 const NotificationSettings = ({ theme }: Props) => {
-  // const [{ loading: fetchSettingsLoading }, fetchSettings] = useAsyncFn(
-  //   api.fetchProfileSettings,
-  // );
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const settings = useSelector(getProfileSettings);
   const preferences = useSelector(getProfilePreferences);
 
+  const formik = useFormik<FormValues>({
+    initialValues: {
+      language: preferences.language,
+      showPhoneNumber: settings.data.showPhoneNumber,
+      notificationMethod: settings.data.notificationMethod,
+    },
+    onSubmit: ({ language, ...rest }) => {
+      dispatch(editProfileSettings(rest));
+      dispatch(changePreferences({ language }));
+    },
+  });
+
   useEffect(() => {
     dispatch(fetchProfileSettings());
   }, [dispatch]);
-
-  const handlePhoneNumberChange = useCallback(
-    showPhoneNumber => {
-      dispatch(
-        updateProfileSettings({
-          showPhoneNumber,
-        }),
-      );
-    },
-    [dispatch],
-  );
-
-  const handleNotificationChange = useCallback(
-    notificationMethod => {
-      dispatch(
-        updateProfileSettings({
-          notificationMethod,
-        }),
-      );
-    },
-    [dispatch],
-  );
-
-  const handleLanguageChange = useCallback(
-    language => {
-      dispatch(
-        changePreferences({
-          language,
-        }),
-      );
-    },
-    [dispatch],
-  );
 
   if (settings.loading) {
     <Text>{t('loading')}</Text>;
   }
 
-  console.log('settings.data.showPhoneNumber', settings.data.showPhoneNumber);
+
+  const { values, setFieldValue, handleSubmit } = formik;
 
   return (
     <Card>
@@ -98,7 +80,7 @@ const NotificationSettings = ({ theme }: Props) => {
         <Select
           style={styles}
           useNativeAndroidPickerStyle={false}
-          onValueChange={handleLanguageChange}
+          onValueChange={val => setFieldValue('language', val)}
           Icon={() => (
             <Icon
               name="arrow-ios-downward-outline"
@@ -107,8 +89,9 @@ const NotificationSettings = ({ theme }: Props) => {
               fill={theme.colors.gray}
             />
           )}
-          value={preferences.language}
+          value={values.language}
           items={LANGUAGES}
+          placeholder={{}}
         />
       </Layout>
 
@@ -117,8 +100,11 @@ const NotificationSettings = ({ theme }: Props) => {
       <Layout layout="row" align="center" justify="between">
         <Text>{t('profile:settings.phone_number_label')}</Text>
         <Switch
-          onValueChange={handlePhoneNumberChange}
-          value={settings.data.showPhoneNumber}
+          onValueChange={val => {
+            console.log('asdasdasdasd', val);
+            setFieldValue('showPhoneNumber', val);
+          }}
+          value={values.showPhoneNumber}
         />
       </Layout>
 
@@ -129,7 +115,7 @@ const NotificationSettings = ({ theme }: Props) => {
         <Select
           style={styles}
           useNativeAndroidPickerStyle={false}
-          onValueChange={handleNotificationChange}
+          onValueChange={val => setFieldValue('notificationMethod', val)}
           Icon={() => (
             <Icon
               name="arrow-ios-downward-outline"
@@ -138,9 +124,16 @@ const NotificationSettings = ({ theme }: Props) => {
               fill={theme.colors.gray}
             />
           )}
-          value={settings.data.notificationMethod}
-          items={SELECT_VALUES}
+          value={values.notificationMethod}
+          items={SETTINGS_VALUES}
+          placeholder={{}}
         />
+      </Layout>
+
+      <Layout align="center" spacer={{ t: 'lg' }}>
+        <Button wide shape="circle" onPress={handleSubmit}>
+          {t('save')}
+        </Button>
       </Layout>
     </Card>
   );
@@ -149,7 +142,7 @@ const NotificationSettings = ({ theme }: Props) => {
 const styles = StyleSheet.create({
   inputIOS: { paddingRight: 20 },
   inputAndroid: { paddingRight: 20 },
-  iconContainer: { bottom: 14 },
+  iconContainer: { bottom: 14, ...Platform.select({ android: {}, ios: { top: -2 } }) },
 });
 
 export default withTheme(NotificationSettings);

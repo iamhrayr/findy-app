@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import { s } from 'react-native-size-matters';
 
 import Shape from '@app/assets/shape-1.svg';
 import twoCarsImage from '@app/assets/two-cars.png';
@@ -15,20 +16,25 @@ const LoginImage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: s(20),
+    flexShrink: 0,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
   },
   shape: {
     width: '200%',
-    height: 300,
+    height: s(300),
     position: 'absolute',
-    right: 120,
-    top: -100,
+    left: s(140),
+    top: -s(100),
   },
   cars: {
     width: '100%',
-    height: 200,
-    marginLeft: -180,
-    marginTop: -40,
+    height: s(200),
+    marginLeft: s(170),
+    marginTop: -s(40),
   },
 });
 
