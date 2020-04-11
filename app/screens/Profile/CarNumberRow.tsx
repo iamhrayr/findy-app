@@ -3,6 +3,7 @@ import { Alert, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/native';
+import { s } from 'react-native-size-matters';
 
 import { Car } from '@app/types/Car';
 import { Text, Layout, Button } from '@app/components';
@@ -18,10 +19,10 @@ type Props = {
 };
 
 const Dot = styled(View)<Partial<Car>>`
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
-  margin-right: 5px;
+  width: ${s(10)}px;
+  height: ${s(10)}px;
+  border-radius: ${s(10)}px;
+  margin-right: ${s(5)}px;
   background-color: ${({ color }) => color};
 `;
 

@@ -3,12 +3,13 @@ import { View, TextInput } from 'react-native';
 import styled, { css, withTheme, DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
+import { s } from 'react-native-size-matters';
 
 const Wrapper = styled(View)`
   ${({ theme }) => css`
     flex-direction: row;
-    padding: 25px 15px;
-    border-top-width: 1px;
+    padding: ${s(25)}px ${s(15)}px;
+    border-top-width: ${s(1)}px;
     border-top-color: ${theme.colors.lightGray};
     align-items: center;
     background-color: ${theme.colors.white};
@@ -21,13 +22,13 @@ const MessageInput = styled(TextInput)`
   ${({ theme }) => css`
     flex: 1;
     background-color: ${theme.colors.lightGray};
-    border-radius: 25px;
-    padding: 10px 20px;
+    border-radius: ${s(25)}px;
+    padding: ${s(10)}px ${s(20)}px;
   `}
 `;
 
 const SendIcon = styled(Icon)`
-  margin-left: 10px;
+  margin-left: ${s(10)}px;
   color: red;
 `;
 

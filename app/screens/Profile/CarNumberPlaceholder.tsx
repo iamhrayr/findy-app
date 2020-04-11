@@ -6,11 +6,12 @@ import {
   PlaceholderLine,
   ShineOverlay,
 } from 'rn-placeholder';
+import { s } from 'react-native-size-matters';
 
 import { Line, Layout } from '@app/components';
 
 const ButtonPlaceholder = styled(PlaceholderMedia)`
-  margin-left: 7px;
+  margin-left: ${s(7)}px;
 `;
 
 const CarNumberPlaceholder = () => (

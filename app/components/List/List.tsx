@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import styled, { css } from 'styled-components/native';
+import { s } from 'react-native-size-matters';
 
 // TODO: fix the types
 type Props = {
@@ -17,11 +18,11 @@ const ListItem = styled(View)<{
   noPaddingTop?: boolean;
   noPaddingBottom?: boolean;
 }>`
-  padding-vertical: 20px;
+  padding-vertical: ${s(20)}px;
   ${({ bordered, theme }) =>
     bordered &&
     css`
-      border-bottom-width: 1px;
+      border-bottom-width: ${s(1)}px;
       border-bottom-color: ${theme.colors.lightGray};
     `}
   ${({ noPaddingTop }) =>

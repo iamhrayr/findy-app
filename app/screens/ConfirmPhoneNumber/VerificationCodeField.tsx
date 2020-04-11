@@ -6,6 +6,7 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import { s } from 'react-native-size-matters';
 
 import { Text } from '@app/components';
 
@@ -18,13 +19,13 @@ type Props = {
 const CELL_COUNT = 4;
 
 const Cell = styled(Text)<{ isFocused: boolean }>`
-  width: 60px;
-  height: 60px;
-  line-height: 52px;
-  margin-top: 10px;
-  font-size: 24px;
+  width: ${s(60)}px;
+  height: ${s(60)}px;
+  line-height: ${s(52)}px;
+  margin-top: ${s(10)}px;
+  font-size: ${s(24)}px;
   border-radius: ${({ theme }) => theme.borderRadius.round}px;
-  border-width: 2px;
+  border-width: ${s(2)}px;
   border-color: ${({ isFocused, theme }) =>
     isFocused ? theme.colors.darkGray : theme.colors.gray};
   text-align: center;

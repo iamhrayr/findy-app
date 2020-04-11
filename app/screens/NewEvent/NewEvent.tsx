@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
+import { s } from 'react-native-size-matters';
 
 import {
   Container,
@@ -28,8 +29,8 @@ type FormValues = {
 
 const TextArea = styled(Input)`
   /* TODO: most probably we need TextArea component or more smart Input one */
-  margin-top: 12px;
-  min-height: 100px;
+  margin-top: ${s(12)}px;
+  min-height: ${s(100)}px;
 `;
 
 const NewEvent = () => {

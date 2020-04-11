@@ -32,7 +32,7 @@ const AvatarImage = styled(Image)<Props>`
   ${({ size = DEFAULT_SIZE, circle }) => css`
     width: ${size}px;
     height: ${size}px;
-    border-radius: ${circle ? size : Number(size) / 5}px;
+    border-radius: ${circle ? size : Number(size) / s(5)}px;
   `}
 `;
 

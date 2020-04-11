@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styled, { css, withTheme /*DefaultTheme*/ } from 'styled-components/native';
+import { s } from 'react-native-size-matters';
 
 import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
 import If from '../If';
@@ -46,7 +47,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     padding-vertical: ${theme.button.paddingY[size] || 0}px;
     padding-horizontal: ${!wide
       ? theme.button.paddingX[size]
-      : theme.button.paddingX[size] * 2.4}px;
+      : theme.button.paddingX[size] * s(2.4)}px;
     background: ${type !== 'link' ? theme.colors[type] : 'transparent'};
     align-items: ${TextAlignOptions[textAlign] || 'center'};
     width: ${block ? '100%' : 'auto'};
@@ -58,7 +59,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     ${generateSpaces(spacer, theme)}
     ${icon &&
       css`
-        padding: 10px;
+        padding: ${s(10)}px;
       `};
   `}
 
@@ -67,7 +68,7 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     type !== 'link' &&
     css`
       background-color: transparent;
-      border-width: 1px;
+      border-width: ${s(1)}px;
       border-color: ${theme.colors[type]};
     `}
 `;
