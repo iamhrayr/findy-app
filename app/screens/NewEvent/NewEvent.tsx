@@ -58,10 +58,12 @@ const NewEvent = () => {
     },
     [formik],
   );
+
   const handleRequestSuccess = useCallback(() => {
     setIsVisible(false);
+    formik.resetForm();
     navigation.navigate('Events:Home');
-  }, [navigation]);
+  }, [formik, navigation]);
 
   const handleCheckButtonPress = useCallback(() => {
     checkCarExistance(formik.values.carNumber).then(({ valid }) => {
@@ -84,7 +86,7 @@ const NewEvent = () => {
   return (
     <Container>
       <Content>
-        <Layout spacer={{ x: 'sm', y: 'lg' }}>
+        <Layout spacer={{ x: 'sm', y: 'sm' }}>
           <Card>
             <Spacer b="sm" />
 

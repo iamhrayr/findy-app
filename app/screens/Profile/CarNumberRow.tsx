@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
-import { Alert } from 'react-native';
+import { Alert, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components/native';
 
 import { Car } from '@app/types/Car';
 import { Text, Layout, Button } from '@app/components';
@@ -15,6 +16,14 @@ type Props = {
   onRemove: (id: Id) => void;
   navigateToEdit: (data: Car) => void;
 };
+
+const Dot = styled(View)<Partial<Car>>`
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+  background-color: ${({ color }) => color};
+`;
 
 const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
   const { t } = useTranslation();
@@ -39,14 +48,17 @@ const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
   }, [removeCar, t]);
 
   return (
-    <Layout layout="row">
+    <Layout layout="row" align="center">
       <Layout grow={1}>
         <Text size="h3" spacer={{ b: 'xs' }}>
           {data.carNumber}
         </Text>
-        <Text size="xs" color="darkGray">
-          {t('added')}: {'data.added'}
-        </Text>
+        <Layout layout="row" align="center">
+          <Dot color={data.color} />
+          <Text size="xs" color="darkGray">
+            {data.makeName}
+          </Text>
+        </Layout>
       </Layout>
       <Layout layout="row">
         <Button

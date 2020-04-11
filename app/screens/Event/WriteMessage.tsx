@@ -11,6 +11,9 @@ const Wrapper = styled(View)`
     border-top-width: 1px;
     border-top-color: ${theme.colors.lightGray};
     align-items: center;
+    background-color: ${theme.colors.white};
+    margin-top: auto;
+    /* position: absolute; */
   `}
 `;
 
@@ -49,6 +52,7 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
         onSubmitEditing={handleSendMessage}
         onChangeText={val => setMessage(val)}
         value={message}
+        returnKeyType="send"
       />
 
       <SendIcon

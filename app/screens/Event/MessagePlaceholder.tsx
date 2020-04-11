@@ -42,16 +42,16 @@ const SentMessagePlaceholder = ({ rowCount }: { rowCount: number }) => {
 
 const MessagePlaceholders = () => {
   return (
-    <Layout layout="col">
+    <Layout layout="col" style={{ marginTop: 'auto' }}>
       <ReceivedMessagePlaceholder rowCount={3} />
       <Spacer b="md" />
-      <ReceivedMessagePlaceholder rowCount={5} />
+      <ReceivedMessagePlaceholder rowCount={4} />
+      <Spacer b="md" />
+      <SentMessagePlaceholder rowCount={1} />
       <Spacer b="md" />
       <SentMessagePlaceholder rowCount={2} />
       <Spacer b="md" />
-      <SentMessagePlaceholder rowCount={3} />
-      <Spacer b="md" />
-      <ReceivedMessagePlaceholder rowCount={4} />
+      <ReceivedMessagePlaceholder rowCount={3} />
     </Layout>
   );
 };

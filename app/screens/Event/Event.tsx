@@ -1,25 +1,23 @@
 /* global WebSocket */
 import React, { useRef, useCallback, useReducer, useMemo } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import camelCaseKeys from 'camelcase-keys';
+import { useTranslation } from 'react-i18next';
 
 import { Message } from '@app/types/Message';
 import { RootState } from '@app/redux/rootReducer';
-import { Container, Content, If, Spacer } from '@app/components';
+import { Container, Content, If, Spacer, NoData, KeyboardShift } from '@app/components';
 import api from '@app/api';
-import {
-  useAsyncFn,
-  // useHideTabBar
-} from '@app/hooks';
+import { useAsyncFn } from '@app/hooks';
 import configs from '@app/configs';
 import SingleMessage from './SingleMessage';
 import MessagePlaceholder from './MessagePlaceholder';
 import WriteMessage from './WriteMessage';
 
-// TODO: I think RouteProps should be defined globally in the root navigator
+// TODO: RouteProps should be defined globally in the root navigator
 type RoutePropType = RouteProp<{ 'Events:Event': { id: Id } }, 'Events:Event'>;
 
 const initialState: Array<Message> = [];
@@ -34,10 +32,8 @@ function reducer(state: Array<Message>, action: any) {
 }
 
 const Event = () => {
-  const flatLsitRef = useRef<FlatList<any>>(null);
-
+  const { t } = useTranslation();
   const auth = useSelector((state: RootState) => state.auth);
-
   const { params } = useRoute<RoutePropType>();
 
   const wsEndpoint = `${configs.ws.url}chat/${params.id}/?token=${auth.accessToken}`;
@@ -46,8 +42,6 @@ const Event = () => {
   const [{ loading, res }, fetchMessages] = useAsyncFn(api.fetchThreadMessages);
 
   const [socketMessages, dispatchMessage] = useReducer(reducer, initialState);
-
-  // useHideTabBar();
 
   useMount(() => {
     fetchMessages(params.id);
@@ -78,35 +72,35 @@ const Event = () => {
   );
 
   return (
-    <Container>
-      <Content as={View} full noPaddingY>
-        <If condition={loading}>
-          <Spacer t="md" />
-          <MessagePlaceholder />
-          <Spacer t="md" />
-        </If>
+    <KeyboardShift extraSpace={20}>
+      <Container>
+        <Content full noPaddingY scrollable={false}>
+          <If condition={loading}>
+            <MessagePlaceholder />
+          </If>
 
-        <If condition={res}>
-          <FlatList
-            inverted
-            ref={flatLsitRef}
-            data={allMessages}
-            ListHeaderComponent={<Spacer t="md" />}
-            ListFooterComponent={<Spacer t="md" />}
-            renderItem={({ item }: { item: Message }) => (
-              <SingleMessage
-                isTypeReceived={item.sender !== auth.user.pk}
-                text={item.message}
-                date={item.sentAt}
-              />
-            )}
-            keyExtractor={item => String(item.pk)}
-          />
-        </If>
-      </Content>
+          <If condition={res}>
+            <FlatList
+              inverted
+              data={allMessages}
+              ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
+              ListHeaderComponent={<Spacer t="md" />}
+              ListFooterComponent={<Spacer t="md" />}
+              renderItem={({ item }: { item: Message }) => (
+                <SingleMessage
+                  isTypeReceived={item.sender !== auth?.user?.pk}
+                  text={item.message}
+                  date={item.sentAt}
+                />
+              )}
+              keyExtractor={item => String(item.pk)}
+            />
+          </If>
 
-      <WriteMessage onSendMessage={handleSendMessage} />
-    </Container>
+          <WriteMessage onSendMessage={handleSendMessage} />
+        </Content>
+      </Container>
+    </KeyboardShift>
   );
 };
 
