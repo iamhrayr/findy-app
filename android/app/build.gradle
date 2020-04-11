@@ -83,6 +83,7 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -165,12 +166,19 @@ android {
         debug {
             signingConfig signingConfigs.debug
             multiDexEnabled true
+            resValue "string", "CodePushDeploymentKey", '""'
+        }
+        releaseStaging {
+            signingConfig signingConfigs.release
+            resValue "string", "CodePushDeploymentKey", '"59R3XmCtyJYKbRA_44t-DDE4qCD6rTDNwx6LZ"'
+            matchingFallbacks = ['release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
             signingConfig signingConfigs.release
             // signingConfig signingConfigs.debug
+            resValue "string", "CodePushDeploymentKey", '"zDRc8k5N7LwKEp-udq2phS-CxfAFRXbQML8-4"'
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             multiDexEnabled true
