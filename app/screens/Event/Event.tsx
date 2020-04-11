@@ -1,9 +1,9 @@
 /* global WebSocket */
 import React, { useRef, useCallback, useReducer, useMemo } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import camelCaseKeys from 'camelcase-keys';
 import { useTranslation } from 'react-i18next';
 
@@ -18,7 +18,10 @@ import MessagePlaceholder from './MessagePlaceholder';
 import WriteMessage from './WriteMessage';
 
 // TODO: RouteProps should be defined globally in the root navigator
-type RoutePropType = RouteProp<{ 'Events:Event': { id: Id } }, 'Events:Event'>;
+type RoutePropType = RouteProp<
+  { 'Events:Event': { id: Id; title: string } },
+  'Events:Event'
+>;
 
 const initialState: Array<Message> = [];
 
@@ -35,6 +38,7 @@ const Event = () => {
   const { t } = useTranslation();
   const auth = useSelector((state: RootState) => state.auth);
   const { params } = useRoute<RoutePropType>();
+  const navigation = useNavigation();
 
   const wsEndpoint = `${configs.ws.url}chat/${params.id}/?token=${auth.accessToken}`;
   const wsRef = useRef<WebSocket>(new WebSocket(wsEndpoint));
@@ -45,6 +49,7 @@ const Event = () => {
 
   useMount(() => {
     fetchMessages(params.id);
+    navigation.setOptions({ title: params.title });
 
     wsRef.current.onopen = () => {
       console.log('socket connection opened');
@@ -86,6 +91,7 @@ const Event = () => {
               ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
               ListHeaderComponent={<Spacer t="md" />}
               ListFooterComponent={<Spacer t="md" />}
+              contentContainerStyle={sytles.flatList}
               renderItem={({ item }: { item: Message }) => (
                 <SingleMessage
                   isTypeReceived={item.sender !== auth?.user?.pk}
@@ -103,5 +109,11 @@ const Event = () => {
     </KeyboardShift>
   );
 };
+
+const sytles = StyleSheet.create({
+  flatList: {
+    flex: 1,
+  },
+});
 
 export default Event;
