@@ -82,7 +82,7 @@ class Api {
 
   removeCar = (carId: Id) => {
     return http({
-      url: `accounts/delete-car/${carId}`,
+      url: `accounts/delete-car/${carId}/`,
       method: 'delete',
     });
   };
@@ -135,14 +135,14 @@ class Api {
 
   fetchThreadMessages = (id: Id) => {
     return http({
-      url: `/messaging/inbox/${id}`,
+      url: `/messaging/inbox/${id}/`,
       method: 'get',
     });
   };
 
   checkCarExistance = (carNumber: string) => {
     return http({
-      url: `/accounts/check_car/${carNumber}`,
+      url: `/accounts/check_car/${carNumber}/`,
       method: 'get',
     });
   };
