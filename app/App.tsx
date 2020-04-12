@@ -14,6 +14,7 @@ import * as Sentry from '@sentry/react-native';
 import SplashScreen from 'react-native-splash-screen';
 import messaging from '@react-native-firebase/messaging';
 import { enableScreens } from 'react-native-screens';
+import codePush from 'react-native-code-push';
 
 import './i18n';
 import NavigationRoot from './navigation';
@@ -76,4 +77,6 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default codePush({
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+})(App);
