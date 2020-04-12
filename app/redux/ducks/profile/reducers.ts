@@ -53,7 +53,7 @@ const myCarsReducer = (state: MyCarsState = initialState, action: Action) => {
     case REMOVE_CAR: {
       const { id } = action.payload;
       const newData = { ...state.data };
-      const newIds = state.ids.filter(_id => _id !== id);
+      const newIds = state.ids.filter((_id) => _id !== id);
       delete newData[id];
       return {
         ...state,

@@ -80,7 +80,7 @@ const NotificationSettings = ({ theme }: Props) => {
         <Select
           style={styles}
           useNativeAndroidPickerStyle={false}
-          onValueChange={val => setFieldValue('language', val)}
+          onValueChange={(val) => setFieldValue('language', val)}
           Icon={() => (
             <Icon
               name="arrow-ios-downward-outline"
@@ -100,7 +100,7 @@ const NotificationSettings = ({ theme }: Props) => {
       <Layout layout="row" align="center" justify="between">
         <Text>{t('profile:settings.phone_number_label')}</Text>
         <Switch
-          onValueChange={val => {
+          onValueChange={(val) => {
             console.log('asdasdasdasd', val);
             setFieldValue('showPhoneNumber', val);
           }}
@@ -115,7 +115,7 @@ const NotificationSettings = ({ theme }: Props) => {
         <Select
           style={styles}
           useNativeAndroidPickerStyle={false}
-          onValueChange={val => setFieldValue('notificationMethod', val)}
+          onValueChange={(val) => setFieldValue('notificationMethod', val)}
           Icon={() => (
             <Icon
               name="arrow-ios-downward-outline"

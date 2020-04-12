@@ -14,7 +14,7 @@ const NetworkStatusChecker = ({ children }: Props) => {
   const [isConnected, setIsConnected] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setIsConnected(state.isConnected);
     });
     return () => unsubscribe();

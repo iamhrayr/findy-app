@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
+import { s } from 'react-native-size-matters';
 
 import {
   Container,
@@ -28,8 +29,8 @@ type FormValues = {
 
 const TextArea = styled(Input)`
   /* TODO: most probably we need TextArea component or more smart Input one */
-  margin-top: 12px;
-  min-height: 100px;
+  margin-top: ${s(12)}px;
+  min-height: ${s(100)}px;
 `;
 
 const NewEvent = () => {
@@ -46,7 +47,7 @@ const NewEvent = () => {
       carNumber: '',
       message: '',
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       console.log(values);
     },
   });
@@ -58,10 +59,12 @@ const NewEvent = () => {
     },
     [formik],
   );
+
   const handleRequestSuccess = useCallback(() => {
     setIsVisible(false);
+    formik.resetForm();
     navigation.navigate('Events:Home');
-  }, [navigation]);
+  }, [formik, navigation]);
 
   const handleCheckButtonPress = useCallback(() => {
     checkCarExistance(formik.values.carNumber).then(({ valid }) => {
@@ -84,7 +87,7 @@ const NewEvent = () => {
   return (
     <Container>
       <Content>
-        <Layout spacer={{ x: 'sm', y: 'lg' }}>
+        <Layout spacer={{ x: 'sm', y: 'sm' }}>
           <Card>
             <Spacer b="sm" />
 
@@ -129,7 +132,7 @@ const NewEvent = () => {
           numberOfLines={4}
           label={t('message')}
           value={formik.values.message}
-          onChangeText={val => formik.setFieldValue('message', val)}
+          onChangeText={(val) => formik.setFieldValue('message', val)}
           placeholder={t('events:new_event.message_to_driver_placeholder')}
           spacer={{ t: 'lg' }}
         />

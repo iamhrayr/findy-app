@@ -32,7 +32,7 @@ const CarModalInput = ({ formik, models = [], loading, selectedBrandId }: Props)
     [formik],
   );
 
-  const modelsOfBrand = models.filter(model => model.makePk === selectedBrandId);
+  const modelsOfBrand = models.filter((model) => model.makePk === selectedBrandId);
 
   return (
     <>

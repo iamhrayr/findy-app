@@ -31,7 +31,7 @@ const PersonalDetailsForm: React.FC = () => {
       email: user?.email || '',
     },
     // validationSchema: validation,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(authActions.updateUser(values));
     },
   });
@@ -47,7 +47,7 @@ const PersonalDetailsForm: React.FC = () => {
       <Input
         label={t('first_name')}
         placeholder=""
-        onChangeText={val => setFieldValue('firstName', val)}
+        onChangeText={(val) => setFieldValue('firstName', val)}
         value={values.firstName}
         errorMessage={touched.firstName && errors.firstName}
       />
@@ -55,7 +55,7 @@ const PersonalDetailsForm: React.FC = () => {
       <Input
         label={t('last_name')}
         placeholder=""
-        onChangeText={val => setFieldValue('lastName', val)}
+        onChangeText={(val) => setFieldValue('lastName', val)}
         value={values.lastName}
         errorMessage={touched.lastName && errors.lastName}
       />
@@ -63,7 +63,7 @@ const PersonalDetailsForm: React.FC = () => {
       <Input
         label={t('email')}
         placeholder=""
-        onChangeText={val => setFieldValue('email', val)}
+        onChangeText={(val) => setFieldValue('email', val)}
         value={values.email}
         errorMessage={touched.email && errors.email}
       />

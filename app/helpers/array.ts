@@ -12,5 +12,5 @@ export const array2IdMap = (arr: any[], idKey: string = 'pk') => {
 };
 
 export const arrayFromIdMap = (idMap: KeyMap<any>, ids: Array<Id>) => {
-  return ids.map(id => idMap[id]);
+  return ids.map((id) => idMap[id]);
 };

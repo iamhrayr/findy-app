@@ -13,6 +13,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Sentry from '@sentry/react-native';
 import SplashScreen from 'react-native-splash-screen';
 import messaging from '@react-native-firebase/messaging';
+import { enableScreens } from 'react-native-screens';
 
 import './i18n';
 import NavigationRoot from './navigation';
@@ -35,17 +36,19 @@ if (__DEV__) {
 
 console.disableYellowBox = true;
 
+enableScreens();
+
 const App: React.FC = () => {
   useMount(() => {
     SplashScreen.hide();
   });
 
   useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
 
-    messaging().setBackgroundMessageHandler(async remoteMessage => {
+    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
       console.log('Message handled in the background!', remoteMessage);
     });
 

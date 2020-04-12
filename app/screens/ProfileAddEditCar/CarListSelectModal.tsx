@@ -19,12 +19,12 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
   const [searchText, setSearchText] = useState('');
 
   const filteredData = useMemo(() => {
-    return data.filter(item =>
+    return data.filter((item) =>
       item.name.toLowerCase().includes(searchText.toLowerCase()),
     );
   }, [data, searchText]);
 
-  const handleSearchInputChange = useCallback(val => {
+  const handleSearchInputChange = useCallback((val) => {
     setSearchText(val);
   }, []);
 
@@ -58,7 +58,7 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
             <If condition={filteredData.length > 0}>
               <FlatList
                 data={filteredData}
-                keyExtractor={item => String(item.pk)}
+                keyExtractor={(item) => String(item.pk)}
                 ItemSeparatorComponent={() => <Spacer b="lg" />}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={() => onSelect(item)}>
