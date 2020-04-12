@@ -4,6 +4,7 @@ import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
 
 import { Container, Content, Button } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 
 import htmlContent from './tems-of-use-content';
 
@@ -26,4 +27,4 @@ const TermsOfUse = () => {
   );
 };
 
-export default TermsOfUse;
+export default withInteractionsComplete(TermsOfUse);

@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { Message } from '@app/types/Message';
 import { RootState } from '@app/redux/rootReducer';
 import { Container, Content, If, Spacer, NoData, KeyboardShift } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
 import configs from '@app/configs';
@@ -116,4 +117,4 @@ const sytles = StyleSheet.create({
   },
 });
 
-export default Event;
+export default withInteractionsComplete(Event);

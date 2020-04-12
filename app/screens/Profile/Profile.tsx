@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
 import { Container, Card, Layout, Text, Button, Line, NoData, If } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import { fetchMyCars as fetchMyCarsRedux } from '@app/redux/ducks/profile/actions';
 import CarNumberRow from './CarNumberRow';
 import UserDetails from './UserDetails';
@@ -111,4 +112,4 @@ const Profile = ({ theme }: Props) => {
   );
 };
 
-export default withTheme(Profile);
+export default withInteractionsComplete(withTheme(Profile));

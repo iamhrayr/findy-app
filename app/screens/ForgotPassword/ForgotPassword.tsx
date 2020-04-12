@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import ForgotImage from './ForgotImage';
 import validation from './validation';
 
@@ -54,4 +55,4 @@ const ForgotPassword: React.FC = () => {
   );
 };
 
-export default ForgotPassword;
+export default withInteractionsComplete(ForgotPassword);

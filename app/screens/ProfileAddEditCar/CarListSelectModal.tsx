@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import { useTranslation } from 'react-i18next';
 
 import { Container, Text, Layout, Input, If, Spacer, Loading } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 
 type Props = {
   isVisible: boolean;
@@ -84,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CarListSelectModal;
+export default withInteractionsComplete<Props>(CarListSelectModal);

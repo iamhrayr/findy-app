@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Content, Layout } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import IntroImage from './IntroImage';
 
 const AuthIntro: React.FC = () => {
@@ -65,4 +66,4 @@ const AuthIntro: React.FC = () => {
   );
 };
 
-export default AuthIntro;
+export default withInteractionsComplete(AuthIntro);

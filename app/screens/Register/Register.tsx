@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 // import validation from './validation';
 import { register } from '@app/redux/ducks/auth/actions';
 import { getRegisterStatus } from '@app/redux/ducks/auth/selectors';
@@ -112,4 +113,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default withInteractionsComplete(Register);
