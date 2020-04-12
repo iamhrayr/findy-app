@@ -31,7 +31,7 @@ const AuthIntro: React.FC = () => {
 
           <Layout grow={0}>
             <Text size="giant" weight="300" spacer={{ b: 'md' }}>
-              {t('welcome')} aper
+              {t('welcome')}
             </Text>
 
             <Text size="lg">{t('auth:intro.text')}</Text>
