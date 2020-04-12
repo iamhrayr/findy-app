@@ -8,6 +8,7 @@ import { login } from '@app/redux/ducks/auth/actions';
 import { getLoginStatus } from '@app/redux/ducks/auth/selectors';
 // import { RootState } from '@app/redux/rootReducer';
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import LoginImage from './LoginImage';
 // import validation from './validation';
 
@@ -107,4 +108,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default withInteractionsComplete(Login);
