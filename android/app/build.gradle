@@ -170,7 +170,7 @@ android {
         }
         releaseStaging {
             signingConfig signingConfigs.release
-            resValue "string", "CodePushDeploymentKey", '"59R3XmCtyJYKbRA_44t-DDE4qCD6rTDNwx6LZ"'
+            resValue "string", "CodePushDeploymentKey", '"zelVBwUwO2rG_MCxR3VQxqKlhbFwkY6L75kaa"'
             matchingFallbacks = ['release']
         }
         release {
@@ -178,7 +178,7 @@ android {
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
             signingConfig signingConfigs.release
             // signingConfig signingConfigs.debug
-            resValue "string", "CodePushDeploymentKey", '"zDRc8k5N7LwKEp-udq2phS-CxfAFRXbQML8-4"'
+            resValue "string", "CodePushDeploymentKey", '"FykyQc4hkrew06o1KNGBZPB7XqbodTAZniKV6"'
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             multiDexEnabled true
