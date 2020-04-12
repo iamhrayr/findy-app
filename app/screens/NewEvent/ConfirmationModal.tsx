@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
+import { withInteractionsComplete } from '@app/HoCs';
 import {
   Container,
   Content,
@@ -118,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ConfirmationModal;
+export default withInteractionsComplete(ConfirmationModal);

@@ -17,6 +17,7 @@ import {
   Button,
   Layout,
 } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
 import LicensePlateIcon from '@app/assets/license-plate.svg';
@@ -161,4 +162,4 @@ const NewEvent = () => {
   );
 };
 
-export default NewEvent;
+export default withInteractionsComplete(NewEvent);

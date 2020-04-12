@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 import CAR_COLORS from '@app/constants/carColors';
 import { Container, Content, Label, MaskedInput, Layout, Button } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import { Car } from '@app/types/Car';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
@@ -140,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileAddEditCar;
+export default withInteractionsComplete(ProfileAddEditCar);

@@ -7,6 +7,7 @@ import { showMessage } from 'react-native-flash-message';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Text, Container, Layout, Content } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import UserIdentityIcon from '@app/assets/user-identity.svg';
 import { confirmPhoneNumber } from '@app/redux/ducks/auth/actions';
 import { getConfirmPhoneNumberStatus } from '@app/redux/ducks/auth/selectors';
@@ -100,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ConfirmPhoneNumber;
+export default withInteractionsComplete(ConfirmPhoneNumber);

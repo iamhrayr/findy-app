@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Container, Content, Spacer } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 // import { useHideTabBar } from '@app/hooks';
 
 import PersonalDetailsForm from './PersonalDetailsForm';
@@ -20,4 +21,4 @@ const EditProfile: React.FC = () => {
   );
 };
 
-export default EditProfile;
+export default withInteractionsComplete(EditProfile);

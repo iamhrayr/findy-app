@@ -13,6 +13,7 @@ import {
   If,
   // Text, Layout
 } from '@app/components';
+import { withInteractionsComplete } from '@app/HoCs';
 import { eventsSelectors, eventsActions } from '@app/redux/ducks/events';
 import EventItem from './EventsItem';
 import EventsPlaceholder from './EventsPlaceholder';
@@ -68,4 +69,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default withInteractionsComplete(Events);
