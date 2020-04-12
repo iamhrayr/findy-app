@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
 
-const getActionType = (action: Action) =>
-  action.type
-    .split('/')
-    .slice(0, -1)
-    .join('/');
+const getActionType = (action: Action) => action.type.split('/').slice(0, -1).join('/');
 
 const getActionStatus = (action: Action) => action.type.split('/').slice(-1)[0];
 

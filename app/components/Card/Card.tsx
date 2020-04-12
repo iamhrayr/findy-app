@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
+import { s } from 'react-native-size-matters';
 
 type Props = {
   radius?: number;
@@ -9,7 +10,7 @@ type Props = {
 
 const CardWrapper = styled(View)<Props>`
   /* TODO: transfer all the data into theme configs */
-  padding: 20px;
+  padding: ${s(20)}px;
   background-color: #fff;
 
   ${({ size }) =>
@@ -23,11 +24,11 @@ const CardWrapper = styled(View)<Props>`
     css`
       shadow-color: ${({ theme }) => theme.colors.darkGray};
       shadow-opacity: 0.12;
-      shadow-radius: 15px;
-      shadow-offset: 0px 7px;
+      shadow-radius: ${s(15)}px;
+      shadow-offset: 0px ${s(7)}px;
       elevation: 14;
     `};
-  border-radius: ${({ radius }) => radius || 10}px;
+  border-radius: ${({ radius }) => radius || s(10)}px;
 `;
 
 export default CardWrapper;

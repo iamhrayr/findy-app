@@ -4,7 +4,7 @@ import i18n from '@app/i18n';
 
 moment.updateLocale('en', {
   relativeTime: {
-    past: function(input) {
+    past: function (input) {
       return input === 'just now' ? input : input + i18n.t('moment:ago');
     },
     s: i18n.t('moment:s'),

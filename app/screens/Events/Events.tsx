@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { useTranslation } from 'react-i18next';
+import { useFocusEffect } from '@react-navigation/native';
 
 import {
   Container,
@@ -29,9 +29,15 @@ const Events = () => {
 
   useMount(fetchData);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+    }, [fetchData]),
+  );
+
   return (
     <Container>
-      <Content as={View}>
+      <Content>
         <If condition={loading}>
           <EventsPlaceholder />
         </If>
@@ -42,10 +48,10 @@ const Events = () => {
             disableRightSwipe
             closeOnRowPress
             data={events}
-            ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
+            ItemSeparatorComponent={() => <Line spacer={{ y: 'md' }} />}
             ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
             renderItem={({ item }) => <EventItem {...item} />}
-            keyExtractor={item => String(item.pk)}
+            keyExtractor={(item) => String(item.pk)}
             onRefresh={fetchData}
             refreshing={loading}
             // renderHiddenItem={(data, rowMap) => (
