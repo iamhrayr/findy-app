@@ -112,7 +112,7 @@ const Event = () => {
 
 const sytles = StyleSheet.create({
   flatList: {
-    flex: 1,
+    // flex: 1,
   },
 });
 
