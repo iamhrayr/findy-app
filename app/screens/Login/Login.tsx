@@ -39,7 +39,7 @@ const Login: React.FC = () => {
   const formik = useFormik({
     initialValues,
     // validationSchema: validation,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(login(values));
     },
   });
@@ -59,7 +59,7 @@ const Login: React.FC = () => {
           <Input
             label={t('phone_number')}
             placeholder="+374 XXXXXXXX"
-            onChangeText={val => formik.setFieldValue('phoneNumber', val)}
+            onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={
               (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
@@ -71,7 +71,7 @@ const Login: React.FC = () => {
             secureTextEntry
             label={t('password')}
             placeholder="*******"
-            onChangeText={val => formik.setFieldValue('password', val)}
+            onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
             addonRight={
               <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>

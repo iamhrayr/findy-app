@@ -6,7 +6,7 @@ import { arrayFromIdMap } from '@app/helpers/array';
 import { getEntireStatus } from '../status/selectors';
 import { FETCH_EVENTS } from './types';
 
-export const getEvents = createSelector([(state: RootState) => state.events], events =>
+export const getEvents = createSelector([(state: RootState) => state.events], (events) =>
   arrayFromIdMap(events.data, events.ids),
 );
 

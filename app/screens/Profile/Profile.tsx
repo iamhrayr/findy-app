@@ -47,7 +47,7 @@ const Profile = ({ theme }: Props) => {
   );
 
   const removeCarHandler = useCallback(
-    id => {
+    (id) => {
       removeCarMutation(id).then(() => {
         dispatch(removeCar({ id }));
       });
@@ -98,7 +98,7 @@ const Profile = ({ theme }: Props) => {
                   onRemove={removeCarHandler}
                 />
               )}
-              keyExtractor={item => String(item.pk)}
+              keyExtractor={(item) => String(item.pk)}
             />
           </If>
         </Card>

@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  View,
-  ScrollView,
-  ScrollViewProps,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Platform,
-} from 'react-native';
+import { View, ScrollViewProps } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled, { css } from 'styled-components/native';
 
 type Props = ScrollViewProps & {
@@ -14,9 +8,9 @@ type Props = ScrollViewProps & {
   noPaddingX?: boolean;
   noPaddingY?: boolean;
   extraPadded?: boolean;
+  scrollable?: boolean;
   full?: boolean;
   children?: React.ReactNode;
-  as?: React.ComponentType;
 };
 
 const Content = styled(View)<Props>`
@@ -45,32 +39,22 @@ const Content = styled(View)<Props>`
     `}
 `;
 
-export default ({ children, full, as: AsComponent, ...props }: Props) => {
-  const Component = AsComponent ? AsComponent : ScrollView;
+export default ({ children, full, scrollable = true, ...props }: Props) => {
+  const contentContainerStyle = full ? { minHeight: '100%' } : {};
+
+  if (!scrollable) {
+    return <Content {...props}>{children}</Content>;
+  }
 
   return (
-    <KeyboardAvoidingView
-      enabled
-      style={styles.keyboardAvoidingView}
-      behavior={Platform.select({ ios: 'padding', android: undefined })}
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 100 })}>
-      <Component
-        contentContainerStyle={full ? styles.container : {}}
-        keyboardShouldPersistTaps="handled"
-        style={styles.container}>
-        <Content {...props}>{children}</Content>
-      </Component>
-    </KeyboardAvoidingView>
+    <KeyboardAwareScrollView
+      scrollEnabled
+      enableOnAndroid
+      extraHeight={100}
+      contentContainerStyle={contentContainerStyle}
+      keyboardShouldPersistTaps="handled"
+      resetScrollToCoords={{ x: 0, y: 0 }}>
+      <Content {...props}>{children}</Content>
+    </KeyboardAwareScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  keyboardAvoidingView: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  container: {
-    flexGrow: 1,
-  },
-});

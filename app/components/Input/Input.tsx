@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
+import { s } from 'react-native-size-matters';
 
 import Text from '../Text';
 import Label from '../Label';
@@ -38,13 +39,14 @@ const InputContainer = styled(View)`
 `;
 
 const StyledInput = styled(TextInput)`
+  font-size: ${({ theme }) => theme.text.fontSizes.sm};
   flex: 1;
-  height: 50px; /* TODO: take from theme variables */
+  height: ${s(50)}px; /* TODO: take from theme variables */
 `;
 
 const ErrorMessage = styled(Text)`
   ${({ theme }) => css`
-    margin-top: 5px;
+    margin-top: ${s(5)}px;
     color: ${theme.colors.danger};
     font-size: ${theme.form.error.fontSize}px;
   `}

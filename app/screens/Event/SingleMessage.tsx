@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
+import { s } from 'react-native-size-matters';
 
 import moment from '@app/helpers/moment';
 
@@ -12,11 +13,11 @@ type Props = {
   date: string;
 };
 
-const BORDER_RADIUS = '15px';
+const BORDER_RADIUS = `${s(15)}px`;
 
 const MessageTextWrapper = styled(View)<Partial<Props>>`
   ${({ theme, isTypeReceived }) => css`
-    padding: 12px;
+    padding: ${s(12)}px;
     border-color: ${theme.colors.lightGray};
     border-radius: ${BORDER_RADIUS};
     border-top-start-radius: ${!isTypeReceived ? BORDER_RADIUS : 0};
