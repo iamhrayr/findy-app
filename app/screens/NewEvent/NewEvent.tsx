@@ -47,7 +47,7 @@ const NewEvent = () => {
       carNumber: '',
       message: '',
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       console.log(values);
     },
   });
@@ -132,7 +132,7 @@ const NewEvent = () => {
           numberOfLines={4}
           label={t('message')}
           value={formik.values.message}
-          onChangeText={val => formik.setFieldValue('message', val)}
+          onChangeText={(val) => formik.setFieldValue('message', val)}
           placeholder={t('events:new_event.message_to_driver_placeholder')}
           spacer={{ t: 'lg' }}
         />

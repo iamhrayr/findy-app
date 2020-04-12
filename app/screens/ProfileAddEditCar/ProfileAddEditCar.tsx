@@ -66,7 +66,7 @@ const ProfileAddEditCar: React.FC = () => {
 
   const formik = useFormik({
     initialValues: params?.pk ? params : initialValues,
-    onSubmit: values => {
+    onSubmit: (values) => {
       const valuesToSend = {
         carNumber: values.carNumber,
         carModel: values.modelPk,

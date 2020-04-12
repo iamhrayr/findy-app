@@ -49,7 +49,7 @@ const List: React.FC<Props> = ({
     return (
       <FlatList
         data={data}
-        keyExtractor={keyExtractor ? item => keyExtractor(item) : undefined}
+        keyExtractor={keyExtractor ? (item) => keyExtractor(item) : undefined}
         renderItem={({ item, index }) => (
           <ListItem
             noPaddingTop={index === 0}

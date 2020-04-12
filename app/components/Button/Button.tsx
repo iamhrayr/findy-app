@@ -58,9 +58,9 @@ const ButtonWrapper = styled(TouchableOpacity)<WrapperProps>`
     /* spaces */
     ${generateSpaces(spacer, theme)}
     ${icon &&
-      css`
-        padding: ${s(10)}px;
-      `};
+    css`
+      padding: ${s(10)}px;
+    `};
   `}
 
   ${({ outline, type, theme }) =>

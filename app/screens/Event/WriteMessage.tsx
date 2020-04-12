@@ -51,7 +51,7 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
       <MessageInput
         placeholder={t('events:message.type_msg')}
         onSubmitEditing={handleSendMessage}
-        onChangeText={val => setMessage(val)}
+        onChangeText={(val) => setMessage(val)}
         value={message}
         returnKeyType="send"
       />

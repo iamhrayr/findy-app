@@ -18,7 +18,7 @@ class Http {
 
   addInterceptors() {
     this.client.interceptors.request.use(
-      config => {
+      (config) => {
         if (!config.data) {
           return config;
         }
@@ -36,7 +36,7 @@ class Http {
         config.data = snakeCasedData;
         return config;
       },
-      error => {
+      (error) => {
         if (!error.data) {
           return Promise.reject(error);
         }
@@ -47,7 +47,7 @@ class Http {
     );
 
     this.client.interceptors.response.use(
-      response => {
+      (response) => {
         if (!response.data) {
           return response;
         }
@@ -55,7 +55,7 @@ class Http {
         const camelCasedData = camelCaseKeys(response.data, { deep: true });
         return { ...response, data: camelCasedData };
       },
-      error => {
+      (error) => {
         // No response means there is a network error
         if (!error.response) {
           error.response = {

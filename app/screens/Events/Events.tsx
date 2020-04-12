@@ -51,7 +51,7 @@ const Events = () => {
             ItemSeparatorComponent={() => <Line spacer={{ y: 'md' }} />}
             ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
             renderItem={({ item }) => <EventItem {...item} />}
-            keyExtractor={item => String(item.pk)}
+            keyExtractor={(item) => String(item.pk)}
             onRefresh={fetchData}
             refreshing={loading}
             // renderHiddenItem={(data, rowMap) => (

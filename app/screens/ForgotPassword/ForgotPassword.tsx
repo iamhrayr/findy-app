@@ -38,7 +38,7 @@ const ForgotPassword: React.FC = () => {
           <Input
             label={t('phone_number')}
             placeholder="+374 98999590"
-            onChangeText={val => formik.setFieldValue('phoneNumber', val)}
+            onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
           />

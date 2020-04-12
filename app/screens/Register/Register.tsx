@@ -41,7 +41,7 @@ const Register: React.FC = () => {
   const formik = useFormik({
     initialValues,
     // validationSchema: validation,
-    onSubmit: values => {
+    onSubmit: (values) => {
       dispatch(register(values));
     },
   });
@@ -61,7 +61,7 @@ const Register: React.FC = () => {
           <Input
             label={t('phone_number')}
             placeholder="+374 XXXXXXXX"
-            onChangeText={val => formik.setFieldValue('phoneNumber', val)}
+            onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={
               (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
@@ -71,7 +71,7 @@ const Register: React.FC = () => {
           <Input
             label={t('full_name')}
             placeholder="Samuel Jackson"
-            onChangeText={val => formik.setFieldValue('fullName', val)}
+            onChangeText={(val) => formik.setFieldValue('fullName', val)}
             value={formik.values.fullName}
             errorMessage={formik.touched.fullName && formik.errors.fullName}
           />
@@ -79,7 +79,7 @@ const Register: React.FC = () => {
             secureTextEntry={!passVisible}
             label={t('password')}
             placeholder="*******"
-            onChangeText={val => formik.setFieldValue('password', val)}
+            onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
             addonRight={
               <Icon onPress={() => setPassVisible(!passVisible)} name="eye" size={22} />

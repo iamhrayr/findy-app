@@ -52,7 +52,7 @@ export default class KeyboardShift extends Component<Props, State> {
     );
   }
 
-  handleKeyboardDidShow = event => {
+  handleKeyboardDidShow = (event) => {
     const { extraSpace = 0 } = this.props;
     const { height: windowHeight } = Dimensions.get('window');
     const keyboardHeight = event.endCoordinates.height;

@@ -54,19 +54,19 @@ const Event = () => {
     wsRef.current.onopen = () => {
       console.log('socket connection opened');
     };
-    wsRef.current.onerror = e => {
+    wsRef.current.onerror = (e) => {
       console.log('error', e);
     };
-    wsRef.current.onclose = e => {
+    wsRef.current.onclose = (e) => {
       console.log('connection closed', e, { code: e.code, reason: e.reason });
     };
-    wsRef.current.onmessage = e => {
+    wsRef.current.onmessage = (e) => {
       const message = camelCaseKeys(JSON.parse(e.data));
       dispatchMessage({ type: 'add', message });
     };
   });
 
-  const handleSendMessage = useCallback(message => {
+  const handleSendMessage = useCallback((message) => {
     wsRef.current.send(JSON.stringify({ message }));
   }, []);
 
@@ -99,7 +99,7 @@ const Event = () => {
                   date={item.sentAt}
                 />
               )}
-              keyExtractor={item => String(item.pk)}
+              keyExtractor={(item) => String(item.pk)}
             />
           </If>
 
