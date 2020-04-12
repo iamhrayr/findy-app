@@ -1,5 +1,4 @@
 apply plugin: "com.android.application"
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -83,6 +82,7 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -152,25 +152,31 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-        // release {
-        //     if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-        //         storeFile file(MYAPP_UPLOAD_STORE_FILE)
-        //         storePassword MYAPP_UPLOAD_STORE_PASSWORD
-        //         keyAlias MYAPP_UPLOAD_KEY_ALIAS
-        //         keyPassword MYAPP_UPLOAD_KEY_PASSWORD
-        //     }
-        // }
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
             multiDexEnabled true
+            resValue "string", "CodePushDeploymentKey", '""'
+        }
+        releaseStaging {
+            signingConfig signingConfigs.release
+            resValue "string", "CodePushDeploymentKey", '"zelVBwUwO2rG_MCxR3VQxqKlhbFwkY6L75kaa"'
+            matchingFallbacks = ['release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            // signingConfig signingConfigs.release
-            // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            resValue "string", "CodePushDeploymentKey", '"FykyQc4hkrew06o1KNGBZPB7XqbodTAZniKV6"'
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             multiDexEnabled true

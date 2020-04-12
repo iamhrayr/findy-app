@@ -66,7 +66,6 @@ const NotificationSettings = ({ theme }: Props) => {
     <Text>{t('loading')}</Text>;
   }
 
-
   const { values, setFieldValue, handleSubmit } = formik;
 
   return (
