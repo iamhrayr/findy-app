@@ -1,8 +1,8 @@
 /* global GLOBAL */
 
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
-import { StatusBar, Alert } from 'react-native';
+import React from 'react';
+import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
@@ -12,7 +12,7 @@ import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Sentry from '@sentry/react-native';
 import SplashScreen from 'react-native-splash-screen';
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 import { enableScreens } from 'react-native-screens';
 import codePush from 'react-native-code-push';
 
@@ -44,17 +44,17 @@ const App: React.FC = () => {
     SplashScreen.hide();
   });
 
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
+  // useEffect(() => {
+  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+  //     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  //   });
 
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log('Message handled in the background!', remoteMessage);
-    });
+  //   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  //     console.log('Message handled in the background!', remoteMessage);
+  //   });
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
   return (
     <Provider store={store}>
