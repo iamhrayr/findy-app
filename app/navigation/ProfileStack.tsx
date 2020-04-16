@@ -1,11 +1,8 @@
 import React from 'react';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
-import i18n from '@app/i18n';
-
 // Screens
 import ProfileScreen from '../screens/Profile';
-import ProfileAddEditCarScreen from '../screens/ProfileAddEditCar';
 import EditProfileScreen from '../screens/EditProfile';
 
 type Props = {
@@ -30,21 +27,14 @@ const ProfileStackScreen = ({ navigation, route }: Props) => {
         name="Profile:Home"
         component={ProfileScreen}
         options={{
-          title: i18n.t('profile'),
-        }}
-      />
-      <ProfileStack.Screen
-        name="Profile:AddEditCar"
-        component={ProfileAddEditCarScreen}
-        options={{
-          title: i18n.t('profile:add_edit_car'),
+          title: 'profile',
         }}
       />
       <ProfileStack.Screen
         name="Profile:Edit"
         component={EditProfileScreen}
         options={{
-          title: i18n.t('profile:edit_profile'),
+          title: 'edit profile',
         }}
       />
     </ProfileStack.Navigator>

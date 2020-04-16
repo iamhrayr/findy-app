@@ -1,96 +1,38 @@
-import React, { useState } from 'react';
-// import { SafeAreaView, Text } from 'react-native';
-import { useSelector } from 'react-redux';
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import { withTheme } from 'styled-components/native';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Icon } from 'react-native-eva-icons';
 
-import i18n from '@app/i18n';
-import { RootState } from '@app/redux/rootReducer';
+// tabs
+import ProfileStackScreen from './ProfileStack';
 
-// Auth screens
-import AuthIntroScreen from '../screens/AuthIntro';
-import LoginScreen from '../screens/Login';
-import RegisterScreen from '../screens/Register';
-import ForgotPasswordScreen from '../screens/ForgotPassword';
-import TermsOfUseScreen from '../screens/TermsOfUse';
-import ConfirmPhoneNumberScreen from '../screens/ConfirmPhoneNumber';
-import SplashScreen from '../screens/Splash';
+const Tab = createBottomTabNavigator();
 
-import MainTabs from './MainTabs';
-
-const Stack = createStackNavigator();
-
-const NavigationRoot = () => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const [appInitialised, setAppInitialised] = useState<boolean>(false);
-
-  if (!appInitialised) {
-    return <SplashScreen setAppInitialised={setAppInitialised} />;
-  }
-
+const MainTabs = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="Auth:Intro"
-      screenOptions={{
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+    <Tab.Navigator
+      initialRouteName="NewEvent:Tab"
+      tabBarOptions={{
+        keyboardHidesTabBar: true,
+        activeTintColor: 'red',
+        inactiveTintColor: 'blue',
       }}>
-      {!isAuthenticated ? (
-        <>
-          <Stack.Screen
-            name="Auth:Intro"
-            component={AuthIntroScreen}
-            options={{
-              headerShown: false,
-              title: i18n.t('auth:intro_title'),
-            }}
-          />
-          <Stack.Screen
-            name="Auth:Login"
-            component={LoginScreen}
-            options={{
-              title: i18n.t('profile:add_edit_car'),
-            }}
-          />
-          <Stack.Screen
-            name="Auth:Register"
-            component={RegisterScreen}
-            options={{
-              title: i18n.t('register'),
-            }}
-          />
-          <Stack.Screen
-            name="Auth:ForgotPassword"
-            component={ForgotPasswordScreen}
-            options={{
-              title: i18n.t('forgot_password'),
-            }}
-          />
-          <Stack.Screen
-            name="Auth:ConfirmPhoneNumber"
-            component={ConfirmPhoneNumberScreen}
-            options={{
-              title: i18n.t('auth:confirm_phone_number'),
-            }}
-          />
-          <Stack.Screen
-            name="Auth:TermsOfUse"
-            component={TermsOfUseScreen}
-            options={{
-              title: i18n.t('terms_of_use'),
-            }}
-          />
-        </>
-      ) : (
-        <>
-          <Stack.Screen
-            name="Profile"
-            component={withTheme(MainTabs)}
-            options={{ headerShown: false }}
-          />
-        </>
-      )}
-    </Stack.Navigator>
+      <Tab.Screen
+        name="Profile:Tab"
+        component={ProfileStackScreen}
+        options={{
+          title: 'profile',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Icon
+              name={focused ? 'person' : 'person-outline'}
+              height={size}
+              width={size}
+              fill={color}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
-export default NavigationRoot;
+export default MainTabs;
