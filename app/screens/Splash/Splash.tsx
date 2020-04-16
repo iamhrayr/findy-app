@@ -4,14 +4,13 @@ import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import jwtDecode from 'jwt-decode';
-import messaging from '@react-native-firebase/messaging';
 import { showMessage } from 'react-native-flash-message';
 
 import { RootState } from '@app/redux/rootReducer';
 import httpInstance from '@app/helpers/http';
 import i18n from '@app/i18n';
-import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
+import { firebaseService } from '@app/services';
 import { logout, refreshToken } from '@app/redux/ducks/auth/actions';
 import { getRefreshTokenStatus } from '@app/redux/ducks/auth/selectors';
 import { getProfilePreferences } from '@app/redux/ducks/profile/selectors';
@@ -27,34 +26,31 @@ const Splash = ({ setAppInitialised }: Props) => {
   const refreshTokenStatus = useSelector(getRefreshTokenStatus);
   const profilePreferences = useSelector(getProfilePreferences);
   const dispatch = useDispatch();
-  const [{ error }, connectForPushNotifications] = useAsyncFn(
-    api.connectForPushNotifications,
-  );
-
-  useEffect(() => {
-    error &&
-      showMessage({
-        type: 'danger',
-        message: t('auth:error_sending_deviceid_title'),
-        description: t('auth:error_sending_deviceid_description'),
-        duration: 5000,
-      });
-  }, [error, t]);
 
   const registerAppWithFCM = useCallback(() => {
     const fn = async () => {
-      const granted = await messaging().requestPermission();
-      if (!granted) {
-        console.log('User declined messaging permissions :(');
-      } else {
-        await messaging().registerForRemoteNotifications();
-        const fcmToken = await messaging().getToken();
+      const fcmToken = await firebaseService.getRemoteMessageToken();
+      let error = false;
 
-        connectForPushNotifications(fcmToken);
+      if (fcmToken) {
+        try {
+          await api.connectForPushNotifications(fcmToken);
+        } catch (err) {
+          error = true;
+        }
+      }
+
+      if (!fcmToken || error) {
+        showMessage({
+          type: 'danger',
+          message: t('auth:error_sending_deviceid_title'),
+          description: t('auth:error_sending_deviceid_description'),
+          duration: 5000,
+        });
       }
     };
     fn();
-  }, [connectForPushNotifications]);
+  }, [t]);
 
   useMount(() => {
     httpInstance.setLanguageHeader(profilePreferences.language);
@@ -71,7 +67,6 @@ const Splash = ({ setAppInitialised }: Props) => {
         setAppInitialised(true);
       } else {
         dispatch(refreshToken(auth.refreshToken));
-        registerAppWithFCM();
       }
     } else {
       dispatch(logout());
@@ -81,9 +76,15 @@ const Splash = ({ setAppInitialised }: Props) => {
 
   useEffect(() => {
     if (auth.isAuthenticated && refreshTokenStatus.loaded) {
+      registerAppWithFCM();
       setAppInitialised(true);
     }
-  }, [auth.isAuthenticated, refreshTokenStatus.loaded, setAppInitialised]);
+  }, [
+    auth.isAuthenticated,
+    refreshTokenStatus.loaded,
+    setAppInitialised,
+    registerAppWithFCM,
+  ]);
 
   return <View style={styles.container}>{/* <Loading /> */}</View>;
 };

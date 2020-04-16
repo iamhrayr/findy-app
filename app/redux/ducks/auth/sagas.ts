@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import httpInstance from '@app/helpers/http';
 import api from '@app/api';
 import i18n from '@app/i18n';
+import { firebaseService } from '@app/services';
 
 import * as types from './types';
 import {
@@ -24,6 +25,12 @@ function* loginHandler(action: Action) {
     const res: AxiosResponse = yield call(api.login, action.payload);
     yield put(login.success(res.data));
     yield call([httpInstance, 'setAuthHeader'], res.data.accessToken);
+    const fcmToken = yield call(firebaseService.getRemoteMessageToken);
+    try {
+      yield call(api.connectForPushNotifications, fcmToken);
+    } catch (e) {
+      // maybe we need to notify user that he wont receive any push notification
+    }
   } catch (error) {
     yield put(login.failure(error.response.data));
   }

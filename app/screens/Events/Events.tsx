@@ -18,6 +18,8 @@ import { eventsSelectors, eventsActions } from '@app/redux/ducks/events';
 import EventItem from './EventsItem';
 import EventsPlaceholder from './EventsPlaceholder';
 
+const INITIAL_FLATLIST_COUNT = 10;
+
 const Events = () => {
   const dispatch = useDispatch();
   const events = useSelector(eventsSelectors.getEvents);
@@ -54,6 +56,7 @@ const Events = () => {
             renderItem={({ item }) => <EventItem {...item} />}
             keyExtractor={(item) => String(item.pk)}
             onRefresh={fetchData}
+            initialNumToRender={INITIAL_FLATLIST_COUNT}
             refreshing={loading}
             // renderHiddenItem={(data, rowMap) => (
             //   <Layout layout="row" style={{ backgroundColor: 'red' }} reverse>

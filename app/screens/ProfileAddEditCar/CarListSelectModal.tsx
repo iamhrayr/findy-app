@@ -14,16 +14,18 @@ type Props = {
   onSelect: (item: any) => void;
 };
 
+const INITIAL_FLATLIST_COUNT = 15;
+
 const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props) => {
   const { t } = useTranslation();
-
   const [searchText, setSearchText] = useState('');
+  const [modalDidShow, setModalDidShow] = useState(false);
 
   const filteredData = useMemo(() => {
-    return data.filter((item) =>
-      item.name.toLowerCase().includes(searchText.toLowerCase()),
-    );
-  }, [data, searchText]);
+    return modalDidShow && !loading
+      ? data.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()))
+      : [];
+  }, [data, searchText, modalDidShow, loading]);
 
   const handleSearchInputChange = useCallback((val) => {
     setSearchText(val);
@@ -34,7 +36,10 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
   }
 
   return (
-    <Modal isVisible={isVisible} style={styles.modal}>
+    <Modal
+      isVisible={isVisible}
+      style={styles.modal}
+      onModalShow={() => setModalDidShow(true)}>
       <Container>
         <SafeAreaView style={styles.safeArea}>
           <Layout spacer={{ x: 'lg' }}>
@@ -61,6 +66,7 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
                 data={filteredData}
                 keyExtractor={(item) => String(item.pk)}
                 ItemSeparatorComponent={() => <Spacer b="lg" />}
+                initialNumToRender={INITIAL_FLATLIST_COUNT}
                 renderItem={({ item }) => (
                   <TouchableOpacity onPress={() => onSelect(item)}>
                     <Text>{item.name}</Text>

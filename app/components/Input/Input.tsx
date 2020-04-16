@@ -39,6 +39,7 @@ const InputContainer = styled(View)`
 `;
 
 const StyledInput = styled(TextInput)`
+  color: ${({ theme }) => theme.text.color};
   font-size: ${({ theme }) => theme.text.fontSizes.sm};
   flex: 1;
   height: ${s(50)}px; /* TODO: take from theme variables */

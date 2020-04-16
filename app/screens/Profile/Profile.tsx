@@ -23,6 +23,8 @@ type Props = {
   theme: DefaultTheme;
 };
 
+const INITIAL_FLATLIST_COUNT = 10;
+
 const Profile = ({ theme }: Props) => {
   const { t } = useTranslation();
 
@@ -92,6 +94,7 @@ const Profile = ({ theme }: Props) => {
               data={myCars}
               ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
               ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
+              initialNumToRender={INITIAL_FLATLIST_COUNT}
               renderItem={({ item }: { item: Car }) => (
                 <CarNumberRow
                   data={item}

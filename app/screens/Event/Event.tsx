@@ -24,6 +24,8 @@ type RoutePropType = RouteProp<
   'Events:Event'
 >;
 
+const INITIAL_FLATLIST_COUNT = 12;
+
 const initialState: Array<Message> = [];
 
 function reducer(state: Array<Message>, action: any) {
@@ -93,6 +95,7 @@ const Event = () => {
               ListHeaderComponent={<Spacer t="md" />}
               ListFooterComponent={<Spacer t="md" />}
               contentContainerStyle={sytles.flatList}
+              initialNumToRender={INITIAL_FLATLIST_COUNT}
               renderItem={({ item }: { item: Message }) => (
                 <SingleMessage
                   isTypeReceived={item.sender !== auth?.user?.pk}
