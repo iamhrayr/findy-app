@@ -16,6 +16,10 @@ import TermsOfUseScreen from '../screens/TermsOfUse';
 import ConfirmPhoneNumberScreen from '../screens/ConfirmPhoneNumber';
 import SplashScreen from '../screens/Splash';
 
+import ProfileAddEditCarScreen from '../screens/ProfileAddEditCar';
+import EditProfileScreen from '../screens/EditProfile';
+import EventScreen from '../screens/Event';
+
 import MainTabs from './MainTabs';
 
 const Stack = createStackNavigator();
@@ -83,9 +87,33 @@ const NavigationRoot = () => {
       ) : (
         <>
           <Stack.Screen
-            name="Profile"
+            name="MainTabs"
             component={withTheme(MainTabs)}
-            options={{ headerShown: false }}
+            options={{
+              // headerShown: false,
+              title: 'Findy',
+            }}
+          />
+          <Stack.Screen
+            name="Profile:AddEditCar"
+            component={ProfileAddEditCarScreen}
+            options={{
+              title: i18n.t('profile:add_edit_car'),
+            }}
+          />
+          <Stack.Screen
+            name="Profile:Edit"
+            component={EditProfileScreen}
+            options={{
+              title: i18n.t('profile:edit_profile'),
+            }}
+          />
+          <Stack.Screen
+            name="Events:Event"
+            component={EventScreen}
+            options={{
+              title: i18n.t('event'),
+            }}
           />
         </>
       )}
