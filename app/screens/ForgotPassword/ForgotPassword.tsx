@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 
 import { Button, Text, Container, Layout, Input, Content } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
+import { useAsyncFn } from '@app/hooks';
+import api from '@app/api';
 import ForgotImage from './ForgotImage';
-import validation from './validation';
 
 type FormValues = {
   phoneNumber: string;
@@ -17,11 +19,17 @@ const initialValues: FormValues = {
 
 const ForgotPassword: React.FC = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
+
+  const [{ loading, error, res }, forgotPassword] = useAsyncFn(api.forgotPassword);
+
+  useEffect(() => {
+    res && navigation.navigate('Auth:ResetPassword');
+  }, [res, navigation]);
 
   const formik = useFormik({
     initialValues,
-    validationSchema: validation,
-    onSubmit: () => {},
+    onSubmit: forgotPassword,
   });
 
   return (
@@ -38,14 +46,14 @@ const ForgotPassword: React.FC = () => {
 
           <Input
             label={t('phone_number')}
-            placeholder="+374 98999590"
+            placeholder="+374 XX XXXXXX"
             onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
-            errorMessage={formik.touched.phoneNumber && formik.errors.phoneNumber}
+            errorMessage={error?.phoneNumber}
           />
 
           <Layout align="center" spacer={{ y: 'md' }}>
-            <Button wide shape="circle" onPress={formik.handleSubmit}>
+            <Button wide shape="circle" onPress={formik.handleSubmit} loading={loading}>
               {t('submit')}
             </Button>
           </Layout>

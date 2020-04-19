@@ -99,9 +99,9 @@ const TouchableComponent =
   Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
 
 const Touchable = styled(TouchableComponent)`
-  border-radius: 90px;
+  /* border-radius: 90px; */
   overflow: hidden;
-  background-color: red;
+  /* background-color: red; */
 `;
 
 const Button = ({

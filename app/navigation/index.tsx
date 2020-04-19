@@ -12,6 +12,7 @@ import AuthIntroScreen from '../screens/AuthIntro';
 import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/Register';
 import ForgotPasswordScreen from '../screens/ForgotPassword';
+import ResetPasswordScreen from '../screens/ResetPassword';
 import TermsOfUseScreen from '../screens/TermsOfUse';
 import ConfirmPhoneNumberScreen from '../screens/ConfirmPhoneNumber';
 import SplashScreen from '../screens/Splash';
@@ -65,6 +66,14 @@ const NavigationRoot = () => {
           <Stack.Screen
             name="Auth:ForgotPassword"
             component={ForgotPasswordScreen}
+            // component={ResetPasswordScreen}
+            options={{
+              title: i18n.t('forgot_password'),
+            }}
+          />
+          <Stack.Screen
+            name="Auth:ResetPassword"
+            component={ResetPasswordScreen}
             options={{
               title: i18n.t('forgot_password'),
             }}
