@@ -65,10 +65,12 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
               <FlatList
                 data={filteredData}
                 keyExtractor={(item) => String(item.pk)}
-                ItemSeparatorComponent={() => <Spacer b="lg" />}
+                ItemSeparatorComponent={() => <Spacer b="xs" />}
                 initialNumToRender={INITIAL_FLATLIST_COUNT}
                 renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => onSelect(item)}>
+                  <TouchableOpacity
+                    onPress={() => onSelect(item)}
+                    style={styles.touchable}>
                     <Text>{item.name}</Text>
                   </TouchableOpacity>
                 )}
@@ -85,6 +87,10 @@ const styles = StyleSheet.create({
   modal: {
     margin: 0,
     flex: 1,
+  },
+  touchable: {
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   safeArea: {
     flex: 1,

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { s } from 'react-native-size-matters';
@@ -15,4 +16,4 @@ ColorTag.defaultProps = {
   color: '#fff',
 };
 
-export default ColorTag;
+export default memo(ColorTag);

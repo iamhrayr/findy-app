@@ -1,5 +1,5 @@
 /* global GLOBAL */
-import React from 'react';
+import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,6 +13,11 @@ import SplashScreen from 'react-native-splash-screen';
 // import messaging from '@react-native-firebase/messaging';
 import { enableScreens } from 'react-native-screens';
 import codePush from 'react-native-code-push';
+
+// const whyDidYouRender = require('@welldone-software/why-did-you-render');
+// whyDidYouRender(React, {
+//   trackAllPureComponents: true,
+// });
 
 import './i18n';
 import NavigationRoot from './navigation';
@@ -111,6 +116,8 @@ const App: React.FC = () => {
   );
 };
 
-export default codePush({
+const codePushifiedApp = codePush({
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
 })(App);
+
+export default memo(codePushifiedApp);

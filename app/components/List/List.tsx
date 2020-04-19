@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FlatList, View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { s } from 'react-native-size-matters';
@@ -75,4 +75,4 @@ const List: React.FC<Props> = ({
   );
 };
 
-export default List;
+export default memo<Props>(List);

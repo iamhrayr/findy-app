@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -73,4 +74,4 @@ Layout.defaultProps = {
   spacer: {},
 };
 
-export default Layout;
+export default memo<Props>(Layout);

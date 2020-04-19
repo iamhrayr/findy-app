@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View, ViewProps } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -10,4 +11,4 @@ const Container = styled(View)<Props>`
   `}
 `;
 
-export default Container;
+export default memo<Props>(Container);

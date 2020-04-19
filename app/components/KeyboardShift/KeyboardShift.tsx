@@ -1,7 +1,7 @@
 // @ts-nocheck
 // taken from https://codeburst.io/react-native-keyboard-covering-inputs-72a9d3072689
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Animated,
   Dimensions,
@@ -21,7 +21,7 @@ type State = {
 
 const { State: TextInputState } = TextInput;
 
-export default class KeyboardShift extends Component<Props, State> {
+class KeyboardShift extends PureComponent<Props, State> {
   state = {
     shift: new Animated.Value(0),
   };
@@ -94,3 +94,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
 });
+
+export default KeyboardShift;

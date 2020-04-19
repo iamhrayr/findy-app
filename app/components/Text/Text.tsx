@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Text as RNText } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -20,6 +21,7 @@ type Color =
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'h3' | 'h2' | 'h1' | 'giant';
 type Weight = '100' | '200' | '300' | '400' | '500' | '600' | '700';
 type Transform = 'uppercase' | 'capitalize' | 'lowercase' | 'none';
+
 type Props = {
   size?: Size;
   weight?: Weight;
@@ -43,4 +45,4 @@ const Text = styled(RNText)<Props>`
   `}
 `;
 
-export default Text;
+export default memo<Props>(Text);

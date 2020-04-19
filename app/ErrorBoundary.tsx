@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import RNRestart from 'react-native-restart'; // Import package from node modules
 import { withTranslation } from 'react-i18next';
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTranslation()(ErrorBoundary as any);
+export default withTranslation()(memo(ErrorBoundary as any));
