@@ -19,6 +19,22 @@ class Api {
     });
   };
 
+  forgotPassword = (data: { phoneNumber: string }) => {
+    return http({
+      url: 'accounts/forgot-password/',
+      method: 'post',
+      data,
+    });
+  };
+
+  resetPassword = (data: { token: string; password: string }) => {
+    return http({
+      url: 'accounts/reset-password/',
+      method: 'post',
+      data,
+    });
+  };
+
   confirmPhoneNumber = (code: string) => {
     return http({
       url: 'accounts/confirm-phone/',

@@ -6,9 +6,13 @@ import { Icon } from 'react-native-eva-icons';
 import i18n from '@app/i18n';
 
 // tabs
-import ProfileStackScreen from './ProfileStack';
-import EventsStackScreen from './EventsStack';
-import NewEventStackScreen from './NewEventStack';
+import ProfileScreen from '../screens/Profile';
+import NewEventScreen from '../screens/NewEvent';
+import EventsScreen from '../screens/Events';
+
+// import ProfileStackScreen from './ProfileStack';
+// import EventsStackScreen from './EventsStack';
+// import NewEventStackScreen from './NewEventStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +27,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
       }}>
       <Tab.Screen
         name="Events:Tab"
-        component={EventsStackScreen}
+        component={EventsScreen}
         options={{
           title: i18n.t('events'),
           tabBarIcon: ({ focused, color, size }) => (
@@ -38,7 +42,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
       />
       <Tab.Screen
         name="NewEvent:Tab"
-        component={NewEventStackScreen}
+        component={NewEventScreen}
         options={{
           title: i18n.t('new_event'),
           tabBarIcon: ({ focused, color, size }) => (
@@ -53,7 +57,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
       />
       <Tab.Screen
         name="Profile:Tab"
-        component={ProfileStackScreen}
+        component={ProfileScreen}
         options={{
           title: i18n.t('profile'),
           tabBarIcon: ({ focused, color, size }) => (

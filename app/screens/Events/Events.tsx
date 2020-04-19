@@ -32,11 +32,7 @@ const Events = () => {
 
   useMount(fetchData);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchData();
-    }, [fetchData]),
-  );
+  useFocusEffect(useCallback(fetchData, [fetchData]));
 
   return (
     <Container>

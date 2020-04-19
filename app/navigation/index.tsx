@@ -12,9 +12,14 @@ import AuthIntroScreen from '../screens/AuthIntro';
 import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/Register';
 import ForgotPasswordScreen from '../screens/ForgotPassword';
+import ResetPasswordScreen from '../screens/ResetPassword';
 import TermsOfUseScreen from '../screens/TermsOfUse';
 import ConfirmPhoneNumberScreen from '../screens/ConfirmPhoneNumber';
 import SplashScreen from '../screens/Splash';
+
+import ProfileAddEditCarScreen from '../screens/ProfileAddEditCar';
+import EditProfileScreen from '../screens/EditProfile';
+import EventScreen from '../screens/Event';
 
 import MainTabs from './MainTabs';
 
@@ -61,6 +66,14 @@ const NavigationRoot = () => {
           <Stack.Screen
             name="Auth:ForgotPassword"
             component={ForgotPasswordScreen}
+            // component={ResetPasswordScreen}
+            options={{
+              title: i18n.t('forgot_password'),
+            }}
+          />
+          <Stack.Screen
+            name="Auth:ResetPassword"
+            component={ResetPasswordScreen}
             options={{
               title: i18n.t('forgot_password'),
             }}
@@ -83,9 +96,33 @@ const NavigationRoot = () => {
       ) : (
         <>
           <Stack.Screen
-            name="Profile"
+            name="MainTabs"
             component={withTheme(MainTabs)}
-            options={{ headerShown: false }}
+            options={{
+              // headerShown: false,
+              title: 'Findy',
+            }}
+          />
+          <Stack.Screen
+            name="Profile:AddEditCar"
+            component={ProfileAddEditCarScreen}
+            options={{
+              title: i18n.t('profile:add_edit_car'),
+            }}
+          />
+          <Stack.Screen
+            name="Profile:Edit"
+            component={EditProfileScreen}
+            options={{
+              title: i18n.t('profile:edit_profile'),
+            }}
+          />
+          <Stack.Screen
+            name="Events:Event"
+            component={EventScreen}
+            options={{
+              title: i18n.t('event'),
+            }}
           />
         </>
       )}

@@ -38,9 +38,45 @@ console.disableYellowBox = true;
 enableScreens();
 
 const App: React.FC = () => {
+  const navigationRef = React.useRef(null);
+  // const navigation = useNavigation();
+
   useMount(() => {
     SplashScreen.hide();
+
+    // messaging().onNotificationOpenedApp((remoteMessage) => {
+    //   Alert.alert(JSON.stringify(remoteMessage, null, 2));
+    //   console.log(
+    //     'Notification caused app to open from background state:',
+    //     remoteMessage.notification,
+    //   );
+    //   // navigationRef.current?.navigate('Home')
+    //   // navigation.navigate('');
+    // });
   });
+
+  // useEffect(() => {
+  //   // Assume a message-notification contains a "type" property in the data payload of the screen to open
+
+  //   messaging().onNotificationOpenedApp((remoteMessage) => {
+  //     console.log(
+  //       'Notification caused app to open from background state:',
+  //       remoteMessage,
+  //     );
+  //     // navigation.navigate(remoteMessage.data.type);
+  //   });
+
+  //   // Check whether an initial notification is available
+  //   messaging()
+  //     .getInitialNotification()
+  //     .then((remoteMessage) => {
+  //       if (remoteMessage) {
+  //         console.log('Notification caused app to open from quit state:', remoteMessage);
+  //         // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+  //       }
+  //       // setLoading(false);
+  //     });
+  // }, []);
 
   // useEffect(() => {
   //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
@@ -61,7 +97,7 @@ const App: React.FC = () => {
           <NetworkStatusChecker>
             <ErrorBoundary>
               <SafeAreaProvider>
-                <NavigationContainer>
+                <NavigationContainer ref={navigationRef}>
                   <StatusBar barStyle="dark-content" />
                   <NavigationRoot />
                   <FlashMessage position="top" />
