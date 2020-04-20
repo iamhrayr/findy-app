@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
@@ -102,4 +102,4 @@ const UserDetailsWrapper = ({ isAuthenticated }: { isAuthenticated: boolean }) =
   return <UserDetailsWithTheme />;
 };
 
-export default UserDetailsWrapper;
+export default memo(UserDetailsWrapper);

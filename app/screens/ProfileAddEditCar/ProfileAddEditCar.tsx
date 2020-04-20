@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInteractionsComplete(ProfileAddEditCar);
+export default withInteractionsComplete(memo(ProfileAddEditCar));

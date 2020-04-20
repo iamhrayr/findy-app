@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -30,6 +31,7 @@ type Props = {
   grow?: number;
   shrink?: number;
   spacer?: Partial<SpacerProps>;
+  children: React.ReactNode;
 };
 
 const Layout = styled(View)<Props>`
@@ -73,4 +75,5 @@ Layout.defaultProps = {
   spacer: {},
 };
 
+// TODO: try to find out why the React.memo is not working
 export default Layout;

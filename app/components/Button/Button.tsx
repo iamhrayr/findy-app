@@ -26,7 +26,7 @@ type WrapperProps = {
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   textStyle?: any;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   spacer: Partial<SpacerProps>;
   outline?: boolean;
   disabled?: boolean;

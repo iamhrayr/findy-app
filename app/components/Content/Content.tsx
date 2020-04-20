@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, ScrollViewProps } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled, { css } from 'styled-components/native';
@@ -13,7 +13,7 @@ type Props = ScrollViewProps & {
   children?: React.ReactNode;
 };
 
-const Content = styled(View)<Props>`
+const ContentWrapper = styled(View)<Props>`
   ${({ noPadding, extraPadded, theme }) => css`
     padding: ${noPadding ? 0 : theme.content.padding}px;
     ${extraPadded && `padding: ${theme.content.padding}px`};
@@ -39,11 +39,11 @@ const Content = styled(View)<Props>`
     `}
 `;
 
-export default ({ children, full, scrollable = true, ...props }: Props) => {
+const Content = ({ children, full, scrollable = true, ...props }: Props) => {
   const contentContainerStyle = full ? { minHeight: '100%' } : {};
 
   if (!scrollable) {
-    return <Content {...props}>{children}</Content>;
+    return <ContentWrapper {...props}>{children}</ContentWrapper>;
   }
 
   return (
@@ -54,7 +54,9 @@ export default ({ children, full, scrollable = true, ...props }: Props) => {
       contentContainerStyle={contentContainerStyle}
       keyboardShouldPersistTaps="handled"
       resetScrollToCoords={{ x: 0, y: 0 }}>
-      <Content {...props}>{children}</Content>
+      <ContentWrapper {...props}>{children}</ContentWrapper>
     </KeyboardAwareScrollView>
   );
 };
+
+export default memo<Props>(Content);

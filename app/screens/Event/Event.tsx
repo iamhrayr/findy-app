@@ -1,5 +1,5 @@
 /* global WebSocket */
-import React, { useRef, useCallback, useReducer, useMemo } from 'react';
+import React, { useRef, useCallback, useReducer, useMemo, memo } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
@@ -79,6 +79,19 @@ const Event = () => {
     [res, socketMessages],
   );
 
+  const renderNoData = useCallback(() => <NoData message={t('no_data_text')} />, [t]);
+  const renderItem = useCallback(
+    ({ item }: { item: Message }) => (
+      <SingleMessage
+        isTypeReceived={item.sender !== auth?.user?.pk}
+        text={item.message}
+        date={item.sentAt}
+      />
+    ),
+    [auth],
+  );
+  const extractKey = useCallback((item) => String(item.pk), []);
+
   return (
     <KeyboardShift extraSpace={20}>
       <Container>
@@ -91,19 +104,13 @@ const Event = () => {
             <FlatList
               inverted
               data={allMessages}
-              ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
+              ListEmptyComponent={renderNoData}
               ListHeaderComponent={<Spacer t="md" />}
               ListFooterComponent={<Spacer t="md" />}
               contentContainerStyle={sytles.flatList}
               initialNumToRender={INITIAL_FLATLIST_COUNT}
-              renderItem={({ item }: { item: Message }) => (
-                <SingleMessage
-                  isTypeReceived={item.sender !== auth?.user?.pk}
-                  text={item.message}
-                  date={item.sentAt}
-                />
-              )}
-              keyExtractor={(item) => String(item.pk)}
+              renderItem={renderItem}
+              keyExtractor={extractKey}
             />
           </If>
 
@@ -120,4 +127,4 @@ const sytles = StyleSheet.create({
   },
 });
 
-export default withInteractionsComplete(Event);
+export default withInteractionsComplete(memo(Event));

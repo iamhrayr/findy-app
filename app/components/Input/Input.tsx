@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, memo } from 'react';
 import { View, TextInput, TextInputProps } from 'react-native';
 import { s } from 'react-native-size-matters';
 
@@ -81,4 +81,4 @@ const Input = (
   );
 };
 
-export default forwardRef(Input);
+export default memo<Props>(forwardRef(Input));

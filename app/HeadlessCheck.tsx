@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import App from './App';
 
 const HeadlessCheck = ({ isHeadless }: { isHeadless: boolean }) => {
@@ -10,4 +10,4 @@ const HeadlessCheck = ({ isHeadless }: { isHeadless: boolean }) => {
   return <App />;
 };
 
-export default HeadlessCheck;
+export default memo(HeadlessCheck);

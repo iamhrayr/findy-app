@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
@@ -58,4 +58,4 @@ const CarMakeInput = ({ formik, brands, loading }: Props) => {
   );
 };
 
-export default CarMakeInput;
+export default memo(CarMakeInput);

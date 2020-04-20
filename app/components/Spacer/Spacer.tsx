@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import Styled, { css, DefaultTheme } from 'styled-components/native';
 
@@ -18,4 +19,4 @@ const Spacer = Styled(View)<SpacerProps>`
   ${({ t, b, l, r, x, y, theme }) => generateSpaces({ t, b, l, r, x, y }, theme)}
 `;
 
-export default Spacer;
+export default memo<SpacerProps>(Spacer);

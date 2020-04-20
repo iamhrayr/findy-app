@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Container, Content, Spacer } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
@@ -21,4 +21,4 @@ const EditProfile: React.FC = () => {
   );
 };
 
-export default withInteractionsComplete(EditProfile);
+export default withInteractionsComplete(memo(EditProfile));

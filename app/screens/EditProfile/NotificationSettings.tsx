@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Switch, StyleSheet, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   iconContainer: { bottom: 14, ...Platform.select({ android: {}, ios: { top: -2 } }) },
 });
 
-export default withTheme(NotificationSettings);
+export default withTheme(memo(NotificationSettings));

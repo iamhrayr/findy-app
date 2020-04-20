@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { Alert, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
@@ -81,4 +81,4 @@ const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
   );
 };
 
-export default CarNumberRow;
+export default memo(CarNumberRow);

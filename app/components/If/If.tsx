@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 type Props = {
   condition: any;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const If = ({ condition, children }: Props): any => {
@@ -12,4 +12,4 @@ const If = ({ condition, children }: Props): any => {
   return null;
 };
 
-export default If;
+export default memo<Props>(If);

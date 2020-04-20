@@ -1,5 +1,5 @@
 /* global GLOBAL */
-import React from 'react';
+import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
@@ -31,6 +31,15 @@ if (__DEV__) {
   // @ts-ignore
   GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
+}
+
+if (__DEV__) {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  const ReactRedux = require('react-redux');
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+    trackExtraHooks: [[ReactRedux, 'useSelector']],
+  });
 }
 
 console.disableYellowBox = true;
@@ -111,6 +120,8 @@ const App: React.FC = () => {
   );
 };
 
-export default codePush({
+const codePushifiedApp = codePush({
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
 })(App);
+
+export default memo(codePushifiedApp);

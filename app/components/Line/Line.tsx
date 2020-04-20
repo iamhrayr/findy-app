@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
@@ -6,6 +7,7 @@ type Props = {
   vertical?: boolean;
   size?: string | number;
   spacer?: Partial<SpacerProps>;
+  children?: React.ReactNode;
 };
 
 const Line = styled(View)<Props>`
@@ -24,4 +26,4 @@ const Line = styled(View)<Props>`
   `}
 `;
 
-export default Line;
+export default memo<Props>(Line);
