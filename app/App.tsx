@@ -14,10 +14,12 @@ import SplashScreen from 'react-native-splash-screen';
 import { enableScreens } from 'react-native-screens';
 import codePush from 'react-native-code-push';
 
-// const whyDidYouRender = require('@welldone-software/why-did-you-render');
-// whyDidYouRender(React, {
-//   trackAllPureComponents: true,
-// });
+const whyDidYouRender = require('@welldone-software/why-did-you-render');
+const ReactRedux = require('react-redux');
+whyDidYouRender(React, {
+  trackAllPureComponents: true,
+  trackExtraHooks: [[ReactRedux, 'useSelector']],
+});
 
 import './i18n';
 import NavigationRoot from './navigation';

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, memo } from 'react';
 import { StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInteractionsComplete(ConfirmPhoneNumber);
+export default withInteractionsComplete(memo(ConfirmPhoneNumber));

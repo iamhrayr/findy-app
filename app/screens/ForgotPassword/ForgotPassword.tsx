@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
@@ -63,4 +63,4 @@ const ForgotPassword: React.FC = () => {
   );
 };
 
-export default withInteractionsComplete(ForgotPassword);
+export default withInteractionsComplete(memo(ForgotPassword));

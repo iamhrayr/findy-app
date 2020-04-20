@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, memo } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DefaultTheme, withTheme } from 'styled-components/native';
@@ -62,6 +62,20 @@ const Profile = ({ theme }: Props) => {
     dispatch(authActions.logout());
   }, [dispatch]);
 
+  const renderNoData = useCallback(() => <NoData message={t('no_data_text')} />, [t]);
+  const renderLine = useCallback(() => <Line spacer={{ y: 'lg' }} />, []);
+  const extractKey = useCallback((item) => String(item.pk), []);
+  const renderItem = useCallback(
+    ({ item }: { item: Car }) => (
+      <CarNumberRow
+        data={item}
+        navigateToEdit={navigateToAddEditCar}
+        onRemove={removeCarHandler}
+      />
+    ),
+    [navigateToAddEditCar, removeCarHandler],
+  );
+
   return (
     <Container>
       <UserDetails isAuthenticated={isAuthenticated} />
@@ -92,17 +106,11 @@ const Profile = ({ theme }: Props) => {
           <If condition={loaded}>
             <FlatList
               data={myCars}
-              ItemSeparatorComponent={() => <Line spacer={{ y: 'lg' }} />}
-              ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
+              ItemSeparatorComponent={renderLine}
+              ListEmptyComponent={renderNoData}
               initialNumToRender={INITIAL_FLATLIST_COUNT}
-              renderItem={({ item }: { item: Car }) => (
-                <CarNumberRow
-                  data={item}
-                  navigateToEdit={navigateToAddEditCar}
-                  onRemove={removeCarHandler}
-                />
-              )}
-              keyExtractor={(item) => String(item.pk)}
+              renderItem={renderItem}
+              keyExtractor={extractKey}
             />
           </If>
         </Card>
@@ -115,4 +123,4 @@ const Profile = ({ theme }: Props) => {
   );
 };
 
-export default withInteractionsComplete(withTheme(Profile));
+export default withInteractionsComplete(memo(withTheme(Profile)));

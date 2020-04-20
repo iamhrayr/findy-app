@@ -1,11 +1,11 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, memo } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Container, Content, Layout } from '@app/components';
 
 import { useInteractionsComplete } from '@app/hooks';
 
 function withInteractionsComplete<Props>(BaseComponent: ComponentType) {
-  return (props: Props) => {
+  return memo((props: Props) => {
     const interactionsComplete = useInteractionsComplete();
 
     if (!interactionsComplete) {
@@ -21,7 +21,7 @@ function withInteractionsComplete<Props>(BaseComponent: ComponentType) {
     }
 
     return <BaseComponent {...props} />;
-  };
+  });
 }
 
 export default withInteractionsComplete;

@@ -7,6 +7,7 @@ type Props = {
   radius?: number;
   noShadow?: boolean;
   size?: number;
+  children?: React.ReactNode;
 };
 
 const CardWrapper = styled(View)<Props>`

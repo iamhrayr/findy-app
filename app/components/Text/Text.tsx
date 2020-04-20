@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Text as RNText } from 'react-native';
+import { Text as RNText, TextProps } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
 import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
@@ -30,7 +30,8 @@ type Props = {
   color?: Color;
   spacer?: Partial<SpacerProps>;
   transform?: Transform;
-};
+  children?: React.ReactNode;
+} & TextProps;
 
 const Text = styled(RNText)<Props>`
   ${({ size, weight, spacer, opacity, color, align, transform, theme }) => css`

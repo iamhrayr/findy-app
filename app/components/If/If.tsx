@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 type Props = {
   condition: any;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const If = ({ condition, children }: Props): any => {

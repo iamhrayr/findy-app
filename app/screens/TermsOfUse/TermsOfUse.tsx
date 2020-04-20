@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
@@ -27,4 +27,4 @@ const TermsOfUse = () => {
   );
 };
 
-export default withInteractionsComplete(TermsOfUse);
+export default withInteractionsComplete(memo(TermsOfUse));

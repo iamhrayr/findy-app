@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -92,4 +92,4 @@ const ResetPassword: React.FC = () => {
   );
 };
 
-export default withInteractionsComplete(ResetPassword);
+export default withInteractionsComplete(memo(ResetPassword));

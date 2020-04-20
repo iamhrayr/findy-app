@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventsItem;
+export default memo(EventsItem);

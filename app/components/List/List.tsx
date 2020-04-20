@@ -11,6 +11,7 @@ type Props = {
   virtualized?: boolean;
   keyExtractor?: (row: any) => string;
   renderItem: (row: any, index?: number) => React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const ListItem = styled(View)<{

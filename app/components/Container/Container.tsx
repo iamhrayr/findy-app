@@ -2,7 +2,9 @@ import { memo } from 'react';
 import { View, ViewProps } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-type Props = ViewProps & {};
+type Props = ViewProps & {
+  children?: React.ReactNode;
+};
 
 const Container = styled(View)<Props>`
   ${({ theme }) => css`

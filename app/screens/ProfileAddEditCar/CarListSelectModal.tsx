@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import { FlatList, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +31,18 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
     setSearchText(val);
   }, []);
 
-  if (loading) {
+  const extractKey = useCallback((item) => String(item.pk), []);
+  const renderSeparator = useCallback(() => <Spacer b="xs" />, []);
+  const renderItem = useCallback(
+    ({ item }) => (
+      <TouchableOpacity onPress={() => onSelect(item)} style={styles.touchable}>
+        <Text>{item.name}</Text>
+      </TouchableOpacity>
+    ),
+    [onSelect],
+  );
+
+  if (isVisible && loading) {
     <Loading />;
   }
 
@@ -64,16 +75,10 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
             <If condition={filteredData.length > 0}>
               <FlatList
                 data={filteredData}
-                keyExtractor={(item) => String(item.pk)}
-                ItemSeparatorComponent={() => <Spacer b="xs" />}
                 initialNumToRender={INITIAL_FLATLIST_COUNT}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => onSelect(item)}
-                    style={styles.touchable}>
-                    <Text>{item.name}</Text>
-                  </TouchableOpacity>
-                )}
+                ItemSeparatorComponent={renderSeparator}
+                keyExtractor={extractKey}
+                renderItem={renderItem}
               />
             </If>
           </Layout>
@@ -97,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInteractionsComplete<Props>(CarListSelectModal);
+export default withInteractionsComplete<Props>(memo(CarListSelectModal));

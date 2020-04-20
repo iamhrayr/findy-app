@@ -7,6 +7,7 @@ type Props = {
   vertical?: boolean;
   size?: string | number;
   spacer?: Partial<SpacerProps>;
+  children?: React.ReactNode;
 };
 
 const Line = styled(View)<Props>`

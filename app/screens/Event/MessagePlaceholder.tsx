@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { StyleSheet } from 'react-native';
 import {
   Placeholder,
   PlaceholderLine,
@@ -43,7 +44,7 @@ const SentMessagePlaceholder = ({ rowCount }: { rowCount: number }) => {
 
 const MessagePlaceholders = () => {
   return (
-    <Layout layout="col" style={{ marginTop: 'auto' }}>
+    <Layout layout="col" style={styles.container}>
       <ReceivedMessagePlaceholder rowCount={3} />
       <Spacer b="md" />
       <ReceivedMessagePlaceholder rowCount={4} />
@@ -57,4 +58,10 @@ const MessagePlaceholders = () => {
   );
 };
 
-export default MessagePlaceholders;
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 'auto',
+  },
+});
+
+export default memo(MessagePlaceholders);

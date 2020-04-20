@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -113,4 +113,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default withInteractionsComplete(Register);
+export default withInteractionsComplete(memo(Register));

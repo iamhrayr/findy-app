@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -34,6 +34,11 @@ const Events = () => {
 
   useFocusEffect(useCallback(fetchData, [fetchData]));
 
+  const renderLine = useCallback(() => <Line spacer={{ y: 'md' }} />, []);
+  const renderNoData = useCallback(() => <NoData message={t('no_data_text')} />, [t]);
+  const renderItem = useCallback(({ item }) => <EventItem {...item} />, []);
+  const extractKey = useCallback((item) => String(item.pk), []);
+
   return (
     <Container>
       <Content>
@@ -47,10 +52,10 @@ const Events = () => {
             disableRightSwipe
             closeOnRowPress
             data={events}
-            ItemSeparatorComponent={() => <Line spacer={{ y: 'md' }} />}
-            ListEmptyComponent={() => <NoData message={t('no_data_text')} />}
-            renderItem={({ item }) => <EventItem {...item} />}
-            keyExtractor={(item) => String(item.pk)}
+            ItemSeparatorComponent={renderLine}
+            ListEmptyComponent={renderNoData}
+            renderItem={renderItem}
+            keyExtractor={extractKey}
             onRefresh={fetchData}
             initialNumToRender={INITIAL_FLATLIST_COUNT}
             refreshing={loading}
@@ -68,4 +73,4 @@ const Events = () => {
   );
 };
 
-export default withInteractionsComplete(Events);
+export default withInteractionsComplete(memo(Events));

@@ -13,6 +13,7 @@ import {
 
 type Props = {
   extraSpace?: number;
+  children?: React.ReactNode;
 };
 
 type State = {

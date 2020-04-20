@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
@@ -59,4 +59,4 @@ const CarModalInput = ({ formik, models = [], loading, selectedBrandId }: Props)
   );
 };
 
-export default CarModalInput;
+export default memo(CarModalInput);

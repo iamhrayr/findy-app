@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { useSelector, useDispatch } from 'react-redux';
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Splash;
+export default memo(Splash);

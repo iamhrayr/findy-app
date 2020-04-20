@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -89,4 +89,4 @@ const PersonalDetailsForm: React.FC = () => {
   );
 };
 
-export default PersonalDetailsForm;
+export default memo(PersonalDetailsForm);
