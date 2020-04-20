@@ -14,13 +14,6 @@ import SplashScreen from 'react-native-splash-screen';
 import { enableScreens } from 'react-native-screens';
 import codePush from 'react-native-code-push';
 
-const whyDidYouRender = require('@welldone-software/why-did-you-render');
-const ReactRedux = require('react-redux');
-whyDidYouRender(React, {
-  trackAllPureComponents: true,
-  trackExtraHooks: [[ReactRedux, 'useSelector']],
-});
-
 import './i18n';
 import NavigationRoot from './navigation';
 import getTheme from './theme';
@@ -38,6 +31,15 @@ if (__DEV__) {
   // @ts-ignore
   GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
+}
+
+if (__DEV__) {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  const ReactRedux = require('react-redux');
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+    trackExtraHooks: [[ReactRedux, 'useSelector']],
+  });
 }
 
 console.disableYellowBox = true;
