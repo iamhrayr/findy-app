@@ -43,7 +43,7 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
   );
 
   if (isVisible && loading) {
-    <Loading />;
+    return <Loading />;
   }
 
   return (
