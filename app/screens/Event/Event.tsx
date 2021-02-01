@@ -94,7 +94,10 @@ const Event = () => {
 
   return (
     <BoxNew flex={1} p="m">
-      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={95}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={95}
+        style={sytles.keyboardAvoidingView}>
         <If condition={loading}>
           <MessagePlaceholder />
         </If>
@@ -120,8 +123,8 @@ const Event = () => {
 };
 
 const sytles = StyleSheet.create({
-  flatList: {
-    // flex: 1,
+  keyboardAvoidingView: {
+    flex: 1,
   },
 });
 
