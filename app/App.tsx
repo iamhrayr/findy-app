@@ -3,7 +3,8 @@ import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as ThemeProviderStyledSystem } from 'styled-components';
+import { ThemeProvider } from '@shopify/restyle';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
@@ -17,6 +18,7 @@ import codePush from 'react-native-code-push';
 import './i18n';
 import NavigationRoot from './navigation';
 import getTheme from './theme';
+import theme from './theme-new';
 import { store, persistor } from './redux/store';
 
 import ErrorBoundary from './ErrorBoundary';
@@ -33,14 +35,14 @@ if (__DEV__) {
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
 }
 
-if (__DEV__) {
-  const whyDidYouRender = require('@welldone-software/why-did-you-render');
-  const ReactRedux = require('react-redux');
-  whyDidYouRender(React, {
-    trackAllPureComponents: true,
-    trackExtraHooks: [[ReactRedux, 'useSelector']],
-  });
-}
+// if (__DEV__) {
+//   const whyDidYouRender = require('@welldone-software/why-did-you-render');
+//   const ReactRedux = require('react-redux');
+//   whyDidYouRender(React, {
+//     trackAllPureComponents: true,
+//     trackExtraHooks: [[ReactRedux, 'useSelector']],
+//   });
+// }
 
 console.disableYellowBox = true;
 
@@ -102,19 +104,22 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={getTheme('light')}>
-          <NetworkStatusChecker>
-            <ErrorBoundary>
-              <SafeAreaProvider>
-                <NavigationContainer ref={navigationRef}>
-                  <StatusBar barStyle="dark-content" />
-                  <NavigationRoot />
-                  <FlashMessage position="top" />
-                </NavigationContainer>
-              </SafeAreaProvider>
-            </ErrorBoundary>
-          </NetworkStatusChecker>
-        </ThemeProvider>
+        {/* TODO: ThemeProviderStyledSystem should be removed */}
+        <ThemeProviderStyledSystem theme={getTheme('light')}>
+          <ThemeProvider theme={theme}>
+            <NetworkStatusChecker>
+              <ErrorBoundary>
+                <SafeAreaProvider>
+                  <NavigationContainer ref={navigationRef}>
+                    <StatusBar barStyle="dark-content" />
+                    <NavigationRoot />
+                    <FlashMessage position="top" />
+                  </NavigationContainer>
+                </SafeAreaProvider>
+              </ErrorBoundary>
+            </NetworkStatusChecker>
+          </ThemeProvider>
+        </ThemeProviderStyledSystem>
       </PersistGate>
     </Provider>
   );

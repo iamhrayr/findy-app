@@ -19,7 +19,8 @@ const Tab = createBottomTabNavigator();
 const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
   return (
     <Tab.Navigator
-      initialRouteName="NewEvent:Tab"
+      // initialRouteName="NewEvent:Tab"
+      initialRouteName="Events:Tab"
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: theme.colors.primary,

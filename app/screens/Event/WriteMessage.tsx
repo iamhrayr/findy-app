@@ -1,22 +1,11 @@
 import React, { useState, useCallback, memo } from 'react';
-import { View, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import styled, { css, withTheme, DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
 import { s } from 'react-native-size-matters';
 
-const Wrapper = styled(View)`
-  ${({ theme }) => css`
-    flex-direction: row;
-    padding: ${s(25)}px ${s(15)}px;
-    border-top-width: ${s(1)}px;
-    border-top-color: ${theme.colors.lightGray};
-    align-items: center;
-    background-color: ${theme.colors.white};
-    margin-top: auto;
-    /* position: absolute; */
-  `}
-`;
+import { BoxNew } from '@app/components';
 
 const MessageInput = styled(TextInput)`
   ${({ theme }) => css`
@@ -25,11 +14,6 @@ const MessageInput = styled(TextInput)`
     border-radius: ${s(25)}px;
     padding: ${s(10)}px ${s(20)}px;
   `}
-`;
-
-const SendIcon = styled(Icon)`
-  margin-left: ${s(10)}px;
-  color: red;
 `;
 
 type Props = {
@@ -47,7 +31,13 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
   }, [message, onSendMessage]);
 
   return (
-    <Wrapper>
+    <BoxNew
+      flexDirection="row"
+      py="l"
+      px="m"
+      borderTopWidth={1}
+      borderTopColor="lightGray"
+      alignItems="center">
       <MessageInput
         placeholder={t('events:message.type_msg')}
         onSubmitEditing={handleSendMessage}
@@ -56,14 +46,16 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
         returnKeyType="send"
       />
 
-      <SendIcon
-        name="paper-plane-outline"
-        width={30}
-        height={30}
-        fill={theme.colors.primary}
-        onPress={handleSendMessage}
-      />
-    </Wrapper>
+      <BoxNew ml="s">
+        <Icon
+          name="paper-plane-outline"
+          width={30}
+          height={30}
+          fill={theme.colors.primary}
+          onPress={handleSendMessage}
+        />
+      </BoxNew>
+    </BoxNew>
   );
 };
 

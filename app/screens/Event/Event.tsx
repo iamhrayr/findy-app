@@ -1,6 +1,6 @@
 /* global WebSocket */
 import React, { useRef, useCallback, useReducer, useMemo, memo } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Message } from '@app/types/Message';
 import { RootState } from '@app/redux/rootReducer';
-import { Container, Content, If, Spacer, NoData, KeyboardShift } from '@app/components';
+import { If, Spacer, NoData, BoxNew } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
@@ -93,31 +93,29 @@ const Event = () => {
   const extractKey = useCallback((item) => String(item.pk), []);
 
   return (
-    <KeyboardShift extraSpace={20}>
-      <Container>
-        <Content full noPaddingY scrollable={false}>
-          <If condition={loading}>
-            <MessagePlaceholder />
-          </If>
+    <BoxNew flex={1} p="m">
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={95}>
+        <If condition={loading}>
+          <MessagePlaceholder />
+        </If>
 
-          <If condition={res}>
-            <FlatList
-              inverted
-              data={allMessages}
-              ListEmptyComponent={renderNoData}
-              ListHeaderComponent={<Spacer t="md" />}
-              ListFooterComponent={<Spacer t="md" />}
-              contentContainerStyle={sytles.flatList}
-              initialNumToRender={INITIAL_FLATLIST_COUNT}
-              renderItem={renderItem}
-              keyExtractor={extractKey}
-            />
-          </If>
+        <If condition={res}>
+          <FlatList
+            inverted
+            data={allMessages}
+            ListEmptyComponent={renderNoData}
+            ListHeaderComponent={<Spacer t="md" />}
+            ListFooterComponent={<Spacer t="md" />}
+            contentContainerStyle={sytles.flatList}
+            initialNumToRender={INITIAL_FLATLIST_COUNT}
+            renderItem={renderItem}
+            keyExtractor={extractKey}
+          />
+        </If>
 
-          <WriteMessage onSendMessage={handleSendMessage} />
-        </Content>
-      </Container>
-    </KeyboardShift>
+        <WriteMessage onSendMessage={handleSendMessage} />
+      </KeyboardAvoidingView>
+    </BoxNew>
   );
 };
 

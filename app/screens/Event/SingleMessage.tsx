@@ -1,11 +1,7 @@
 import React, { memo } from 'react';
-import { View } from 'react-native';
-import styled, { css } from 'styled-components/native';
-import { s } from 'react-native-size-matters';
 
 import moment from '@app/helpers/moment';
-
-import { Avatar, Text, Layout, Spacer } from '@app/components';
+import { Avatar, Spacer, BoxNew, TextNew } from '@app/components';
 
 type Props = {
   text: string;
@@ -13,40 +9,34 @@ type Props = {
   date: string;
 };
 
-const BORDER_RADIUS = `${s(15)}px`;
-
-const MessageTextWrapper = styled(View)<Partial<Props>>`
-  ${({ theme, isTypeReceived }) => css`
-    padding: ${s(12)}px;
-    border-color: ${theme.colors.lightGray};
-    border-radius: ${BORDER_RADIUS};
-    border-top-start-radius: ${!isTypeReceived ? BORDER_RADIUS : 0};
-    border-top-end-radius: ${isTypeReceived ? BORDER_RADIUS : 0};
-    background-color: ${isTypeReceived ? 'transparent' : theme.colors.primary};
-    border-width: ${isTypeReceived ? '1px' : 0};
-    flex: 0.9;
-  `}
-`;
-
-const MessageText = styled(Text)<Partial<Props>>`
-  ${({ theme, isTypeReceived }) => css`
-    color: ${isTypeReceived ? theme.colors.dirtyBlue : theme.colors.white};
-  `}
-`;
-
 const SingleMessage = ({ text, isTypeReceived, date }: Props) => {
   return (
-    <Layout layout="row" spacer={{ b: 'sm' }} reverse={!isTypeReceived}>
+    <BoxNew
+      flexDirection={isTypeReceived ? 'row' : 'row-reverse'}
+      alignItems="flex-start"
+      mb="m">
       {isTypeReceived && <Avatar size="50" circle />}
+
       <Spacer r="md" />
-      <MessageTextWrapper isTypeReceived={isTypeReceived}>
-        <MessageText isTypeReceived={isTypeReceived}>{text}</MessageText>
-      </MessageTextWrapper>
-      <Spacer r="sm" />
-      <Text size="sm" spacer={{ t: 'sm' }}>
+
+      <BoxNew
+        flex={0.9}
+        p="s"
+        borderColor="lightGray"
+        borderRadius={15}
+        borderTopStartRadius={!isTypeReceived ? 15 : 0}
+        borderTopEndRadius={isTypeReceived ? 15 : 0}
+        borderWidth={isTypeReceived ? 1 : 0}
+        bg={isTypeReceived ? 'transparent' : 'primary'}>
+        <TextNew color={isTypeReceived ? 'dirtyBlue' : 'white'}>{text}</TextNew>
+      </BoxNew>
+
+      <BoxNew flex={0.05} />
+
+      <TextNew mt="s" variant="tiny" fontWeight="300">
         {moment(date).fromNow()}
-      </Text>
-    </Layout>
+      </TextNew>
+    </BoxNew>
   );
 };
 

@@ -1,12 +1,8 @@
 import React, { useCallback, memo } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import {
-  Layout,
-  // Avatar,
-  Text,
-} from '@app/components';
+import { BoxNew, TextNew } from '@app/components';
 
 type Props = {
   pk: Id;
@@ -16,38 +12,26 @@ type Props = {
   message: string;
 };
 
-const EventsItem = ({
-  // participant,
-  carNumber,
-  sentAt,
-  message,
-  eventPk,
-}: Props) => {
+const EventsItem = ({ carNumber, sentAt, message, eventPk }: Props) => {
   const navigation = useNavigation();
   const navigateToRegister = useCallback(() => {
     navigation.navigate('Events:Event', { id: eventPk, title: carNumber });
   }, [navigation, eventPk, carNumber]);
 
   return (
-    <TouchableWithoutFeedback onPress={navigateToRegister}>
-      <View style={styles.container}>
-        <Layout layout="row">
-          <Layout spacer={{ b: 'md' }} size={1}>
-            <Text size="sm">{carNumber}</Text>
-          </Layout>
-          <Text size="sm">{sentAt}</Text>
-        </Layout>
+    <TouchableOpacity onPress={navigateToRegister}>
+      <BoxNew>
+        <BoxNew flexDirection="row" mb="s" alignItems="center">
+          <BoxNew flex={1}>
+            <TextNew variant="subtitle">{carNumber}</TextNew>
+          </BoxNew>
+          <TextNew variant="tiny">{sentAt}</TextNew>
+        </BoxNew>
 
-        <Text numberOfLines={2}>{message}</Text>
-      </View>
-    </TouchableWithoutFeedback>
+        <TextNew numberOfLines={2}>{message}</TextNew>
+      </BoxNew>
+    </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
-});
 
 export default memo(EventsItem);

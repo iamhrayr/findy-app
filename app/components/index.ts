@@ -1,5 +1,7 @@
 export { default as Button } from './Button';
 export { default as Text } from './Text';
+export { default as TextNew } from './TextNew';
+export { default as BoxNew } from './BoxNew';
 export { default as Input, MaskedInput } from './Input';
 export { default as Label } from './Label';
 export { default as Spacer } from './Spacer';
