@@ -1,21 +1,25 @@
 import React, { useState, useCallback, memo } from 'react';
-import { View, TextInput } from 'react-native';
+import {
+  // View,
+  TextInput,
+} from 'react-native';
 import styled, { css, withTheme, DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
 import { s } from 'react-native-size-matters';
 
+import {
+  View,
+  KeyboardAwareFlatList,
+  KeyboardAwareScrollView,
+  Incubator,
+  TextField,
+} from 'react-native-ui-lib';
+
+import { Line } from '@app/components';
+
 const Wrapper = styled(View)`
-  ${({ theme }) => css`
-    flex-direction: row;
-    padding: ${s(25)}px ${s(15)}px;
-    border-top-width: ${s(1)}px;
-    border-top-color: ${theme.colors.lightGray};
-    align-items: center;
-    background-color: ${theme.colors.white};
-    margin-top: auto;
-    /* position: absolute; */
-  `}
+  border-top-width: ${s(1)}px;
 `;
 
 const MessageInput = styled(TextInput)`
@@ -29,7 +33,7 @@ const MessageInput = styled(TextInput)`
 
 const SendIcon = styled(Icon)`
   margin-left: ${s(10)}px;
-  color: red;
+  /* color: red; */
 `;
 
 type Props = {
@@ -47,14 +51,26 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
   }, [message, onSendMessage]);
 
   return (
-    <Wrapper>
-      <MessageInput
+    <View paddingH-25 paddingV-15 row center>
+      {/* <Line /> */}
+      {/* <MessageInput
         placeholder={t('events:message.type_msg')}
         onSubmitEditing={handleSendMessage}
         onChangeText={(val) => setMessage(val)}
         value={message}
         returnKeyType="send"
-      />
+      /> */}
+
+      <View flex-1 bg-red10>
+        <Incubator.TextField
+          paddingB-0
+          placeholder={t('events:message.type_msg')}
+          onSubmitEditing={handleSendMessage}
+          onChangeText={(val) => setMessage(val)}
+          value={message}
+          returnKeyType="send"
+        />
+      </View>
 
       <SendIcon
         name="paper-plane-outline"
@@ -63,7 +79,7 @@ const WriteMessage = ({ theme, onSendMessage }: Props) => {
         fill={theme.colors.primary}
         onPress={handleSendMessage}
       />
-    </Wrapper>
+    </View>
   );
 };
 

@@ -1,11 +1,17 @@
 /* global WebSocket */
 import React, { useRef, useCallback, useReducer, useMemo, memo } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { useSelector } from 'react-redux';
 import useMount from 'react-use/lib/useMount';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import camelCaseKeys from 'camelcase-keys';
 import { useTranslation } from 'react-i18next';
+
+import {
+  View,
+  KeyboardAwareFlatList,
+  KeyboardAwareScrollView,
+} from 'react-native-ui-lib';
 
 import { Message } from '@app/types/Message';
 import { RootState } from '@app/redux/rootReducer';
@@ -93,37 +99,38 @@ const Event = () => {
   const extractKey = useCallback((item) => String(item.pk), []);
 
   return (
-    <KeyboardShift extraSpace={20}>
-      <Container>
-        <Content full noPaddingY scrollable={false}>
-          <If condition={loading}>
-            <MessagePlaceholder />
-          </If>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={88}
+      behavior="padding"
+      style={sytles.keyboardAvoidingView}>
+      <View flex-1 padding-20>
+        <If condition={loading}>
+          <MessagePlaceholder />
+        </If>
 
-          <If condition={res}>
-            <FlatList
-              inverted
-              data={allMessages}
-              ListEmptyComponent={renderNoData}
-              ListHeaderComponent={<Spacer t="md" />}
-              ListFooterComponent={<Spacer t="md" />}
-              contentContainerStyle={sytles.flatList}
-              initialNumToRender={INITIAL_FLATLIST_COUNT}
-              renderItem={renderItem}
-              keyExtractor={extractKey}
-            />
-          </If>
+        <If condition={res}>
+          <FlatList
+            inverted
+            data={allMessages}
+            ListEmptyComponent={renderNoData}
+            ListHeaderComponent={<Spacer t="md" />}
+            ListFooterComponent={<Spacer t="md" />}
+            // contentContainerStyle={sytles.flatList}
+            initialNumToRender={INITIAL_FLATLIST_COUNT}
+            renderItem={renderItem}
+            keyExtractor={extractKey}
+          />
+        </If>
+      </View>
 
-          <WriteMessage onSendMessage={handleSendMessage} />
-        </Content>
-      </Container>
-    </KeyboardShift>
+      <WriteMessage onSendMessage={handleSendMessage} />
+    </KeyboardAvoidingView>
   );
 };
 
 const sytles = StyleSheet.create({
-  flatList: {
-    // flex: 1,
+  keyboardAvoidingView: {
+    flex: 1,
   },
 });
 

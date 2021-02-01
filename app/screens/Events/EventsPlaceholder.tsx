@@ -1,14 +1,16 @@
 import React, { memo } from 'react';
 import { Placeholder, PlaceholderLine, ShineOverlay } from 'rn-placeholder';
 
-import { Line, Layout } from '@app/components';
+import { View } from 'react-native-ui-lib';
+
+import { Line } from '@app/components';
 
 const EventsPlaceholder = () => (
   <Placeholder Animation={ShineOverlay}>
-    <Layout layout="row" justify="between" spacer={{ b: 'xs' }}>
+    <View row spread marginB-5>
       <PlaceholderLine width={25} />
       <PlaceholderLine width={20} />
-    </Layout>
+    </View>
     <PlaceholderLine width={100} />
     <PlaceholderLine width={50} />
   </Placeholder>
@@ -16,13 +18,13 @@ const EventsPlaceholder = () => (
 
 const EventsPlaceholders = () => {
   return (
-    <Layout layout="col">
+    <View>
       <EventsPlaceholder />
       <Line spacer={{ y: 'lg' }} />
       <EventsPlaceholder />
       <Line spacer={{ y: 'lg' }} />
       <EventsPlaceholder />
-    </Layout>
+    </View>
   );
 };
 

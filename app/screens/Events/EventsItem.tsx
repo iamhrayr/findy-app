@@ -1,12 +1,24 @@
 import React, { useCallback, memo } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  // StyleSheet,
+  TouchableWithoutFeedback,
+  // View
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import {
-  Layout,
-  // Avatar,
+  View,
   Text,
-} from '@app/components';
+  Avatar,
+  KeyboardAwareFlatList,
+  Incubator,
+} from 'react-native-ui-lib';
+
+// import {
+// Layout,
+// Avatar,
+// Text,
+// } from '@app/components';
 
 type Props = {
   pk: Id;
@@ -29,25 +41,23 @@ const EventsItem = ({
   }, [navigation, eventPk, carNumber]);
 
   return (
-    <TouchableWithoutFeedback onPress={navigateToRegister}>
-      <View style={styles.container}>
-        <Layout layout="row">
-          <Layout spacer={{ b: 'md' }} size={1}>
-            <Text size="sm">{carNumber}</Text>
-          </Layout>
-          <Text size="sm">{sentAt}</Text>
-        </Layout>
+    <Incubator.TouchableOpacity onPress={navigateToRegister}>
+      <View>
+        <View row>
+          <View marginB-10 flex-1>
+            <Text text70M primary>
+              {carNumber}
+            </Text>
+          </View>
+          <Text text90L grey30>
+            {sentAt}
+          </Text>
+        </View>
 
         <Text numberOfLines={2}>{message}</Text>
       </View>
-    </TouchableWithoutFeedback>
+    </Incubator.TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
-});
 
 export default memo(EventsItem);
