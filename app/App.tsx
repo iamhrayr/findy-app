@@ -3,7 +3,8 @@ import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as ThemeProviderStyled } from 'styled-components';
+import { ThemeProvider, defaultTheme } from 'react-native-magnus';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
@@ -102,18 +103,26 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={getTheme('light')}>
-          <NetworkStatusChecker>
-            <ErrorBoundary>
-              <SafeAreaProvider>
-                <NavigationContainer ref={navigationRef}>
-                  <StatusBar barStyle="dark-content" />
-                  <NavigationRoot />
-                  <FlashMessage position="top" />
-                </NavigationContainer>
-              </SafeAreaProvider>
-            </ErrorBoundary>
-          </NetworkStatusChecker>
+        <ThemeProvider
+          theme={{
+            colors: {
+              primary: defaultTheme.colors?.blue600 || '#3182ce',
+              secondary: defaultTheme.colors?.orange600 || '#dd6b20',
+            },
+          }}>
+          <ThemeProviderStyled theme={getTheme('light')}>
+            <NetworkStatusChecker>
+              <ErrorBoundary>
+                <SafeAreaProvider>
+                  <NavigationContainer ref={navigationRef}>
+                    <StatusBar barStyle="dark-content" />
+                    <NavigationRoot />
+                    <FlashMessage position="top" />
+                  </NavigationContainer>
+                </SafeAreaProvider>
+              </ErrorBoundary>
+            </NetworkStatusChecker>
+          </ThemeProviderStyled>
         </ThemeProvider>
       </PersistGate>
     </Provider>
