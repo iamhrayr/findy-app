@@ -20,6 +20,7 @@ const theme = createTheme({
     secondary: palette.orange,
     mainBackground: palette.white,
     cardPrimaryBackground: palette.white,
+    textPrimary: palette.darkGray,
     ...palette,
   },
   spacing: {
@@ -45,7 +46,7 @@ const theme = createTheme({
     },
     body: {
       fontSize: 16,
-      lineHeight: 24,
+      // lineHeight: 24,
       color: 'darkGray',
     },
     subtitle: {
@@ -53,6 +54,34 @@ const theme = createTheme({
       lineHeight: 30,
       color: 'blue',
       fontWeight: 'bold',
+    },
+    title: {
+      fontSize: 30,
+      lineHeight: 36,
+      color: 'blue',
+      fontWeight: 'bold',
+    },
+    giant: {
+      fontSize: 30,
+      lineHeight: 36,
+      color: 'blue',
+      fontWeight: 'bold',
+    },
+  },
+
+  buttonVariants: {
+    primary: {
+      bg: 'primary',
+      color: 'white',
+    },
+    secondary: {
+      bg: 'secondary',
+      color: 'white',
+    },
+  },
+  buttonSizes: {
+    xs: {
+      paddingVertical: 'm',
     },
   },
 });

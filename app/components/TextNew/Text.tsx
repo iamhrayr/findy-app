@@ -5,6 +5,7 @@ const Text = createText<Theme>();
 
 Text.defaultProps = {
   variant: 'body',
+  color: 'textPrimary',
 };
 
 export default Text;
