@@ -1,14 +1,14 @@
 import { s } from 'react-native-size-matters';
 
 import colors from './colors';
+import palette from './palette';
 
 export default {
   colors: {
-    primary: colors.blue,
-    secondary: colors.orange,
-    danger: colors.red,
-    success: colors.green,
-    headerBg: '',
+    primary: palette.blue600,
+    secondary: palette.orange600,
+    danger: palette.red600,
+    success: palette.green600,
     appBg: colors.darkGray,
     footerBg: '',
     link: colors.blue,
