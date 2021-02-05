@@ -11,15 +11,18 @@ const AuthIntro: React.FC = () => {
   const { t } = useTranslation();
 
   const navigateToRegister = useCallback(() => {
-    requestAnimationFrame(() => navigation.navigate('Auth:Register'));
+    // requestAnimationFrame(() => navigation.navigate('Auth:Register'));
+    navigation.navigate('Auth:Register');
   }, [navigation]);
 
   const navigateToLogin = useCallback(() => {
-    requestAnimationFrame(() => navigation.navigate('Auth:Login'));
+    // requestAnimationFrame(() => navigation.navigate('Auth:Login'));
+    navigation.navigate('Auth:Login');
   }, [navigation]);
 
   const navigateToTermsOfUse = useCallback(() => {
-    requestAnimationFrame(() => navigation.navigate('Auth:TermsOfUse'));
+    // requestAnimationFrame(() => navigation.navigate('Auth:TermsOfUse'));
+    navigation.navigate('Auth:TermsOfUse');
   }, [navigation]);
 
   return (

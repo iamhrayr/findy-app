@@ -16,6 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* findyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* findyTests.m */; };
+		462E685E2518C5A7002581F6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462E685D2518C5A7002581F6 /* File.swift */; };
 		46BCA4A924421FF6002A55C3 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46BCA4A824421FF5002A55C3 /* AppCenter-Config.plist */; };
 		46C7C79624311A5E009C5454 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C7C79524311A5E009C5454 /* GoogleService-Info.plist */; };
 		77085884AA444F70ADB83ACD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50A56356A41F4E798702216A /* libz.tbd */; };
@@ -50,7 +51,6 @@
 		13B07F961A680F5B00A75B9A /* findy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = findy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = findy/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = findy/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = findy/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = findy/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = findy/main.m; sourceTree = "<group>"; };
@@ -60,6 +60,8 @@
 		2D02E4901E0B4A5D006451C7 /* findy-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "findy-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		363964F2425C7625BF5B10AE /* Pods-findy-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findy-tvOS.release.xcconfig"; path = "Target Support Files/Pods-findy-tvOS/Pods-findy-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		3817DCACE58E9C807166DEB2 /* Pods-findy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findy.release.xcconfig"; path = "Target Support Files/Pods-findy/Pods-findy.release.xcconfig"; sourceTree = "<group>"; };
+		462E685C2518C5A7002581F6 /* findy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "findy-Bridging-Header.h"; sourceTree = "<group>"; };
+		462E685D2518C5A7002581F6 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		466F83D42443D9F1006E5623 /* findy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = findy.entitlements; path = findy/findy.entitlements; sourceTree = "<group>"; };
 		46BCA4A824421FF5002A55C3 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		46C7C79524311A5E009C5454 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				462E685D2518C5A7002581F6 /* File.swift */,
 				46BCA4A824421FF5002A55C3 /* AppCenter-Config.plist */,
 				46C7C79524311A5E009C5454 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* findy */,
@@ -200,6 +203,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				5635B2B9628E97DCBB2052DC /* Pods */,
+				462E685C2518C5A7002581F6 /* findy-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -317,6 +321,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = C66BH5F2HJ;
+						LastSwiftMigration = 1120;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -430,6 +435,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -451,6 +457,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -637,6 +644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				462E685E2518C5A7002581F6 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,7 +685,6 @@
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
 			path = findy;
@@ -690,6 +697,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80426B7905507DCEFCA526C5 /* Pods-findyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = C66BH5F2HJ;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -714,6 +722,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E50BD9FBAF7FA21CECD7DBE /* Pods-findyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = C66BH5F2HJ;
@@ -736,6 +745,7 @@
 			baseConfigurationReference = 23B5AC8E5C3C2642946621CD /* Pods-findy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODEPUSH_KEY = "";
 				CODE_SIGN_ENTITLEMENTS = findy/findy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -754,6 +764,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.findy.app;
 				PRODUCT_NAME = findy;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "findy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -763,6 +776,7 @@
 			baseConfigurationReference = 3817DCACE58E9C807166DEB2 /* Pods-findy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODEPUSH_KEY = Tj5xhZYBi0OLJNa8ASdwApBik9MnGhDKmSWdB;
 				CODE_SIGN_ENTITLEMENTS = findy/findy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -780,6 +794,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.findy.app;
 				PRODUCT_NAME = findy;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "findy-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -937,7 +953,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -949,6 +965,7 @@
 			baseConfigurationReference = 80C988EB0C107D249437F50E /* Pods-findy.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODEPUSH_KEY = VC6Nn4eGHV1c3wz2cRP1In52VokbQQYP4FQz0;
 				CODE_SIGN_ENTITLEMENTS = findy/findy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -966,6 +983,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.findy.app;
 				PRODUCT_NAME = findy;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "findy-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Staging;
@@ -974,6 +993,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1AEBCD16DA4206AA9A593AF3 /* Pods-findyTests.staging.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = C66BH5F2HJ;
@@ -1094,7 +1114,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1140,7 +1160,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
