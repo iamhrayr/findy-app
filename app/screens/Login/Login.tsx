@@ -3,11 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { KeyboardAvoidingView } from 'react-native';
+import { Button, Box, Text, Input } from 'react-native-magnus';
 
 import { login } from '@app/redux/ducks/auth/actions';
 import { getLoginStatus } from '@app/redux/ducks/auth/selectors';
 // import { RootState } from '@app/redux/rootReducer';
-import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+// import { Input as InputOld } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import LoginImage from './LoginImage';
 // import validation from './validation';
@@ -46,19 +48,33 @@ const Login: React.FC = () => {
   });
 
   return (
-    <Container>
-      <Content noPadding full>
-        <Layout grow={1}>
+    <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <Box flex={1}>
+        <Box flex={1} justifyContent="space-between">
           <LoginImage />
-        </Layout>
+        </Box>
 
-        <Layout spacer={{ x: 'lg', b: 'lg' }}>
-          <Text size="giant" spacer={{ b: 'xl' }}>
+        <Box mx="xl" mb="xl">
+          <Text fontSize={62} mb="2xl">
             {t('login')}
           </Text>
 
+          <Text
+            fontSize="lg"
+            mb="sm"
+            textTransform="uppercase"
+            color="gray500"
+            fontWeight="600">
+            {t('phone_number')}
+          </Text>
           <Input
-            label={t('phone_number')}
+            // label={t('phone_number')}
+            mb="2xl"
+            borderColor="transparent"
+            bg="transparent"
+            borderBottomColor="gray400"
+            px="none"
+            borderBottomWidth={1}
             placeholder="+374 XXXXXXXX"
             onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
@@ -68,14 +84,32 @@ const Login: React.FC = () => {
             }
           />
 
+          <Text
+            fontSize="lg"
+            mb="sm"
+            textTransform="uppercase"
+            color="gray500"
+            fontWeight="600">
+            {t('password')}
+          </Text>
           <Input
             secureTextEntry
-            label={t('password')}
+            mb="2xl"
+            // label={t('password')}
+            borderColor="transparent"
+            bg="transparent"
+            borderBottomColor="gray400"
+            px="none"
+            borderBottomWidth={1}
             placeholder="*******"
             onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            addonRight={
-              <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
+            suffix={
+              <Text
+                textAlign="right"
+                fontSize="lg"
+                color="primary"
+                onPress={navigateToForgot}>
                 {t('auth:login.forgot_password_text')}
               </Text>
             }
@@ -86,25 +120,33 @@ const Login: React.FC = () => {
             }
           />
 
-          <Layout align="center" spacer={{ y: 'md' }}>
+          <Box justifyContent="center" my="lg" flexDir="row">
             <Button
-              wide
-              shape="circle"
-              loading={loginStatus.loading}
-              onPress={formik.handleSubmit}>
+              minW="60%"
+              mb="xl"
+              textTransform="uppercase"
+              rounded="circle"
+              fontSize="xl"
+              onPress={navigateToRegister}>
               {t('login')}
             </Button>
-          </Layout>
+          </Box>
 
-          <Text align="center">
-            <Text align="center">{t('auth:login.new_user')} </Text>
-            <Text align="center" color="primary" onPress={navigateToRegister}>
+          <Box justifyContent="center" flexDir="row">
+            <Text textAlign="center" fontSize="xl" mr="sm">
+              {t('auth:login.new_user')}
+            </Text>
+            <Text
+              textAlign="center"
+              color="primary"
+              fontSize="xl"
+              onPress={navigateToRegister}>
               {t('auth:login.register_text')}
             </Text>
-          </Text>
-        </Layout>
-      </Content>
-    </Container>
+          </Box>
+        </Box>
+      </Box>
+    </KeyboardAvoidingView>
   );
 };
 
