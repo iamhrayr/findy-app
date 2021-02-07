@@ -1,15 +1,16 @@
 import React, { memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Box } from 'react-native-magnus';
 
 import Shape from '@app/assets/shape-1.svg';
 import Security from '@app/assets/security.svg';
 
 const ForgotImage = () => {
   return (
-    <View style={styles.container}>
+    <Box p="xl" mb="2xl">
       <Shape style={styles.shape} />
       <Security style={styles.security} />
-    </View>
+    </Box>
   );
 };
 

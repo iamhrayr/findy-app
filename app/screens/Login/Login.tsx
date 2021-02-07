@@ -3,13 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { KeyboardAvoidingView } from 'react-native';
-import { Button, Box, Text, Input } from 'react-native-magnus';
+import { Button, Box, Text } from 'react-native-magnus';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import { useQuery, useMutation } from 'react-query';
 
+// import api from '@app/api';
 import { login } from '@app/redux/ducks/auth/actions';
 import { getLoginStatus } from '@app/redux/ducks/auth/selectors';
-// import { RootState } from '@app/redux/rootReducer';
-// import { Input as InputOld } from '@app/components';
+import { Input } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import LoginImage from './LoginImage';
 // import validation from './validation';
@@ -39,43 +40,34 @@ const Login: React.FC = () => {
     navigation.navigate('Auth:ForgotPassword');
   }, [navigation]);
 
+  // const { mutate, error, isLoading } = useMutation(api.login);
+
   const formik = useFormik({
     initialValues,
     // validationSchema: validation,
     onSubmit: (values) => {
       dispatch(login(values));
+      // mutate(values);
     },
   });
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
       <Box flex={1}>
-        <Box flex={1} justifyContent="space-between">
+        <Box flex={1}>
           <LoginImage />
         </Box>
 
         <Box mx="xl" mb="xl">
-          <Text fontSize={62} mb="2xl">
+          <Text fontSize="giant" mb="2xl" fontWeight="300">
             {t('login')}
           </Text>
 
-          <Text
-            fontSize="lg"
-            mb="sm"
-            textTransform="uppercase"
-            color="gray500"
-            fontWeight="600">
-            {t('phone_number')}
-          </Text>
           <Input
-            // label={t('phone_number')}
             mb="2xl"
-            borderColor="transparent"
-            bg="transparent"
-            borderBottomColor="gray400"
-            px="none"
-            borderBottomWidth={1}
+            label={t('phone_number')}
             placeholder="+374 XXXXXXXX"
+            keyboardType="phone-pad"
             onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={
@@ -84,32 +76,15 @@ const Login: React.FC = () => {
             }
           />
 
-          <Text
-            fontSize="lg"
-            mb="sm"
-            textTransform="uppercase"
-            color="gray500"
-            fontWeight="600">
-            {t('password')}
-          </Text>
           <Input
             secureTextEntry
+            label={t('password')}
             mb="2xl"
-            // label={t('password')}
-            borderColor="transparent"
-            bg="transparent"
-            borderBottomColor="gray400"
-            px="none"
-            borderBottomWidth={1}
             placeholder="*******"
             onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
             suffix={
-              <Text
-                textAlign="right"
-                fontSize="lg"
-                color="primary"
-                onPress={navigateToForgot}>
+              <Text fontSize="lg" color="primary" onPress={navigateToForgot}>
                 {t('auth:login.forgot_password_text')}
               </Text>
             }
@@ -124,29 +99,23 @@ const Login: React.FC = () => {
             <Button
               minW="60%"
               mb="xl"
-              textTransform="uppercase"
-              rounded="circle"
-              fontSize="xl"
-              onPress={navigateToRegister}>
+              onPress={formik.handleSubmit}
+              loading={loginStatus.loading}>
               {t('login')}
             </Button>
           </Box>
 
           <Box justifyContent="center" flexDir="row">
-            <Text textAlign="center" fontSize="xl" mr="sm">
+            <Text textAlign="center" mr="sm">
               {t('auth:login.new_user')}
             </Text>
-            <Text
-              textAlign="center"
-              color="primary"
-              fontSize="xl"
-              onPress={navigateToRegister}>
+            <Text textAlign="center" color="primary" onPress={navigateToRegister}>
               {t('auth:login.register_text')}
             </Text>
           </Box>
         </Box>
       </Box>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 

@@ -4,8 +4,10 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useTranslation } from 'react-i18next';
+import { Box, Text } from 'react-native-magnus';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { Button, Input } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 // import validation from './validation';
 import { register } from '@app/redux/ducks/auth/actions';
@@ -48,20 +50,22 @@ const Register: React.FC = () => {
   });
 
   return (
-    <Container>
-      <Content noPadding full>
-        <Layout grow={1}>
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+      <Box flex={1}>
+        <Box flex={1}>
           <RegisterImage />
-        </Layout>
+        </Box>
 
-        <Layout spacer={{ x: 'lg', b: 'lg' }}>
-          <Text size="giant" spacer={{ b: 'xl' }}>
+        <Box mb="lg" mx="lg">
+          <Text fontSize="giant" mb="xl" fontWeight="300">
             {t('register')}
           </Text>
 
           <Input
+            mb="2xl"
             label={t('phone_number')}
             placeholder="+374 XXXXXXXX"
+            keyboardType="phone-pad"
             onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={
@@ -69,20 +73,27 @@ const Register: React.FC = () => {
               registerStatus.error?.phoneNumber
             }
           />
+
           <Input
+            mb="2xl"
             label={t('full_name')}
             placeholder="Samuel Jackson"
             onChangeText={(val) => formik.setFieldValue('fullName', val)}
             value={formik.values.fullName}
-            errorMessage={formik.touched.fullName && formik.errors.fullName}
+            errorMessage={
+              (formik.touched.fullName && formik.errors.fullName) ||
+              registerStatus.error?.fullName
+            }
           />
+
           <Input
+            mb="2xl"
             secureTextEntry={!passVisible}
             label={t('password')}
             placeholder="*******"
             onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            addonRight={
+            suffix={
               <Icon onPress={() => setPassVisible(!passVisible)} name="eye" size={22} />
             }
             errorMessage={
@@ -91,25 +102,24 @@ const Register: React.FC = () => {
             }
           />
 
-          <Layout align="center" spacer={{ y: 'md' }}>
+          <Box justifyContent="center" my="lg" flexDir="row">
             <Button
               onPress={formik.handleSubmit}
-              shape="circle"
               loading={registerStatus.loading}
-              wide>
+              w="60%">
               {t('register')}
             </Button>
-          </Layout>
+          </Box>
 
-          <Text align="center">
-            <Text align="center">{t('auth:register.already_registered')} </Text>
-            <Text align="center" color="primary" onPress={navigateToLogin}>
+          <Text textAlign="center">
+            <Text textAlign="center">{t('auth:register.already_registered')} </Text>
+            <Text textAlign="center" color="primary" onPress={navigateToLogin}>
               {t('auth:register.login_text')}
             </Text>
           </Text>
-        </Layout>
-      </Content>
-    </Container>
+        </Box>
+      </Box>
+    </KeyboardAwareScrollView>
   );
 };
 

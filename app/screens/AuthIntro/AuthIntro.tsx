@@ -2,7 +2,8 @@ import React, { useCallback, memo } from 'react';
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Trans, useTranslation } from 'react-i18next';
-import { Button, Box, Text } from 'react-native-magnus';
+import { Box, Text } from 'react-native-magnus';
+import { Button } from '@app/components';
 
 import { withInteractionsComplete } from '@app/HoCs';
 import IntroImage from './IntroImage';
@@ -43,26 +44,12 @@ const AuthIntro: React.FC = () => {
 
             <Box flexDir="row" justifyContent="space-between" my="2xl">
               <Box flex={0.48}>
-                <Button
-                  block
-                  bg="transparent"
-                  borderWidth={1}
-                  borderColor="primary"
-                  color="primary"
-                  textTransform="uppercase"
-                  rounded="circle"
-                  fontSize="xl"
-                  onPress={navigateToRegister}>
+                <Button block outline onPress={navigateToRegister}>
                   {t('register')}
                 </Button>
               </Box>
               <Box flex={0.48}>
-                <Button
-                  block
-                  textTransform="uppercase"
-                  rounded="circle"
-                  fontSize="xl"
-                  onPress={navigateToLogin}>
+                <Button block onPress={navigateToLogin}>
                   {t('login')}
                 </Button>
               </Box>
