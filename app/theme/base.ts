@@ -33,4 +33,68 @@ export default {
     '-3xl': -48,
     '-4xl': -64,
   },
+
+  shadow: {
+    none: {},
+    xs: {
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 1.0,
+
+      elevation: 2,
+    },
+    sm: {
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.12,
+      shadowRadius: 2.62,
+
+      elevation: 4,
+    },
+    md: {
+      shadowOffset: {
+        width: 0,
+        height: 8,
+      },
+      shadowOpacity: 0.14,
+      shadowRadius: 4.65,
+
+      elevation: 8,
+    },
+    lg: {
+      shadowOffset: {
+        width: 0,
+        height: 12,
+      },
+      shadowOpacity: 0.18,
+      shadowRadius: 7.49,
+
+      elevation: 12,
+    },
+    xl: {
+      shadowOffset: {
+        width: 0,
+        height: 18,
+      },
+      shadowOpacity: 0.24,
+      shadowRadius: 10.32,
+
+      elevation: 18,
+    },
+    '2xl': {
+      shadowOffset: {
+        width: 0,
+        height: 24,
+      },
+      shadowOpacity: 0.28,
+      shadowRadius: 13.16,
+
+      elevation: 24,
+    },
+  },
 };

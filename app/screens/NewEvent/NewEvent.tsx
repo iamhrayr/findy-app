@@ -1,22 +1,12 @@
 import React, { useState, useCallback, memo } from 'react';
 import { Alert } from 'react-native';
-import styled from 'styled-components/native';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
-import { s } from 'react-native-size-matters';
+import { Box, Text } from 'react-native-magnus';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import {
-  Container,
-  Content,
-  Text,
-  Card,
-  Spacer,
-  Input,
-  MaskedInput,
-  Button,
-  Layout,
-} from '@app/components';
+import { Input, MaskedInput, Button } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
@@ -27,12 +17,6 @@ type FormValues = {
   carNumber: string;
   message: string;
 };
-
-const TextArea = styled(Input)`
-  /* TODO: most probably we need TextArea component or more smart Input one */
-  margin-top: ${s(12)}px;
-  min-height: ${s(100)}px;
-`;
 
 const NewEvent = () => {
   const { t } = useTranslation();
@@ -86,39 +70,39 @@ const NewEvent = () => {
   }, [checkCarExistance, formik.values.carNumber, t]);
 
   return (
-    <Container>
-      <Content>
-        <Layout spacer={{ x: 'sm', y: 'sm' }}>
-          <Card>
-            <Spacer b="sm" />
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+      <Box p="lg">
+        <Box
+          shadow="md"
+          rounded="xl"
+          px="md"
+          py="3xl"
+          mb="2xl"
+          bg="white"
+          alignItems="center">
+          <LicensePlateIcon width={100} height={100} />
 
-            <Layout align="center">
-              <LicensePlateIcon width={100} height={100} />
-              <Text align="center" size="h3" weight="700">
-                {t('events:new_event.title')}
-              </Text>
-              <Spacer b="xs" />
-              <Text align="center" size="xs">
-                {t('events:new_event.subtitle')}
-              </Text>
-            </Layout>
-            <Spacer b="lg" />
-          </Card>
-        </Layout>
+          <Text textAlign="center" fontSize="4xl" fontWeight="700" mb="xs">
+            {t('events:new_event.title')}
+          </Text>
+
+          <Text textAlign="center" fontSize="md">
+            {t('events:new_event.subtitle')}
+          </Text>
+        </Box>
 
         <MaskedInput
           options={{ mask: '99 AA 999' }}
           label={t('car_number')}
           placeholder="11 AA 111"
-          spacer={{ t: 'lg' }}
           onChangeText={handleCarNumberChange}
           value={formik.values.carNumber}
           autoCapitalize="characters"
-          addonRight={
+          suffix={
             <Button
-              type="success"
-              shape="circle"
+              variant="success"
               size="sm"
+              minW={60}
               onPress={handleCheckButtonPress}
               disabled={formik.values.carNumber.length === 0 || loading}
               loading={loading}>
@@ -127,7 +111,7 @@ const NewEvent = () => {
           }
         />
 
-        <TextArea
+        <Input
           multiline
           textAlignVertical="top"
           numberOfLines={4}
@@ -135,13 +119,15 @@ const NewEvent = () => {
           value={formik.values.message}
           onChangeText={(val) => formik.setFieldValue('message', val)}
           placeholder={t('events:new_event.message_to_driver_placeholder')}
-          spacer={{ t: 'lg' }}
+          mt="lg"
+          minH={100}
         />
 
         <Button
           disabled={isNextDisabled}
-          spacer={{ t: 'xl' }}
-          shape="circle"
+          mt="xl"
+          w="60%"
+          alignSelf="center"
           onPress={() => setIsVisible(true)}>
           {t('next')}
         </Button>
@@ -157,8 +143,8 @@ const NewEvent = () => {
           message={formik.values.message}
           onSuccess={handleRequestSuccess}
         />
-      </Content>
-    </Container>
+      </Box>
+    </KeyboardAwareScrollView>
   );
 };
 

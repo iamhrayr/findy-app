@@ -2,24 +2,21 @@ import React from 'react';
 import { Button as BaseButton, ButtonProps, useTheme } from 'react-native-magnus';
 
 type Props = ButtonProps & {
-  size?: keyof typeof SIZES;
+  size?: string | number;
   outline?: boolean;
   ghost?: boolean;
 };
 
-const SIZES = {
-  sm: {
-    // p: 'lg',
-    // fontSize: 'lg',
-  },
-  md: {
-    // p: 'md',
-    // fontSize: 'xl',
-  },
-  xl: {
-    // p: 'xl',
-    // fontSize: '2xl',
-  },
+const getSizes = (size: string | number) => {
+  if (!size) {
+    return;
+  }
+
+  return {
+    p: size,
+    fontSize: size,
+    loaderSize: size,
+  };
 };
 
 const Button = ({ size, outline, ghost, ...rest }: Props) => {
@@ -54,7 +51,7 @@ const Button = ({ size, outline, ghost, ...rest }: Props) => {
 
     if (size) {
       newProps = {
-        ...SIZES[size],
+        ...getSizes(size),
         ...newProps,
       };
     }
