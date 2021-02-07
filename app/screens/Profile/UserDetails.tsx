@@ -1,20 +1,16 @@
 import React, { useCallback, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Icon } from 'react-native-eva-icons';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import ImagePicker, { Image } from 'react-native-image-crop-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { withTheme, DefaultTheme } from 'styled-components/native';
+import { Box, Text, Icon, Avatar } from 'react-native-magnus';
 
+import { Button } from '@app/components';
 import { authSelectors, authActions } from '@app/redux/ducks/auth';
-import { Avatar, Layout, Text, Button } from '@app/components';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-type Props = {
-  theme: DefaultTheme;
-};
-
-const UserDetails = ({ theme }: Props) => {
+const UserDetails = () => {
   const navigation = useNavigation();
   const user = useSelector(authSelectors.getUser);
   const dispatch = useDispatch();
@@ -61,34 +57,27 @@ const UserDetails = ({ theme }: Props) => {
   }, [dispatch]);
 
   return (
-    <Layout layout="row" spacer={{ x: 'md', b: 'lg', t: 'lg' }}>
-      <Avatar clickable onPress={handleAvatarPress} source={{ uri: user!.avatar! }} />
-      <Layout layout="col" justify="center" spacer={{ l: 'lg' }}>
-        <Text size="h3" weight="600" spacer={{ b: 'sm' }}>
+    <Box flexDir="row" mx="md" my="lg">
+      <TouchableOpacity onPress={handleAvatarPress}>
+        <Avatar size={100} rounded="2xl" source={{ uri: user!.avatar! }} />
+      </TouchableOpacity>
+      <Box justifyContent="center" ml="lg">
+        <Text fontSize="3xl" fontWeight="600" mb="sm">
           {renderFullName()}
         </Text>
-        <Layout layout="row">
-          <Icon
-            name="phone-outline"
-            width={20}
-            height={20}
-            fill={theme.colors.darkGray}
-          />
-          <Text weight="300" spacer={{ l: 'xs' }}>
-            {phoneNumber}
-          </Text>
-        </Layout>
-        <Layout layout="col" spacer={{ t: 'sm' }}>
-          <Button outline type="primary" size="sm" onPress={navigateToEditProfile}>
+        <Box flexDir="row" alignItems="center">
+          <Icon name="phone" w={20} h={20} fontSize="xl" color="gray700" />
+          <Text ml="xs">{phoneNumber}</Text>
+        </Box>
+        <Box mt="sm">
+          <Button outline size="sm" w="70%" onPress={navigateToEditProfile}>
             {t('profile:edit_profile')}
           </Button>
-        </Layout>
-      </Layout>
-    </Layout>
+        </Box>
+      </Box>
+    </Box>
   );
 };
-
-const UserDetailsWithTheme = withTheme(UserDetails);
 
 // all this messy shit was because of some unexpected rerender after logout.
 // When logout action dispatched it changes isAuthenticated flag,
@@ -99,7 +88,7 @@ const UserDetailsWrapper = ({ isAuthenticated }: { isAuthenticated: boolean }) =
   if (!isAuthenticated) {
     return null;
   }
-  return <UserDetailsWithTheme />;
+  return <UserDetails />;
 };
 
 export default memo(UserDetailsWrapper);

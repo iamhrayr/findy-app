@@ -41,7 +41,7 @@ export default {
         width: 0,
         height: 2,
       },
-      shadowOpacity: 0.1,
+      shadowOpacity: 0.05,
       shadowRadius: 1.0,
 
       elevation: 2,
@@ -51,7 +51,7 @@ export default {
         width: 0,
         height: 4,
       },
-      shadowOpacity: 0.12,
+      shadowOpacity: 0.07,
       shadowRadius: 2.62,
 
       elevation: 4,
@@ -61,7 +61,7 @@ export default {
         width: 0,
         height: 8,
       },
-      shadowOpacity: 0.14,
+      shadowOpacity: 0.09,
       shadowRadius: 4.65,
 
       elevation: 8,
@@ -71,7 +71,7 @@ export default {
         width: 0,
         height: 12,
       },
-      shadowOpacity: 0.18,
+      shadowOpacity: 0.11,
       shadowRadius: 7.49,
 
       elevation: 12,
@@ -81,7 +81,7 @@ export default {
         width: 0,
         height: 18,
       },
-      shadowOpacity: 0.24,
+      shadowOpacity: 0.14,
       shadowRadius: 10.32,
 
       elevation: 18,
@@ -91,7 +91,7 @@ export default {
         width: 0,
         height: 24,
       },
-      shadowOpacity: 0.28,
+      shadowOpacity: 0.18,
       shadowRadius: 13.16,
 
       elevation: 24,

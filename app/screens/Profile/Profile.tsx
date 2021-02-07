@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, memo } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { DefaultTheme, withTheme } from 'styled-components/native';
-import { Icon } from 'react-native-eva-icons';
+// import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
+import { Box, Text, Icon } from 'react-native-magnus';
 
 import { Car } from '@app/types/Car';
 import { profileSelectors } from '@app/redux/ducks/profile';
@@ -12,20 +12,16 @@ import { removeCar } from '@app/redux/ducks/profile/actions';
 import { useNavigation } from '@react-navigation/native';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
-import { Container, Card, Layout, Text, Button, Line, NoData, If } from '@app/components';
+import { Button, NoData, If } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import { fetchMyCars as fetchMyCarsRedux } from '@app/redux/ducks/profile/actions';
 import CarNumberRow from './CarNumberRow';
 import UserDetails from './UserDetails';
 import CarNumberPlaceholder from './CarNumberPlaceholder';
 
-type Props = {
-  theme: DefaultTheme;
-};
-
 const INITIAL_FLATLIST_COUNT = 10;
 
-const Profile = ({ theme }: Props) => {
+const Profile = () => {
   const { t } = useTranslation();
 
   const navigation = useNavigation();
@@ -63,7 +59,7 @@ const Profile = ({ theme }: Props) => {
   }, [dispatch]);
 
   const renderNoData = useCallback(() => <NoData message={t('no_data_text')} />, [t]);
-  const renderLine = useCallback(() => <Line spacer={{ y: 'lg' }} />, []);
+  const renderLine = useCallback(() => <Box h={1} bg="gray300" my="xl" />, []);
   const extractKey = useCallback((item) => String(item.pk), []);
   const renderItem = useCallback(
     ({ item }: { item: Car }) => (
@@ -77,50 +73,44 @@ const Profile = ({ theme }: Props) => {
   );
 
   return (
-    <Container>
+    <Box flex={1}>
       <UserDetails isAuthenticated={isAuthenticated} />
 
-      <Layout size={1} spacer={{ x: 'md', b: 'md' }}>
-        <Card size={1}>
-          <Layout layout="row" justify="between" spacer={{ b: 'md' }}>
-            <Text spacer={{ b: 'sm' }}>{t('profile:my_cars')}</Text>
-            <TouchableOpacity onPress={() => navigateToAddEditCar()}>
-              <Layout layout="row" align="center">
-                <Text color="primary" transform="uppercase" spacer={{ r: 'xs' }}>
-                  {t('add')}
-                </Text>
-                <Icon
-                  name="plus-outline"
-                  width={20}
-                  height={20}
-                  fill={theme.colors.primary}
-                />
-              </Layout>
-            </TouchableOpacity>
-          </Layout>
+      <Box flex={1} mb="md" mx="md" bg="white" rounded="xl" p="xl" shadow="md">
+        <Box flexDir="row" justifyContent="space-between" mb="md">
+          <Text mb="sm">{t('profile:my_cars')}</Text>
 
-          <If condition={loading}>
-            <CarNumberPlaceholder />
-          </If>
+          <TouchableOpacity onPress={() => navigateToAddEditCar()}>
+            <Box flexDir="row" alignItems="center">
+              <Text color="primary" textTransform="uppercase" mr="xs">
+                {t('add')}
+              </Text>
+              <Icon name="plus" w={20} h={20} color="primary" />
+            </Box>
+          </TouchableOpacity>
+        </Box>
 
-          <If condition={loaded}>
-            <FlatList
-              data={myCars}
-              ItemSeparatorComponent={renderLine}
-              ListEmptyComponent={renderNoData}
-              initialNumToRender={INITIAL_FLATLIST_COUNT}
-              renderItem={renderItem}
-              keyExtractor={extractKey}
-            />
-          </If>
-        </Card>
-      </Layout>
+        <If condition={loading}>
+          <CarNumberPlaceholder />
+        </If>
 
-      <Button type="link" size="sm" onPress={logoutHandler}>
+        <If condition={loaded}>
+          <FlatList
+            data={myCars}
+            ItemSeparatorComponent={renderLine}
+            ListEmptyComponent={renderNoData}
+            initialNumToRender={INITIAL_FLATLIST_COUNT}
+            renderItem={renderItem}
+            keyExtractor={extractKey}
+          />
+        </If>
+      </Box>
+
+      <Button ghost fontSize="lg" alignSelf="center" onPress={logoutHandler}>
         {t('logout')}
       </Button>
-    </Container>
+    </Box>
   );
 };
 
-export default withInteractionsComplete(memo(withTheme(Profile)));
+export default withInteractionsComplete(memo(Profile));
