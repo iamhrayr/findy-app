@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
 import { showMessage } from 'react-native-flash-message';
 import { useTranslation } from 'react-i18next';
+import { Button, Text } from 'react-native-magnus';
+import { Container, Layout, Content } from '@app/components';
 
-import { Button, Text, Container, Layout, Content } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import UserIdentityIcon from '@app/assets/user-identity.svg';
 import { confirmPhoneNumber } from '@app/redux/ducks/auth/actions';
@@ -50,11 +51,11 @@ const ConfirmPhoneNumber: React.FC = () => {
           <UserIdentityIcon width={100} height={200} />
         </Layout>
 
-        <Text align="center" size="h2" spacer={{ b: 'sm' }}>
+        <Text textAlign="center" fontSize="xl" mb="sm">
           {t('auth:verification.title')}
         </Text>
 
-        <Text align="center">{t('auth:verification.confirmation_code_text')}</Text>
+        <Text textAlign="center">{t('auth:verification.confirmation_code_text')}</Text>
 
         <CountDown
           size={30}
@@ -72,9 +73,9 @@ const ConfirmPhoneNumber: React.FC = () => {
         <VerificationCodeField value={value} cellCount={CELL_COUNT} setValue={setValue} />
 
         <Button
-          shape="circle"
-          size="lg"
-          spacer={{ t: 'xxl' }}
+          mt="2xl"
+          w="60%"
+          alignSelf="center"
           onPress={handleSubmit}
           loading={confirmPhoneNumberStatus.loading}
           disabled={value.length !== CELL_COUNT}>
@@ -82,7 +83,7 @@ const ConfirmPhoneNumber: React.FC = () => {
         </Button>
 
         {confirmPhoneNumberStatus.error?.token && (
-          <Text align="center" color="danger" spacer={{ t: 'sm' }}>
+          <Text textAlign="center" color="danger" mt="sm">
             {confirmPhoneNumberStatus.error?.token}
           </Text>
         )}
