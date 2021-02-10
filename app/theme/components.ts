@@ -3,6 +3,14 @@ export default {
     Text: {
       fontSize: 'xl',
       color: 'gray800',
+      variants: {
+        label: {
+          mb: 'sm',
+          textTransform: 'uppercase',
+          color: 'gray500',
+          fontWeight: '600',
+        },
+      },
     },
     Button: {
       textTransform: 'uppercase',

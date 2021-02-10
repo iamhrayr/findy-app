@@ -57,10 +57,11 @@ const UserDetails = () => {
   }, [dispatch]);
 
   return (
-    <Box flexDir="row" mx="md" my="lg">
+    <Box flexDir="row" mx="md" my="2xl">
       <TouchableOpacity onPress={handleAvatarPress}>
         <Avatar size={100} rounded="2xl" source={{ uri: user!.avatar! }} />
       </TouchableOpacity>
+
       <Box justifyContent="center" ml="lg">
         <Text fontSize="3xl" fontWeight="600" mb="sm">
           {renderFullName()}

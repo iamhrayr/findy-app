@@ -51,7 +51,7 @@
     "react-native-image-progress": "^1.1.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-locale-detector": "^1.0.1",
-    "react-native-magnus": "git://github.com/jsartisan/react-native-magnus#master",
+    "react-native-magnus": "^1.0.61",
     "react-native-masked-text": "^1.13.0",
     "react-native-modal": "^11.6.1",
     "react-native-paper": "^3.8.0",

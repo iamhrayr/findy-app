@@ -1,7 +1,7 @@
 import React, { useState, useCallback, memo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useTranslation } from 'react-i18next';
+import { Icon } from 'react-native-magnus';
 
 import { Input } from '@app/components';
 import { Brand } from '@app/types/CarBrandModel';
@@ -41,9 +41,10 @@ const CarMakeInput = ({ formik, brands, loading }: Props) => {
           label={t('profile:car_make_label')}
           placeholder={t('profile:car_make_placeholder')}
           value={formik.values.makeName}
-          addonRight={<Icon name="ios-arrow-forward" size={24} />}
+          suffix={<Icon name="ios-arrow-forward" fontFamily="Ionicons" fontSize={24} />}
           errorMessage={formik.touched.makeName && formik.errors.makeName}
           editable={false}
+          mb="2xl"
         />
       </TouchableOpacity>
 

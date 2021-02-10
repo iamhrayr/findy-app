@@ -25,12 +25,7 @@ const Input = ({
   const { m, mb, mt, ml, mr, p, pt, pb, pl, pr, ...rest } = props;
   const labelContent =
     typeof label === 'string' ? (
-      <Text
-        mb="sm"
-        textTransform="uppercase"
-        color="gray500"
-        fontWeight="600"
-        {...labelProps}>
+      <Text variant="label" {...labelProps}>
         {label}
       </Text>
     ) : (

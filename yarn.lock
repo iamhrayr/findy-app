@@ -7351,9 +7351,10 @@ react-native-locale-detector@^1.0.1:
   resolved "https://registry.yarnpkg.com/react-native-locale-detector/-/react-native-locale-detector-1.0.1.tgz#c002261ecb60619e5952257c8c7fa31c2c15ed30"
   integrity sha1-wAImHstgYZ5ZUiV8jH+jHCwV7TA=
 
-"react-native-magnus@git://github.com/jsartisan/react-native-magnus#master":
-  version "1.0.60"
-  resolved "git://github.com/jsartisan/react-native-magnus#47c639b04e58b3c21f564574e7947d8a1b10e052"
+react-native-magnus@^1.0.61:
+  version "1.0.61"
+  resolved "https://registry.yarnpkg.com/react-native-magnus/-/react-native-magnus-1.0.61.tgz#e3eacf617b218aebc1a3ad60c9f3f33f104cbc4b"
+  integrity sha512-B4omHCR8U3gHYfxuU9uG3Z1LaWqizW8R/pnE6VJ6apF3uN3UTLpwx0HWqetRXmmkHYXmf++odDGO1VcJCwEFNQ==
 
 react-native-masked-text@^1.13.0:
   version "1.13.0"
