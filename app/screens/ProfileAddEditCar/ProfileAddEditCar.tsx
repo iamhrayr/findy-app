@@ -81,68 +81,69 @@ const ProfileAddEditCar: React.FC = () => {
 
   return (
     <Box p="lg">
-      <MaskedInput
-        options={{ mask: '99 AA 999' }}
-        label={t('car_number')}
-        placeholder="11 AA 111"
-        onChangeText={(val: string) => formik.setFieldValue('carNumber', val)}
-        value={formik.values.carNumber}
-        autoCapitalize="characters"
-        errorMessage={
-          (formik.touched.carNumber && formik.errors.carNumber) || error?.carNumber
-        }
-        mb="2xl"
-      />
+      <Box bg="white" p="lg" rounded="lg">
+        <MaskedInput
+          options={{ mask: '99 AA 999' }}
+          label={t('car_number')}
+          placeholder="11 AA 111"
+          onChangeText={(val: string) => formik.setFieldValue('carNumber', val)}
+          value={formik.values.carNumber}
+          autoCapitalize="characters"
+          errorMessage={
+            (formik.touched.carNumber && formik.errors.carNumber) || error?.carNumber
+          }
+          mb="2xl"
+        />
 
-      <CarMakeInput
-        formik={formik}
-        brands={brandsModels.data.brands}
-        loading={brandsModels.loading}
-      />
+        <CarMakeInput
+          formik={formik}
+          brands={brandsModels.data.brands}
+          loading={brandsModels.loading}
+        />
 
-      <CarModelInput
-        key={formik.values.makePk}
-        formik={formik}
-        models={brandsModels.data.models}
-        loading={brandsModels.loading}
-        selectedBrandId={formik.values.makePk}
-      />
+        <CarModelInput
+          key={formik.values.makePk}
+          formik={formik}
+          models={brandsModels.data.models}
+          loading={brandsModels.loading}
+          selectedBrandId={formik.values.makePk}
+        />
 
-      <Box>
-        <Text variant="label">{t('color')}</Text>
-        <Box flexDir="row" alignItems="center">
-          <Box mr="md" flex={0.7}>
-            <ColorPalette
-              onChange={(color: string) => formik.setFieldValue('color', color)}
-              value={formik.values.color}
-              // defaultColor={CAR_COLORS[0]}
-              colors={CAR_COLORS}
-              title={null}
-              icon={
-                <Icon
-                  fontFamily="Ionicons"
-                  name="ios-checkmark"
-                  fontSize={18}
-                  color="white"
-                />
-              }
-              paletteStyles={styles.colorsWrapper}
-            />
-          </Box>
-          <Box flex={0.3}>
-            <CarIcon height={100} color={formik.values.color} />
+        <Box>
+          <Text variant="label">{t('color')}</Text>
+          <Box flexDir="row" alignItems="center">
+            <Box mr="md" flex={0.7}>
+              <ColorPalette
+                onChange={(color: string) => formik.setFieldValue('color', color)}
+                value={formik.values.color}
+                colors={CAR_COLORS}
+                title={null}
+                icon={
+                  <Icon
+                    fontFamily="Ionicons"
+                    name="ios-checkmark"
+                    fontSize={18}
+                    color="white"
+                  />
+                }
+                paletteStyles={styles.colorsWrapper}
+              />
+            </Box>
+            <Box flex={0.3}>
+              <CarIcon height={100} color={formik.values.color} />
+            </Box>
           </Box>
         </Box>
-      </Box>
 
-      <Button
-        block
-        alignSelf="center"
-        mt="2xl"
-        onPress={formik.handleSubmit}
-        loading={loading}>
-        {t('save')}
-      </Button>
+        <Button
+          block
+          alignSelf="center"
+          mt="2xl"
+          onPress={formik.handleSubmit}
+          loading={loading}>
+          {t('save')}
+        </Button>
+      </Box>
     </Box>
   );
 };

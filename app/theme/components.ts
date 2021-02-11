@@ -9,6 +9,7 @@ export default {
           textTransform: 'uppercase',
           color: 'gray500',
           fontWeight: '600',
+          fontSize: 16,
         },
       },
     },
@@ -36,14 +37,16 @@ export default {
       },
     },
     Input: {
+      fontSize: 16,
       variants: {
         regular: {},
         underline: {
-          borderColor: 'transparent',
-          bg: 'transparent',
-          borderBottomColor: 'gray400',
-          px: 'none',
           borderBottomWidth: 1,
+          borderColor: 'transparent',
+          borderBottomColor: 'gray400',
+          bg: 'transparent',
+          px: 'none',
+          rounded: 0,
         },
       },
     },

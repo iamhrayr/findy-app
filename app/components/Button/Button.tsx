@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button as BaseButton, ButtonProps, useTheme } from 'react-native-magnus';
 
-type Props = ButtonProps & {
+export type Props = ButtonProps & {
   size?: string | number;
   outline?: boolean;
   ghost?: boolean;
@@ -30,22 +30,22 @@ const Button = ({ size, outline, ghost, ...rest }: Props) => {
     if (outline && variant) {
       const variants = theme.components?.Button?.variants ?? {};
       newProps = {
-        ...newProps,
         bg: 'transparent',
         borderWidth: 1,
         borderColor: bg ?? variants[variant].bg,
         color: bg ?? variants[variant].bg,
+        ...newProps,
       };
     }
 
     if (ghost && variant) {
       const variants = theme.components?.Button?.variants ?? {};
       newProps = {
-        ...newProps,
         bg: 'transparent',
         borderWidth: 0,
         borderColor: 'transparent',
         color: bg ?? variants[variant].bg,
+        ...newProps,
       };
     }
 
@@ -59,6 +59,7 @@ const Button = ({ size, outline, ghost, ...rest }: Props) => {
     return newProps;
   }, [ghost, outline, rest, size, theme.components]);
 
+  console.log(computedProps);
   return <BaseButton {...computedProps} />;
 };
 

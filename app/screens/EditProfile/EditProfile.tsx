@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
+import { ScrollView } from 'react-native';
+import { Box } from 'react-native-magnus';
 
-import { Container, Content, Spacer } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 // import { useHideTabBar } from '@app/hooks';
 
@@ -11,13 +12,13 @@ const EditProfile: React.FC = () => {
   // useHideTabBar();
 
   return (
-    <Container>
-      <Content>
+    <ScrollView>
+      <Box p="lg">
         <PersonalDetailsForm />
-        <Spacer b="lg" />
+        <Box mb="lg" />
         <NotificationSettings />
-      </Content>
-    </Container>
+      </Box>
+    </ScrollView>
   );
 };
 

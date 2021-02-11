@@ -2,11 +2,12 @@ import React, { memo } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Box, Text, Button } from 'react-native-magnus';
 
 // import { useAsyncFn } from '@app/hooks';
 // import api from '@app/api';
 import { authSelectors, authActions } from '@app/redux/ducks/auth';
-import { Card, Input, Layout, Button, Text } from '@app/components';
+import { Input } from '@app/components';
 // import validation from './validation';
 
 type FormValues = {
@@ -39,12 +40,13 @@ const PersonalDetailsForm: React.FC = () => {
   const { values, setFieldValue, touched, errors, handleSubmit } = formik;
 
   return (
-    <Card>
-      <Text size="lg" align="center" spacer={{ b: 'lg' }}>
+    <Box bg="white" p="lg" rounded="lg" shadow="sm">
+      <Text fontSize="4xl" textAlign="center" mb="lg">
         {t('profile:settings.personal_details_title')}
       </Text>
 
       <Input
+        mb="lg"
         label={t('first_name')}
         placeholder=""
         onChangeText={(val) => setFieldValue('firstName', val)}
@@ -53,39 +55,37 @@ const PersonalDetailsForm: React.FC = () => {
       />
 
       <Input
+        mb="lg"
         label={t('last_name')}
-        placeholder=""
         onChangeText={(val) => setFieldValue('lastName', val)}
         value={values.lastName}
         errorMessage={touched.lastName && errors.lastName}
       />
 
       <Input
+        mb="lg"
         label={t('email')}
-        placeholder=""
         onChangeText={(val) => setFieldValue('email', val)}
         value={values.email}
         errorMessage={touched.email && errors.email}
       />
 
       <Input
+        mb="lg"
         editable={false}
         label={t('phone_number')}
-        placeholder=""
         value={user!.phoneNumber}
-        addonRight={
-          <Text align="right" size="sm" color="gray">
+        suffix={
+          <Text textAlign="right" fontSize="md" color="gray">
             {t('profile:not_editable')}
           </Text>
         }
       />
 
-      <Layout align="center" spacer={{ y: 'md' }}>
-        <Button wide shape="circle" onPress={handleSubmit}>
-          {t('save')}
-        </Button>
-      </Layout>
-    </Card>
+      <Button alignSelf="center" w="60%" onPress={handleSubmit} my="lg">
+        {t('save')}
+      </Button>
+    </Box>
   );
 };
 
