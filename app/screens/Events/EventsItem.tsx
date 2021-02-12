@@ -1,12 +1,7 @@
 import React, { useCallback, memo } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-import {
-  Layout,
-  // Avatar,
-  Text,
-} from '@app/components';
+import { Text, Box } from 'react-native-magnus';
 
 type Props = {
   pk: Id;
@@ -30,24 +25,22 @@ const EventsItem = ({
 
   return (
     <TouchableWithoutFeedback onPress={navigateToRegister}>
-      <View style={styles.container}>
-        <Layout layout="row">
-          <Layout spacer={{ b: 'md' }} size={1}>
-            <Text size="sm">{carNumber}</Text>
-          </Layout>
-          <Text size="sm">{sentAt}</Text>
-        </Layout>
+      <Box bg="white">
+        <Box flexDir="row" mb="md">
+          <Text fontSize="xl" fontWeight="500" flex={1}>
+            {carNumber}
+          </Text>
+          <Text fontSize="md" color="gray700">
+            {sentAt}
+          </Text>
+        </Box>
 
-        <Text numberOfLines={2}>{message}</Text>
-      </View>
+        <Text fontSize="lg" numberOfLines={2}>
+          {message}
+        </Text>
+      </Box>
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
-});
 
 export default memo(EventsItem);

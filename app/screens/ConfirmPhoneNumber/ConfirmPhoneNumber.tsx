@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
 import { showMessage } from 'react-native-flash-message';
 import { useTranslation } from 'react-i18next';
-import { Button, Text } from 'react-native-magnus';
-import { Container, Layout, Content } from '@app/components';
+import { Text, Box } from 'react-native-magnus';
+import { Button } from '@app/components';
 
 import { withInteractionsComplete } from '@app/HoCs';
 import UserIdentityIcon from '@app/assets/user-identity.svg';
@@ -45,50 +45,48 @@ const ConfirmPhoneNumber: React.FC = () => {
   }, [confirmPhoneNumberStatus.loaded, navigation, t]);
 
   return (
-    <Container>
-      <Content extraPadded>
-        <Layout align="center">
-          <UserIdentityIcon width={100} height={200} />
-        </Layout>
+    <Box w="80%" alignSelf="center" justifyContent="center" flex={0.8}>
+      <Box alignItems="center">
+        <UserIdentityIcon width={100} height={200} />
+      </Box>
 
-        <Text textAlign="center" fontSize="xl" mb="sm">
-          {t('auth:verification.title')}
+      <Text textAlign="center" fontSize="xl" mb="sm">
+        {t('auth:verification.title')}
+      </Text>
+
+      <Text textAlign="center">{t('auth:verification.confirmation_code_text')}</Text>
+
+      <CountDown
+        size={30}
+        until={2 * 60}
+        // @ts-ignore
+        // TODO: show message and redirect to register page if time is over
+        onFinish={() => Alert.alert('Finished')}
+        digitStyle={styles.digitStyle}
+        separatorStyle={styles.separatorStyle}
+        timeToShow={['M', 'S']}
+        timeLabels={{ m: null, s: null }}
+        showSeparator
+      />
+
+      <VerificationCodeField value={value} cellCount={CELL_COUNT} setValue={setValue} />
+
+      <Button
+        mt="2xl"
+        w="60%"
+        alignSelf="center"
+        onPress={handleSubmit}
+        loading={confirmPhoneNumberStatus.loading}
+        disabled={value.length !== CELL_COUNT}>
+        {t('confirm')}
+      </Button>
+
+      {confirmPhoneNumberStatus.error?.token && (
+        <Text textAlign="center" color="danger" mt="sm">
+          {confirmPhoneNumberStatus.error?.token}
         </Text>
-
-        <Text textAlign="center">{t('auth:verification.confirmation_code_text')}</Text>
-
-        <CountDown
-          size={30}
-          until={2 * 60}
-          // @ts-ignore
-          // TODO: show message and redirect to register page if time is over
-          onFinish={() => Alert.alert('Finished')}
-          digitStyle={styles.digitStyle}
-          separatorStyle={styles.separatorStyle}
-          timeToShow={['M', 'S']}
-          timeLabels={{ m: null, s: null }}
-          showSeparator
-        />
-
-        <VerificationCodeField value={value} cellCount={CELL_COUNT} setValue={setValue} />
-
-        <Button
-          mt="2xl"
-          w="60%"
-          alignSelf="center"
-          onPress={handleSubmit}
-          loading={confirmPhoneNumberStatus.loading}
-          disabled={value.length !== CELL_COUNT}>
-          {t('confirm')}
-        </Button>
-
-        {confirmPhoneNumberStatus.error?.token && (
-          <Text textAlign="center" color="danger" mt="sm">
-            {confirmPhoneNumberStatus.error?.token}
-          </Text>
-        )}
-      </Content>
-    </Container>
+      )}
+    </Box>
   );
 };
 

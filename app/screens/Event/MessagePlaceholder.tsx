@@ -1,67 +1,44 @@
 import React, { memo } from 'react';
-import { StyleSheet } from 'react-native';
-import {
-  Placeholder,
-  PlaceholderLine,
-  PlaceholderMedia,
-  ShineOverlay,
-} from 'rn-placeholder';
-import { s } from 'react-native-size-matters';
-import styled from 'styled-components/native';
 
-import { Spacer, Layout } from '@app/components';
-
-const ImagePlaceholder = styled(PlaceholderMedia)`
-  width: ${s(55)}px;
-  height: ${s(55)}px;
-  border-radius: ${s(50)}px;
-  margin-right: ${s(10)}px;
-`;
-
-const ReceivedMessagePlaceholder = ({ rowCount }: { rowCount: number }) => {
-  const elements: any[] = [];
-  for (let i = 0; i < rowCount; i++) {
-    elements.push(<PlaceholderLine width={s(70)} key={i} />);
-  }
-
-  return (
-    <Placeholder Left={() => <ImagePlaceholder isRound />} Animation={ShineOverlay}>
-      {elements}
-    </Placeholder>
-  );
-};
-
-const SentMessagePlaceholder = ({ rowCount }: { rowCount: number }) => {
-  const elements: any[] = [];
-  for (let i = 0; i < rowCount; i++) {
-    elements.push(
-      <PlaceholderLine width={s(70)} key={i} style={{ alignSelf: 'flex-end' }} />,
-    );
-  }
-
-  return <Placeholder Animation={ShineOverlay}>{elements}</Placeholder>;
-};
+import { Box, Skeleton } from 'react-native-magnus';
 
 const MessagePlaceholders = () => {
   return (
-    <Layout layout="col" style={styles.container}>
-      <ReceivedMessagePlaceholder rowCount={3} />
-      <Spacer b="md" />
-      <ReceivedMessagePlaceholder rowCount={4} />
-      <Spacer b="md" />
-      <SentMessagePlaceholder rowCount={1} />
-      <Spacer b="md" />
-      <SentMessagePlaceholder rowCount={2} />
-      <Spacer b="md" />
-      <ReceivedMessagePlaceholder rowCount={3} />
-    </Layout>
+    <>
+      <Box flexDir="row" mb="xl">
+        <Skeleton.Circle h={55} w={55} />
+        <Box ml="md" flex={1}>
+          <Skeleton.Box />
+          <Skeleton.Box mt="sm" w="80%" />
+          <Skeleton.Box mt="sm" />
+        </Box>
+      </Box>
+
+      <Box flexDir="row" mb="xl" alignItems="center">
+        <Skeleton.Circle h={55} w={55} />
+        <Box ml="md" flex={1}>
+          <Skeleton.Box w="80%" />
+          <Skeleton.Box mt="sm" />
+        </Box>
+      </Box>
+
+      <Box flexDir="row-reverse" mb="xl">
+        <Box ml="md" flex={0.7}>
+          <Skeleton.Box />
+          <Skeleton.Box mt="sm" />
+          <Skeleton.Box mt="sm" w="80%" alignSelf="flex-end" />
+        </Box>
+      </Box>
+
+      <Box flexDir="row" mb="xl" alignItems="center">
+        <Skeleton.Circle h={55} w={55} />
+        <Box ml="md" flex={1}>
+          <Skeleton.Box />
+          <Skeleton.Box mt="sm" />
+        </Box>
+      </Box>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 'auto',
-  },
-});
 
 export default memo(MessagePlaceholders);
