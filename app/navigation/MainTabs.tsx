@@ -20,7 +20,7 @@ const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
   return (
     <Tab.Navigator
       // initialRouteName="NewEvent:Tab"
-      initialRouteName="Profile:Tab"
+      initialRouteName="Profile:Events"
       tabBarOptions={{
         keyboardHidesTabBar: true,
         activeTintColor: theme.colors.primary,

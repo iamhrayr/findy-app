@@ -1,23 +1,20 @@
 import React, { memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Box } from 'react-native-magnus';
 
 import Shape from '@app/assets/shape-1.svg';
 import Security from '@app/assets/security.svg';
 
 const ForgotImage = () => {
   return (
-    <View style={styles.container}>
+    <Box mb={20} p={20}>
       <Shape style={styles.shape} />
       <Security style={styles.security} />
-    </View>
+    </Box>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 50,
-    padding: 20,
-  },
   shape: {
     width: '200%',
     height: 300,
