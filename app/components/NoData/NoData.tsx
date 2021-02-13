@@ -1,29 +1,15 @@
 import React, { memo } from 'react';
-import { View } from 'react-native';
-import styled, { css } from 'styled-components/native';
-import { s } from 'react-native-size-matters';
-
-import Text from '../Text';
+import { Box, Text } from 'react-native-magnus';
 
 type Props = {
   message: React.ReactNode;
 };
 
-const Wrapper = styled(View)`
-  ${({ theme }) => css`
-    padding: ${s(25)}px;
-    align-items: center;
-    border-width: ${s(1)}px;
-    border-radius: ${theme.borderRadius.round}px;
-    border-color: ${theme.colors.lightGray};
-  `}
-`;
-
 const NoData = ({ message }: Props) => {
   return (
-    <Wrapper>
+    <Box p={25} alignItems="center" borderWidth={1} rounded="lg" borderColor="gray400">
       <Text>{message}</Text>
-    </Wrapper>
+    </Box>
   );
 };
 

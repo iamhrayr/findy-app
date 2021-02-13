@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { View, Text } from 'react-native';
+import { Box, Text } from 'react-native-magnus';
 
 const Loading = () => {
   return (
-    <View>
+    <Box>
       <Text>Loading...</Text>
-    </View>
+    </Box>
   );
 };
 

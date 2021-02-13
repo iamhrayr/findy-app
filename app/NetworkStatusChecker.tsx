@@ -2,8 +2,8 @@ import React, { useEffect, useState, memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import { useTranslation } from 'react-i18next';
+import { Box, Text } from 'react-native-magnus';
 
-import { Container, Content, Text, Layout } from '@app/components';
 import noConnectionImg from '@app/assets/no-connection.png';
 
 type Props = {
@@ -24,19 +24,17 @@ const NetworkStatusChecker = ({ children }: Props) => {
 
   if (!isConnected) {
     return (
-      <Container>
-        <Content full extraPadded>
-          <Layout size={1} align="center" justify="center">
-            <Image source={noConnectionImg} resizeMode="contain" style={styles.image} />
-            <Text size="h3" spacer={{ b: 'sm' }} weight="600" align="center">
-              {t('you_are_offline')}
-            </Text>
-            <Text size="lg" weight="300" align="center">
-              {t('connect_to_network_message')}
-            </Text>
-          </Layout>
-        </Content>
-      </Container>
+      <Box>
+        <Box flex={1} alignItems="center" justifyContent="center">
+          <Image source={noConnectionImg} resizeMode="contain" style={styles.image} />
+          <Text fontSize="h3" mb="sm" fontWeight="600" textAlign="center">
+            {t('you_are_offline')}
+          </Text>
+          <Text fontSize="lg" fontWeight="300" textAlign="center">
+            {t('connect_to_network_message')}
+          </Text>
+        </Box>
+      </Box>
     );
   }
 

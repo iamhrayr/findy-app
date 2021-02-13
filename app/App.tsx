@@ -3,7 +3,6 @@ import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider as ThemeProviderStyled } from 'styled-components';
 import { ThemeProvider } from 'react-native-magnus';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -19,7 +18,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import './i18n';
 import NavigationRoot from './navigation';
 import light from './theme/light';
-import lightOld from './theme/lightOld';
 import { store, persistor } from './redux/store';
 
 import ErrorBoundary from './ErrorBoundary';
@@ -109,19 +107,17 @@ const App: React.FC = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={light}>
-            <ThemeProviderStyled theme={lightOld}>
-              <NetworkStatusChecker>
-                <ErrorBoundary>
-                  <SafeAreaProvider>
-                    <NavigationContainer ref={navigationRef}>
-                      <StatusBar barStyle="dark-content" />
-                      <NavigationRoot />
-                      <FlashMessage position="top" />
-                    </NavigationContainer>
-                  </SafeAreaProvider>
-                </ErrorBoundary>
-              </NetworkStatusChecker>
-            </ThemeProviderStyled>
+            <NetworkStatusChecker>
+              <ErrorBoundary>
+                <SafeAreaProvider>
+                  <NavigationContainer ref={navigationRef}>
+                    <StatusBar barStyle="dark-content" />
+                    <NavigationRoot />
+                    <FlashMessage position="top" />
+                  </NavigationContainer>
+                </SafeAreaProvider>
+              </ErrorBoundary>
+            </NetworkStatusChecker>
           </ThemeProvider>
         </PersistGate>
       </Provider>

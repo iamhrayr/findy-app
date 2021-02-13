@@ -1,6 +1,6 @@
 import React, { ComponentType, memo } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { Container, Content, Layout } from '@app/components';
+import { Box } from 'react-native-magnus';
 
 import { useInteractionsComplete } from '@app/hooks';
 
@@ -10,13 +10,11 @@ function withInteractionsComplete<Props>(BaseComponent: ComponentType) {
 
     if (!interactionsComplete) {
       return (
-        <Container>
-          <Content full>
-            <Layout align="center" justify="center" grow={1}>
-              <ActivityIndicator />
-            </Layout>
-          </Content>
-        </Container>
+        <Box p="lg">
+          <Box alignItems="center" justifyContent="center">
+            <ActivityIndicator />
+          </Box>
+        </Box>
       );
     }
 

@@ -3,8 +3,9 @@ import { Image, StyleSheet } from 'react-native';
 import RNRestart from 'react-native-restart'; // Import package from node modules
 import { withTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
+import { Box, Text } from 'react-native-magnus';
 
-import { Container, Content, Text, Layout, Button } from '@app/components';
+import { Button } from '@app/components';
 import brokenCar from '@app/assets/broken-car.png';
 
 type Props = {
@@ -23,19 +24,17 @@ class ErrorBoundary extends React.Component<Props> {
 
     if (this.state.hasError) {
       return (
-        <Container>
-          <Content full extraPadded>
-            <Layout size={1} align="center" justify="center">
-              <Image source={brokenCar} resizeMode="contain" style={styles.image} />
-              <Text size="h3" spacer={{ b: 'lg' }} weight="300" align="center">
-                {t('oops_something_wrong')}
-              </Text>
-              <Button shape="circle" onPress={this.restartApp}>
-                {t('reload')}
-              </Button>
-            </Layout>
-          </Content>
-        </Container>
+        <Box p="lg">
+          <Box flex={1} alignItems="center" justifyContent="center">
+            <Image source={brokenCar} resizeMode="contain" style={styles.image} />
+            <Text fontSize="2xl" mb="b" fontWeight="300" textAlign="center">
+              {t('oops_something_wrong')}
+            </Text>
+            <Button shape="circle" onPress={this.restartApp}>
+              {t('reload')}
+            </Button>
+          </Box>
+        </Box>
       );
     }
 

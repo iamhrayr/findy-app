@@ -2,8 +2,9 @@ import React, { useCallback, memo } from 'react';
 import { Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
+import { Box } from 'react-native-magnus';
 
-import { Container, Content, Button } from '@app/components';
+import { Button } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 
 import htmlContent from './tems-of-use-content';
@@ -18,12 +19,10 @@ const TermsOfUse = () => {
   }, [navigation]);
 
   return (
-    <Container>
-      <Content>
-        <Button onPress={handleSubmit} />
-        <HTML html={htmlContent} imagesMaxWidth={Dimensions.get('window').width} />
-      </Content>
-    </Container>
+    <Box p="lg">
+      <Button onPress={handleSubmit} />
+      <HTML html={htmlContent} imagesMaxWidth={Dimensions.get('window').width} />
+    </Box>
   );
 };
 
