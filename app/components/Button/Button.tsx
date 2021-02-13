@@ -1,168 +1,70 @@
-import React, { useMemo } from 'react';
-import {
-  Text,
-  View,
-  Platform,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableOpacityProps,
-  ActivityIndicator,
-} from 'react-native';
-import styled, { css, withTheme /*DefaultTheme*/ } from 'styled-components/native';
-import { s } from 'react-native-size-matters';
+import React from 'react';
+import { Button as BaseButton, ButtonProps, useTheme } from 'react-native-magnus';
 
-import { SpacerProps, generateSpaces } from '../Spacer/Spacer';
-import If from '../If';
-
-enum TextAlignOptions {
-  left = 'flex-start',
-  center = 'center',
-  right = 'flex-end',
-}
-
-type WrapperProps = {
-  block?: boolean;
-  width?: number | string;
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
-  textStyle?: any;
-  children?: React.ReactNode;
-  spacer: Partial<SpacerProps>;
+export type Props = ButtonProps & {
+  size?: string | number;
   outline?: boolean;
-  disabled?: boolean;
-  wide?: boolean;
-  loading?: boolean;
-  // theme?: DefaultTheme;
-  shape: 'square' | 'round' | 'circle';
-  textAlign: 'left' | 'center' | 'right';
-  size: 'lg' | 'md' | 'sm';
-  type: 'primary' | 'secondary' | 'danger' | 'success' | 'link';
-  textTransform?: 'uppercase' | 'capitalize' | 'lowercase' | 'none';
-  icon?: React.ReactNode;
+  ghost?: boolean;
 };
 
-type TextProps = Pick<Props, 'size' | 'type' | 'transform' | 'outline'>;
+const getSizes = (size: string | number) => {
+  if (!size) {
+    return;
+  }
 
-type Props = TouchableOpacityProps & WrapperProps;
+  return {
+    p: size,
+    fontSize: size,
+    loaderSize: size,
+  };
+};
 
-const ButtonWrapper = styled(View)<WrapperProps>`
-  ${({ shape, size, type, textAlign, block, spacer, wide, disabled, icon, theme }) => css`
-    border-radius: ${theme.borderRadius[shape] || 0}px;
-    padding-vertical: ${theme.button.paddingY[size] || 0}px;
-    padding-horizontal: ${!wide
-      ? theme.button.paddingX[size]
-      : theme.button.paddingX[size] * s(2.4)}px;
-    background: ${type !== 'link' ? theme.colors[type] : 'transparent'};
-    align-items: ${TextAlignOptions[textAlign] || 'center'};
-    width: ${block ? '100%' : 'auto'};
-    /* flex-shrink: 1; */
-    flex-shrink: 0;
-    opacity: ${disabled ? 0.6 : 1};
-    overflow: hidden;
-    /* spaces */
-    ${generateSpaces(spacer, theme)}
-    ${icon &&
-    css`
-      padding: ${s(10)}px;
-    `};
-  `}
+const Button = ({ size, outline, ghost, ...rest }: Props) => {
+  const { theme } = useTheme();
 
-  ${({ outline, type, theme }) =>
-    outline &&
-    type !== 'link' &&
-    css`
-      background-color: transparent;
-      border-width: ${s(1)}px;
-      border-color: ${theme.colors[type]};
-    `}
-`;
+  const computedProps = React.useMemo(() => {
+    let newProps = { ...rest };
 
-const ButtonText = styled(Text)<TextProps>`
-  ${({ type, size, transform, theme }) => css`
-    color: ${type === 'link' ? theme.colors.primary : theme.colors.white};
-    font-size: ${theme.button.fontSizes[size]}px;
-    text-transform: ${transform};
-    font-weight: ${theme.button.fontWeight};
-  `}
+    const { variant, bg } = rest;
 
-  ${({ outline, type, theme }) =>
-    outline &&
-    type !== 'link' &&
-    css`
-      color: ${theme.colors[type]};
-    `}
-`;
+    if (outline && variant) {
+      const variants = theme.components?.Button?.variants ?? {};
+      newProps = {
+        bg: 'transparent',
+        borderWidth: 1,
+        borderColor: bg ?? variants[variant].bg,
+        color: bg ?? variants[variant].bg,
+        ...newProps,
+      };
+    }
 
-const defaultSpacer = { b: 'sm' };
+    if (ghost && variant) {
+      const variants = theme.components?.Button?.variants ?? {};
+      newProps = {
+        bg: 'transparent',
+        borderWidth: 0,
+        borderColor: 'transparent',
+        color: bg ?? variants[variant].bg,
+        ...newProps,
+      };
+    }
 
-const TouchableComponent =
-  Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+    if (size) {
+      newProps = {
+        ...getSizes(size),
+        ...newProps,
+      };
+    }
 
-const Touchable = styled(TouchableComponent)`
-  /* border-radius: 90px; */
-  overflow: hidden;
-  /* background-color: red; */
-`;
+    return newProps;
+  }, [ghost, outline, rest, size, theme.components]);
 
-const Button = ({
-  children,
-  textStyle,
-  spacer,
-  loading,
-  icon,
-  // @ts-ignore
-  // FIXME: fix the fucking theme type
-  theme,
-  ...rest
-}: Props) => {
-  // keep the default ones if the user add non conflicting custom ones
-  const mergedSpacer: Partial<SpacerProps> = useMemo(
-    () => ({
-      ...(defaultSpacer as Partial<SpacerProps>),
-      ...spacer,
-    }),
-    [spacer],
-  );
-
-  // TODO: don't pass ...rest on Touchable and ButtonWrapper.
-  return (
-    <Touchable activeOpacity={0.8} {...rest} useForeground={true}>
-      <ButtonWrapper spacer={mergedSpacer} icon={!!icon} {...rest}>
-        <If condition={icon}>{icon}</If>
-
-        <If condition={!icon}>
-          <If condition={loading}>
-            <ActivityIndicator color={theme!.colors.white} />
-          </If>
-          <If condition={!loading}>
-            <If condition={React.isValidElement(children)}>{children}</If>
-            <If condition={!React.isValidElement(children)}>
-              <ButtonText
-                style={textStyle}
-                size={rest.size}
-                transform={rest.textTransform}
-                type={rest.type}
-                outline={rest.outline}>
-                {children}
-              </ButtonText>
-            </If>
-          </If>
-        </If>
-      </ButtonWrapper>
-    </Touchable>
-  );
+  console.log(computedProps);
+  return <BaseButton {...computedProps} />;
 };
 
 Button.defaultProps = {
-  type: 'primary',
-  size: 'md',
-  shape: 'round',
-  textAlign: 'center',
-  textTransform: 'uppercase',
-  outline: false,
-  spacer: {},
-} as Partial<Props>;
+  variant: 'primary',
+};
 
-//@ts-ignore
-// FIXME: find out what the fucking problem with type
-export default withTheme(Button);
+export default Button;

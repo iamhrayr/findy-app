@@ -1,14 +1,14 @@
 import React, { memo } from 'react';
 import { Placeholder, PlaceholderLine, ShineOverlay } from 'rn-placeholder';
 
-import { Line, Layout } from '@app/components';
+import { Box } from 'react-native-magnus';
 
 const EventsPlaceholder = () => (
   <Placeholder Animation={ShineOverlay}>
-    <Layout layout="row" justify="between" spacer={{ b: 'xs' }}>
+    <Box flexDir="row" justifyContent="space-between" mb="xs">
       <PlaceholderLine width={25} />
       <PlaceholderLine width={20} />
-    </Layout>
+    </Box>
     <PlaceholderLine width={100} />
     <PlaceholderLine width={50} />
   </Placeholder>
@@ -16,13 +16,13 @@ const EventsPlaceholder = () => (
 
 const EventsPlaceholders = () => {
   return (
-    <Layout layout="col">
+    <Box>
       <EventsPlaceholder />
-      <Line spacer={{ y: 'lg' }} />
+      <Box bg="gray300" my="lg" h={1} />
       <EventsPlaceholder />
-      <Line spacer={{ y: 'lg' }} />
+      <Box bg="gray300" my="lg" h={1} />
       <EventsPlaceholder />
-    </Layout>
+    </Box>
   );
 };
 

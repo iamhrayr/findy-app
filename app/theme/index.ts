@@ -1,4 +1,3 @@
-import dark from './dark';
 import light from './light';
 
 export type Theme = typeof light;
@@ -6,7 +5,6 @@ export type ThemeName = 'dark' | 'light';
 export type Themes = { [key in ThemeName]: Theme };
 
 export const themes: Themes = {
-  dark,
   light,
 };
 

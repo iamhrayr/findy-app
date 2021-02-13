@@ -1,12 +1,11 @@
 import React, { useCallback, memo } from 'react';
-import { Alert, View } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Alert } from 'react-native';
+// import Icon from 'react-native-vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components/native';
-import { s } from 'react-native-size-matters';
+import { Box, Text, Icon } from 'react-native-magnus';
 
+import { Button } from '@app/components';
 import { Car } from '@app/types/Car';
-import { Text, Layout, Button } from '@app/components';
 
 type Props = {
   data: Car;
@@ -17,14 +16,6 @@ type Props = {
   onRemove: (id: Id) => void;
   navigateToEdit: (data: Car) => void;
 };
-
-const Dot = styled(View)<Partial<Car>>`
-  width: ${s(10)}px;
-  height: ${s(10)}px;
-  border-radius: ${s(10)}px;
-  margin-right: ${s(5)}px;
-  background-color: ${({ color }) => color};
-`;
 
 const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
   const { t } = useTranslation();
@@ -49,35 +40,34 @@ const CarNumberRow: React.FC<Props> = ({ data, onRemove, navigateToEdit }) => {
   }, [removeCar, t]);
 
   return (
-    <Layout layout="row" align="center">
-      <Layout grow={1}>
-        <Text size="h3" spacer={{ b: 'xs' }}>
+    <Box flexDir="row" justifyContent="center">
+      <Box flex={1}>
+        <Text fontSize="4xl" mb="sm">
           {data.carNumber}
         </Text>
-        <Layout layout="row" align="center">
-          <Dot color={data.color} />
-          <Text size="xs" color="darkGray">
+        <Box flexDir="row" alignItems="center">
+          <Box w={10} h={10} bg={data.color} rounded="circle" mr="xs" />
+          <Text fontSize="sm" color="gray800">
             {data.makeName}
           </Text>
-        </Layout>
-      </Layout>
-      <Layout layout="row">
+        </Box>
+      </Box>
+
+      <Box flexDir="row">
         <Button
-          type="danger"
+          variant="danger"
           size="sm"
-          shape="circle"
-          icon={<Icon name="delete" size={18} color="white" />}
+          prefix={<Icon name="delete" fontSize={18} color="white" />}
           onPress={handleDeletePress}
         />
         <Button
           size="sm"
-          shape="circle"
-          spacer={{ l: 'sm' }}
-          icon={<Icon name="edit" size={18} color="white" />}
+          ml="sm"
+          prefix={<Icon name="edit" fontSize={18} color="white" />}
           onPress={() => navigateToEdit(data)}
         />
-      </Layout>
-    </Layout>
+      </Box>
+    </Box>
   );
 };
 

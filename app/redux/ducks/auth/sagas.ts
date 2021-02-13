@@ -32,7 +32,7 @@ function* loginHandler(action: Action) {
       // maybe we need to notify user that he wont receive any push notification
     }
   } catch (error) {
-    yield put(login.failure(error.response.data));
+    yield put(login.failure(error));
   }
 }
 
@@ -41,7 +41,7 @@ function* registerHandler(action: Action) {
     const res: AxiosResponse = yield call(api.register, action.payload);
     yield put(register.success(res.data));
   } catch (error) {
-    yield put(register.failure(error.response.data));
+    yield put(register.failure(error));
   }
 }
 
@@ -50,7 +50,7 @@ function* confirmPhoneNumberHandler(action: Action) {
     yield call(api.confirmPhoneNumber, action.payload);
     yield put(confirmPhoneNumber.success());
   } catch (error) {
-    yield put(confirmPhoneNumber.failure(error.response.data));
+    yield put(confirmPhoneNumber.failure(error));
   }
 }
 

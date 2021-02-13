@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useNavigation } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Box, Text } from 'react-native-magnus';
 
-import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { Button, Input } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
@@ -50,18 +52,19 @@ const ResetPassword: React.FC = () => {
   });
 
   return (
-    <Container>
-      <Content noPadding full>
-        <Layout grow={1}>
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+      <Box p="lg" flex={1}>
+        <Box flex={1}>
           <ResetPasswordImage />
-        </Layout>
+        </Box>
 
-        <Layout spacer={{ x: 'lg', b: 'lg' }}>
-          <Text size="giant" spacer={{ b: 'xl' }}>
+        <Box mb="lg" mx="lg">
+          <Text fontSize="giant" mb="xl" fontWeight="300">
             {t('auth:reset_password.title')}
           </Text>
 
           <Input
+            mb="2xl"
             label={t('auth:reset_password.code_label')}
             placeholder="Code from sms"
             onChangeText={(val) => formik.setFieldValue('token', val)}
@@ -70,25 +73,26 @@ const ResetPassword: React.FC = () => {
           />
 
           <Input
+            mb="2xl"
             secureTextEntry={!passVisible}
             label={t('password')}
             placeholder="*******"
             onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            addonRight={
+            suffix={
               <Icon onPress={() => setPassVisible(!passVisible)} name="eye" size={22} />
             }
             errorMessage={error?.password}
           />
 
-          <Layout align="center" spacer={{ y: 'md' }}>
-            <Button wide shape="circle" onPress={formik.handleSubmit} loading={loading}>
+          <Box justifyContent="center" my="lg" flexDir="row">
+            <Button onPress={formik.handleSubmit} loading={loading} w="60%">
               {t('submit')}
             </Button>
-          </Layout>
-        </Layout>
-      </Content>
-    </Container>
+          </Box>
+        </Box>
+      </Box>
+    </KeyboardAwareScrollView>
   );
 };
 

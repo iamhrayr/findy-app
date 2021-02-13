@@ -1,26 +1,25 @@
 import React, { memo } from 'react';
-import styled from 'styled-components/native';
 import {
   Placeholder,
   PlaceholderMedia,
   PlaceholderLine,
   ShineOverlay,
 } from 'rn-placeholder';
-import { s } from 'react-native-size-matters';
 
-import { Line, Layout } from '@app/components';
-
-const ButtonPlaceholder = styled(PlaceholderMedia)`
-  margin-left: ${s(7)}px;
-`;
+import { Box } from 'react-native-magnus';
 
 const CarNumberPlaceholder = () => (
   <Placeholder
     Animation={ShineOverlay}
     Right={() => (
       <>
-        <ButtonPlaceholder isRound={true} />
-        <ButtonPlaceholder isRound={true} />
+        <Box ml={7}>
+          <PlaceholderMedia isRound={true} />
+        </Box>
+
+        <Box ml={7}>
+          <PlaceholderMedia isRound={true} />
+        </Box>
       </>
     )}>
     <PlaceholderLine width={40} />
@@ -30,11 +29,11 @@ const CarNumberPlaceholder = () => (
 
 const CarNumberPlaceholders = () => {
   return (
-    <Layout layout="col">
+    <Box>
       <CarNumberPlaceholder />
-      <Line spacer={{ y: 'lg' }} />
+      <Box h={1} bg="gray300" my="lg" />
       <CarNumberPlaceholder />
-    </Layout>
+    </Box>
   );
 };
 

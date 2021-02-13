@@ -11,6 +11,7 @@ export default Object.freeze([
   '#ff5722',
   '#ae08d8',
   '#facc14',
+  '#c9b96e',
   '#d4cdb0',
   '#aaaaaa',
   '#f9f9f9',

@@ -3,7 +3,8 @@ import React, { memo } from 'react';
 import { StatusBar } from 'react-native';
 import useMount from 'react-use/lib/useMount';
 import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as ThemeProviderStyled } from 'styled-components';
+import { ThemeProvider } from 'react-native-magnus';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
@@ -13,10 +14,12 @@ import SplashScreen from 'react-native-splash-screen';
 // import messaging from '@react-native-firebase/messaging';
 import { enableScreens } from 'react-native-screens';
 import codePush from 'react-native-code-push';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import './i18n';
 import NavigationRoot from './navigation';
-import getTheme from './theme';
+import light from './theme/light';
+import lightOld from './theme/lightOld';
 import { store, persistor } from './redux/store';
 
 import ErrorBoundary from './ErrorBoundary';
@@ -33,18 +36,20 @@ if (__DEV__) {
   // import('./configs/reactotron').then(() => console.log('Reactotron Configured'));
 }
 
-if (__DEV__) {
-  const whyDidYouRender = require('@welldone-software/why-did-you-render');
-  const ReactRedux = require('react-redux');
-  whyDidYouRender(React, {
-    trackAllPureComponents: true,
-    trackExtraHooks: [[ReactRedux, 'useSelector']],
-  });
-}
+// if (__DEV__) {
+//   const whyDidYouRender = require('@welldone-software/why-did-you-render');
+//   const ReactRedux = require('react-redux');
+//   whyDidYouRender(React, {
+//     trackAllPureComponents: true,
+//     trackExtraHooks: [[ReactRedux, 'useSelector']],
+//   });
+// }
 
 console.disableYellowBox = true;
 
 enableScreens();
+
+const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   const navigationRef = React.useRef(null);
@@ -100,23 +105,27 @@ const App: React.FC = () => {
   // }, []);
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={getTheme('light')}>
-          <NetworkStatusChecker>
-            <ErrorBoundary>
-              <SafeAreaProvider>
-                <NavigationContainer ref={navigationRef}>
-                  <StatusBar barStyle="dark-content" />
-                  <NavigationRoot />
-                  <FlashMessage position="top" />
-                </NavigationContainer>
-              </SafeAreaProvider>
-            </ErrorBoundary>
-          </NetworkStatusChecker>
-        </ThemeProvider>
-      </PersistGate>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={light}>
+            <ThemeProviderStyled theme={lightOld}>
+              <NetworkStatusChecker>
+                <ErrorBoundary>
+                  <SafeAreaProvider>
+                    <NavigationContainer ref={navigationRef}>
+                      <StatusBar barStyle="dark-content" />
+                      <NavigationRoot />
+                      <FlashMessage position="top" />
+                    </NavigationContainer>
+                  </SafeAreaProvider>
+                </ErrorBoundary>
+              </NetworkStatusChecker>
+            </ThemeProviderStyled>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </QueryClientProvider>
   );
 };
 

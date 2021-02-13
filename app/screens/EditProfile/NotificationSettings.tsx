@@ -1,19 +1,10 @@
 import React, { useEffect, memo } from 'react';
-import { Switch, StyleSheet, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
-import Select from 'react-native-picker-select';
-import { Icon } from 'react-native-eva-icons';
 import { useTranslation } from 'react-i18next';
-import { withTheme, DefaultTheme } from 'styled-components/native';
+import { Box, Text, Toggle } from 'react-native-magnus';
 
-type FormValues = {
-  language: string;
-  showPhoneNumber: boolean;
-  notificationMethod: string;
-};
-
-import { Card, Layout, Text, Spacer, Button } from '@app/components';
+import { Button, Select } from '@app/components';
 import {
   fetchProfileSettings,
   editProfileSettings,
@@ -35,11 +26,18 @@ const LANGUAGES = [
   { label: 'Armenian', value: 'am' },
 ];
 
-type Props = {
-  theme: DefaultTheme;
+type Option = {
+  label: string;
+  value: string | number;
 };
 
-const NotificationSettings = ({ theme }: Props) => {
+type FormValues = {
+  language: string;
+  showPhoneNumber: boolean;
+  notificationMethod: string;
+};
+
+const NotificationSettings = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -62,86 +60,78 @@ const NotificationSettings = ({ theme }: Props) => {
     dispatch(fetchProfileSettings());
   }, [dispatch]);
 
+  const { values, setFieldValue, handleSubmit } = formik;
+
+  const selectedLanguageTitle = values.language
+    ? LANGUAGES.find((lng) => lng.value === values.language)?.label
+    : 'Select';
+
+  const selectedNotificationTitle = values.notificationMethod
+    ? SETTINGS_VALUES.find((lng) => lng.value === values.notificationMethod)?.label
+    : 'Select';
+
   if (settings.loading) {
     <Text>{t('loading')}</Text>;
   }
 
-  const { values, setFieldValue, handleSubmit } = formik;
-
   return (
-    <Card>
-      <Text size="lg" align="center" spacer={{ b: 'lg' }}>
+    <Box bg="white" p="lg" rounded="lg" shadow="sm">
+      <Text fontSize="4xl" textAlign="center" mb="lg">
         {t('profile:settings.notification_title')}
       </Text>
 
-      <Layout layout="row" align="center" justify="between">
+      <Box flexDir="row" alignItems="center" justifyContent="space-between" mb="lg">
         <Text>{t('profile:settings.app_language')}</Text>
         <Select
-          style={styles}
-          useNativeAndroidPickerStyle={false}
-          onValueChange={(val) => setFieldValue('language', val)}
-          Icon={() => (
-            <Icon
-              name="arrow-ios-downward-outline"
-              width={20}
-              height={20}
-              fill={theme.colors.gray}
-            />
-          )}
+          onSelect={(val: string) => setFieldValue('language', val)}
+          // onSelect={(val: string) => dispatch(changePreferences({ language: val }))}
           value={values.language}
-          items={LANGUAGES}
-          placeholder={{}}
-        />
-      </Layout>
+          title="Select language"
+          pb="2xl"
+          roundedTop="xl"
+          data={LANGUAGES}
+          renderItem={(item: Option) => (
+            <Select.Option value={item.value} py="md">
+              <Text>{item.label}</Text>
+            </Select.Option>
+          )}>
+          {selectedLanguageTitle}
+        </Select>
+      </Box>
 
-      <Spacer b="lg" />
-
-      <Layout layout="row" align="center" justify="between">
+      <Box flexDir="row" alignItems="center" justifyContent="space-between" mb="lg">
         <Text>{t('profile:settings.phone_number_label')}</Text>
-        <Switch
-          onValueChange={(val) => {
-            console.log('asdasdasdasd', val);
-            setFieldValue('showPhoneNumber', val);
+        <Toggle
+          onPress={() => {
+            setFieldValue('showPhoneNumber', !values.showPhoneNumber);
           }}
-          value={values.showPhoneNumber}
+          on={values.showPhoneNumber}
         />
-      </Layout>
+      </Box>
 
-      <Spacer b="lg" />
-
-      <Layout layout="row" align="center" justify="between">
+      <Box flexDir="row" alignItems="center" justifyContent="space-between">
         <Text>{t('profile:settings.notification_method_label')}</Text>
         <Select
-          style={styles}
-          useNativeAndroidPickerStyle={false}
-          onValueChange={(val) => setFieldValue('notificationMethod', val)}
-          Icon={() => (
-            <Icon
-              name="arrow-ios-downward-outline"
-              width={20}
-              height={20}
-              fill={theme.colors.gray}
-            />
-          )}
+          onSelect={(val: string) => setFieldValue('notificationMethod', val)}
           value={values.notificationMethod}
-          items={SETTINGS_VALUES}
-          placeholder={{}}
-        />
-      </Layout>
+          title="Select language"
+          pb="2xl"
+          roundedTop="xl"
+          data={SETTINGS_VALUES}
+          renderItem={(item: Option) => (
+            <Select.Option value={item.value} py="md">
+              <Text>{item.label}</Text>
+            </Select.Option>
+          )}>
+          {selectedNotificationTitle}
+        </Select>
+      </Box>
 
-      <Layout align="center" spacer={{ t: 'lg' }}>
-        <Button wide shape="circle" onPress={handleSubmit}>
-          {t('save')}
-        </Button>
-      </Layout>
-    </Card>
+      <Button onPress={handleSubmit} alignSelf="center" w="70%" my="lg">
+        {t('save')}
+      </Button>
+    </Box>
   );
 };
 
-const styles = StyleSheet.create({
-  inputIOS: { paddingRight: 20 },
-  inputAndroid: { paddingRight: 20 },
-  iconContainer: { bottom: 14, ...Platform.select({ android: {}, ios: { top: -2 } }) },
-});
-
-export default withTheme(memo(NotificationSettings));
+export default memo(NotificationSettings);

@@ -2,19 +2,11 @@ import React, { useCallback, memo } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTranslation } from 'react-i18next';
+import { Icon, Box, Text } from 'react-native-magnus';
 
 import api from '@app/api';
 import { useAsyncFn } from '@app/hooks';
-import { withInteractionsComplete } from '@app/HoCs';
-import {
-  Container,
-  Content,
-  Text,
-  Spacer,
-  Button,
-  Layout,
-  ColorTag,
-} from '@app/components';
+import { ColorTag, Button } from '@app/components';
 
 type Props = {
   isVisible: boolean;
@@ -54,58 +46,67 @@ const ConfirmationModal = ({
 
   return (
     <Modal isVisible={isVisible} style={styles.modal}>
-      <Container>
+      <Box flex={1} bg="white" px="2xl">
         <SafeAreaView style={styles.safeArea}>
-          <Content extraPadded scrollEnabled={false}>
-            <Layout size={1} justify="center">
-              <Text size="xs" transform="uppercase" weight="600">
+          <Box flex={1} mt="4xl">
+            <Box mb="lg">
+              <Text fontSize="md" textTransform="uppercase" fontWeight="600">
                 {t('make')}
               </Text>
-              <Text size="lg">{make}</Text>
+              <Text fontSize="lg">{make}</Text>
+            </Box>
 
-              <Spacer t="lg" />
-
-              <Text size="xs" transform="uppercase" weight="600">
+            <Box mb="lg">
+              <Text fontSize="md" textTransform="uppercase" fontWeight="600">
                 {t('model')}
               </Text>
-              <Text size="lg">{model}</Text>
+              <Text fontSize="lg">{model}</Text>
+            </Box>
 
-              <Spacer t="lg" />
-
-              <Text size="xs" transform="uppercase" weight="600" spacer={{ b: 'xs' }}>
+            <Box mb="lg">
+              <Text fontSize="md" textTransform="uppercase" fontWeight="600" mb="xs">
                 {t('color')}
               </Text>
               <ColorTag color={color} />
+            </Box>
 
-              <Spacer t="lg" />
-
-              <Text size="xs" transform="uppercase" weight="600">
+            <Box mb="lg">
+              <Text fontSize="md" textTransform="uppercase" fontWeight="600">
                 {t('plate_number')}
               </Text>
-              <Text size="lg">{plateNumber}</Text>
+              <Text fontSize="lg">{plateNumber}</Text>
+            </Box>
 
-              <Spacer t="lg" />
-
-              <Text size="xs" transform="uppercase" weight="600">
+            <Box mb="lg">
+              <Text fontSize="md" textTransform="uppercase" fontWeight="600">
                 {t('message')}
               </Text>
-              <Text size="lg">{message}</Text>
+              <Text fontSize="lg">{message}</Text>
+            </Box>
 
+            <Box mt="xl">
               <Button
-                shape="circle"
-                spacer={{ t: 'xl' }}
+                alignSelf="center"
                 onPress={handleSendRequest}
                 loading={loading}
-                disabled={loading}>
+                disabled={loading}
+                mb="sm">
                 {t('send_request')}
               </Button>
-              <Button type="link" onPress={onClose}>
-                {t('close')}
+
+              <Button
+                bg="gray400"
+                h={45}
+                w={45}
+                rounded="circle"
+                onPress={onClose}
+                alignSelf="center">
+                <Icon color="gray900" name="close" />
               </Button>
-            </Layout>
-          </Content>
+            </Box>
+          </Box>
         </SafeAreaView>
-      </Container>
+      </Box>
     </Modal>
   );
 };
@@ -119,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInteractionsComplete(memo(ConfirmationModal));
+export default memo(ConfirmationModal);

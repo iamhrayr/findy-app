@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { TextInputMask, TextInputMaskProps } from 'react-native-masked-text';
 
 import Input, { Props } from './Input';
@@ -30,4 +30,4 @@ MaskedInput.defaultProps = {
   type: 'custom',
 };
 
-export default memo<Props>(MaskedInput);
+export default MaskedInput;

@@ -1,8 +1,10 @@
 import React, { useCallback, memo } from 'react';
+import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Trans, useTranslation } from 'react-i18next';
+import { Box, Text } from 'react-native-magnus';
+import { Button } from '@app/components';
 
-import { Button, Text, Container, Content, Layout } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import IntroImage from './IntroImage';
 
@@ -26,46 +28,45 @@ const AuthIntro: React.FC = () => {
   }, [navigation]);
 
   return (
-    <Container>
-      <Content noPaddingX full>
-        <Layout size={1} spacer={{ x: 'lg' }}>
-          <Layout grow={1}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Box flex={1}>
+        <Box flex={1} mx="2xl" justifyContent="space-between">
+          <Box>
             <IntroImage />
-          </Layout>
+          </Box>
 
-          <Layout grow={0}>
-            <Text size="giant" weight="300" spacer={{ b: 'md' }}>
+          <Box>
+            <Text fontSize={62} fontWeight="300" mb="lg">
               {t('welcome')}
             </Text>
 
-            <Text size="lg">{t('auth:intro.text')}</Text>
+            <Text fontSize="4xl">{t('auth:intro.text')}</Text>
 
-            <Layout layout="row" justify="between" spacer={{ y: 'lg' }}>
-              <Layout size={47}>
-                <Button block outline shape="circle" onPress={navigateToRegister}>
+            <Box flexDir="row" justifyContent="space-between" my="2xl">
+              <Box flex={0.48}>
+                <Button block outline onPress={navigateToRegister}>
                   {t('register')}
                 </Button>
-              </Layout>
-              <Layout size={6} />
-              <Layout size={47}>
-                <Button block shape="circle" onPress={navigateToLogin}>
+              </Box>
+              <Box flex={0.48}>
+                <Button block onPress={navigateToLogin}>
                   {t('login')}
                 </Button>
-              </Layout>
-            </Layout>
+              </Box>
+            </Box>
 
-            <Text align="center" spacer={{ b: 'xs' }}>
+            <Text textAlign="center" fontSize="xl">
               <Trans i18nKey="auth:intro.terms_of_use">
                 By using the app you are agreeing to our
-                <Text align="center" color="primary" onPress={navigateToTermsOfUse}>
-                  Terms of Usea
+                <Text color="primary" fontSize="xl" onPress={navigateToTermsOfUse}>
+                  Terms of Use
                 </Text>
               </Trans>
             </Text>
-          </Layout>
-        </Layout>
-      </Content>
-    </Container>
+          </Box>
+        </Box>
+      </Box>
+    </SafeAreaView>
   );
 };
 

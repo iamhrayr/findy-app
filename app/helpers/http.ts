@@ -79,12 +79,13 @@ class Http {
 
         try {
           const camelCasedError = camelCaseKeys(error.response.data, { deep: true });
-          error.response.data = camelCasedError;
+          return Promise.reject(camelCasedError);
+          // error.response.data = camelCasedError;
         } catch (e) {
           return Promise.reject(error);
         }
 
-        return Promise.reject(error);
+        // return Promise.reject(error);
       },
     );
   }

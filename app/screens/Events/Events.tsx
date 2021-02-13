@@ -4,15 +4,9 @@ import useMount from 'react-use/lib/useMount';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { useTranslation } from 'react-i18next';
 import { useFocusEffect } from '@react-navigation/native';
+import { Box } from 'react-native-magnus';
 
-import {
-  Container,
-  Content,
-  Line,
-  NoData,
-  If,
-  // Text, Layout
-} from '@app/components';
+import { Line, NoData, If } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import { eventsSelectors, eventsActions } from '@app/redux/ducks/events';
 import EventItem from './EventsItem';
@@ -40,36 +34,34 @@ const Events = () => {
   const extractKey = useCallback((item) => String(item.pk), []);
 
   return (
-    <Container>
-      <Content>
-        <If condition={loading}>
-          <EventsPlaceholder />
-        </If>
+    <Box p="lg" bg="white" flex={1}>
+      <If condition={loading}>
+        <EventsPlaceholder />
+      </If>
 
-        <If condition={loaded}>
-          <SwipeListView
-            useFlatList
-            disableRightSwipe
-            closeOnRowPress
-            data={events}
-            ItemSeparatorComponent={renderLine}
-            ListEmptyComponent={renderNoData}
-            renderItem={renderItem}
-            keyExtractor={extractKey}
-            onRefresh={fetchData}
-            initialNumToRender={INITIAL_FLATLIST_COUNT}
-            refreshing={loading}
-            // renderHiddenItem={(data, rowMap) => (
-            //   <Layout layout="row" style={{ backgroundColor: 'red' }} reverse>
-            //     <Text>Hi</Text>
-            //   </Layout>
-            // )}
-            leftOpenValue={75}
-            rightOpenValue={-75}
-          />
-        </If>
-      </Content>
-    </Container>
+      <If condition={loaded}>
+        <SwipeListView
+          useFlatList
+          disableRightSwipe
+          closeOnRowPress
+          data={events}
+          ItemSeparatorComponent={renderLine}
+          ListEmptyComponent={renderNoData}
+          renderItem={renderItem}
+          keyExtractor={extractKey}
+          onRefresh={fetchData}
+          initialNumToRender={INITIAL_FLATLIST_COUNT}
+          refreshing={loading}
+          // renderHiddenItem={(data, rowMap) => (
+          //   <Layout layout="row" style={{ backgroundColor: 'red' }} reverse>
+          //     <Text>Hi</Text>
+          //   </Layout>
+          // )}
+          leftOpenValue={75}
+          rightOpenValue={-75}
+        />
+      </If>
+    </Box>
   );
 };
 

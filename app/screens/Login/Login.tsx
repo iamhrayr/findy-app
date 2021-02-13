@@ -3,11 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Button, Box, Text } from 'react-native-magnus';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import { useQuery, useMutation } from 'react-query';
 
+// import api from '@app/api';
 import { login } from '@app/redux/ducks/auth/actions';
 import { getLoginStatus } from '@app/redux/ducks/auth/selectors';
-// import { RootState } from '@app/redux/rootReducer';
-import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { Input } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import LoginImage from './LoginImage';
 // import validation from './validation';
@@ -37,29 +40,34 @@ const Login: React.FC = () => {
     navigation.navigate('Auth:ForgotPassword');
   }, [navigation]);
 
+  // const { mutate, error, isLoading } = useMutation(api.login);
+
   const formik = useFormik({
     initialValues,
     // validationSchema: validation,
     onSubmit: (values) => {
       dispatch(login(values));
+      // mutate(values);
     },
   });
 
   return (
-    <Container>
-      <Content noPadding full>
-        <Layout grow={1}>
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+      <Box flex={1}>
+        <Box flex={1}>
           <LoginImage />
-        </Layout>
+        </Box>
 
-        <Layout spacer={{ x: 'lg', b: 'lg' }}>
-          <Text size="giant" spacer={{ b: 'xl' }}>
+        <Box mx="xl" mb="xl">
+          <Text fontSize="giant" mb="2xl" fontWeight="300">
             {t('login')}
           </Text>
 
           <Input
+            mb="2xl"
             label={t('phone_number')}
             placeholder="+374 XXXXXXXX"
+            keyboardType="phone-pad"
             onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={
@@ -71,11 +79,12 @@ const Login: React.FC = () => {
           <Input
             secureTextEntry
             label={t('password')}
+            mb="2xl"
             placeholder="*******"
             onChangeText={(val) => formik.setFieldValue('password', val)}
             value={formik.values.password}
-            addonRight={
-              <Text align="right" size="sm" color="primary" onPress={navigateToForgot}>
+            suffix={
+              <Text fontSize="lg" color="primary" onPress={navigateToForgot}>
                 {t('auth:login.forgot_password_text')}
               </Text>
             }
@@ -86,25 +95,27 @@ const Login: React.FC = () => {
             }
           />
 
-          <Layout align="center" spacer={{ y: 'md' }}>
+          <Box justifyContent="center" my="lg" flexDir="row">
             <Button
-              wide
-              shape="circle"
-              loading={loginStatus.loading}
-              onPress={formik.handleSubmit}>
+              minW="60%"
+              mb="xl"
+              onPress={formik.handleSubmit}
+              loading={loginStatus.loading}>
               {t('login')}
             </Button>
-          </Layout>
+          </Box>
 
-          <Text align="center">
-            <Text align="center">{t('auth:login.new_user')} </Text>
-            <Text align="center" color="primary" onPress={navigateToRegister}>
+          <Box justifyContent="center" flexDir="row">
+            <Text textAlign="center" mr="sm">
+              {t('auth:login.new_user')}
+            </Text>
+            <Text textAlign="center" color="primary" onPress={navigateToRegister}>
               {t('auth:login.register_text')}
             </Text>
-          </Text>
-        </Layout>
-      </Content>
-    </Container>
+          </Box>
+        </Box>
+      </Box>
+    </KeyboardAwareScrollView>
   );
 };
 

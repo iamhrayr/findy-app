@@ -2,8 +2,10 @@ import React, { useEffect, memo } from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
+import { Box, Text } from 'react-native-magnus';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { Button, Text, Container, Layout, Input, Content } from '@app/components';
+import { Button, Input } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import { useAsyncFn } from '@app/hooks';
 import api from '@app/api';
@@ -33,33 +35,35 @@ const ForgotPassword: React.FC = () => {
   });
 
   return (
-    <Container>
-      <Content noPadding full>
-        <Layout grow={1}>
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+      <Box flex={1}>
+        <Box flex={1}>
           <ForgotImage />
-        </Layout>
+        </Box>
 
-        <Layout spacer={{ x: 'lg', b: 'lg' }}>
-          <Text size="giant" spacer={{ b: 'xl' }}>
+        <Box mx="lg" mb="lg">
+          <Text fontSize="giant" mb="xl" fontWeight="300">
             {t('auth:forgot_password.title')}
           </Text>
 
           <Input
+            mb="2xl"
             label={t('phone_number')}
             placeholder="+374 XX XXXXXX"
+            keyboardType="phone-pad"
             onChangeText={(val) => formik.setFieldValue('phoneNumber', val)}
             value={formik.values.phoneNumber}
             errorMessage={error?.phoneNumber}
           />
 
-          <Layout align="center" spacer={{ y: 'md' }}>
-            <Button wide shape="circle" onPress={formik.handleSubmit} loading={loading}>
+          <Box justifyContent="center" flexDir="row" mb="xl">
+            <Button w="60%" onPress={formik.handleSubmit} loading={loading}>
               {t('submit')}
             </Button>
-          </Layout>
-        </Layout>
-      </Content>
-    </Container>
+          </Box>
+        </Box>
+      </Box>
+    </KeyboardAwareScrollView>
   );
 };
 
