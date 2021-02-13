@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useFocusEffect } from '@react-navigation/native';
 import { Box } from 'react-native-magnus';
 
-import { Line, NoData, If } from '@app/components';
+import { NoData, If } from '@app/components';
 import { withInteractionsComplete } from '@app/HoCs';
 import { eventsSelectors, eventsActions } from '@app/redux/ducks/events';
 import EventItem from './EventsItem';
@@ -28,7 +28,7 @@ const Events = () => {
 
   useFocusEffect(useCallback(fetchData, [fetchData]));
 
-  const renderLine = useCallback(() => <Line spacer={{ y: 'md' }} />, []);
+  const renderLine = useCallback(() => <Box h={1} bg="gray300" my="md" />, []);
   const renderNoData = useCallback(() => <NoData message={t('no_data_text')} />, [t]);
   const renderItem = useCallback(({ item }) => <EventItem {...item} />, []);
   const extractKey = useCallback((item) => String(item.pk), []);

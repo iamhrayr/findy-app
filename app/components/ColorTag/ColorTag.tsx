@@ -1,19 +1,12 @@
-import { memo } from 'react';
-import { View } from 'react-native';
-import styled, { css } from 'styled-components/native';
-import { s } from 'react-native-size-matters';
+import React, { memo } from 'react';
+import { Box } from 'react-native-magnus';
 
-const ColorTag = styled(View)<{ color: string }>`
-  ${({ color }) => css`
-    background-color: ${color};
-    width: ${s(100)}px;
-    height: ${s(14)}px;
-    border-radius: ${s(3)}px;
-  `}
-`;
+const ColorTag = ({ color }: { color: string }) => {
+  return <Box bg={color} w={100} h={14} rounded="md" />;
+};
 
 ColorTag.defaultProps = {
-  color: '#fff',
+  color: 'white',
 };
 
 export default memo(ColorTag);

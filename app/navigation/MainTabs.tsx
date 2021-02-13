@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DefaultTheme } from 'styled-components/native';
 import { Icon } from 'react-native-eva-icons';
+import { useTheme } from 'react-native-magnus';
 
 import i18n from '@app/i18n';
 
@@ -16,15 +16,17 @@ import EventsScreen from '../screens/Events';
 
 const Tab = createBottomTabNavigator();
 
-const MainTabs = ({ theme }: { theme: DefaultTheme }) => {
+const MainTabs = () => {
+  const { theme } = useTheme();
+
   return (
     <Tab.Navigator
       // initialRouteName="NewEvent:Tab"
       initialRouteName="Profile:Events"
       tabBarOptions={{
         keyboardHidesTabBar: true,
-        activeTintColor: theme.colors.primary,
-        inactiveTintColor: theme.colors.darkGray,
+        activeTintColor: theme.colors?.primary,
+        inactiveTintColor: theme.colors?.darkGray,
       }}>
       <Tab.Screen
         name="Events:Tab"

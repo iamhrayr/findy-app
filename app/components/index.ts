@@ -4,10 +4,8 @@
 
 export { default as Button } from './Button';
 export { default as Input, MaskedInput } from './Input';
-export { default as Spacer } from './Spacer';
 export { default as Select } from './Select';
 export { default as If } from './If';
-export { default as Line } from './Line';
 export { default as NoData } from './NoData';
 export { default as Loading } from './Loading';
 export { default as ColorTag } from './ColorTag';

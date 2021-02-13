@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 // import { SafeAreaView, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import { withTheme } from 'styled-components/native';
 
 import i18n from '@app/i18n';
 import { RootState } from '@app/redux/rootReducer';
@@ -97,7 +96,7 @@ const NavigationRoot = () => {
         <>
           <Stack.Screen
             name="MainTabs"
-            component={withTheme(MainTabs)}
+            component={MainTabs}
             options={{
               // headerShown: false,
               title: 'Findy',
