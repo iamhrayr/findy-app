@@ -59,7 +59,6 @@ const Button = ({ size, outline, ghost, ...rest }: Props) => {
     return newProps;
   }, [ghost, outline, rest, size, theme.components]);
 
-  console.log(computedProps);
   return <BaseButton {...computedProps} />;
 };
 
