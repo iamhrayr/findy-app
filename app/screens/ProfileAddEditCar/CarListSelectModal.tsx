@@ -47,7 +47,11 @@ const CarListSelectModal = ({ isVisible, close, onSelect, data, loading }: Props
   }
 
   return (
-    <Modal isVisible={isVisible} onModalShow={() => setModalDidShow(true)}>
+    <Modal
+      useNativeDriver
+      hideModalContentWhileAnimating
+      isVisible={isVisible}
+      onModalShow={() => setModalDidShow(true)}>
       <SafeAreaView style={styles.safeArea}>
         <Box mx="lg">
           <Input
