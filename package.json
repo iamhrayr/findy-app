@@ -65,7 +65,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-swipe-list-view": "^2.5.0",
     "react-native-vector-icons": "^8.0.0",
-    "react-native-webview": "^9.1.4",
+    "react-native-webview": "^11.0.0",
     "react-query": "^3.7.1",
     "react-redux": "^7.2.0",
     "react-use": "^14.1.1",
