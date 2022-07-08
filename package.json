@@ -34,7 +34,7 @@
     "i18next-react-native-language-detector": "^1.0.2",
     "jwt-decode": "^2.2.0",
     "libphonenumber-js": "^1.7.50",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "16.13.1",
     "react-i18next": "^11.3.4",
     "react-native": "0.63.4",
